@@ -1,0 +1,40 @@
+site_name: Tinkerbell Docs
+
+nav:
+  - Home: index.md
+
+  - Architecture: about/architecture.md
+  - Hardware Data: about/hardware-data.md
+  - Templates: about/templates.md
+  - Workflows: about/workflows.md
+
+  - Setup:
+    - Local Setup with Vagrant: setup/local-vagrant.md
+    - Setup on Packet: setup/packet-terraform.md
+
+  - Examples:
+    - A Hello-world Workflow: examples/hello-world-workflow.md
+
+  - Tink CLI Reference:
+    - Hardware: cli-reference/hardware.md
+    - Template: cli-reference/template.md
+    - Workflow: cli-reference/workflow.md
+
+  - Troubleshooting: troubleshooting.md
+
+theme:
+  name: material
+  logo: assets/tinkerbell-logo.png
+  favicon: assets/tinkerbell-logo.png
+
+extra_css:
+  - stylesheets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/tinkerbell
+    - icon: fontawesome/brands/slack
+      link: https://slack.packet.com/
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/tinkerbell_oss
