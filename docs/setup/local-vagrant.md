@@ -256,4 +256,7 @@ docker exec -i deploy_tink-cli_1 tink workflow events a8984b09-566d-47ba-b6c5-fb
 
 Getting set up locally is a good way to sample Tinkerbell's functionality. The Vagrant set up is not necessarily intended to be persistent, but while it's up and running, you can use the Provisioner to test out the CLI commands or just explore the stack.
 
+
+If you are looking to extend your local setup to develop or test out other workflows, check out the [Extending the Vagrant Setup](/setup/extending-vagrant) doc.
+
 That's it! Let us know what you think about it on [Slack](https://slack.packet.com/).

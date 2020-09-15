@@ -53,8 +53,15 @@ You can view the events and the state of a workflow during or after its executio
 
 ## Ephemeral Data
 
-The workers that are part of a workflow might need to share data. This can take the form of a light JSON like below, or some binary files that other workers might require to complete their action.
-For instance, a worker may add the following data:
+Ephemeral data is data that is shared between Workers as they execute workflows. Ephemeral data is stored at `/workflow/<workflow_id>` in each tink-worker.
+
+Initially the directory is empty; you populate with it by having a [template's actions (scripts, etc)](/about/templates) write to it. Then, the content in `/workflow/<workflow_id>` is pushed back to the database and from the database, pushed out to the other Workers.
+
+As the workflow progresses, subsequent actions on a Worker can read any ephemeral data that's been created by previous actions on other Workers, as well as update that file with any changes. Ephemeral data is only preserved through the life of a single workflow. Each workflow that executes gets an empty file.
+
+The data can take the form of a light JSON like below, or some binary files that other workers might require to complete their action. There is a 10 MB limit for ephemeral data, because it gets pushed to and from the tink-server and tink-worker with every action, so it needs to be pretty light.
+
+For instance, a Worker may write the following data:
 
 ```json
 {
@@ -82,4 +89,4 @@ The other worker may retrieve and use this data and eventually add some more:
 }
 ```
 
-Ephemeral data is passed as a file that is stored in the database that is accessed and modified in the execution of the workflow. You can get the ephemeral data associated with a workflow with the [`tink workflow data`](/cli-reference/workflow/#tink-workflow-data) tink CLI command.
+You can get the ephemeral data associated with a workflow with the [`tink workflow data`](/docs/cli-reference/workflow/#tink-workflow-data) tink CLI command.
