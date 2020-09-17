@@ -5,6 +5,171 @@
   
 }
 
+/* Header */
+
+#site-header {
+    background-color: #05254c;
+    color: #fff;
+    display: block;
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+.nav {
+    text-align: right;
+    display: block;
+}
+
+.nav a {
+    color: #fff;
+    font-size: 1rem;
+}
+
+.nav ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.nav ul li {
+    margin: 0 25px;
+}
+
+.nav ul li a {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 400;
+    border-bottom: 1px solid #05254c;
+    color: #9dafc4;
+}
+
+.nav ul li a:hover {
+    color: #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.nav ul li.pre {
+    margin: 0 5px;
+}
+
+.nav ul li.pre a {
+    color: #ffd105;
+    border: 1px solid #0386ac;
+    border-radius: 50em;
+    width: 32px;
+    height: 32px;
+    line-height: 1.65;
+    text-align: center;
+    display: block;
+    position: relative;
+}
+
+.nav ul li.pre a:hover {
+    border: 1px solid #fff;
+}
+
+.nav ul li .fa {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+}
+
+/* Footer */
+#footer-wrapper {
+    color: #3e3e3e;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#footer-wrapper * {
+    font-size: 12px;
+}
+
+#footer-wrapper a {
+    display: inline-block;
+}
+
+#footer-wrapper .text {
+    margin: 0;
+}
+
+#nav-footer ul {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+#nav-footer ul li {
+    line-height: 1;
+    list-style-type: none;
+    margin: 0;
+    padding: 0 7px;
+    position: relative;
+}
+
+#nav-footer ul li:last-child {
+    padding-right: 0;
+}
+
+#nav-footer ul li a {
+    line-height: 1;
+}
+
+#nav-footer ul li a:hover {
+    color: #0082a7;
+}
+
+#nav-footer ul li:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    border-right: 1px solid #000;
+}
+
+#nav-footer ul li:last-child:after {
+    border-right: 0;
+}
+
+.packet-logo {
+    width: 66px;
+    height: auto;
+    vertical-align: middle;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+@media print, screen and (max-width:63.99875em) {
+    #nav-footer ul {
+        margin-top: 30px;
+        display: block
+    }
+
+    #nav-footer ul li {
+        margin-bottom: 7px;
+        padding-left: 0
+    }
+
+    #nav-footer ul li:after {
+        display: none
+    }
+
+    #footer-wrapper p {
+        display: block
+    }
+    #footer-wrapper .packet-logo {
+        margin-left: 0
+    }
+}
+
 .md-footer-nav {display: none}
 .md-header {background-color: var(--md-primary-fg-color--dark)}
 .md-footer {background-color: var(--md-primary-fg-color--dark)}

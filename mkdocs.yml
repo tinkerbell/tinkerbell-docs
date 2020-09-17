@@ -32,11 +32,15 @@ nav:
 
 theme:
   name: material
-  logo: assets/tinkerbell-logo.png
+  custom_dir: overrides
+  logo: assets/logo.png
+  footer_logo: assets/packet.png
   favicon: assets/tinkerbell-logo.png
 
 extra_css:
   - stylesheets/extra.css
+  - stylesheets/simple-grid.css
+  - stylesheets/font-awesome.min.css
 
 extra:
   social:
