@@ -5,7 +5,20 @@
   
 }
 
+.grid-x {
+    display: flex;
+    flex-flow: row wrap;
+}
+
 /* Header */
+.menu-toggle {
+    position: absolute;
+    right: 20px;
+    top: 1%;
+    z-index: 10;
+    font-size: 20px;
+    color: #fff;
+}
 
 #site-header {
     background-color: #05254c;
@@ -71,11 +84,54 @@
     border: 1px solid #fff;
 }
 
-.nav ul li .fa {
-    position: absolute;
-    top: 15%;
-    left: 15%;
+.md-nav__title .md-nav__button.md-logo img, .md-nav__title .md-nav__button.md-logo svg {
+    width: 100%;
 }
+
+@media screen and (max-width: 76.1875em) {
+    .nav .nav-top {
+        margin-right: 5%;
+    }
+}
+
+@media print, screen and (max-width:63.99875em) {
+    #site-header {
+        padding-bottom: 0;
+        padding-top: 20px
+    }
+
+    .nav .nav-top {
+        overflow-y: auto;
+        white-space: nowrap;
+        width: 100%;
+        padding-top: 0;
+        padding-bottom: 20px
+    }
+    .nav ul {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .nav ul li {
+        margin: 0 10px;
+        display: inline
+    }
+    .nav ul li:first-child {
+        margin-left: 0
+    }
+    .nav ul li a {
+        font-size: .875rem;
+        display: inline-block!important
+    }
+    .logo {
+        margin-bottom: 20px;
+        display: block
+    }
+    .logo img {
+        height: 40px
+    }
+}
+
 
 /* Footer */
 #footer-wrapper {

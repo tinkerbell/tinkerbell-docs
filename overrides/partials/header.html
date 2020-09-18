@@ -1,7 +1,11 @@
 <header id="site-header">
+    <!-- Button to open drawer -->
+    <label class="md-header-nav__button md-icon menu-toggle" for="__drawer">
+        {% include ".icons/material/menu" ~ ".svg" %}
+    </label>
     <nav id="nav-main" class="nav">
         <div class="md-grid">
-            <section class="md-grid row">
+            <section class="md-grid grid-x row">
                 <div class="col-2 left">
                     <a aria-current="page" class="logo" href="/">
                         <img src="{{ config.theme.logo | url }}" alt="logo">

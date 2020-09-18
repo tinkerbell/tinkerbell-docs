@@ -50,3 +50,6 @@ extra:
       link: https://slack.packet.com/
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/tinkerbell_oss
+
+plugins:
+  - search
