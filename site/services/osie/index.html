@@ -1,0 +1,618 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/tinkerbell-logo.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.12">
+    
+    
+      
+        <title>OSIE - Tinkerbell Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4dd2dd8d.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/simple-grid.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#osie" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header id="site-header">
+    <!-- Button to open drawer -->
+    <label class="md-header-nav__button md-icon menu-toggle" for="__drawer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <nav id="nav-main" class="nav">
+        <div class="md-grid">
+            <section class="md-grid grid-x row">
+                <div class="col-2 left">
+                    <a aria-current="page" class="logo" href="/">
+                        <img src="../../assets/logo.png" alt="logo">
+                    </a>
+                </div>
+                <div class="col-10">
+                    <div class="nav-top">
+                        <ul>
+                            <li class="">
+                                <a href="">Faqs</a>
+                            </li>
+                            <li class="">
+                                <a href="">Docs</a>
+                            </li>
+                            <li class="">
+                                <a href="">Examples</a>
+                            </li>
+                            <li class="">
+                                <a href="">Community</a>
+                            </li>
+                            <li class="pre">
+                                <a href="https://github.com/tinkerbell/"><i class="fa fa-github"></i></a>
+                            </li>
+                            <li class="pre">
+                                <a href="https://tinkerbell.org/community/slack/"><i class="fa fa-slack"></i></a>
+                            </li>
+                            <li class="pre">
+                                <a href="https://twitter.com/tinkerbell_oss"><i class="fa fa-twitter"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+    <!-- Site title -->
+    <label class="md-nav__title" for="__drawer">
+        <a href="../.." title="Tinkerbell Docs" class="md-nav__button md-logo" aria-label="Tinkerbell Docs">
+            
+  <img src="../../assets/logo.png" alt="logo">
+
+        </a>
+        Tinkerbell Docs
+    </label>
+    <!-- Repository containing source -->
+    
+    <!-- Render item list -->
+    <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../../about/architecture/" title="Architecture" class="md-nav__link">
+      Architecture
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Services
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Services" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Services
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../boots/" title="Boots" class="md-nav__link">
+      Boots
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../hegel/" title="Hegel" class="md-nav__link">
+      Hegel
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        OSIE
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="OSIE" class="md-nav__link md-nav__link--active">
+      OSIE
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#alpine-and-osie" class="md-nav__link">
+    Alpine and OSIE
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-you-see-osie" class="md-nav__link">
+    When You See OSIE
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tink/" title="Tink" class="md-nav__link">
+      Tink
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../../about/hardware-data/" title="Hardware Data" class="md-nav__link">
+      Hardware Data
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../../about/templates/" title="Templates" class="md-nav__link">
+      Templates
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../../about/workflows/" title="Workflows" class="md-nav__link">
+      Workflows
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Setups
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Setups" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon"></span>
+        Setups
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../setup/local-vagrant/" title="Local Setup with Vagrant" class="md-nav__link">
+      Local Setup with Vagrant
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../setup/extending-vagrant/" title="Extending the Vagrant Setup" class="md-nav__link">
+      Extending the Vagrant Setup
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../setup/packet-terraform/" title="Packet Setup with Terraform" class="md-nav__link">
+      Packet Setup with Terraform
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Examples
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Examples" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon"></span>
+        Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/hello-world-workflow/" title="A Hello-world Workflow" class="md-nav__link">
+      A Hello-world Workflow
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Tink CLI Reference
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Tink CLI Reference" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon"></span>
+        Tink CLI Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cli-reference/hardware/" title="Hardware" class="md-nav__link">
+      Hardware
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cli-reference/template/" title="Template" class="md-nav__link">
+      Template
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cli-reference/workflow/" title="Workflow" class="md-nav__link">
+      Workflow
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../../troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+        
+    </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#alpine-and-osie" class="md-nav__link">
+    Alpine and OSIE
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-you-see-osie" class="md-nav__link">
+    When You See OSIE
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <h1 id="osie">OSIE</h1>
+<p>When a Worker first starts in a Tinkerbell environment, it network boots and contacts the Provisioner where <a href="/docs/services/boots">Boots</a> handles its DHCP settings and provides iPXE support. As part of this process Tinkerbell sets up the Worker with an in-memory operating system called OSIE and is based on <a href="https://alpinelinux.org">Alpine</a>.</p>
+<p>OSIE is downloaded to the Worker via iPXE. Usually, this will happen when a Worker network boots and an operating system is not installed, otherwise the bootloader will boot from the disk which contains your operating system.</p>
+<p>OSIE can built, run, and tested outside of the Tinkerbell stack. Take a look at the code in its GitHub repository: <a href="https://github.com/tinkerbell/osie">tinkerbell/osie</a>.</p>
+<h2 id="alpine-and-osie">Alpine and OSIE</h2>
+<p>Alpine is known to be small (~130MB of storage) and easy to customize. The boot process is minimal and it does not require much configuration. OSIE builds on that to provide an environment capable of running the right actions required to configure your Worker and install a persistent operating system.</p>
+<p>OSIE gets compiled to a initial ramdisk and a kernel. The initial ramdisk contains Docker and it starts the <a href="/docs/services/tink"><code>tink-worker</code></a> as a docker container. The <code>tink-worker</code> is the application that gets and manage workflows. Usually one of the first workflows it generates is the one that installs an operating system.</p>
+<p>Currently, the OSIE of today is a bit "too fat"! We are in the process of moving a lot of the customization out of OSIE and into workflows.</p>
+<h2 id="when-you-see-osie">When You See OSIE</h2>
+<p>If you follow the <a href="/docs/setup/locally-with-vagrant">Vagrant Setup</a> tutorial you encounter OSIE at the section "Start the Worker".</p>
+<p>At that time the Worker has netbooted and Boots has pushed OSIE to the Worker, the workflow has started, and the Worker does not have an operating system yet.</p>
+<p><img alt="Screenshot from the Worker" src="/images/vagrant-setup-vbox-worker.png" /></p>
+<p>The <code>Welcome to Alpine Linux 4.7</code> message comes from OSIE.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        <div id="footer-wrapper" class="middle">
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <p class="text">
+                    An open source project brought to you by 
+                    <a class="logo-footer" href="https://www.packet.com/" title="Packet">
+                        <img src="../../assets/packet.png" alt="logo" class="packet-logo">
+                    </a>
+                </p>
+            </div>
+            <div class="col-6">
+                <nav id="nav-footer">
+                    <ul>
+                        <li><a href="#" title="">Terms</a></li>
+                        <li><a href="#" title="">License</a></li>
+                        <li><a href="#" title="">Code of Coduct</a></li>
+                        <li><a href="#" title="">Contributor Guide</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.3636a4ec.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

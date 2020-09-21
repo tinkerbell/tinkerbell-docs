@@ -1,0 +1,902 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/tinkerbell-logo.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.12">
+    
+    
+      
+        <title>Local Setup with Vagrant - Tinkerbell Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4dd2dd8d.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/simple-grid.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#local-setup-with-vagrant" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header id="site-header">
+    <!-- Button to open drawer -->
+    <label class="md-header-nav__button md-icon menu-toggle" for="__drawer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <nav id="nav-main" class="nav">
+        <div class="md-grid">
+            <section class="md-grid grid-x row">
+                <div class="col-2 left">
+                    <a aria-current="page" class="logo" href="/">
+                        <img src="../../assets/logo.png" alt="logo">
+                    </a>
+                </div>
+                <div class="col-10">
+                    <div class="nav-top">
+                        <ul>
+                            <li class="">
+                                <a href="">Faqs</a>
+                            </li>
+                            <li class="">
+                                <a href="">Docs</a>
+                            </li>
+                            <li class="">
+                                <a href="">Examples</a>
+                            </li>
+                            <li class="">
+                                <a href="">Community</a>
+                            </li>
+                            <li class="pre">
+                                <a href="https://github.com/tinkerbell/"><i class="fa fa-github"></i></a>
+                            </li>
+                            <li class="pre">
+                                <a href="https://tinkerbell.org/community/slack/"><i class="fa fa-slack"></i></a>
+                            </li>
+                            <li class="pre">
+                                <a href="https://twitter.com/tinkerbell_oss"><i class="fa fa-twitter"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+    <!-- Site title -->
+    <label class="md-nav__title" for="__drawer">
+        <a href="../.." title="Tinkerbell Docs" class="md-nav__button md-logo" aria-label="Tinkerbell Docs">
+            
+  <img src="../../assets/logo.png" alt="logo">
+
+        </a>
+        Tinkerbell Docs
+    </label>
+    <!-- Repository containing source -->
+    
+    <!-- Render item list -->
+    <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../../about/architecture/" title="Architecture" class="md-nav__link">
+      Architecture
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Services
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Services" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Services
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../services/boots/" title="Boots" class="md-nav__link">
+      Boots
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../services/hegel/" title="Hegel" class="md-nav__link">
+      Hegel
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../services/osie/" title="OSIE" class="md-nav__link">
+      OSIE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../services/tink/" title="Tink" class="md-nav__link">
+      Tink
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../../about/hardware-data/" title="Hardware Data" class="md-nav__link">
+      Hardware Data
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../../about/templates/" title="Templates" class="md-nav__link">
+      Templates
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../../about/workflows/" title="Workflows" class="md-nav__link">
+      Workflows
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
+    
+    <label class="md-nav__link" for="nav-7">
+      Setups
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Setups" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon"></span>
+        Setups
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Local Setup with Vagrant
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="Local Setup with Vagrant" class="md-nav__link md-nav__link--active">
+      Local Setup with Vagrant
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-tinkerbell" class="md-nav__link">
+    Getting Tinkerbell
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#start-the-provisioner" class="md-nav__link">
+    Start the Provisioner
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#starting-tinkerbell" class="md-nav__link">
+    Starting Tinkerbell
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-the-workers-hardware-data" class="md-nav__link">
+    Creating the Worker's Hardware Data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-template" class="md-nav__link">
+    Creating a Template
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-the-workflow" class="md-nav__link">
+    Creating the Workflow
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#start-the-worker" class="md-nav__link">
+    Start the Worker
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../extending-vagrant/" title="Extending the Vagrant Setup" class="md-nav__link">
+      Extending the Vagrant Setup
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../packet-terraform/" title="Packet Setup with Terraform" class="md-nav__link">
+      Packet Setup with Terraform
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Examples
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Examples" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon"></span>
+        Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/hello-world-workflow/" title="A Hello-world Workflow" class="md-nav__link">
+      A Hello-world Workflow
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Tink CLI Reference
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Tink CLI Reference" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon"></span>
+        Tink CLI Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cli-reference/hardware/" title="Hardware" class="md-nav__link">
+      Hardware
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cli-reference/template/" title="Template" class="md-nav__link">
+      Template
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cli-reference/workflow/" title="Workflow" class="md-nav__link">
+      Workflow
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../../troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+        
+    </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-tinkerbell" class="md-nav__link">
+    Getting Tinkerbell
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#start-the-provisioner" class="md-nav__link">
+    Start the Provisioner
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#starting-tinkerbell" class="md-nav__link">
+    Starting Tinkerbell
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-the-workers-hardware-data" class="md-nav__link">
+    Creating the Worker's Hardware Data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-template" class="md-nav__link">
+    Creating a Template
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-the-workflow" class="md-nav__link">
+    Creating the Workflow
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#start-the-worker" class="md-nav__link">
+    Start the Worker
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <h1 id="local-setup-with-vagrant">Local Setup with Vagrant</h1>
+<p>If you want to dive in to trying out Tinkerbell, this tutorial sets it up locally using Vagrant. Vagrant manages the Tinkerbell installation for this tutorial's Provisioner, and runs both the Provisioner and Worker on VirtualBox or <code>libvirtd</code>.</p>
+<p>It covers some basic aspects of Tinkerbell's functionality:</p>
+<ul>
+<li>setting up a Provisioner</li>
+<li>creating the hardware data for the Worker</li>
+<li>creating a template with a placeholder action item, using the <a href="/examples/hello-world-workflow">hello-world example</a></li>
+<li>and creating a workflow</li>
+</ul>
+<p>The last step is to start up the Worker, which will call back to the Provisioner for its workflow.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li><a href="https://www.cyberciti.biz/faq/linux-xen-vmware-kvm-intel-vt-amd-v-support/">The host's processor should support virtualization</a></li>
+<li><a href="https://www.vagrantup.com/downloads">Vagrant</a> is installed</li>
+<li>Either <a href="https://www.virtualbox.org/">VirtualBox</a> or <a href="https://libvirt.org/">libvirtd</a> is installed.</li>
+</ul>
+<h2 id="getting-tinkerbell">Getting Tinkerbell</h2>
+<p>To get Tinkerbell, clone the <code>tink</code> repository.</p>
+<pre><code>git clone https://github.com/tinkerbell/tink.git
+</code></pre>
+
+<p>Move into the <code>deploy/vagrant</code> directory. This folder contains a Vagrant configuration file (Vagrantfile) needed to setup the Provisioner and the Worker.</p>
+<pre><code>cd tink/deploy/vagrant
+</code></pre>
+
+<h2 id="start-the-provisioner">Start the Provisioner</h2>
+<p>Since Vagrant is handling the Provisioner's configuration, including installing the Tinkerbell stack, run the command to start it up.</p>
+<pre><code>vagrant up provisioner
+&gt;
+Bringing machine 'provisioner' up with 'virtualbox' provider...
+</code></pre>
+
+<p>The Provisioner installs and runs Ubuntu with a couple of additional utilities. The time it takes to spin up the Provisioner varies with connection speed and resources on your local machine.</p>
+<p>When the Provisioner is ready, you should see the following message:</p>
+<pre><code>INFO: tinkerbell stack setup completed successfully on ubuntu server
+</code></pre>
+
+<h2 id="starting-tinkerbell">Starting Tinkerbell</h2>
+<p>Now that the Provisioner's machine is up and running, you can connect and bring up Tinkerbell. SSH into the Provisioner.</p>
+<pre><code>vagrant ssh provisioner
+&gt;
+vagrant@provisioner:~$
+</code></pre>
+
+<p>Tinkerbell is going to be running from a container, so navigate to the <code>vagrant</code> directory, set the environment, and start the Tinkerbell stack with <code>docker-compose</code>.</p>
+<pre><code>cd /vagrant &amp;&amp; source envrc &amp;&amp; cd deploy
+docker-compose up -d
+</code></pre>
+
+<p>The Tinkerbell server, and more importantly the CLI, are now managed like a standard Docker Compose project. Just make sure to have sourced the <code>envrc</code> before issuing docker-compose commands.</p>
+<p>Tinkerbell is now ready to receive templates and workflows. Check out all the Tinkerbell services are running.</p>
+<pre><code>docker-compose ps
+&gt;
+        Name                      Command                  State                             Ports
+-------------------------------------------------------------------------------------------------------------------------
+deploy_boots_1         /boots -dhcp-addr 0.0.0.0: ...   Up
+deploy_cacher_1        /cacher                          Up             0.0.0.0:42111-&gt;42111/tcp, 0.0.0.0:42112-&gt;42112/tcp
+deploy_db_1            docker-entrypoint.sh postgres    Up (healthy)   0.0.0.0:5432-&gt;5432/tcp
+deploy_hegel_1         cmd/hegel                        Up
+deploy_nginx_1         /docker-entrypoint.sh ngin ...   Up             192.168.1.2:80-&gt;80/tcp
+deploy_registry_1      /entrypoint.sh /etc/docker ...   Up (healthy)
+deploy_tink-cli_1      /bin/sh -c sleep infinity        Up
+deploy_tink-server_1   tink-server                      Up (healthy)   0.0.0.0:42113-&gt;42113/tcp, 0.0.0.0:42114-&gt;42114/tcp
+</code></pre>
+
+<p>At this point, you might want to open a ssh connection to show logs from the Provisioner, because it will show what the <code>tink-server</code> is doing through the rest of the setup. Open a new terminal, ssh in to the provisioner as you did before, and run <code>docker-compose logs</code> to tail logs.</p>
+<pre><code>cd tink/deploy/vagrant
+vagrant ssh provisioner
+cd /vagrant &amp;&amp; source envrc &amp;&amp; cd deploy
+docker-compose logs -f tink-server boots nginx
+</code></pre>
+
+<p>Later in the tutorial you can check the logs from <code>tink-server</code> in order to see the execution of the workflow.</p>
+<p>The last step for the Provisioner to do at this point is to pull down the image that will be used in the workflow. Tinkerbell uses Docker registry to host images locally, so pull down the <a href="https://hub.docker.com/_/hello-world/">"Hello World" docker image</a> and push it to the registry.</p>
+<pre><code>docker pull hello-world
+docker tag hello-world 192.168.1.1/hello-world
+docker push 192.168.1.1/hello-world
+</code></pre>
+
+<h2 id="creating-the-workers-hardware-data">Creating the Worker's Hardware Data</h2>
+<p>With the provisioner up and running, it's time to set up the worker's configuration.</p>
+<p>First, define the Worker's hardware data, which is used to identify the Worker as the target of a workflow. Very minimal hardware data is required for this example, but it does at least need to contain the MAC Address of the Worker, which is hardcoded in the Vagrant file, and have the Worker set to allow PXE booting and accept workflows.</p>
+<pre><code>cat &gt; hardware-data.json &lt;&lt;EOF
+{
+  &quot;id&quot;: &quot;ce2e62ed-826f-4485-a39f-a82bb74338e2&quot;,
+  &quot;metadata&quot;: {
+    &quot;facility&quot;: {
+      &quot;facility_code&quot;: &quot;onprem&quot;
+    },
+    &quot;instance&quot;: {},
+    &quot;state&quot;: &quot;&quot;
+  },
+  &quot;network&quot;: {
+    &quot;interfaces&quot;: [
+      {
+        &quot;dhcp&quot;: {
+          &quot;arch&quot;: &quot;x86_64&quot;,
+          &quot;ip&quot;: {
+            &quot;address&quot;: &quot;192.168.1.5&quot;,
+            &quot;gateway&quot;: &quot;192.168.1.1&quot;,
+            &quot;netmask&quot;: &quot;255.255.255.248&quot;
+          },
+          &quot;mac&quot;: &quot;08:00:27:00:00:01&quot;,
+          &quot;uefi&quot;: false
+        },
+        &quot;netboot&quot;: {
+          &quot;allow_pxe&quot;: true,
+          &quot;allow_workflow&quot;: true
+        }
+      }
+    ]
+  }
+}
+EOF
+</code></pre>
+
+<p>Then, push the hardware data to the database with the <code>tink hardware push</code> command.</p>
+<pre><code>docker exec -i deploy_tink-cli_1 tink hardware push &lt; ./hardware-data.json
+&gt; 2020/06/17 14:12:45 Hardware data pushed successfully
+</code></pre>
+
+<p>If you are following along in the <code>tink-server</code> logs, you should see:</p>
+<pre><code>tink-server_1  | {&quot;level&quot;:&quot;info&quot;,&quot;ts&quot;:1592936402.3975577,&quot;caller&quot;:&quot;grpc-server/hardware.go:37&quot;,&quot;msg&quot;:&quot;data pushed&quot;,&quot;service&quot;:&quot;github.com/tinkerbell/tink&quot;,&quot;id&quot;:&quot;ce2e62ed-826f-4485-a39f-a82bb74338e2&quot;}
+</code></pre>
+
+<h2 id="creating-a-template">Creating a Template</h2>
+<p>Next, define the template for the workflow. The template sets out tasks for the Worker to preform sequentially. This template contains a single task with a single action, which is to perform "hello-world". Just as in the <a href="/exmaples/hello-world-workflow">hello-world example</a>, the "hello-world" image doesn't contain any instructions that the Worker will perform. It is just a placeholder in the template so a workflow can be created and pushed to the Worker.</p>
+<pre><code>cat &gt; hello-world.yml  &lt;&lt;EOF
+version: &quot;0.1&quot;
+name: hello_world_workflow
+global_timeout: 600
+tasks:
+  - name: &quot;hello world&quot;
+    worker: &quot;{{.device_1}}&quot;
+    actions:
+      - name: &quot;hello_world&quot;
+        image: hello-world
+        timeout: 60
+EOF
+</code></pre>
+
+<p>Create the template and push it to the database with the <code>tink template create</code> command.</p>
+<pre><code>docker exec -i deploy_tink-cli_1 tink template create --name hello-world &lt; ./hello-world.yml
+&gt;
+Created Template:  75ab8483-6f42-42a9-a80d-a9f6196130df
+</code></pre>
+
+<p>The command returns a Template ID, and if you are watching the <code>tink-server</code> logs you will see:</p>
+<pre><code>tink-server_1  | {&quot;level&quot;:&quot;info&quot;,&quot;ts&quot;:1592934670.2717152,&quot;caller&quot;:&quot;grpc-server/template.go:34&quot;,&quot;msg&quot;:&quot;done creating a new Template&quot;,&quot;service&quot;:&quot;github.com/tinkerbell/tink&quot;}
+</code></pre>
+
+<h2 id="creating-the-workflow">Creating the Workflow</h2>
+<p>The next step is to combine both the hardware data and the template to create a workflow.</p>
+<ul>
+<li>First, the workflow needs to know which template to execute. The Template ID you should use was returned by <code>tink template create</code> command executed above.</li>
+<li>Second, the Workflow needs a target, defined by the hardware data. In this example, the target is identified by a MAC address set in the hardware data for our Worker, so <code>08:00:27:00:00:01</code>. (Note: this MAC address is hard coded in the Vagrantfile.)</li>
+</ul>
+<p>Combine these two pieces of information and create the workflow with the <code>tink workflow create</code> command.</p>
+<pre><code>docker exec -i deploy_tink-cli_1 tink workflow create \
+    -t &lt;TEMPLATE ID&gt; \
+    -r '{&quot;device_1&quot;:&quot;08:00:27:00:00:01&quot;}'
+&gt;
+Created Workflow:  a8984b09-566d-47ba-b6c5-fbe482d8ad7f
+</code></pre>
+
+<p>The command returns a Workflow ID and if you are watching the logs, you will see:</p>
+<pre><code>tink-server_1  | {&quot;level&quot;:&quot;info&quot;,&quot;ts&quot;:1592936829.6773047,&quot;caller&quot;:&quot;grpc-server/workflow.go:63&quot;,&quot;msg&quot;:&quot;done creating a new workflow&quot;,&quot;service&quot;:&quot;github.com/tinkerbell/tink&quot;}
+</code></pre>
+
+<h2 id="start-the-worker">Start the Worker</h2>
+<p>You can now bring up the Worker and execute the Workflow. In a new terminal window, move into the <code>tink/deploy/vagrant</code> directory, and bring up the Worker with Vagrant, similar to bringing up the Provisioner.</p>
+<pre><code>cd tink/deploy/vagrant
+vagrant up worker
+</code></pre>
+
+<p>If you are using VirtualBox, it will bring up a UI, and after the setup, you will see a login screen. You can login with the username <code>root</code> and no password is required. Tinkerbell will netboot a custom AlpineOS that runs in RAM, so any changes you make won't be persisted between reboots.</p>
+<blockquote>
+<p>Note: If you have a high-resolution monitor, here are a few notes about how to make the <a href="https://github.com/tinkerbell/tinkerbell.org/pull/76#discussion_r442151095">UI bigger</a>.</p>
+</blockquote>
+<p>At this point you should check on the Provisioner to confirm that the Workflow was executed on the Worker. If you opened a terminal window to monitor the Tinkerbell logs, you should see the execution in them.</p>
+<pre><code>tink-server_1  | Received action status: workflow_id:&quot;a8984b09-566d-47ba-b6c5-fbe482d8ad7f&quot; task_name:&quot;hello world&quot; action_name:&quot;hello_world&quot; action_status:ACTION_SUCCESS message:&quot;Finished Execution Successfully&quot; worker_id:&quot;ce2e62ed-826f-4485-a39f-a82bb74338e2&quot;
+tink-server_1  | Current context workflow_id:&quot;a8984b09-566d-47ba-b6c5-fbe482d8ad7f&quot; current_worker:&quot;ce2e62ed-826f-4485-a39f-a82bb74338e2&quot; current_task:&quot;hello world&quot; current_action:&quot;hello_world&quot; current_action_state:ACTION_SUCCESS total_number_of_actions:1
+</code></pre>
+
+<p>You can also check using the <code>tink workflow events</code> and the Workflow ID on the Provisioner.</p>
+<pre><code>docker exec -i deploy_tink-cli_1 tink workflow events a8984b09-566d-47ba-b6c5-fbe482d8ad7f
+&gt;
++--------------------------------------+-------------+-------------+----------------+---------------------------------+--------------------+
+| WORKER ID                            | TASK NAME   | ACTION NAME | EXECUTION TIME | MESSAGE                         |      ACTION STATUS |
++--------------------------------------+-------------+-------------+----------------+---------------------------------+--------------------+
+| ce2e62ed-826f-4485-a39f-a82bb74338e2 | hello world | hello_world |              0 | Started execution               | ACTION_IN_PROGRESS |
+| ce2e62ed-826f-4485-a39f-a82bb74338e2 | hello world | hello_world |              0 | Finished Execution Successfully |     ACTION_SUCCESS |
++--------------------------------------+-------------+-------------+----------------+---------------------------------+--------------------+
+</code></pre>
+
+<h2 id="summary">Summary</h2>
+<p>Getting set up locally is a good way to sample Tinkerbell's functionality. The Vagrant set up is not necessarily intended to be persistent, but while it's up and running, you can use the Provisioner to test out the CLI commands or just explore the stack.</p>
+<p>If you are looking to extend your local setup to develop or test out other workflows, check out the <a href="/setup/extending-vagrant">Extending the Vagrant Setup</a> doc.</p>
+<p>That's it! Let us know what you think about it on <a href="https://slack.packet.com/">Slack</a>.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        <div id="footer-wrapper" class="middle">
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <p class="text">
+                    An open source project brought to you by 
+                    <a class="logo-footer" href="https://www.packet.com/" title="Packet">
+                        <img src="../../assets/packet.png" alt="logo" class="packet-logo">
+                    </a>
+                </p>
+            </div>
+            <div class="col-6">
+                <nav id="nav-footer">
+                    <ul>
+                        <li><a href="#" title="">Terms</a></li>
+                        <li><a href="#" title="">License</a></li>
+                        <li><a href="#" title="">Code of Coduct</a></li>
+                        <li><a href="#" title="">Contributor Guide</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.3636a4ec.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

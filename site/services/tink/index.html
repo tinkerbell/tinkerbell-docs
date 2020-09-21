@@ -1,0 +1,752 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/tinkerbell-logo.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.12">
+    
+    
+      
+        <title>Tink - Tinkerbell Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4dd2dd8d.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/simple-grid.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tink" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header id="site-header">
+    <!-- Button to open drawer -->
+    <label class="md-header-nav__button md-icon menu-toggle" for="__drawer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <nav id="nav-main" class="nav">
+        <div class="md-grid">
+            <section class="md-grid grid-x row">
+                <div class="col-2 left">
+                    <a aria-current="page" class="logo" href="/">
+                        <img src="../../assets/logo.png" alt="logo">
+                    </a>
+                </div>
+                <div class="col-10">
+                    <div class="nav-top">
+                        <ul>
+                            <li class="">
+                                <a href="">Faqs</a>
+                            </li>
+                            <li class="">
+                                <a href="">Docs</a>
+                            </li>
+                            <li class="">
+                                <a href="">Examples</a>
+                            </li>
+                            <li class="">
+                                <a href="">Community</a>
+                            </li>
+                            <li class="pre">
+                                <a href="https://github.com/tinkerbell/"><i class="fa fa-github"></i></a>
+                            </li>
+                            <li class="pre">
+                                <a href="https://tinkerbell.org/community/slack/"><i class="fa fa-slack"></i></a>
+                            </li>
+                            <li class="pre">
+                                <a href="https://twitter.com/tinkerbell_oss"><i class="fa fa-twitter"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+    <!-- Site title -->
+    <label class="md-nav__title" for="__drawer">
+        <a href="../.." title="Tinkerbell Docs" class="md-nav__button md-logo" aria-label="Tinkerbell Docs">
+            
+  <img src="../../assets/logo.png" alt="logo">
+
+        </a>
+        Tinkerbell Docs
+    </label>
+    <!-- Repository containing source -->
+    
+    <!-- Render item list -->
+    <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../../about/architecture/" title="Architecture" class="md-nav__link">
+      Architecture
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Services
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Services" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Services
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../boots/" title="Boots" class="md-nav__link">
+      Boots
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../hegel/" title="Hegel" class="md-nav__link">
+      Hegel
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../osie/" title="OSIE" class="md-nav__link">
+      OSIE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Tink
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="Tink" class="md-nav__link md-nav__link--active">
+      Tink
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#getting-tink" class="md-nav__link">
+    Getting Tink
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Tink">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-the-docker-images" class="md-nav__link">
+    Getting the Docker Images
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#building-the-binaries" class="md-nav__link">
+    Building the Binaries
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-and-running-tink-cli" class="md-nav__link">
+    Building and Running tink-cli
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../../about/hardware-data/" title="Hardware Data" class="md-nav__link">
+      Hardware Data
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../../about/templates/" title="Templates" class="md-nav__link">
+      Templates
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../../about/workflows/" title="Workflows" class="md-nav__link">
+      Workflows
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Setups
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Setups" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon"></span>
+        Setups
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../setup/local-vagrant/" title="Local Setup with Vagrant" class="md-nav__link">
+      Local Setup with Vagrant
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../setup/extending-vagrant/" title="Extending the Vagrant Setup" class="md-nav__link">
+      Extending the Vagrant Setup
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../setup/packet-terraform/" title="Packet Setup with Terraform" class="md-nav__link">
+      Packet Setup with Terraform
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Examples
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Examples" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon"></span>
+        Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/hello-world-workflow/" title="A Hello-world Workflow" class="md-nav__link">
+      A Hello-world Workflow
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Tink CLI Reference
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Tink CLI Reference" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon"></span>
+        Tink CLI Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cli-reference/hardware/" title="Hardware" class="md-nav__link">
+      Hardware
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cli-reference/template/" title="Template" class="md-nav__link">
+      Template
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cli-reference/workflow/" title="Workflow" class="md-nav__link">
+      Workflow
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../../troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+        
+    </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#getting-tink" class="md-nav__link">
+    Getting Tink
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Tink">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-the-docker-images" class="md-nav__link">
+    Getting the Docker Images
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#building-the-binaries" class="md-nav__link">
+    Building the Binaries
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-and-running-tink-cli" class="md-nav__link">
+    Building and Running tink-cli
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <h1 id="tink">Tink</h1>
+<p>Tink provides the user interface and the API gateway to expose all the features distributed across the various other Tinkerbell services. It lives in the GitHub repository: <a href="https://github.com/tinkerbell/tink">tinkerbell/tink</a>.</p>
+<p>It exposes three binaries:</p>
+<ol>
+<li>The <code>tink-server</code> is a long running daemon written in Go that exposes a gRPC API. As a user and operator this is your entry point. You can register new hardware, create templates and workflows, and much more.</li>
+<li>The <code>tink-cli</code> is one of the way you can use to interact with the <code>tink-server</code>. It is a command line interface written in Go and <a href="https://github.com/spf13/cobra">Cobra</a>.</li>
+<li>The <code>tink-worker</code> is a binary that runs in every worker machine. It is one of the first processes started by a Worker and it executes workflows.</li>
+</ol>
+<h2 id="getting-tink">Getting Tink</h2>
+<p>Right now we do not yet have a release cycle in place that builds and release binaries. You can either compile them by yourself or you can use the Docker container that is already built.</p>
+<p>The docker containers are the ones in use when you follow the setup tutorial and run <a href="https://github.com/tinkerbell/tink/blob/master/deploy/docker-compose.yml#L4"><code>docker-compose</code></a>.</p>
+<h3 id="getting-the-docker-images">Getting the Docker Images</h3>
+<p>We relay on Docker a lot for both code distribution but and workflow execution. Our CI/CD pipeline builds and pushes images to
+<a href="https://quay.io/tinkerbell">quay.io</a> a popular image repository similar to Docker Hub.</p>
+<p>There is a repository for every tool:</p>
+<ul>
+<li><a href="https://quay.io/repository/tinkerbell/tink-cli?tab=tags">tink-cli</a></li>
+<li><a href="https://quay.io/repository/tinkerbell/tink-worker?tab=tags">tink-worker</a></li>
+<li><a href="https://quay.io/repository/tinkerbell/tink?tab=tags">tink-server</a></li>
+</ul>
+<p>The tags are composed as: <code>sha-&lt;gitsha&gt;</code>, where <code>gitsha</code> is the first 7 characters of a git commit. Only master commits are pushed to quay.io.</p>
+<h3 id="building-the-binaries">Building the Binaries</h3>
+<p>Tinkerbell uses the standard Golang toolchain. You can clone the tink repository:</p>
+<pre><code>git clone git@github.com:tinkerbell/tink
+</code></pre>
+
+<p>All the binaries are inside <code>cmd/tink-*</code>. Based on what you need, you can run <code>go build</code>. For example if you would like to compile the CLI, run:</p>
+<pre><code>go build cmd/tink-cli/main.go
+</code></pre>
+
+<p>You can also use <code>go run</code> if you want to run code without having to compile a binary:</p>
+<pre><code>go run cmd/tink-server/main.go
+</code></pre>
+
+<h2 id="building-and-running-tink-cli">Building and Running <code>tink-cli</code></h2>
+<p>One use case of the binaries, is if you want to run the <code>tink-cli</code> binary on the Provisioner, outside the <code>tink-server</code> container. This simplifies the CLI command usage.</p>
+<p>Prerequisites:</p>
+<ul>
+<li>A bit of familiarity with <code>go build</code>, and Go has to be installed.</li>
+<li>A Provisioner up and running Tinkerbell (works with the Vagrant setup, for example)</li>
+</ul>
+<p>SSH into the Provisioner and Navigate to the directory where you have cloned the tink repository.</p>
+<pre><code>ssh
+cd tink
+</code></pre>
+
+<p>Now let's compile the binary with:</p>
+<pre><code>$ go build -o tink cmd/tink-cli/main.go
+</code></pre>
+
+<p>All the traffic between Tinkerbell services is encrypted via TLS, so before running any <code>tink</code> commands there are two environment variables that authenticate the CLI to the <code>tink-server</code>. The <code>tink-server</code> entry point is 127.0.0.1 and exposes ports 42113 and 42114.</p>
+<ul>
+<li><code>TINKERBELL_CERT_URL=http://127.0.0.1:42114/cert</code></li>
+<li><code>TINKERBELL_GRPC_AUTHORITY=127.0.0.1:42113</code></li>
+</ul>
+<p>NOTE: In a real environment every person that as access to the host and ports can authenticate and use <code>tink-server</code>.</p>
+<p>You can export them as environment variables or you can run them in-line as part of the <code>tink</code> command.</p>
+<pre><code>$ export TINKERBELL_GRPC_AUTHORITY=127.0.0.1:42113
+$ export TINKERBELL_CERT_URL=http://127.0.0.1:42114/cert
+</code></pre>
+
+<p>Now you can run <code>tink</code> commands without <code>docker-exec</code>.</p>
+<pre><code>$ tink hardware list
+&gt;
++----+-------------+------------+----------+
+| ID | MAC ADDRESS | IP ADDRESS | HOSTNAME |
++----+-------------+------------+----------+
++----+-------------+------------+----------+
+</code></pre>
+
+<p>You can also test by making some hardware data.</p>
+<pre><code>$ cat &gt; hardware-data.json &lt;&lt;EOF
+{
+  &quot;id&quot;: &quot;ce2e62ed-826f-4485-a39f-a82bb74338e2&quot;,
+  &quot;metadata&quot;: {
+    &quot;facility&quot;: {
+      &quot;facility_code&quot;: &quot;onprem&quot;
+    },
+    &quot;instance&quot;: {},
+    &quot;state&quot;: &quot;&quot;
+  },
+  &quot;network&quot;: {
+    &quot;interfaces&quot;: [
+      {
+        &quot;dhcp&quot;: {
+          &quot;arch&quot;: &quot;x86_64&quot;,
+          &quot;ip&quot;: {
+            &quot;address&quot;: &quot;192.168.1.5&quot;,
+            &quot;gateway&quot;: &quot;192.168.1.1&quot;,
+            &quot;netmask&quot;: &quot;255.255.255.248&quot;
+          },
+          &quot;mac&quot;: &quot;08:00:27:00:00:01&quot;,
+          &quot;uefi&quot;: false
+        },
+        &quot;netboot&quot;: {
+          &quot;allow_pxe&quot;: true,
+          &quot;allow_workflow&quot;: true
+        }
+      }
+    ]
+  }
+}
+EOF
+tink hardware push &lt; ./hardware-data.json
+&gt;
+2020/08/31 10:20:20 Hardware data pushed successfully
+</code></pre>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        <div id="footer-wrapper" class="middle">
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <p class="text">
+                    An open source project brought to you by 
+                    <a class="logo-footer" href="https://www.packet.com/" title="Packet">
+                        <img src="../../assets/packet.png" alt="logo" class="packet-logo">
+                    </a>
+                </p>
+            </div>
+            <div class="col-6">
+                <nav id="nav-footer">
+                    <ul>
+                        <li><a href="#" title="">Terms</a></li>
+                        <li><a href="#" title="">License</a></li>
+                        <li><a href="#" title="">Code of Coduct</a></li>
+                        <li><a href="#" title="">Contributor Guide</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.3636a4ec.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

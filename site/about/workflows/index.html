@@ -1,0 +1,680 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/tinkerbell-logo.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.12">
+    
+    
+      
+        <title>Workflows - Tinkerbell Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4dd2dd8d.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/simple-grid.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#workflows" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header id="site-header">
+    <!-- Button to open drawer -->
+    <label class="md-header-nav__button md-icon menu-toggle" for="__drawer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <nav id="nav-main" class="nav">
+        <div class="md-grid">
+            <section class="md-grid grid-x row">
+                <div class="col-2 left">
+                    <a aria-current="page" class="logo" href="/">
+                        <img src="../../assets/logo.png" alt="logo">
+                    </a>
+                </div>
+                <div class="col-10">
+                    <div class="nav-top">
+                        <ul>
+                            <li class="">
+                                <a href="">Faqs</a>
+                            </li>
+                            <li class="">
+                                <a href="">Docs</a>
+                            </li>
+                            <li class="">
+                                <a href="">Examples</a>
+                            </li>
+                            <li class="">
+                                <a href="">Community</a>
+                            </li>
+                            <li class="pre">
+                                <a href="https://github.com/tinkerbell/"><i class="fa fa-github"></i></a>
+                            </li>
+                            <li class="pre">
+                                <a href="https://tinkerbell.org/community/slack/"><i class="fa fa-slack"></i></a>
+                            </li>
+                            <li class="pre">
+                                <a href="https://twitter.com/tinkerbell_oss"><i class="fa fa-twitter"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+    <!-- Site title -->
+    <label class="md-nav__title" for="__drawer">
+        <a href="../.." title="Tinkerbell Docs" class="md-nav__button md-logo" aria-label="Tinkerbell Docs">
+            
+  <img src="../../assets/logo.png" alt="logo">
+
+        </a>
+        Tinkerbell Docs
+    </label>
+    <!-- Repository containing source -->
+    
+    <!-- Render item list -->
+    <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../architecture/" title="Architecture" class="md-nav__link">
+      Architecture
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Services
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Services" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Services
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../services/boots/" title="Boots" class="md-nav__link">
+      Boots
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../services/hegel/" title="Hegel" class="md-nav__link">
+      Hegel
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../services/osie/" title="OSIE" class="md-nav__link">
+      OSIE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../services/tink/" title="Tink" class="md-nav__link">
+      Tink
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../hardware-data/" title="Hardware Data" class="md-nav__link">
+      Hardware Data
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../templates/" title="Templates" class="md-nav__link">
+      Templates
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Workflows
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="Workflows" class="md-nav__link md-nav__link--active">
+      Workflows
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-workflow" class="md-nav__link">
+    Creating a Workflow
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-execution" class="md-nav__link">
+    Workflow Execution
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ephemeral-data" class="md-nav__link">
+    Ephemeral Data
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Setups
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Setups" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon"></span>
+        Setups
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../setup/local-vagrant/" title="Local Setup with Vagrant" class="md-nav__link">
+      Local Setup with Vagrant
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../setup/extending-vagrant/" title="Extending the Vagrant Setup" class="md-nav__link">
+      Extending the Vagrant Setup
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../setup/packet-terraform/" title="Packet Setup with Terraform" class="md-nav__link">
+      Packet Setup with Terraform
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Examples
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Examples" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon"></span>
+        Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/hello-world-workflow/" title="A Hello-world Workflow" class="md-nav__link">
+      A Hello-world Workflow
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Tink CLI Reference
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Tink CLI Reference" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon"></span>
+        Tink CLI Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cli-reference/hardware/" title="Hardware" class="md-nav__link">
+      Hardware
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cli-reference/template/" title="Template" class="md-nav__link">
+      Template
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cli-reference/workflow/" title="Workflow" class="md-nav__link">
+      Workflow
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../../troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+        
+    </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-workflow" class="md-nav__link">
+    Creating a Workflow
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-execution" class="md-nav__link">
+    Workflow Execution
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ephemeral-data" class="md-nav__link">
+    Ephemeral Data
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <h1 id="workflows">Workflows</h1>
+<p>A workflow is the complete set of operations to be run on a Worker. It consists of two building blocks: a Worker's <a href="/about/hardware-data">hardware data</a> and a <a href="/about/templates">template</a>.</p>
+<h2 id="creating-a-workflow">Creating a Workflow</h2>
+<p>You create a workflow with the <a href="/cli-reference/workflow/#tink-workflow-create"><code>tink workflow create</code></a>command, which takes a template ID and a JSON object that identifies the Worker, and combines them into a workflow. The workflow is stored in the database on the Provisioner and returns a workflow ID.</p>
+<p>For example,</p>
+<pre><code>tink workflow create \
+    -t 75ab8483-6f42-42a9-a80d-a9f6196130df \
+    -r '{&quot;device_1&quot;:&quot;08:00:27:00:00:01&quot;}'
+&gt; Created Workflow:  a8984b09-566d-47ba-b6c5-fbe482d8ad7f
+</code></pre>
+
+<p>The template ID is <code>75ab8483-6f42-42a9-a80d-a9f6196130df</code>. The MAC address of the Worker is <code>08:00:27:00:00:01</code>, which should match the MAC address of hardware data that you have already created to identify that Worker. It is mapped to <code>device_1</code>, which is where the MAC address will be substituted into the template when the workflow is created.</p>
+<p>After creating a workflow, you can retrieve it from the database by ID with <a href="/cli-reference/workflow/#tink-workflow-get"><code>tink workflow get</code></a>. This is particularly useful to check to see that the MAC address or IP Address of the Worker was correctly substituted when you created the workflow.</p>
+<pre><code>tink workflow get a8984b09-566d-47ba-b6c5-fbe482d8ad7f
+&gt;
+version: &quot;0.1&quot;
+name: hello_world_workflow
+global_timeout: 600
+tasks:
+  - name: &quot;hello world&quot;
+    worker: &quot;08:00:27:00:00:01&quot;
+    actions:
+      - name: &quot;hello_world&quot;
+        image: hello-world
+        timeout: 60
+</code></pre>
+
+<p>In addition, you can list all the workflows stored in the database with <a href="/cli-reference/workflow/#tink-workflow-list"><code>tink workflow list</code></a>. Delete a workflow with <a href="/cli-reference/workflow/#tink-workflow-delete"><code>tink workflow delete</code></a>.</p>
+<h2 id="workflow-execution">Workflow Execution</h2>
+<p>On the first boot, the Worker is PXE booted, asks Boots for it's IP address, and loads into OSIE. It then asks the <code>tink-server</code> for workflows that match its MAC or IP address. Those workflows are then executed onto the Worker.</p>
+<p><img alt="Architecture" src="/images/workflow-diagram.png" /></p>
+<p>If there are no workflows defined for the Worker, the Provisioner will ignore the Worker's request. If as a part of the workflow, a new OS is installed and completes successfully, then the boot request (after reboot) will be handled by newly installed OS. If as a part of the workflow, an OS is <strong>not</strong> installed, then the Worker after reboot will request PXE-boot from the Provisioner.</p>
+<p>You can view the events and the state of a workflow during or after its execution with the tink CLI using the <a href="/cli-reference/workflow/#tink-workflow-events"><code>tink workflow events</code></a> an the <a href="/cli-reference/workflow/#tink-workflow-state"><code>tink workflow state</code></a> commands.</p>
+<h2 id="ephemeral-data">Ephemeral Data</h2>
+<p>Ephemeral data is data that is shared between Workers as they execute workflows. Ephemeral data is stored at <code>/workflow/&lt;workflow_id&gt;</code> in each tink-worker.</p>
+<p>Initially the directory is empty; you populate with it by having a <a href="/about/templates">template's actions (scripts, etc)</a> write to it. Then, the content in <code>/workflow/&lt;workflow_id&gt;</code> is pushed back to the database and from the database, pushed out to the other Workers.</p>
+<p>As the workflow progresses, subsequent actions on a Worker can read any ephemeral data that's been created by previous actions on other Workers, as well as update that file with any changes. Ephemeral data is only preserved through the life of a single workflow. Each workflow that executes gets an empty file.</p>
+<p>The data can take the form of a light JSON like below, or some binary files that other workers might require to complete their action. There is a 10 MB limit for ephemeral data, because it gets pushed to and from the tink-server and tink-worker with every action, so it needs to be pretty light.</p>
+<p>For instance, a Worker may write the following data:</p>
+<pre><code class="json">{
+  &quot;instance_id&quot;: &quot;123e4567-e89b-12d3-a456-426655440000&quot;,
+  &quot;mac_addr&quot;: &quot;F5:C9:E2:99:BD:9B&quot;,
+  &quot;operating_system&quot;: &quot;ubuntu_18_04&quot;
+}
+</code></pre>
+
+<p>The other worker may retrieve and use this data and eventually add some more:</p>
+<pre><code class="json">{
+  &quot;instance_id&quot;: &quot;123e4567-e89b-12d3-a456-426655440000&quot;,
+  &quot;ip_addresses&quot;: [
+    {
+      &quot;address_family&quot;: 4,
+      &quot;address&quot;: &quot;172.27.0.23&quot;,
+      &quot;cidr&quot;: 31,
+      &quot;private&quot;: true
+    }
+  ],
+  &quot;mac_addr&quot;: &quot;F5:C9:E2:99:BD:9B&quot;,
+  &quot;operating_system&quot;: &quot;ubuntu_18_04&quot;
+}
+</code></pre>
+
+<p>You can get the ephemeral data associated with a workflow with the <a href="/docs/cli-reference/workflow/#tink-workflow-data"><code>tink workflow data</code></a> tink CLI command.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        <div id="footer-wrapper" class="middle">
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <p class="text">
+                    An open source project brought to you by 
+                    <a class="logo-footer" href="https://www.packet.com/" title="Packet">
+                        <img src="../../assets/packet.png" alt="logo" class="packet-logo">
+                    </a>
+                </p>
+            </div>
+            <div class="col-6">
+                <nav id="nav-footer">
+                    <ul>
+                        <li><a href="#" title="">Terms</a></li>
+                        <li><a href="#" title="">License</a></li>
+                        <li><a href="#" title="">Code of Coduct</a></li>
+                        <li><a href="#" title="">Contributor Guide</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.3636a4ec.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,996 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/tinkerbell-logo.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.12">
+    
+    
+      
+        <title>Hardware Data - Tinkerbell Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4dd2dd8d.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/simple-grid.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hardware-data" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header id="site-header">
+    <!-- Button to open drawer -->
+    <label class="md-header-nav__button md-icon menu-toggle" for="__drawer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <nav id="nav-main" class="nav">
+        <div class="md-grid">
+            <section class="md-grid grid-x row">
+                <div class="col-2 left">
+                    <a aria-current="page" class="logo" href="/">
+                        <img src="../../assets/logo.png" alt="logo">
+                    </a>
+                </div>
+                <div class="col-10">
+                    <div class="nav-top">
+                        <ul>
+                            <li class="">
+                                <a href="">Faqs</a>
+                            </li>
+                            <li class="">
+                                <a href="">Docs</a>
+                            </li>
+                            <li class="">
+                                <a href="">Examples</a>
+                            </li>
+                            <li class="">
+                                <a href="">Community</a>
+                            </li>
+                            <li class="pre">
+                                <a href="https://github.com/tinkerbell/"><i class="fa fa-github"></i></a>
+                            </li>
+                            <li class="pre">
+                                <a href="https://tinkerbell.org/community/slack/"><i class="fa fa-slack"></i></a>
+                            </li>
+                            <li class="pre">
+                                <a href="https://twitter.com/tinkerbell_oss"><i class="fa fa-twitter"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+    <!-- Site title -->
+    <label class="md-nav__title" for="__drawer">
+        <a href="../.." title="Tinkerbell Docs" class="md-nav__button md-logo" aria-label="Tinkerbell Docs">
+            
+  <img src="../../assets/logo.png" alt="logo">
+
+        </a>
+        Tinkerbell Docs
+    </label>
+    <!-- Repository containing source -->
+    
+    <!-- Render item list -->
+    <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../architecture/" title="Architecture" class="md-nav__link">
+      Architecture
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Services
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Services" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Services
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../services/boots/" title="Boots" class="md-nav__link">
+      Boots
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../services/hegel/" title="Hegel" class="md-nav__link">
+      Hegel
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../services/osie/" title="OSIE" class="md-nav__link">
+      OSIE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../services/tink/" title="Tink" class="md-nav__link">
+      Tink
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Hardware Data
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="Hardware Data" class="md-nav__link md-nav__link--active">
+      Hardware Data
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#property-description" class="md-nav__link">
+    Property Description
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-minimal-hardware-data" class="md-nav__link">
+    The Minimal Hardware Data
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../templates/" title="Templates" class="md-nav__link">
+      Templates
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../workflows/" title="Workflows" class="md-nav__link">
+      Workflows
+    </a>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Setups
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Setups" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon"></span>
+        Setups
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../setup/local-vagrant/" title="Local Setup with Vagrant" class="md-nav__link">
+      Local Setup with Vagrant
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../setup/extending-vagrant/" title="Extending the Vagrant Setup" class="md-nav__link">
+      Extending the Vagrant Setup
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../setup/packet-terraform/" title="Packet Setup with Terraform" class="md-nav__link">
+      Packet Setup with Terraform
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Examples
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Examples" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon"></span>
+        Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../examples/hello-world-workflow/" title="A Hello-world Workflow" class="md-nav__link">
+      A Hello-world Workflow
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Tink CLI Reference
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Tink CLI Reference" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon"></span>
+        Tink CLI Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cli-reference/hardware/" title="Hardware" class="md-nav__link">
+      Hardware
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cli-reference/template/" title="Template" class="md-nav__link">
+      Template
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cli-reference/workflow/" title="Workflow" class="md-nav__link">
+      Workflow
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+        
+        
+        
+
+
+  <li class="md-nav__item">
+    <a href="../../troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+        
+    </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#property-description" class="md-nav__link">
+    Property Description
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-minimal-hardware-data" class="md-nav__link">
+    The Minimal Hardware Data
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <h1 id="hardware-data">Hardware Data</h1>
+<ul>
+<li>Hardware data holds the details about the hardware that you wish to use with a workflow.</li>
+<li>A hardware may have multiple network devices that can be used in a worklfow.</li>
+<li>The details about all those devices is maintained in JSON format as hardware data.</li>
+</ul>
+<h2 id="example">Example</h2>
+<p>If you have a hardware that has a single network/worker device on it, its hardware data shall be structured like the following:</p>
+<pre><code class="json">{
+  &quot;id&quot;: &quot;0eba0bf8-3772-4b4a-ab9f-6ebe93b90a94&quot;,
+  &quot;metadata&quot;: {
+    &quot;bonding_mode&quot;: 5,
+    &quot;custom&quot;: {
+      &quot;preinstalled_operating_system_version&quot;: {},
+      &quot;private_subnets&quot;: []
+    },
+    &quot;facility&quot;: {
+      &quot;facility_code&quot;: &quot;ewr1&quot;,
+      &quot;plan_slug&quot;: &quot;c2.medium.x86&quot;,
+      &quot;plan_version_slug&quot;: &quot;&quot;
+    },
+    &quot;instance&quot;: {
+      &quot;crypted_root_password&quot;: &quot;redacted&quot;,
+      &quot;operating_system_version&quot;: {
+        &quot;distro&quot;: &quot;ubuntu&quot;,
+        &quot;os_slug&quot;: &quot;ubuntu_18_04&quot;,
+        &quot;version&quot;: &quot;18.04&quot;
+      },
+      &quot;storage&quot;: {
+        &quot;disks&quot;: [
+          {
+            &quot;device&quot;: &quot;/dev/sda&quot;,
+            &quot;partitions&quot;: [
+              {
+                &quot;label&quot;: &quot;BIOS&quot;,
+                &quot;number&quot;: 1,
+                &quot;size&quot;: 4096
+              },
+              {
+                &quot;label&quot;: &quot;SWAP&quot;,
+                &quot;number&quot;: 2,
+                &quot;size&quot;: 3993600
+              },
+              {
+                &quot;label&quot;: &quot;ROOT&quot;,
+                &quot;number&quot;: 3,
+                &quot;size&quot;: 0
+              }
+            ],
+            &quot;wipe_table&quot;: true
+          }
+        ],
+        &quot;filesystems&quot;: [
+          {
+            &quot;mount&quot;: {
+              &quot;create&quot;: {
+                &quot;options&quot;: [&quot;-L&quot;, &quot;ROOT&quot;]
+              },
+              &quot;device&quot;: &quot;/dev/sda3&quot;,
+              &quot;format&quot;: &quot;ext4&quot;,
+              &quot;point&quot;: &quot;/&quot;
+            }
+          },
+          {
+            &quot;mount&quot;: {
+              &quot;create&quot;: {
+                &quot;options&quot;: [&quot;-L&quot;, &quot;SWAP&quot;]
+              },
+              &quot;device&quot;: &quot;/dev/sda2&quot;,
+              &quot;format&quot;: &quot;swap&quot;,
+              &quot;point&quot;: &quot;none&quot;
+            }
+          }
+        ]
+      }
+    },
+    &quot;manufacturer&quot;: {
+      &quot;id&quot;: &quot;&quot;,
+      &quot;slug&quot;: &quot;&quot;
+    },
+    &quot;state&quot;: &quot;&quot;
+  },
+  &quot;network&quot;: {
+    &quot;interfaces&quot;: [
+      {
+        &quot;dhcp&quot;: {
+          &quot;arch&quot;: &quot;x86_64&quot;,
+          &quot;hostname&quot;: &quot;server001&quot;,
+          &quot;ip&quot;: {
+            &quot;address&quot;: &quot;192.168.1.5&quot;,
+            &quot;gateway&quot;: &quot;192.168.1.1&quot;,
+            &quot;netmask&quot;: &quot;255.255.255.248&quot;
+          },
+          &quot;lease_time&quot;: 86400,
+          &quot;mac&quot;: &quot;00:00:00:00:00:00&quot;,
+          &quot;name_servers&quot;: [],
+          &quot;time_servers&quot;: [],
+          &quot;uefi&quot;: false
+        },
+        &quot;netboot&quot;: {
+          &quot;allow_pxe&quot;: true,
+          &quot;allow_workflow&quot;: true,
+          &quot;ipxe&quot;: {
+            &quot;contents&quot;: &quot;#!ipxe&quot;,
+            &quot;url&quot;: &quot;http://url/menu.ipxe&quot;
+          },
+          &quot;osie&quot;: {
+            &quot;base_url&quot;: &quot;&quot;,
+            &quot;initrd&quot;: &quot;&quot;,
+            &quot;kernel&quot;: &quot;vmlinuz-x86_64&quot;
+          }
+        }
+      }
+    ]
+  }
+}
+</code></pre>
+
+<h2 id="property-description">Property Description</h2>
+<p>The following section explains each property in the above example:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>A UUID used to uniquely identify the hardware. The <code>id</code> can be generated using the <code>uuidgen</code> command. If you are in Packet environment, you can get the <code>id</code> from the server overview page.</td>
+</tr>
+<tr>
+<td>network</td>
+<td>Network details</td>
+</tr>
+<tr>
+<td>network.Interfaces[]</td>
+<td>List of network interfaces on the hardware</td>
+</tr>
+<tr>
+<td>network.interfaces[].dhcp</td>
+<td>DHCP details</td>
+</tr>
+<tr>
+<td>network.interfaces[].dhcp.mac</td>
+<td>MAC address of the network device (worker)</td>
+</tr>
+<tr>
+<td>network.interfaces[].dhcp.ip</td>
+<td>IP details for DHCP</td>
+</tr>
+<tr>
+<td>network.interfaces[].dhcp.ip.address</td>
+<td>Worker IP address to be requested over DHCP</td>
+</tr>
+<tr>
+<td>network.interfaces[].dhcp.ip.gateway</td>
+<td>Gateway address</td>
+</tr>
+<tr>
+<td>network.interfaces[].dhcp.ip.netmask</td>
+<td>Netmask for the private network</td>
+</tr>
+<tr>
+<td>network.interfaces[].dhcp.hostname</td>
+<td>Hostname</td>
+</tr>
+<tr>
+<td>network.interfaces[].dhcp.lease_time</td>
+<td>Expiration in secs (default: 86400)</td>
+</tr>
+<tr>
+<td>network.interfaces[].dhcp.name_servers[]</td>
+<td>DNS servers</td>
+</tr>
+<tr>
+<td>network.interfaces[].dhcp.time_servers[]</td>
+<td>NTP servers</td>
+</tr>
+<tr>
+<td>network.interfaces[].dhcp.arch</td>
+<td>Hardware architecture, example: <code>x86_64</code></td>
+</tr>
+<tr>
+<td>network.interfaces[].dhcp.uefi</td>
+<td>Is UEFI</td>
+</tr>
+<tr>
+<td>network.interfaces[].netboot</td>
+<td>Netboot details</td>
+</tr>
+<tr>
+<td>network.interfaces[].netboot.allow_pxe</td>
+<td>Must be set to <code>true</code> to PXE.</td>
+</tr>
+<tr>
+<td>network.interfaces[].netboot.allow_workflow</td>
+<td>Must be <code>true</code> in order to execute a workflow.</td>
+</tr>
+<tr>
+<td>network.interfaces[].netboot.ipxe</td>
+<td>Details for iPXE</td>
+</tr>
+<tr>
+<td>network.interfaces[].netboot.ipxe.url</td>
+<td>iPXE script URL</td>
+</tr>
+<tr>
+<td>network.interfaces[].netboot.ipxe.contents</td>
+<td>iPXE script contents</td>
+</tr>
+<tr>
+<td>network.interfaces[].netboot.osie</td>
+<td>OSIE details</td>
+</tr>
+<tr>
+<td>network.interfaces[].netboot.osie.kernel</td>
+<td>Kernel</td>
+</tr>
+<tr>
+<td>network.interfaces[].netboot.osie.initrd</td>
+<td>Initrd</td>
+</tr>
+<tr>
+<td>network.interfaces[].netboot.osie.base_url</td>
+<td>Base URL for the kernel and initrd</td>
+</tr>
+<tr>
+<td>metadata</td>
+<td>Hardware metadata details</td>
+</tr>
+<tr>
+<td>metadata.state</td>
+<td>State must be set to <code>provisioning</code> for workflows.</td>
+</tr>
+<tr>
+<td>metadata.bonding_mode</td>
+<td>Bonding mode</td>
+</tr>
+<tr>
+<td>metadata.manufacturer</td>
+<td>Manufacturer details</td>
+</tr>
+<tr>
+<td>metadata.instance</td>
+<td>Holds the details for an instance</td>
+</tr>
+<tr>
+<td>metadata.instance.storage</td>
+<td>Details for an instance storage like disks and filesystems</td>
+</tr>
+<tr>
+<td>metadata.instance.storage.disks</td>
+<td>List of disk partitions</td>
+</tr>
+<tr>
+<td>metadata.instance.storage.disks[].device</td>
+<td>Name of the disk</td>
+</tr>
+<tr>
+<td>metadata.instance.storage.disks[].wipe_table</td>
+<td>Set to <code>true</code> to allow disk wipe.</td>
+</tr>
+<tr>
+<td>metadata.instance.storage.disks[].partitions</td>
+<td>List of disk partitions</td>
+</tr>
+<tr>
+<td>metadata.instance.storage.disks[].partitions[].size</td>
+<td>Size of the partition</td>
+</tr>
+<tr>
+<td>metadata.instance.storage.disks[].partitions[].label</td>
+<td>Partition label like BIOS, SWAP or ROOT</td>
+</tr>
+<tr>
+<td>metadata.instance.storage.disks[].partitions[].number</td>
+<td>Partition number</td>
+</tr>
+<tr>
+<td>metadata.instance.storage.filesystems</td>
+<td>List of filesystems and their respective mount points</td>
+</tr>
+<tr>
+<td>metadata.instance.storage.filesystems[].mount</td>
+<td>Details about the filesystem to be mounted</td>
+</tr>
+<tr>
+<td>metadata.instance.storage.filesystems[].mount.point</td>
+<td>Mount point for the filesystem</td>
+</tr>
+<tr>
+<td>metadata.instance.storage.filesystems[].mount.create</td>
+<td>Additional details that can be provided while creating a partition</td>
+</tr>
+<tr>
+<td>metadata.instance.storage.filesystems[].mount.create.options</td>
+<td>Options to be passed to <code>mkfs</code> while creating a partition</td>
+</tr>
+<tr>
+<td>metadata.instance.storage.filesystems[].mount.device</td>
+<td>Device to be mounted</td>
+</tr>
+<tr>
+<td>metadata.instance.storage.filesystems[].mount.format</td>
+<td>Filesystem format</td>
+</tr>
+<tr>
+<td>metadata.instance.crypted_root_password</td>
+<td>Hash for root password that is used to login into the worker after provisioning. The hash can be generated using the <code>openssl passwd</code> command. For example, <code>openssl passwd -6 -salt xyz your-password</code>.</td>
+</tr>
+<tr>
+<td>metadata.operating_system_version</td>
+<td>Details about the operating system to be installed</td>
+</tr>
+<tr>
+<td>metadata.operating_system_version.distro</td>
+<td>Operating system distribution name, like ubuntu</td>
+</tr>
+<tr>
+<td>metadata.operating_system_version.version</td>
+<td>Operating system version, like 18.04 or 20.04</td>
+</tr>
+<tr>
+<td>metadata.operating_system_version.os_slug</td>
+<td>A slug is a combination of operating system distro and version.</td>
+</tr>
+<tr>
+<td>metadata.facility</td>
+<td>Facility details</td>
+</tr>
+<tr>
+<td>metadata.facility.plan_slug</td>
+<td>The slug for the worker class. The value for this property depends on how you setup your workflow. While it is required if you are using the OS images from <a href="https://github.com/packethost/packet-images">packet-images</a> repository, it may be left out if not used at all in the workflow.</td>
+</tr>
+<tr>
+<td>metadata.facility.facility_code</td>
+<td>For local setup, <code>onprem</code> or any other string value can be used.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="the-minimal-hardware-data">The Minimal Hardware Data</h2>
+<p>While the hardware data is essential, not all the properties are required for every workflow.
+In fact, it's upto a workflow designer how they want to use the data in their workflow.
+Therefore, you may start with the minimal data given below and only add the properties you would want to use in your workflow.</p>
+<pre><code class="json">{
+  &quot;id&quot;: &quot;0eba0bf8-3772-4b4a-ab9f-6ebe93b90a94&quot;,
+  &quot;metadata&quot;: {
+    &quot;facility&quot;: {
+      &quot;facility_code&quot;: &quot;ewr1&quot;,
+      &quot;plan_slug&quot;: &quot;c2.medium.x86&quot;,
+      &quot;plan_version_slug&quot;: &quot;&quot;
+    },
+    &quot;instance&quot;: {},
+    &quot;state&quot;: &quot;provisioning&quot;
+  },
+  &quot;network&quot;: {
+    &quot;interfaces&quot;: [
+      {
+        &quot;dhcp&quot;: {
+          &quot;arch&quot;: &quot;x86_64&quot;,
+          &quot;ip&quot;: {
+            &quot;address&quot;: &quot;192.168.1.5&quot;,
+            &quot;gateway&quot;: &quot;192.168.1.1&quot;,
+            &quot;netmask&quot;: &quot;255.255.255.248&quot;
+          },
+          &quot;mac&quot;: &quot;00:00:00:00:00:00&quot;,
+          &quot;uefi&quot;: false
+        },
+        &quot;netboot&quot;: {
+          &quot;allow_pxe&quot;: true,
+          &quot;allow_workflow&quot;: true
+        }
+      }
+    ]
+  }
+}
+</code></pre>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        <div id="footer-wrapper" class="middle">
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <p class="text">
+                    An open source project brought to you by 
+                    <a class="logo-footer" href="https://www.packet.com/" title="Packet">
+                        <img src="../../assets/packet.png" alt="logo" class="packet-logo">
+                    </a>
+                </p>
+            </div>
+            <div class="col-6">
+                <nav id="nav-footer">
+                    <ul>
+                        <li><a href="#" title="">Terms</a></li>
+                        <li><a href="#" title="">License</a></li>
+                        <li><a href="#" title="">Code of Coduct</a></li>
+                        <li><a href="#" title="">Contributor Guide</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.3636a4ec.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
