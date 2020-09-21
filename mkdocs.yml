@@ -36,19 +36,6 @@ theme:
   logo: assets/logo.png
   footer_logo: assets/packet.png
   favicon: assets/tinkerbell-logo.png
-  nav_top:
-    - Faqs: index.md
-    - Docs: index.md
-    - Examples: index.md
-    - Community: services/boots.md
-
-  nav_top_social:
-    - icon: github
-      link: https://github.com/tinkerbell
-    - icon: slack
-      link: https://tinkerbell.org/community/slack
-    - icon: twitter
-      link: https://twitter.com/tinkerbell_oss
 
 extra_css:
   - stylesheets/extra.css
