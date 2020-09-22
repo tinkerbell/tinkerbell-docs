@@ -39,19 +39,6 @@ theme:
   font:
     text: Gotham A
     code: Consolas
-  nav_top:
-    - Faqs: index.md
-    - Docs: index.md
-    - Examples: index.md
-    - Community: services/boots.md
-
-  nav_top_social:
-    - icon: github
-      link: https://github.com/tinkerbell
-    - icon: slack
-      link: https://tinkerbell.org/community/slack
-    - icon: twitter
-      link: https://twitter.com/tinkerbell_oss
 
 extra_css:
   - stylesheets/extra.css
