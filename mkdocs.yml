@@ -36,6 +36,9 @@ theme:
   logo: assets/logo.png
   footer_logo: assets/packet.png
   favicon: assets/tinkerbell-logo.png
+  font:
+    text: Gotham A
+    code: Consolas
   nav_top:
     - Faqs: index.md
     - Docs: index.md
