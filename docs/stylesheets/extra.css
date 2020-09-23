@@ -2,7 +2,14 @@
   --md-primary-fg-color:        #3985a9;
   --md-primary-fg-color--light: #1d5086;
   --md-primary-fg-color--dark:  #05254c;
-  
+}
+
+body {
+    font-size: .875rem!important
+}
+
+.align-middle {
+    align-items: center;
 }
 
 .grid-x {
@@ -24,13 +31,10 @@
     background-color: #05254c;
     color: #fff;
     display: block;
-    padding-top: 14px;
-    padding-bottom: 14px;
 }
 
 .nav {
     text-align: right;
-    display: block;
 }
 
 .nav a {
@@ -53,7 +57,7 @@
 
 .nav ul li a {
     display: inline-block;
-    font-size: 1rem;
+    font-size: 0.8em;
     font-weight: 400;
     border-bottom: 1px solid #05254c;
     color: #9dafc4;
@@ -72,12 +76,12 @@
     color: #ffd105;
     border: 1px solid #0386ac;
     border-radius: 50em;
+    padding: 3px;
     width: 32px;
     height: 32px;
     line-height: 1.65;
     text-align: center;
     display: block;
-    position: relative;
 }
 
 .nav ul li.pre a:hover {
