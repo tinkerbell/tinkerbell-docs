@@ -4,8 +4,25 @@
   --md-primary-fg-color--dark:  #05254c;
 }
 
+@import url('https://cloud.typography.com/6193438/7900212/css/fonts.css');
+
 body {
+    font-family: Gotham A, Gotham B, Helvetica, Roboto, Arial, sans-serif;
+    background: #f8f8f8;
     font-size: .875rem!important
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: Gotham A, Gotham B, Helvetica, Roboto, Arial, sans-serif!important;
+    line-height: 1.3
+}
+
+pre, code, kbd {
+    font-family: Consolas, "Liberation Mono", Courier, monospace;
 }
 
 .align-middle {
