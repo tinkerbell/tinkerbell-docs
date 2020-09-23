@@ -80,6 +80,10 @@ pre, code, kbd {
     color: #9dafc4;
 }
 
+.nav ul li.active a {
+    color: #fff;
+}
+
 .nav ul li a:hover {
     color: #fff;
     border-bottom: 1px solid #fff;
