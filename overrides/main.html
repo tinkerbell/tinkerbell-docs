@@ -22,35 +22,10 @@
   <meta name="twitter:title" content="{{ title }}">
   <meta name="twitter:description" content="{{ config.site_description }}">
   <meta name="twitter:image" content="{{ image }}">
-  <link rel="stylesheet" href="{{ 'assets/stylesheets/overrides.9514a156.min.css' | url }}">
   <link href="https://cloud.typography.com/6193438/7900212/css/fonts.css" rel="stylesheet">
-{% endblock %}
-{% block announce %}
-  <a href="https://twitter.com/squidfunk">
-    For updates follow <strong>@squidfunk</strong> on
-    <span class="twemoji twitter">
-      {% include ".icons/fontawesome/brands/twitter.svg" %}
-    </span>
-    <strong>Twitter</strong>
-  </a>
 {% endblock %}
 {% block content %}
   {{ super() }}
-  <footer class="tx-content__footer md-typeset">
-    <a href="{{ 'insiders/' | url }}" title="Material for MkDocs Insiders">
-      <hr>
-      <span class="twemoji">
-        {% include ".icons/logo.svg" %}
-      </span>
-      <span class="twemoji">
-        {% include ".icons/material/plus.svg" %}
-      </span>
-      <span class="twemoji tx-heart">
-        {% include ".icons/octicons/heart-fill-24.svg" %}
-      </span>
-      <hr>
-    </a>
-  </footer>
 {% endblock %}
 {% block analytics %}
   {{ super() }}
