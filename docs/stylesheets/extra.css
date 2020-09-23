@@ -4,7 +4,7 @@
   --md-primary-fg-color--dark:  #05254c;
 }
 
-@import url('https://cloud.typography.com/6193438/7900212/css/fonts.css');
+@import url('//cloud.typography.com/6193438/7900212/css/fonts.css');
 
 body {
     font-family: Gotham A, Gotham B, Helvetica, Roboto, Arial, sans-serif;
