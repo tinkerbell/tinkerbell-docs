@@ -220,12 +220,10 @@ pre, code, kbd {
     border-right: 0;
 }
 
-.packet-logo {
-    width: 66px;
-    height: auto;
+.logo-footer svg {
     vertical-align: middle;
     display: inline-block;
-    margin-left: 10px;
+    margin-left: 20px;
 }
 
 @media print, screen and (max-width:63.99875em) {
