@@ -1,10 +1,12 @@
-# tinkerbell-docs
+![](https://img.shields.io/badge/Stability-Experimental-red.svg)
 
-Repo for the Tinkerbell docs. They are build using static-site generator `mkdocs` and using the `mkdocs-material` theme, then served by netlify to docs.tinkerbell.com. 
+# Tinkerbell Docs
+
+This is the source repo for the Tinkerbell docs. They are build using static-site generator `mkdocs` and using the `mkdocs-material` theme, then served by netlify to docs.tinkerbell.com. 
 
 ## mkdocs
 
-If you wish, you can install `mkdocs` and `mkdocs-material` to build the docs locally. Prereqresite: You need to have Python installed.
+If you wish, you can install `mkdocs` and `mkdocs-material` to build the docs locally. Prerequisite: You need to have Python installed.
 
 To [install MkDocs](https://www.mkdocs.org/#installation):
 
