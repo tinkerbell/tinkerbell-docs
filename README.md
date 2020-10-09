@@ -2,7 +2,7 @@
 
 # Tinkerbell Docs
 
-This is the source repo for the Tinkerbell docs. They are build using static-site generator `mkdocs` and using the `mkdocs-material` theme, then served by netlify to docs.tinkerbell.com. 
+This is the source repo for the Tinkerbell docs. They are build using static-site generator [`mkdocs`](https://www.mkdocs.org/) and using the `[mkdocs-material`](https://squidfunk.github.io/mkdocs-material/) theme, then served by netlify to [docs.tinkerbell.org](https://docs.tinkerbell.org/). 
 
 ## mkdocs
 
@@ -12,7 +12,7 @@ To [install MkDocs](https://www.mkdocs.org/#installation):
 
 `pip install mkdocs`
 
-Next you'll need to install the [MkDocs Material](https://github.com/squidfunk/mkdocs-material) theme:
+Next you'll need to install the [MkDocs Material](https://squidfunk.github.io/mkdocs-material/getting-started/#installation) theme:
 
 `pip install mkdocs-material`
 
