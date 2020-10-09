@@ -1,26 +1,39 @@
 # tinkerbell-docs
-Repo for initial Tinkerbell docs to MkDocs
+
+Repo for the Tinkerbell docs. They are build using static-site generator `mkdocs` and using the `mkdocs-material` theme, then served by netlify to docs.tinkerbell.com. 
+
+## mkdocs
+
+If you wish, you can install `mkdocs` and `mkdocs-material` to build the docs locally. Prereqresite: You need to have Python installed.
 
 To [install MkDocs](https://www.mkdocs.org/#installation):
 
-You need to have Python installed.
+`pip install mkdocs`
 
-Run `pip install mkdocs`
+Next you'll need to install the [MkDocs Material](https://github.com/squidfunk/mkdocs-material) theme:
 
-Next you'll need to install the [MkDocs Material](https://github.com/squidfunk/mkdocs-material) theme, run `pip install mkdocs-material`
+`pip install mkdocs-material`
 
-Then you'll need to enable versioning. To do that:
-Install the plugin using pip:
+To build locally, clone the repo and from `tinkerbell-docs`, run:
 
-`pip install mkdocs-versioning`
+`mkdocs serve`
 
-Next, add the following lines to your mkdocs.yml:
+## Contributing to the Tinkerbell Docs
 
-`plugins:
-  - search
-  - mkdocs-versioning:
-      version: 0.3.0`
+All the markdown source files for the documentation are in the `docs/` folder. Find the file that you want to update and edit it. Then open a Pull Request with your changes. Make sure that the build passes, and take a look at the netlify preview to see your changes staged on the website.
 
-Since we have no plugins entry in your config file yet, you'll likely also want to add the search plugin. MkDocs enables it by default if there is no plugins entry set.
+### Page metadata
 
-Everything should be ready to go, just run `mkdocs serve`
+Currently the metadata for the page is yaml formatted, with two fields: title and date. If you edit a doc, update the date to when you made your edits. 
+
+### Adding Images
+
+All the images for the docs are in the `images/` folder. To pull the image into your doc, use a relative link to the image file. Example:
+
+```
+![Architecture](/images/architecture-diagram.png)
+```
+
+### Adding a page
+
+If you would like to submit a new page to the documentation, be sure to add it to the `nav` section in mkdocs.yml. This will ensure that the page appears in the table of contents.
