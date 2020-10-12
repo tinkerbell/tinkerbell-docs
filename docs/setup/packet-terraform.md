@@ -109,11 +109,11 @@ SSH into the Provisioner and you will find yourself in a copy of the `tink` repo
 ssh -t root@$(terraform output provisioner_ip) "cd /root/tink && bash"
 ```
 
-You have to define and set Tinkerbell's environment. Use the `generate-envrc.sh` script to generate the `envrc` file. Using and setting `envrc` creates an idempotent workflow and you can use it to configure the `setup.sh` script. For example changing the [OSIE](/docs/services/osie) version.
+You have to define and set Tinkerbell's environment. Use the `generate-envrc.sh` script to generate the `.env` file. Using and setting `.env` creates an idempotent workflow and you can use it to configure the `setup.sh` script. For example changing the [OSIE](/docs/services/osie) version.
 
 ```
-./generate-envrc.sh enp1s0f1 > envrc
-source ./envrc
+./generate-envrc.sh enp1s0f1 > .env
+source .env
 ```
 
 Then, you run the `setup.sh` script.
@@ -122,7 +122,7 @@ Then, you run the `setup.sh` script.
 ./setup.sh
 ```
 
-`setup.sh` uses the `envrc` to install and configure:
+`setup.sh` uses the `.env` to install and configure:
 
 - [tink-server](/docs/services/tink)
 - [hegel](/docs/services/hegel)
