@@ -5,7 +5,7 @@ date: 2020-07-28
 
 # Workflows
 
-A workflow is the complete set of operations to be run on a Worker. It consists of two building blocks: a Worker's [hardware data](/about/hardware-data) and a [template](/about/templates).
+A workflow is the complete set of operations to be run on a Worker. It consists of two building blocks: a Worker's [hardware data](/about/hardware-data) and a [template](/about/templates). Workflows, once created, are immutable. Changes made to a template or to hardware data does not update any associated workflows.
 
 ## Creating a Workflow
 
