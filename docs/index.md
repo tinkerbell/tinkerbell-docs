@@ -11,7 +11,7 @@ Everything you need to know about Tinkerbell and its major component microservic
 
 Tinkerbell is an open-source, bare metal provisioning engine, built and maintained by the team at Packet.
 
-Interested in contributing? Check out our [Contributors' Page](/contributors).
+Interested in contributing? Check out our [Contributors' Page](https://tinkerbell.org/community/contributors/).
 
 ## What's Powering Tinkerbell?
 
