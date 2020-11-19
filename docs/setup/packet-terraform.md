@@ -1,20 +1,20 @@
 ---
-title: Packet Setup with Terraform
+title: Equinix Metal Setup with Terraform
 date: 2020-09-08
 ---
 
-# Packet Setup with Terraform
+# Equinix Metal Setup with Terraform
 
-This setup uses the Packet Terraform provider to create two Packet servers, _tf-provisioner_ and _tf-worker_, that are attached to the same VLAN. Then uses the `hello-world` example workflow as an introduction to Tinkerbell. _tf-provisioner_ is will be setup as the Provisioner, running `tink-server`, `boots`, `nginx to serve osie`, `hegel` and Postgres. _tf-worker_ will be setup as the Worker, able to execute workflows.
+This setup uses the Equinix Metal Terraform provider to create two Equinix Metal servers, _tf-provisioner_ and _tf-worker_, that are attached to the same VLAN. Then uses the `hello-world` example workflow as an introduction to Tinkerbell. _tf-provisioner_ is will be setup as the Provisioner, running `tink-server`, `boots`, `nginx to serve osie`, `hegel` and Postgres. _tf-worker_ will be setup as the Worker, able to execute workflows.
 
 ## Prerequisites
 
 This guide assumes that you already have:
 
-- [A Packet account](https://app.packet.net/login).
-- Your Packet API Key and Project ID. The Terraform provider needs to have both to create servers in your account. Make sure the API token is a user API token (created/accessed under _API keys_ in your personal settings).
-- [SSH Keys](https://www.packet.com/developers/docs/servers/key-features/ssh-keys/) need to be set up on Packet for the machine where you are running Terraform. Terraform uses your `ssh-agent` to connect to the Provisioner when needed. Double check that the right keys are set.
-- [Terraform](https://www.terraform.io/downloads.html) and the [Packet Terraform provider](https://registry.terraform.io/providers/packethost/packet/latest/docs) installed on your local machine.
+- [An Equinix Metal account](https://console.equinix.com/login).
+- Your Equinix Metal API Key and Project ID. The Terraform provider needs to have both to create servers in your account. Make sure the API token is a user API token (created/accessed under _API keys_ in your personal settings).
+- [SSH Keys](https://metal.equinix.com/developers/docs/accounts/ssh-keys/) need to be set up on Equinix Metal for the machine where you are running Terraform. Terraform uses your `ssh-agent` to connect to the Provisioner when needed. Double check that the right keys are set.
+- [Terraform](https://www.terraform.io/downloads.html) and the [Equinix Metal Terraform provider](https://registry.terraform.io/providers/packethost/packet/latest/docs) installed on your local machine.
 
 ## Using Terraform
 
@@ -25,7 +25,7 @@ git clone https://github.com/tinkerbell/sandbox.git
 cd sandbox/deploy/terraform
 ```
 
-The Packet Terraform module requires a couple of inputs, the mandatory ones are the `packet_api_token` and the `project_id`. You can define them in a `terraform.ftvars` file. By default, Terraform will load the file when present. You can create one `terraform.tfvars` that looks like this:
+The Equinix Metal Terraform module requires a couple of inputs, the mandatory ones are the `packet_api_token` and the `project_id`. You can define them in a `terraform.ftvars` file. By default, Terraform will load the file when present. You can create one `terraform.tfvars` that looks like this:
 
 ```
 cat terraform.tfvars
@@ -59,7 +59,7 @@ As an output, the `terraform apply` command returns the IP address of the Provis
 
 ### Troubleshooting - Server Creation
 
-When creating servers on Packet, you might get an error similar to:
+When creating servers on Equinix Metal, you might get an error similar to:
 
 ```
 > Error: The facility sjc1 has no provisionable c3.small.x86 servers matching your criteria.
@@ -67,7 +67,7 @@ When creating servers on Packet, you might get an error similar to:
 
 This error notifies you that the facility you are using (by default sjc1) does not have devices available for `c3.small.x86`. You can change your device setting to a different `device_type` in `terraform.tfvars` (be sure that layer2 networking is supported for the new `device_type`), or you can change facility with the variable `facility` set to a different one.
 
-You can check availability of device type in a particular facility through the Packet CLI using the `capacity get` command.
+You can check availability of device type in a particular facility through the Equinix Metal CLI using the `capacity get` command.
 
 ```
 packet capacity get
@@ -216,7 +216,7 @@ docker exec -i deploy_tink-cli_1 tink hardware push < /root/tink/deploy/hardware
 2020/06/17 14:12:45 Hardware data pushed successfully
 ```
 
-A note on the Worker at this point. Ideally the worker should be kept from booting until the Provisioner is ready to serve it OSIE, but on Packet that probably doesn't happen. Now that the Worker's hardware data is registered with Tinkerbell, you should manually reboot the worker through the Packet [CLI](https://github.com/packethost/packet-cli/blob/master/docs/packet_device_reboot.md), [API](https://www.packet.com/developers/api/devices/#devices-performAction), or Packet UI. Remember to use the SOS console to check what the Worker is doing.
+A note on the Worker at this point. Ideally the worker should be kept from booting until the Provisioner is ready to serve it OSIE, but on Equinix Metal that probably doesn't happen. Now that the Worker's hardware data is registered with Tinkerbell, you should manually reboot the worker through the [Equinix Metal CLI](https://github.com/packethost/packet-cli/blob/master/docs/packet_device_reboot.md), [API](https://metal.equinix.com/developers/api/devices/#devices-performAction), or Equinix Metal console. Remember to use the SOS console to check what the Worker is doing.
 
 ## Creating a Template
 

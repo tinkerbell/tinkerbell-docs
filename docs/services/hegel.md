@@ -56,4 +56,4 @@ Every cloud provider is capable of exposing metadata to servers that you can que
 
 - [AWS: Instance metadata and user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
 - [GCP: Storing and retrieving instance metadata](https://cloud.google.com/compute/docs/storing-retrieving-metadata)
-- [Packet: Metadata](https://www.packet.com/developers/docs/servers/key-features/metadata/)
+- [Equinix Metal: Metadata](https://metal.equinix.com/developers/docs/servers/metadata/)

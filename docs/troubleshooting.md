@@ -7,7 +7,7 @@ date: 2019-05-05
 
 The following are possible errors you might run into and their possible solutions:
 
-- If you are on Packet environment and the worker is not set to always PXE, then you may encounter the following error.
+- If you are in an Equinix Metal environment and the worker is not set to always PXE, then you may encounter the following error.
   The issue can be resolved by setting the worker to always PXE from the server actions dropdown.
 
 ```
