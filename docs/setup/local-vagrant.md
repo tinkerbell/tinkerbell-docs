@@ -24,16 +24,16 @@ The last step is to start up the Worker, which will call back to the Provisioner
 
 ## Getting Tinkerbell
 
-To get Tinkerbell, clone the `tink` repository.
+To get Tinkerbell, clone the `sandbox` repository.
 
 ```
-git clone https://github.com/tinkerbell/tink.git
+git clone https://github.com/tinkerbell/sandbox.git
 ```
 
 Move into the `deploy/vagrant` directory. This folder contains a Vagrant configuration file (Vagrantfile) needed to setup the Provisioner and the Worker.
 
 ```
-cd tink/deploy/vagrant
+cd sandbox/deploy/vagrant
 ```
 
 ## Start the Provisioner
