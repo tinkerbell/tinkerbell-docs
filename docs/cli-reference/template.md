@@ -38,7 +38,7 @@ tink template create --name <NAME> --path <PATH> [--help] [--facility]
 **Examples**
 
 ```
-template create --name hello-world < ./hello-world.yml
+tink template create --name hello-world < ./hello-world.yml
 >
 Created Template:  b8dbcf07-39dd-4018-903e-1748ecbd1986
 ```
