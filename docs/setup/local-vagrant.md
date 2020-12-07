@@ -24,16 +24,16 @@ The last step is to start up the Worker, which will call back to the Provisioner
 
 ## Getting Tinkerbell
 
-To get Tinkerbell, clone the `tink` repository.
+To get Tinkerbell, clone the `sandbox` repository.
 
 ```
-git clone https://github.com/tinkerbell/tink.git
+git clone https://github.com/tinkerbell/sandbox.git
 ```
 
 Move into the `deploy/vagrant` directory. This folder contains a Vagrant configuration file (Vagrantfile) needed to setup the Provisioner and the Worker.
 
 ```
-cd tink/deploy/vagrant
+cd sandbox/deploy/vagrant
 ```
 
 ## Start the Provisioner
@@ -67,11 +67,11 @@ vagrant@provisioner:~$
 Tinkerbell is going to be running from a container, so navigate to the `vagrant` directory, set the environment, and start the Tinkerbell stack with `docker-compose`.
 
 ```
-cd /vagrant && source envrc && cd deploy
+cd /vagrant && source .env && cd deploy
 docker-compose up -d
 ```
 
-The Tinkerbell server, and more importantly the CLI, are now managed like a standard Docker Compose project. Just make sure to have sourced the `envrc` before issuing docker-compose commands.
+The Tinkerbell server, and more importantly the CLI, are now managed like a standard Docker Compose project. Just make sure to have sourced the `.env` before issuing docker-compose commands.
 
 Tinkerbell is now ready to receive templates and workflows. Check out all the Tinkerbell services are running.
 
@@ -95,7 +95,7 @@ At this point, you might want to open a ssh connection to show logs from the Pro
 ```
 cd tink/deploy/vagrant
 vagrant ssh provisioner
-cd /vagrant && source envrc && cd deploy
+cd /vagrant && source .env && cd deploy
 docker-compose logs -f tink-server boots nginx
 ```
 
