@@ -35,7 +35,6 @@ theme:
   custom_dir: overrides
   logo: assets/logo.png
   footer_logo: assets/packet.png
-  favicon: assets/tinkerbell-logo.png
   font: false
 
 extra_css:
