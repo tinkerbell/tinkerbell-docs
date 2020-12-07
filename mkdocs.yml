@@ -1,9 +1,11 @@
 site_name: Tinkerbell Docs
+site_description: Designed for scalable provisioning of physical hardware, Tinkerbell is both open-source and cloud native. Contributed by Equinix Metal.
+site_image: https://tinkerbell.org/images/social/tinkerbell-social-image.png
 
 nav:
   - Home: index.md
 
-  - Architecture: about/architecture.md
+  - Architecture: architecture.md
 
   - Services:
     - Boots: services/boots.md
@@ -11,9 +13,9 @@ nav:
     - OSIE: services/osie.md
     - Tink: services/tink.md
 
-  - Hardware Data: about/hardware-data.md
-  - Templates: about/templates.md
-  - Workflows: about/workflows.md
+  - Hardware Data: hardware-data.md
+  - Templates: templates.md
+  - Workflows: workflows.md
 
   - Setups:
     - Local Setup with Vagrant: setup/local-vagrant.md
@@ -35,7 +37,6 @@ theme:
   custom_dir: overrides
   logo: assets/logo.png
   footer_logo: assets/packet.png
-  favicon: assets/tinkerbell-logo.png
   font: false
 
 extra_css:
