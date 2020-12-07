@@ -5,7 +5,7 @@ site_image: https://tinkerbell.org/images/social/tinkerbell-social-image.png
 nav:
   - Home: index.md
 
-  - Architecture: about/architecture.md
+  - Architecture: architecture.md
 
   - Services:
     - Boots: services/boots.md
@@ -13,9 +13,9 @@ nav:
     - OSIE: services/osie.md
     - Tink: services/tink.md
 
-  - Hardware Data: about/hardware-data.md
-  - Templates: about/templates.md
-  - Workflows: about/workflows.md
+  - Hardware Data: hardware-data.md
+  - Templates: templates.md
+  - Workflows: workflows.md
 
   - Setups:
     - Local Setup with Vagrant: setup/local-vagrant.md
