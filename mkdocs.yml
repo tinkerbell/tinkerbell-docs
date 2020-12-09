@@ -21,7 +21,7 @@ nav:
   - Setups:
     - Local Setup with Vagrant: setup/local-vagrant.md
     - Extending the Vagrant Setup: setup/extending-vagrant.md
-    - Packet Setup with Terraform: setup/packet-terraform.md
+    - Equinix Metal Setup with Terraform: setup/packet-terraform.md
 
   - Examples:
     - A Hello-world Workflow: examples/hello-world-workflow.md
@@ -50,7 +50,7 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/tinkerbell
     - icon: fontawesome/brands/slack
-      link: https://slack.packet.com/
+      link: https://slack.equinixmetal.com/
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/tinkerbell_oss
 

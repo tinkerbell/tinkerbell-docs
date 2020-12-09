@@ -9,7 +9,7 @@ The "Hello World" example uses an example hardware data, template, and workflow 
 
 ## Prerequisites
 
-- You have a Provisioner up and running, with the Tinkerbell stack installed and configured. This can be done locally with Vagrant as an experimental environment, on Packet for a more robust setup, or installed on any other environment that you have configured.
+- You have a Provisioner up and running, with the Tinkerbell stack installed and configured. This can be done locally with Vagrant as an experimental environment, on Equinix Metal for a more robust setup, or installed on any other environment that you have configured.
 
 - You have a Worker that has not yet been brought up, or can be restarted.
 
