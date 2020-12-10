@@ -15,7 +15,7 @@ When a Worker comes on-line for the first time, it PXE boots and sends a DHCP re
 
 Next, Boots communicates over TFTP to download the iPXE script to the Worker.
 
-The iPXE script tells the Worker to download and boot an in-memory operating system called [Osie](/docs/services/osie). From there you are inside an OS and you can do what you like, the most common action is to partition your hard drive and installing the actual operating system. Tinkerbell abstracts those actions with the concept of a workflow.
+The iPXE script tells the Worker to download and boot an in-memory operating system called [Osie](/services/osie). From there you are inside an OS and you can do what you like, the most common action is to partition your hard drive and installing the actual operating system. Tinkerbell abstracts those actions with the concept of a workflow.
 
 ## Other Resources
 

@@ -109,7 +109,7 @@ SSH into the Provisioner and you will find yourself in a copy of the `tink` repo
 ssh -t root@$(terraform output provisioner_ip) "cd /root/tink && bash"
 ```
 
-You have to define and set Tinkerbell's environment. Use the `generate-envrc.sh` script to generate the `.env` file. Using and setting `.env` creates an idempotent workflow and you can use it to configure the `setup.sh` script. For example changing the [OSIE](/docs/services/osie) version.
+You have to define and set Tinkerbell's environment. Use the `generate-envrc.sh` script to generate the `.env` file. Using and setting `.env` creates an idempotent workflow and you can use it to configure the `setup.sh` script. For example changing the [OSIE](/services/osie) version.
 
 ```
 ./generate-envrc.sh enp1s0f1 > .env
@@ -124,11 +124,11 @@ Then, you run the `setup.sh` script.
 
 `setup.sh` uses the `.env` to install and configure:
 
-- [tink-server](/docs/services/tink)
-- [hegel](/docs/services/hegel)
-- [boots](/docs/services/boots)
+- [tink-server](/services/tink)
+- [hegel](/services/hegel)
+- [boots](/services/boots)
 - postgres
-- nginx to serve [OSIE](/docs/services/osie)
+- nginx to serve [OSIE](/services/osie)
 - A docker registry.
 
 ## Running Tinkerbell
@@ -220,7 +220,7 @@ A note on the Worker at this point. Ideally the worker should be kept from booti
 
 ## Creating a Template
 
-Next, define the template for the workflow. The template sets out tasks for the Worker to preform sequentially. This template contains a single task with a single action, which is to perform [“hello-world”](/docs/examples/hello-world). Just as in the hello-world example, the `hello-world` image doesn’t contain any instructions that the Worker will perform. It is just a placeholder in the template so a workflow can be created and pushed to the Worker.
+Next, define the template for the workflow. The template sets out tasks for the Worker to preform sequentially. This template contains a single task with a single action, which is to perform [“hello-world”](/examples/hello-world-workflow/). Just as in the hello-world example, the `hello-world` image doesn’t contain any instructions that the Worker will perform. It is just a placeholder in the template so a workflow can be created and pushed to the Worker.
 
 ```
 cat > hello-world.yml  <<EOF

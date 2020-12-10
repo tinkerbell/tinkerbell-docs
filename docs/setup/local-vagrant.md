@@ -165,7 +165,7 @@ tink-server_1  | {"level":"info","ts":1592936402.3975577,"caller":"grpc-server/h
 
 ## Creating a Template
 
-Next, define the template for the workflow. The template sets out tasks for the Worker to preform sequentially. This template contains a single task with a single action, which is to perform "hello-world". Just as in the [hello-world example](/exmaples/hello-world-workflow), the "hello-world" image doesn't contain any instructions that the Worker will perform. It is just a placeholder in the template so a workflow can be created and pushed to the Worker.
+Next, define the template for the workflow. The template sets out tasks for the Worker to preform sequentially. This template contains a single task with a single action, which is to perform "hello-world". Just as in the [hello-world example](/examples/hello-world-workflow), the "hello-world" image doesn't contain any instructions that the Worker will perform. It is just a placeholder in the template so a workflow can be created and pushed to the Worker.
 
 ```
 cat > hello-world.yml  <<EOF

@@ -5,7 +5,7 @@ date: 2020-07-28
 
 # Workflows
 
-A workflow is the complete set of operations to be run on a Worker. It consists of two building blocks: a Worker's [hardware data](/about/hardware-data) and a [template](/about/templates). Workflows are immutable. Updating a template or hardware data does not update existing workflows.
+A workflow is the complete set of operations to be run on a Worker. It consists of two building blocks: a Worker's [hardware data](/hardware-data) and a [template](/templates). Workflows are immutable. Updating a template or hardware data does not update existing workflows.
 
 ## Creating a Workflow
 
@@ -55,7 +55,7 @@ You can view the events and the state of a workflow during or after its executio
 
 Ephemeral data is data that is shared between Workers as they execute workflows. Ephemeral data is stored at `/workflow/<workflow_id>` in each tink-worker.
 
-Initially the directory is empty; you populate with it by having a [template's actions (scripts, etc)](/about/templates) write to it. Then, the content in `/workflow/<workflow_id>` is pushed back to the database and from the database, pushed out to the other Workers.
+Initially the directory is empty; you populate with it by having a [template's actions (scripts, etc)](/templates) write to it. Then, the content in `/workflow/<workflow_id>` is pushed back to the database and from the database, pushed out to the other Workers.
 
 As the workflow progresses, subsequent actions on a Worker can read any ephemeral data that's been created by previous actions on other Workers, as well as update that file with any changes. Ephemeral data is only preserved through the life of a single workflow. Each workflow that executes gets an empty file.
 
@@ -89,4 +89,4 @@ The other worker may retrieve and use this data and eventually add some more:
 }
 ```
 
-You can get the ephemeral data associated with a workflow with the [`tink workflow data`](/docs/cli-reference/workflow/#tink-workflow-data) tink CLI command.
+You can get the ephemeral data associated with a workflow with the [`tink workflow data`](/cli-reference/workflow/) tink CLI command.
