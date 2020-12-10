@@ -21,7 +21,7 @@ Currently, the OSIE of today is a bit "too fat"! We are in the process of moving
 
 ## When You See OSIE
 
-If you follow the [Vagrant Setup](/setup/locally-with-vagrant) tutorial you encounter OSIE at the section "Start the Worker".
+If you follow the [Vagrant Setup](/setup/local-vagrant) tutorial you encounter OSIE at the section "Start the Worker".
 
 At that time the Worker has netbooted and Boots has pushed OSIE to the Worker, the workflow has started, and the Worker does not have an operating system yet.
 
