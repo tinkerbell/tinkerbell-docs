@@ -20,25 +20,23 @@ date: 2020-07-02
 Creates the template from the YAML file, and pushes it to the database. It returns a UUID for the newly created template.
 
 ```
-tink template create --name <NAME> --path <PATH> [--help] [--facility]
+tink template create --path <PATH> [--help] [--facility]
 ```
 
 **Arguments**
 
-- `NAME` - The name for the new template.
 - `PATH` - The path to the template file.
 
 **Options**
 
 - `-h`, `--help` - Displays usage information for `create`.
-- `-n`, `--name` - Specify a name for the template. Must be unique and alphanumeric.
 - `-p`, `--path`, `< ./<PATH>` - Path to the template file. Alternatively, you can open and read the file instead.
 - `-f`, `--facility` - string used to build grpc and http urls
 
 **Examples**
 
 ```
-tink template create --name hello-world < ./hello-world.yml
+tink template create < ./hello-world.yml
 >
 Created Template:  b8dbcf07-39dd-4018-903e-1748ecbd1986
 ```
@@ -120,20 +118,23 @@ tink template list
 ```
 tink template list
 >
-+--------------------------------------+-------------------+-------------------------------+-------------------------------+
-| TEMPLATE ID                          | TEMPLATE NAME     | CREATED AT                    | UPDATED AT                    |
-+--------------------------------------+-------------------+-------------------------------+-------------------------------+
-| 9c7d2a12-8dcb-406c-82a8-f41d2efd8ebf | hello-world-again | 2020-07-06 14:39:19 +0000 UTC | 2020-07-06 14:39:19 +0000 UTC |
-| 160d2cbf-d1ed-496d-9ade-7347b2853cbf | hello-world       | 2020-07-06 14:36:15 +0000 UTC | 2020-07-06 14:36:15 +0000 UTC |
-+--------------------------------------+-------------------+-------------------------------+-------------------------------+
++--------------------------------------+----------------------+-------------------------------+-------------------------------+
+| TEMPLATE ID                          | TEMPLATE NAME        | CREATED AT                    | UPDATED AT                    |
++--------------------------------------+----------------------+-------------------------------+-------------------------------+
+| 9c7d2a12-8dcb-406c-82a8-f41d2efd8ebf | hello_world_workflow | 2020-07-06 14:39:19 +0000 UTC | 2020-07-06 14:39:19 +0000 UTC |
+| 160d2cbf-d1ed-496d-9ade-7347b2853cbf | hello-world          | 2020-07-06 14:36:15 +0000 UTC | 2020-07-06 14:36:15 +0000 UTC |
++--------------------------------------+----------------------+-------------------------------+-------------------------------+
 ```
+**Note**
+
+The values of the `TEMPLATE NAME` column in above table are the values specified in the `name` field inside these templates.
 
 ## tink template update
 
-Updates an existing template with either a new name, or by specifying a new or updated YAML file.
+Updates an existing template by specifying a new or updated YAML file.
 
 ```
-tink template update <ID> [--name <NAME>] [--path <PATH>] [--help] [--facility]
+tink template update <ID> [--path <PATH>] [--help] [--facility]
 ```
 
 **Arguments**
@@ -143,21 +144,12 @@ tink template update <ID> [--name <NAME>] [--path <PATH>] [--help] [--facility]
 **Options**
 
 - `-h`, `--help` - Displays usage information for `update`.
-- `-n`, `--name` - Specify a new name for the template. Must be unique and alphanumeric.
 - `-p`, `--path`, `< ./<PATH>` - Path to the updated template file. Alternatively, you can open and read the file instead.
 - `-f`, `--facility` - string used to build grpc and http urls
 
 **Examples**
 
-Update the name of an existing template.
-
-```
-tink template update 160d2cbf-d1ed-496d-9ade-7347b2853cbf --name renamed-hello-world
->
-Updated Template:  160d2cbf-d1ed-496d-9ade-7347b2853cbf
-```
-
-Update an existing template and keep the same name.
+Update an existing template
 
 ```
 tink template update 9c7d2a12-8dcb-406c-82a8-f41d2efd8ebf < ./tmp/new-sample-template.tmpl
