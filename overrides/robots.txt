@@ -1,0 +1,4 @@
+Sitemap: https://docs.tinkerbell.org/sitemap.xml
+
+User-Agent: *
+Allow: /
