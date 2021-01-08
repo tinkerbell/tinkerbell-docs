@@ -42,8 +42,6 @@ Since Vagrant is handling the Provisioner's configuration, including installing 
 
 ```
 vagrant up provisioner
->
-Bringing machine 'provisioner' up with 'virtualbox' provider...
 ```
 
 The Provisioner installs and runs Ubuntu with a couple of additional utilities. The time it takes to spin up the Provisioner varies with connection speed and resources on your local machine.
@@ -60,8 +58,6 @@ Now that the Provisioner's machine is up and running, you can connect and bring 
 
 ```
 vagrant ssh provisioner
->
-vagrant@provisioner:~$
 ```
 
 Tinkerbell is going to be running from a container, so navigate to the `vagrant` directory, set the environment, and start the Tinkerbell stack with `docker-compose`.
@@ -77,7 +73,10 @@ Tinkerbell is now ready to receive templates and workflows. Check out all the Ti
 
 ```
 docker-compose ps
->
+```
+
+The response shows the running services.
+```
         Name                      Command                  State                             Ports
 -------------------------------------------------------------------------------------------------------------------------
 deploy_boots_1         /boots -dhcp-addr 0.0.0.0: ...   Up
@@ -154,7 +153,6 @@ Then, push the hardware data to the database with the `tink hardware push` comma
 
 ```
 docker exec -i deploy_tink-cli_1 tink hardware push < ./hardware-data.json
-> 2020/06/17 14:12:45 Hardware data pushed successfully
 ```
 
 If you are following along in the `tink-server` logs, you should see:
@@ -186,8 +184,6 @@ Create the template and push it to the database with the `tink template create` 
 
 ```
 docker exec -i deploy_tink-cli_1 tink template create --name hello-world < ./hello-world.yml
->
-Created Template:  75ab8483-6f42-42a9-a80d-a9f6196130df
 ```
 
 The command returns a Template ID, and if you are watching the `tink-server` logs you will see:
@@ -209,8 +205,6 @@ Combine these two pieces of information and create the workflow with the `tink w
 docker exec -i deploy_tink-cli_1 tink workflow create \
     -t <TEMPLATE ID> \
     -r '{"device_1":"08:00:27:00:00:01"}'
->
-Created Workflow:  a8984b09-566d-47ba-b6c5-fbe482d8ad7f
 ```
 
 The command returns a Workflow ID and if you are watching the logs, you will see:
