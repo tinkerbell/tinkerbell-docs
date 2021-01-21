@@ -19,8 +19,6 @@ $ python -m venv .venv
 $ source .venv/bin/activate
 ```
 
-_Note: In some cases the above command may fail, because the `venv` module is not installed. You may then install it via `sudo apt install python3-venv`._
-
 If you frequently work with Python and you don't mind installing and configuring a new tool, you should have a look at [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/). With `virtualenvwrapper` you can use the following commands to create and activate your virtual environment:
 
 ```bash
