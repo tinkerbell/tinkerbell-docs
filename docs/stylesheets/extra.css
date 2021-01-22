@@ -255,6 +255,7 @@ pre, code, kbd {
 .md-footer {background-color: var(--md-primary-fg-color--dark)}
 
 #right-footer .author { text-align: right; }
+#right-footer .author p { margin-top: 10px; }
 
 @media print, screen and (max-width: 63.99875em) {
     .logo-footer svg {
