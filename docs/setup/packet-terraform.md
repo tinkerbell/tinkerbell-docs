@@ -150,7 +150,7 @@ docker-compose ps
 deploy_boots_1         /boots -dhcp-addr 0.0.0.0: ...   Up
 deploy_db_1            docker-entrypoint.sh postgres    Up      0.0.0.0:5432->5432/tcp
 deploy_hegel_1         cmd/hegel                        Up
-deploy_nginx_1         /docker-entrypoint.sh ngin ...   Up      192.168.1.2:80->80/tcp
+deploy_nginx_1         /docker-entrypoint.sh ngin ...   Up      192.168.1.1:8080->80/tcp
 deploy_registry_1      /entrypoint.sh /etc/docker ...   Up
 deploy_tink-cli_1      /bin/sh -c sleep infinity        Up
 deploy_tink-server_1   tink-server                      Up      0.0.0.0:42113->42113/tcp, 0.0.0.0:42114->42114/tcp
