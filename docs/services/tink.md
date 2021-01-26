@@ -10,21 +10,20 @@ Tink provides the user interface and the API gateway to expose all the features 
 It exposes three binaries:
 
 1. The `tink-server` is a long running daemon written in Go that exposes a gRPC API. As a user and operator this is your entry point. You can register new hardware, create templates and workflows, and much more.
-2. The `tink-cli` is one of the way you can use to interact with the `tink-server`. It is a command line interface written in Go and [Cobra](https://github.com/spf13/cobra).
-3. The `tink-worker` is a binary that runs in every worker machine. It is one of the first processes started by a Worker and it executes workflows.
+2. The `tink-cli` is one of the ways you can interact with `tink-server`. It is a command line interface written in Go and [Cobra](https://github.com/spf13/cobra).
+3. The `tink-worker` is a binary that runs on every worker machine. It is one of the first processes started by a worker and it executes workflows.
 
 ## Getting Tink
 
-Right now we do not yet have a release cycle in place that builds and release binaries. You can either compile them by yourself or you can use the Docker container that is already built.
+Right now we do not yet have a release cycle in place that builds and releases binaries. You can either compile them yourself or you can use the Docker containers that are already built.
 
 The docker containers are the ones in use when you follow the setup tutorial and run [`docker-compose`](https://github.com/tinkerbell/tink/blob/master/deploy/docker-compose.yml#L4).
 
 ### Getting the Docker Images
 
-We relay on Docker a lot for both code distribution but and workflow execution. Our CI/CD pipeline builds and pushes images to
-[quay.io](https://quay.io/tinkerbell) a popular image repository similar to Docker Hub.
+We rely on Docker for both code distribution and workflow execution. Our CI/CD pipeline builds and pushes images to [quay.io](https://quay.io/tinkerbell), a popular image repository similar to Docker Hub.
 
-There is a repository for every tool:
+There is a repository for each tool:
 
 - [tink-cli](https://quay.io/repository/tinkerbell/tink-cli?tab=tags)
 - [tink-worker](https://quay.io/repository/tinkerbell/tink-worker?tab=tags)
@@ -46,7 +45,7 @@ All the binaries are inside `cmd/tink-*`. Based on what you need, you can run `g
 go build cmd/tink-cli/main.go
 ```
 
-You can also use `go run` if you want to run code without having to compile a binary:
+You can also use `go run` if you want to run code without needing to compile a binary:
 
 ```
 go run cmd/tink-server/main.go
@@ -54,7 +53,7 @@ go run cmd/tink-server/main.go
 
 ## Building and Running `tink-cli`
 
-One use case of the binaries, is if you want to run the `tink-cli` binary on the Provisioner, outside the `tink-server` container. This simplifies the CLI command usage.
+One use case of the binaries is when you want to run the `tink-cli` binary on the Provisioner, outside the `tink-server` container. This simplifies CLI command usage.
 
 Prerequisites:
 
@@ -74,12 +73,12 @@ Now let's compile the binary with:
 $ go build -o tink cmd/tink-cli/main.go
 ```
 
-All the traffic between Tinkerbell services is encrypted via TLS, so before running any `tink` commands there are two environment variables that authenticate the CLI to the `tink-server`. The `tink-server` entry point is 127.0.0.1 and exposes ports 42113 and 42114.
+All the traffic between Tinkerbell services is encrypted via TLS, so before running any `tink` commands there are two environment variables that authenticate the CLI to the `tink-server`. The `tink-server` entry point is 127.0.0.1 and is exposed on ports 42113 and 42114.
 
 - `TINKERBELL_CERT_URL=http://127.0.0.1:42114/cert`
 - `TINKERBELL_GRPC_AUTHORITY=127.0.0.1:42113`
 
-NOTE: In a real environment every person that as access to the host and ports can authenticate and use `tink-server`.
+NOTE: In a real environment, every person that has access to the host and ports can authenticate and use `tink-server`.
 
 You can export them as environment variables or you can run them in-line as part of the `tink` command.
 
