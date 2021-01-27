@@ -13,10 +13,9 @@ More than a documentation this is my experience installing Tinkerbell in my home
 
 This page is inspired by [Aaron](https://geekgonecrazy.com/) a community member who wrote ["Tinkerbell or iPXE boot on OVH"](https://geekgonecrazy.com/2020/09/07/tinkerbell-or-ipxe-boot-on-ovh/).
 
-In this project we will use [Sandbox](https://github.com/tinkerbell/sandbox) and everything it depends on. Pick a server, or a laptop or as I said an Intel NUC, for this guide I will use Ubuntu but you can use any other distribution, and please, if you do the same for other operating systems open an issue and we will include your experience here.
+In this project we will use [Sandbox](https://github.com/tinkerbell/sandbox) and everything it depends on. Pick a server, or a laptop or as I said an Intel NUC. 
 
-You can see this guide as an explanation with very little automation for what
-happens under the hood in guides like:
+You can see this guide as an explanation with very little automation for what happens under the hood in guides like:
 
 * [Local Setup with Vagrant](/setup/local-vagrant)
 * [Equinix Metal Setup with Terraform](/setup/packet-terraform)
@@ -75,9 +74,6 @@ export TINKERBELL_CIDR=29
 # should be the second address.
 export TINKERBELL_HOST_IP=192.168.1.1
 
-# NGINX IP is used by provisioner to serve files required for iPXE boot
-export TINKERBELL_NGINX_IP=192.168.1.2
-
 # Tink server username and password
 export TINKERBELL_TINK_USERNAME=admin
 export TINKERBELL_TINK_PASSWORD="1efbd196ae2fa3037c25983b1bc46e4c1230d270d21ed522e83a820192677360"
@@ -98,9 +94,6 @@ It has documentation but let me take this opportunity to explain a couple of blo
 
 Tinkerbell needs a static and predictable IP,  that's why the setup.sh script specifies and set its own via `TINKEBELL_HOST_IP`. It is used by [Boots](https://github.com/tinkerbell/boots) to serve the operating system installation environment for example. And Sandbox provisions via Docker Compose an Nginx server that you can use to serve any file you want (OSIE is served via that Nginx).
 
-> There is an open discussion about removing the TINKERBELL_NGINX_IP from
-> sandbox simplifying this IP setup. Follow [PR #43](https://github.com/tinkerbell/sandbox/pull/43)
-
 ## Run setup script
 
 The next step for you is to load the configuration file:
@@ -111,12 +104,43 @@ source ./.env
 
 And you are not ready to run the setup script, but first have a look at it [setup.sh](https://github.com/tinkerbell/sandbox/blob/master/setup.sh) with me.
 
-This script does a bunch of manipulation to your local environment, it requires:
+This script does a bunch of manipulation to your local environment but first we
+need to install the required dependencies:
 
-* [docker](https://docs.docker.com/engine/install/ubuntu/) and
-  [docker-compose](https://docs.docker.com/compose/install/)
-* ip, ifup and ifdown (`apt-get insatll -y ifupdown`)
-* jq (`apt-get insatll -y jq`)
+=== "Ubuntu"
+
+    ``` terminal
+    sudo apt-get update
+    sudo apt-get install -y apt-transport-https \
+        ca-certificates \
+        curl \
+        gnupg-agent \
+        ifupdown \
+        jq \
+        software-properties-common \
+        git
+
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    sudo apt-get update
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+
+    sudo curl -L \
+	"https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" \
+	-o /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
+    ```
+
+=== "CentOS"
+
+    ``` terminal
+    sudo yum install -y yum-utils jq ifupdown iproute
+    sudo yum-config-manager \
+        --add-repo \
+        https://download.docker.com/linux/centos/docker-ce.repo
+    yum install docker-ce docker-ce-cli containerd.io
+    sudo systemctl start docker
+    ```
 
 setup.sh main responsibility is to setup the network, it creates a certificate
 that will be used to setup the registry ([this will may change soon](https://github.com/tinkerbell/sandbox/issues/45)). It download [OSIE](https://github.com/tinkerbell/osie) and it places it inside the Nginx weboot (./deploy/state/webroot/).
