@@ -4,9 +4,33 @@
 
 This is the source repo for the Tinkerbell docs. They are build using static-site generator [`mkdocs`](https://www.mkdocs.org/) and using the [`mkdocs-material`](https://squidfunk.github.io/mkdocs-material/) theme, then served by netlify to [docs.tinkerbell.org](https://docs.tinkerbell.org/). 
 
-## mkdocs
+## Development
 
-If you wish, you can install `mkdocs` and `mkdocs-material` to build the docs locally. Prerequisite: You need to have Python installed.
+This repository uses [MkDocs](https://www.mkdocs.org/) as the documentation framework. If you wish, you can install `mkdocs` and `mkdocs-material` to build the docs locally. Make sure to have [Python installed](https://www.python.org/downloads/).
+
+### Virtual environments
+
+Before installing the dependencies of this project, you may decide create a virtual environment. This will prevent you from polluting your global environment with a lot of packages and ensure that you don't get version conflicts between different repositories.
+
+If you dont't want to install additional dependencies, you can use the following commands to create and activate a virtual environment:
+
+```bash
+$ python -m venv .venv
+$ source .venv/bin/activate
+```
+
+If you frequently work with Python and you don't mind installing and configuring a new tool, you should have a look at [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/). With `virtualenvwrapper` you can use the following commands to create and activate your virtual environment:
+
+```bash
+$ mkvirtualenv tinkerbell-docs
+$ workon tinkerbell-docs
+```
+
+To deactivate the virtual environment, regardless of which tool you are using, simply run `deactivate`.
+
+### MkDocs
+
+If you are using a virtual environment you can simply install all dependencies by running `pip install -r requirements.txt`.
 
 To [install `mkdocs`](https://www.mkdocs.org/#installation):
 
