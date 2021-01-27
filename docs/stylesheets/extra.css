@@ -128,12 +128,15 @@ pre, code, kbd {
         white-space: nowrap;
         width: 100%;
         padding-top: 0;
-        padding-bottom: 20px
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
     .nav ul {
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-left: 20px;
     }
     .nav ul li {
         margin: 0 10px;
@@ -250,3 +253,17 @@ pre, code, kbd {
 .md-footer-nav {display: none}
 .md-header {background-color: var(--md-primary-fg-color--dark)}
 .md-footer {background-color: var(--md-primary-fg-color--dark)}
+
+#right-footer .author { text-align: right; }
+#right-footer .author p { margin-top: 10px; }
+
+@media print, screen and (max-width: 63.99875em) {
+    .logo-footer svg {
+        display: inline-block;
+        margin-top: 15px;
+        margin-bottom: 20px;
+        margin-left: 0;
+    }
+
+    #right-footer .author { text-align: left; }
+}
