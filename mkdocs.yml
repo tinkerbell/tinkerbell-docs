@@ -22,6 +22,7 @@ nav:
     - Local Setup with Vagrant: setup/local-vagrant.md
     - Extending the Vagrant Setup: setup/extending-vagrant.md
     - Equinix Metal Setup with Terraform: setup/packet-terraform.md
+    - On bare metal with Docker: setup/on-bare-metal-with-docker.md
 
   - Examples:
     - A Hello-world Workflow: examples/hello-world-workflow.md
@@ -60,3 +61,7 @@ google_analytics:
 
 plugins:
   - search
+
+markdown_extensions:
+  - pymdownx.tabbed
+  - pymdownx.superfences
