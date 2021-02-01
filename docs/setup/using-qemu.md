@@ -157,10 +157,10 @@ In this example I'll be deploying a `c3.small.x86` in the Amsterdam facility `am
 
 9. Configure the sandbox.
 
-```
-./generate-envrc.sh plunder > .env
-./setup.sh
-```
+    ```
+    ./generate-envrc.sh plunder > .env
+    ./setup.sh
+    ```
 
 10. Start Tinkerbell.
 
