@@ -7,7 +7,7 @@ date: 2020-08-31
 
 An Operating System Installation Environment (OSIE) is the operating system shipped to the hardware you are provisioning. That operating system starts an application called tink-worker. At that point tink-worker will communicate with the Provisioner (tink-server) asking for a something to execute (a workflow).
 
-Usually a workflow partition a disk and it installs an operating system that will be lately used as boot device, leaving the hardware with the desired operating system.
+Usually a workflow partitions the disk(s) and it installs an operating system that will be later used as boot device, leaving the hardware with the desired operating system.
 
 When a hardware first starts there is nothing stored in its hard drive, and the bootloader will enter network mode. This mode runs PXE and it broadcasts a DHCP request asking for "something to do". [Boots](/services/boots) is one of the components shipped as part of the Tinkerbell Stack, it is a DHCP server. It handles the DHCP request and replies with a iPXE script to the hardware containing the operating system installation environment.
 
