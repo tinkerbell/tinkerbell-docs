@@ -11,7 +11,7 @@ Usually a workflow partition a disk and it installs an operating system that wil
 
 When a hardware first starts there is nothing stored in its hard drive, and the bootloader will enter network mode. This mode runs PXE and it broadcasts a DHCP request asking for "something to do". [Boots](/services/boots) is one of the components shipped as part of the Tinkerbell Stack, it is a DHCP server. It handles the DHCP request and replies with a iPXE script to the hardware containing the operating system installation environment.
 
-Right now we ship our one [OSIE](https://github.com/tinkerbell/osie) but You can build your own or modify the operating system in memory environment if you need kernel modules, drivers or applications that are not shipped from the Tinkerbell community.
+Right now we ship our one [OSIE](https://github.com/tinkerbell/osie) but you can build your own or modify the operating system in memory environment if you need kernel modules, drivers or applications that are not shipped from the Tinkerbell community.
 
 # When You See OSIE
 
