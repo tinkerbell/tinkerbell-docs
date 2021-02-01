@@ -40,7 +40,7 @@ As we mentioned you can run your own. And the reasons can be:
 3. You want more visibility and you want to run a monitoring agent when the hardware does netbooting.
 4. Many more...
 
-The Equinix Metal DevRel team wrote [tinkie](https://github.com/gianarb/tinkie), another installation environment built using [LinuxKit](https://github.com/linuxkit/linuxkit). The way it is built and the code is open source. We decided to use LinuxKit because it is an open source builder for Linux Kernel. It is part of the Linux Foundation and it is used by Docker Inc. to ship "Docker for Mac". It provides a layer of abstraction between a distro and how it gets built decreasing the amount of scripting involved and we hope it makes the process clear and easy to figure out.
+The Equinix Metal DevRel team wrote [tinkie](https://github.com/gianarb/tinkie), another installation environment built using [LinuxKit](https://github.com/linuxkit/linuxkit). The way it is built and the code is open source. We decided to use LinuxKit because it is an open source builder for a Linux OS. It is part of the Linux Foundation and it is used by Docker Inc. to ship "Docker for Mac". It provides a layer of abstraction between a distro and how it gets built decreasing the amount of scripting involved and we hope it makes the process clear and easy to figure out.
 
 Along the way of writing an operating system installation environment those are the requirements:
 
