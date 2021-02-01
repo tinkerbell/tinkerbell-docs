@@ -5,7 +5,7 @@ date: 2020-08-31
 
 # The concept of operating system installation environment
 
-An Operating System Installation Environment (OSIE) is the operating system shipped to the hardware you are provisioning. That operating system starts an application called tink-worker. At that point tink-worker will community to the Provisioner (tink-server) asking for a something to execute (a workflow).
+An Operating System Installation Environment (OSIE) is the operating system shipped to the hardware you are provisioning. That operating system starts an application called tink-worker. At that point tink-worker will communicate with the Provisioner (tink-server) asking for a something to execute (a workflow).
 
 Usually a workflow partition a disk and it installs an operating system that will be lately used as boot device, leaving the hardware with the desired operating system.
 
