@@ -31,7 +31,7 @@ We can see that the components for the Tinkerbell stack are particularly light, 
 
 That brings us onto the next part, which is how big should the virtual machines be?
 
-### Operating System installation environment (OSIE)
+### Operating System Installation Environment (OSIE)
 
 Every machine that is booted by Tinkerbell will be passed the in-memory Operating System called `OSIE` which is an alpine based Linux OS that ultimately will run the workflows. As this is in-memory we will need to account for a few things (before we even install our Operating System through a workflow. 
 
@@ -50,7 +50,7 @@ The majority of this memory usage from the as seen from above is for the in-memo
 
 With all this in consideration, we can use Equinix Metal machines T-Shirt sizes do determine the size of machine required. Given the minimal overhead for Tinkerbell and userland then a `t1.small.x86` (1CPU and 8GB or Ram), however if you're looking at deploying multiple machines with Tinkerbell then ideally a machine with 32GB of ram will comfortably allow a comfortable amount of headroom.
 
-### Recommended Machine size and OS
+### Recommended machine size and OS
 
 When selecting a bare metal host to run Tinkerbell and provision machines onto QEMU we recommend one or more CPUs and 8GB of ram is going to be required in order to successfully provision machine instances with Tinkerbell.
 
