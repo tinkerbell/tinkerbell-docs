@@ -19,7 +19,7 @@ environment variable `TINKERBELL_GRPC_AUTHORITY`.
 The HTTP server runs on port `:42114` and you can change it as well using the
 environment variable `TINKERBELL_HTTP_AUTHORITY`.
 
-### Building the Binary
+## Building the Binary
 
 `tink-server` uses the standard Golang toolchain. You can clone the `tink` repository:
 

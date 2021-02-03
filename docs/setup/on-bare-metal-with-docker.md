@@ -3,9 +3,9 @@ title: On Bare Metal with Docker
 date: 2021-01-27
 ---
 
-## Tinkerbell on Bare Metal with Docker
+# On Bare Metal with Docker
 
-More than a documentation, this is an example of installing Tinkerbell in a homelab. It is made of 10 NUCs, with one of them picked to be the Provisioner machine running:
+More than a documentation, this is an example of installing Tinkerbell in a homelab. The homelab is made of 10 Intel NUCs, with one of them picked to be the Provisioner machine running:
 
 1. Nginx
 2. Tink Server
@@ -90,7 +90,7 @@ export ROLLBAR_TOKEN=ignored
 export ROLLBAR_DISABLE=1
 ```
 
-The `./.env` has comments, but there are a few things to note about the contents. The environment variables in the `Tinkerbell Stack version` block pins the various parts of the stack to a specific version. You can think of  it as a release bundle.
+The `./.env` file has some explanatory comments, but there are a few things to note about the contents. The environment variables in the `Tinkerbell Stack version` block pin the various parts of the stack to a specific version. You can think of  it as a release bundle.
 
 > If you are developing or you want to test a different version of a particular tool let's say Hegel, you can build and push a docker image, replace `TINKERBELL_TINK_HEGEL_IMAGE` with your tag and you are good to go.
 

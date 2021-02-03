@@ -42,7 +42,7 @@ Every machine that is booted by Tinkerbell will be passed the in-memory Operatin
 - Action images (at rest) - The **Action image** will be pulled locally from a repository and again written to disk, **however** the disk that these images are written to is a RAM disk, so these images will withhold available memory.
 - Action containers (running) - These images, when run (**Action containers**), will have binaries in them that will require available memory in order to run.
 
-The majority of this memory usage is for the in-memory filesystem in order to host the userland tools and the images listed in the workflow. From testing we've normally seen that **>2GB** is required, however if your workflow consists of large action images then this will need adjusting accordingly.
+The majority of this memory usage is for the in-memory filesystem in order to host the userland tools and the images listed in the workflow. From testing we've normally seen that **> 2 GB** is required, however if your workflow consists of large action images then this will need adjusting accordingly.
 
 With all this in consideration, we can use Equinix Metal machines T-Shirt sizes to determine the size of machine required. Given the minimal overhead for Tinkerbell and userland then a `t1.small.x86`  with 1 CPU and 8 GB of RAM is sufficient. However if you're looking at deploying multiple machines with Tinkerbell then ideally a machine with 32 GB of ram will comfortably allow a comfortable amount of headroom.
 
