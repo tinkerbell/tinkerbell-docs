@@ -107,6 +107,6 @@ Now let's compile the binary with:
 $ go build -o tink cmd/tink-cli/main.go
 ```
 
-# Next steps
+# Future Development
 
 * There is an ongoing effort to have a more consistent set of commands. Watch out for breaking changes and deprecations.

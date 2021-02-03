@@ -37,6 +37,6 @@ docker run --privileged -t --name "tink-worker" \
 	"$docker_registry/tink-worker:latest"
 ```
 
-## Next steps
+## Future Development
 
 As you can image it will be nice to declare a good interface between worker and server, it will simplify the composition leaving to you the possibility to write your own worker. This is important if you don't want to run Docker for example.

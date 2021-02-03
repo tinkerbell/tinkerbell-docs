@@ -29,7 +29,7 @@ $ go run cmd/tink-server/main.go
 $ ./tink-server
 ```
 
-## Next steps
+## Future Development
 
 * We have to do a better job around API and client documentation. Right now there is nothing in place
 * We want to version the current API (both gRPC and HTTP) under a `v1` prefix
