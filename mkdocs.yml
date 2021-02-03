@@ -35,6 +35,11 @@ nav:
 
   - Troubleshooting: troubleshooting.md
 
+  - Contribute:
+    - Welcome: contrib/index.md
+    - Codebase: contrib/codebase.md
+    - Tink repository: contrib/tink.md
+
 theme:
   name: material
   custom_dir: overrides
