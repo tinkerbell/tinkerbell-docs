@@ -12,7 +12,9 @@ nav:
     - Boots: services/boots.md
     - Hegel: services/hegel.md
     - OSIE: services/osie.md
-    - Tink: services/tink.md
+    - Tink Server: services/tink-server.md
+    - Tink Worker: services/tink-worker.md
+    - Tink CLI: services/tink-cli.md
 
   - Hardware Data: hardware-data.md
   - Templates: templates.md
