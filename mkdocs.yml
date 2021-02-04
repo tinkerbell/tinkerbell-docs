@@ -23,7 +23,7 @@ nav:
   - Setups:
     - Local Setup with Vagrant: setup/local-vagrant.md
     - Extending the Vagrant Setup: setup/extending-vagrant.md
-    - Equinix Metal Setup with Terraform: setup/packet-terraform.md
+    - Equinix Metal Setup with Terraform: setup/equinix-metal-terraform.md
     - Bare Metal or Equinix Metal with QEMU: setup/using-qemu.md
     - On bare metal with Docker: setup/on-bare-metal-with-docker.md
 
