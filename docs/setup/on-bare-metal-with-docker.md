@@ -1,31 +1,33 @@
 ---
-title: On bare metal with Docker
+title: On Bare Metal with Docker
 date: 2021-01-27
 ---
 
-More than a documentation this is my experience installing Tinkerbell in my homelab. It is made of 10 NUCs and picked one of them to be the provisioner machine running:
+# On Bare Metal with Docker
+
+More than a documentation, this is an example of installing Tinkerbell in a homelab. The homelab is made of 10 Intel NUCs, with one of them picked to be the Provisioner machine running:
 
 1. Nginx
 2. Tink Server
 3. Tink CLI
-4. Postgres
+4. PostgreSQL
 5. And everything that runs as part of the [docker-compose in sandbox](https://github.com/tinkerbell/sandbox/blob/master/deploy/docker-compose.yml)
 
 This page is inspired by [Aaron](https://geekgonecrazy.com/) a community member who wrote ["Tinkerbell or iPXE boot on OVH"](https://geekgonecrazy.com/2020/09/07/tinkerbell-or-ipxe-boot-on-ovh/).
 
-In this project we will use [Sandbox](https://github.com/tinkerbell/sandbox) and everything it depends on. Pick a server, or a laptop or as I said an Intel NUC. 
+In this project we will use [Sandbox](https://github.com/tinkerbell/sandbox) and everything it depends on. Pick a server, a laptop, or as in this example, an Intel NUC. 
 
-You can see this guide as an explanation with very little automation for what happens under the hood in guides like:
+This guide also provides a little more of an explanation with very little automation for what happens under the hood in guides like:
 
 * [Local Setup with Vagrant](/setup/local-vagrant)
 * [Equinix Metal Setup with Terraform](/setup/packet-terraform)
 
 ## Prerequisites
 
-This guide assumes that you already have:
+This guide assumes:
 
-- You are familiar with the underline operating system you decided to use
-- You can access the device where you want to install Tinkerbell Provisioner even via SSH or Serial console
+- You are familiar with the underline operating system you decided to use.
+- You can access the device where you want to install Tinkerbell Provisioner using SSH or Serial console.
 
 ## Getting Tinkerbell
 
@@ -37,17 +39,17 @@ tar xf v0.4.0.tar.gz
 cd sandbox-0.4.0
 ```
 
-In this case we are using the latest sandbox release that today is [v0.4.0](https://github.com/tinkerbell/sandbox/release/v0.4.0). It is important to checkout a specific version and have a look at the changelog when you update because Tinkerbell is under development we guarantee as best as we can right now that tags are good and working end to end.
+In this case we are using the latest sandbox release that today is [v0.4.0](https://github.com/tinkerbell/sandbox/release/v0.4.0). It is important to checkout a specific version and have a look at the changelog when you update. Tinkerbell is under development, but we guarantee as best as we can that tags are good and working end-to-end.
 
-## Generate configuration file
+## Generate the Configuration File
 
-Sandbox rely on a `.env` file that can be generated running the command:
+The sandbox sets up Tinkerbell using the `setup.sh` script. `setup.sh` relies on a `.env` file that can be generated running the command:
 
 ```
 ./generate-envrc.sh <network-interface> > sandbox/.env
 ```
 
-In my case I identified the network interface as `eth1` and the output of this command will be stored inside `./.env`. It will look like this:
+In this case, the `network-interface` is `eth1`. The output of this command will be stored inside `./.env`. It will look like this:
 
 ```
 # Tinkerbell Stack version
@@ -88,23 +90,15 @@ export ROLLBAR_TOKEN=ignored
 export ROLLBAR_DISABLE=1
 ```
 
-It has documentation but let me take this opportunity to explain a couple of blocks. The first one pins the various tools part of the stack to a specific version. You can see it as a release bundle.
+The `./.env` file has some explanatory comments, but there are a few things to note about the contents. The environment variables in the `Tinkerbell Stack version` block pin the various parts of the stack to a specific version. You can think of  it as a release bundle.
 
-> If you are developing or you want to test a different version of a particular tool let's say Hegel, you can build and push a docker image, replace `TINKERBELL_TINK_HEGEL_IMAGE` with your new tag and you are good to go.
+> If you are developing or you want to test a different version of a particular tool let's say Hegel, you can build and push a docker image, replace `TINKERBELL_TINK_HEGEL_IMAGE` with your tag and you are good to go.
 
-Tinkerbell needs a static and predictable IP,  that's why the setup.sh script specifies and set its own via `TINKEBELL_HOST_IP`. It is used by [Boots](https://github.com/tinkerbell/boots) to serve the operating system installation environment for example. And Sandbox provisions via Docker Compose an Nginx server that you can use to serve any file you want (OSIE is served via that Nginx).
+Tinkerbell needs a static and predictable IP, that's why the `setup.sh` script specifies and sets its own with `TINKEBELL_HOST_IP`. It is used by [Boots](https://github.com/tinkerbell/boots) to serve the operating system installation environment, for example. And Sandbox provisions (via Docker Compose) an Nginx server that you can use to serve any file you want (OSIE is served via that Nginx).
 
-## Run setup script
+## Install Dependencies
 
-The next step for you is to load the configuration file:
-
-```
-source ./.env
-```
-
-And you are not ready to run the setup script, but first have a look at it [setup.sh](https://github.com/tinkerbell/sandbox/blob/master/setup.sh) with me.
-
-This script does a bunch of manipulation to your local environment but first we
+The `setup.sh` script does a bunch of manipulation to your local environment, so first we
 need to install the required dependencies:
 
 === "Ubuntu"
@@ -126,8 +120,8 @@ need to install the required dependencies:
     sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
     sudo curl -L \
-	"https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" \
-	-o /usr/local/bin/docker-compose
+    "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" \
+    -o /usr/local/bin/docker-compose
     sudo chmod +x /usr/local/bin/docker-compose
     ```
 
@@ -142,20 +136,29 @@ need to install the required dependencies:
     sudo systemctl start docker
     ```
 
-setup.sh main responsibility is to setup the network, it creates a certificate
-that will be used to setup the registry ([this will may change soon](https://github.com/tinkerbell/sandbox/issues/45)). It download [OSIE](https://github.com/tinkerbell/osie) and it places it inside the Nginx weboot (./deploy/state/webroot/).
+## Run the Setup Script
 
-You can use the webroot for your purpose, it is part of `gitignore` and other
-than OSIE you can serve other operating systems that you want to install in your
-other servers, or even public ssh keys (whatever you need a link for)
+Before running the [setup.sh](https://github.com/tinkerbell/sandbox/blob/master/setup.sh) script, there are a few handy things to know about it.
 
-Now that you know what you are doing a bit more time to execute it:
+The `setup.sh` script's main responsibility is to setup the network. It creates a certificate that will be used to setup the registry ([this will may change soon](https://github.com/tinkerbell/sandbox/issues/45)). It downloads [OSIE](https://github.com/tinkerbell/osie) and places it inside the Nginx weboot (`./deploy/state/webroot/`).
+
+> You can use the webroot for your own purposes, it is part of `gitignore` and other than OSIE you can serve other operating systems that you want to install in your other servers, or even public ssh keys (whatever you need a link for).
+
+Now to execute `setup.sh`. 
+
+Load the configuration file:
+
+```
+source ./.env
+```
+
+and run it:
 
 ```
 sudo ./setup.sh
 ```
 
-At the end of the command you have everything you need to start the Tinkerbell
+At the end of the command you have everything you need to start up the Tinkerbell
 Provisioner Stack and we use docker-compose for that.
 
 ```
@@ -163,6 +166,6 @@ cd deploy
 docker-compose up -d
 ```
 
-## Time to party
+## Time to Party
 
 At this point let me point you to the ["Local with Vagrant"](/setup/local-vagrant#starting-tinkerbell) setup guide because you have everything you need to play with Tinkerbell. Enjoy
