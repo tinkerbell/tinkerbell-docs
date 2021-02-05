@@ -1,9 +1,11 @@
 ---
-title: Creating a virtual Tinkerbell environment with QEMU
+title: Bare Metal or Equinix Metal with QEMU
 date: 2021-01-27
 ---
 
-## Pre-requisites
+# Bare Metal or Equinix Metal with QEMU
+
+## Prerequisites
 
 This is a rough shopping list of skills/accounts that will be a benefit for this guide.
 
@@ -27,28 +29,22 @@ a70a54baff08        deploy_hegel_1         0.00%               2.984MiB / 7.79Gi
 2fa8a6064036        deploy_nginx_1         0.00%               2.867MiB / 7.79GiB   0.04%               341kB / 0B          0B / 0B             3
 ```
 
-We can see that the components for the Tinkerbell stack are particularly light, with this in mind we can be very confident that we can have all of our userland components (tinkerbell/docker/bash etc..) within 1GB of ram and leave all remaining memory for the virtual machines. 
+We can see that the components for the Tinkerbell stack are particularly light, with this in mind we can be very confident that we can have all of our userland components (tinkerbell/docker/bash etc..) within 1 GB of ram and leave all remaining memory for the virtual machines. 
 
 That brings us onto the next part, which is how big should the virtual machines be?
 
 ### Operating System Installation Environment (OSIE)
 
-Every machine that is booted by Tinkerbell will be passed the in-memory Operating System called `OSIE` which is an alpine based Linux OS that ultimately will run the workflows. As this is in-memory we will need to account for a few things (before we even install our Operating System through a workflow. 
+Every machine that is booted by Tinkerbell will be passed the in-memory Operating System called `OSIE` which is an alpine based Linux OS that ultimately will run the workflows. As this is all in-memory, we will need to account for a few things before we install our Operating System through a workflow. 
 
 - OSIE kernel
-- OSIE RAM Disk (Includes Alpine userland and the docker engine)
-- Action images (at rest)
-- Action containers (running)
+- OSIE RAM Disk (Includes Alpine userland and the docker engine) - The **OSIE Ram Disk**, whilst it looks like a normal filesystem, is actually held in the memory of the host itself so it will immediately withhold that memory from other usage.
+- Action images (at rest) - The **Action image** will be pulled locally from a repository and again written to disk, **however** the disk that these images are written to is a RAM disk, so these images will withhold available memory.
+- Action containers (running) - These images, when run (**Action containers**), will have binaries in them that will require available memory in order to run.
 
-The **OSIE Ram Disk** whilst it looks like a normal filesystem is actually held in the memory of the host itself so immediately will withhold that memory from other usage.
+The majority of this memory usage is for the in-memory filesystem in order to host the userland tools and the images listed in the workflow. From testing we've normally seen that **> 2 GB** is required, however if your workflow consists of large action images then this will need adjusting accordingly.
 
-The **Action image** will be pulled locally from a repository and again written to disk, **however** the disk that these images are written to is a ram disk, so these images will again withhold available memory.
-
-Finally, these images when ran (**Action containers**) will have binaries in them that will require available memory in order to run.
-
-The majority of this memory usage from the as seen from above is for the in-memory filesystem in order to host the userland tools and the images listed in the workflow. From testing we've normally seen that **>2GB** is required, however if your workflow consists of large action images then this will need adjusting accordingly.
-
-With all this in consideration, we can use Equinix Metal machines T-Shirt sizes do determine the size of machine required. Given the minimal overhead for Tinkerbell and userland then a `t1.small.x86` (1CPU and 8GB or Ram), however if you're looking at deploying multiple machines with Tinkerbell then ideally a machine with 32GB of ram will comfortably allow a comfortable amount of headroom.
+With all this in consideration, we can use Equinix Metal machines T-Shirt sizes to determine the size of machine required. Given the minimal overhead for Tinkerbell and userland then a `t1.small.x86`  with 1 CPU and 8 GB of RAM is sufficient. However if you're looking at deploying multiple machines with Tinkerbell then ideally a machine with 32 GB of ram will comfortably allow a comfortable amount of headroom.
 
 ### Recommended machine size and OS
 
@@ -66,7 +62,7 @@ For speed of deployment and modernity of the Operating System, either Ubuntu 18.
 
 ## Deploying Tinkerbell
 
-In this example I'll be deploying a `c3.small.x86` in the Amsterdam facility `ams6` with `ubuntu 20.04`. Once our machine is up and running, we'll need to install our required packages for running Tinkerbell and our virtual machines.
+This examples uses a `c3.small.x86` in the Amsterdam facility `ams6` with `ubuntu 20.04`. Once our machine is up and running, we'll need to install our required packages for running Tinkerbell and our virtual machines.
 
 1. Update the packages.
 
@@ -229,16 +225,10 @@ We can now watch the install on the VNC port `6671`
 
 ## Troubleshooting
 
-```
-could not configure /dev/net/tun (plndrVM-f0cb3c): Device or resource busy 
-```
+- **could not configure /dev/net/tun (plndrVM-f0cb3c): Device or resource busy**
 
-This means that an old QEMU session left an old adapter, we can remove it with the command below:
+    This means that an old QEMU session left an old adapter, we can remove it with the command, `ip link delete plndrVM-f0cb3c`.
 
-`ip link delete plndrVM-f0cb3c`
+- **Is another process using the image [f0cb3c.qcow2]?** 
 
-```
-Is another process using the image [f0cb3c.qcow2]? 
-```
-
-We've left an old disk image laying around, we can remove this with `rm`
+    We've left an old disk image laying around, we can remove this with `rm`.
