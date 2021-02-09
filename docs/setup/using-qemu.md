@@ -82,7 +82,15 @@ This examples uses a `c3.small.x86` in the Amsterdam facility `ams6` with `ubunt
      libguestfs-tools \
      libosinfo-bin \
      git
+     jq
     ```
+This installation method also requires Docker and [`docker-compose`](https://docs.docker.com/compose/install/#install-compose-on-linux-systems):
+
+```
+    apt-get install -y docker.io ; \
+    curl -L "https://github.com/docker/compose/releases/download/1.28.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose ; \
+    chmod +x /usr/local/bin/docker-compose
+```
 
 3. Grab shack (QEMU wrapper).
 
@@ -125,7 +133,7 @@ This examples uses a `c3.small.x86` in the Amsterdam facility `ams6` with `ubunt
     We can also examine that this has worked, by examining `ip addr`:
 
     ```
-    11: plunder: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
+    11: tinkerbell: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
         link/ether 2a:27:61:44:d2:07 brd ff:ff:ff:ff:ff:ff
         inet 192.168.1.1/24 brd 192.168.1.255 scope global plunder
            valid_lft forever preferred_lft forever
@@ -154,7 +162,7 @@ This examples uses a `c3.small.x86` in the Amsterdam facility `ams6` with `ubunt
 9. Configure the sandbox.
 
     ```
-    ./generate-envrc.sh plunder > .env
+    ./generate-envrc.sh tinkerbell > .env
     ./setup.sh
     ```
 
@@ -162,7 +170,7 @@ This examples uses a `c3.small.x86` in the Amsterdam facility `ams6` with `ubunt
 
     ```
     # Add Nginx address to Tinkerbell
-    sudo ip addr add 192.168.1.2/24 dev plunder
+    sudo ip addr add 192.168.1.2/24 dev tinkerbell
     cd deploy
     source ../.env; docker-compose up -d
     ```
