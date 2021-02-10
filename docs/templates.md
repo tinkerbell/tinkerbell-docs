@@ -73,10 +73,12 @@ Templates are each stored as blobs in the database; they are later parsed during
 
 ## Template CLI Commands
 
-A Template is pushed to the database on the Provisioner with the [`tink template create`](/cli-reference/template/#tink-template-create) command which returns a generated UUID for the template.
+```
+  create      Create a template in the database.
+  delete      Delete a template from the database.
+  get         Get a template by ID.
+  list        List all templates in the database.
+  update      Update an existing template.
+```
 
-A template can be retrieved from the database with that ID and [`tink template get`](/cli-reference/template/#tink-template-get). Similarly it can be deleted with [`tink template delete`](/cli-reference/template/#tink-template-delete).
-
-You can list all the templates that are stored in the database with [`tink template list`](/cli-reference/template/#tink-template-list). Update the name or the contents of a template with the [`tink template update`](/cli-reference/template/#tink-template-update) command.
-
-A complete list of CLI commands and examples is in the [CLI Reference](/cli-reference/template/).
+`tink template --help` - Displays the available commands and their usage for `tink template`.
