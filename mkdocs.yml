@@ -30,11 +30,6 @@ nav:
   - Examples:
     - A Hello-world Workflow: examples/hello-world-workflow.md
 
-  - Tink CLI Reference:
-    - Hardware: cli-reference/hardware.md
-    - Template: cli-reference/template.md
-    - Workflow: cli-reference/workflow.md
-
   - Troubleshooting: troubleshooting.md
 
 theme:
