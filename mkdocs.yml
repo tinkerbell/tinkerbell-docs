@@ -23,7 +23,7 @@ nav:
   - Setups:
     - Local Setup with Vagrant: setup/local-vagrant.md
     - Extending the Vagrant Setup: setup/extending-vagrant.md
-    - Equinix Metal Setup with Terraform: setup/packet-terraform.md
+    - Equinix Metal Setup with Terraform: setup/equinix-metal-terraform.md
     - Bare Metal or Equinix Metal with QEMU: setup/using-qemu.md
     - On bare metal with Docker: setup/on-bare-metal-with-docker.md
 
@@ -31,6 +31,11 @@ nav:
     - A Hello-world Workflow: examples/hello-world-workflow.md
 
   - Troubleshooting: troubleshooting.md
+
+  - Contribute:
+    - Welcome: contrib/index.md
+    - Codebase: contrib/codebase.md
+    - Tink repository: contrib/tink.md
 
 theme:
   name: material

@@ -14,7 +14,7 @@ This guide assumes that you already have:
 - [An Equinix Metal account](https://console.equinix.com/login).
 - Your Equinix Metal API Key and Project ID. The Terraform provider needs to have both to create servers in your account. Make sure the API token is a user API token (created/accessed under _API keys_ in your personal settings).
 - [SSH Keys](https://metal.equinix.com/developers/docs/accounts/ssh-keys/) need to be set up on Equinix Metal for the machine where you are running Terraform. Terraform uses your `ssh-agent` to connect to the Provisioner when needed. Double check that the right keys are set.
-- [Terraform](https://www.terraform.io/downloads.html) and the [Equinix Metal Terraform provider](https://registry.terraform.io/providers/packethost/packet/latest/docs) installed on your local machine.
+- [Terraform](https://www.terraform.io/downloads.html) and the [Equinix Metal Terraform provider](https://registry.terraform.io/providers/equinix/metal/latest/docs) installed on your local machine.
 
 ## Using Terraform
 
@@ -25,11 +25,11 @@ git clone https://github.com/tinkerbell/sandbox.git
 cd sandbox/deploy/terraform
 ```
 
-The Equinix Metal Terraform module requires a couple of inputs, the mandatory ones are the `packet_api_token` and the `project_id`. You can define them in a `terraform.ftvars` file. By default, Terraform will load the file when present. You can create one `terraform.tfvars` that looks like this:
+The Equinix Metal Terraform module requires a couple of inputs, the mandatory ones are the `metal_api_token` and the `project_id`. You can define them in a `terraform.ftvars` file. By default, Terraform will load the file when present. You can create one `terraform.tfvars` that looks like this:
 
 ```
 cat terraform.tfvars
-packet_api_token = "awegaga4gs4g"
+metal_api_token = "awegaga4gs4g"
 project_id = "235-23452-245-345"
 ```
 
@@ -50,13 +50,13 @@ Apply complete! Resources: 5 added, 0 changed, 1 destroyed.
 
 Outputs:
 
-provisioner_dns_name = eef33e97.packethost.net
+provisioner_dns_name = eef33e97.platformequinix.com
 provisioner_ip = 136.144.56.237
 worker_mac_addr = [
   "1c:34:da:42:d3:20",
 ]
 worker_sos = [
-  "4ac95ae2-6423-4cad-b91b-3d8c2fcf38d9@sos.dc13.packet.net",
+  "4ac95ae2-6423-4cad-b91b-3d8c2fcf38d9@sos.dc13.platformequinix.com",
 ]
 ```
 
@@ -163,7 +163,7 @@ deploy_tink-cli_1      /bin/sh -c sleep infinity        Up
 deploy_tink-server_1   tink-server                      Up      0.0.0.0:42113->42113/tcp, 0.0.0.0:42114->42114/tcp
 ```
 
-You now have a Provisioner up and running on Packet. The next steps take you through creating a workflow and pushing it to the Worker using the `hello-world` workflow example. If you want to use the example, you need to pull the `hello-world` image from from Docker Hub to the internal registry.
+You now have a Provisioner up and running on Equinix Metal. The next steps take you through creating a workflow and pushing it to the Worker using the `hello-world` workflow example. If you want to use the example, you need to pull the `hello-world` image from from Docker Hub to the internal registry.
 
 ```
 docker pull hello-world
@@ -287,7 +287,7 @@ tink-server_1  | {"level":"info","ts":1592936829.6773047,"caller":"grpc-server/w
 
 ## Checking Workflow Status
 
-You can not SSH directly into the Worker but you can use the `SOS` or `Out of bond` console provided by Packet to follow what happens in the Worker during the workflow. You can SSH into the SOS console with:
+You can not SSH directly into the Worker but you can use the `SOS` or `Out of bond` console provided by Equinix Metal to follow what happens in the Worker during the workflow. You can SSH into the SOS console with:
 
 ```
 ssh $(terraform output -json worker_sos | jq -r '.[0]')
