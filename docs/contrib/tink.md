@@ -11,7 +11,7 @@ Those 3 sub projects shares the same repo because they have a lot of code in com
 
 At the time I am writing this article I am not sure about the layout or the evolution for the Contribute guide. I will just create my `H1` title that will explain a personal or specific techniques I use to develop something in the Tink repository.
 
-# Run the gRPC API, CLI locally
+## Running the gRPC API and CLI locally
 
 I am a developer who likes to spin up all the dependencies that I need for the code I have to develop, nothing more. I don't the point of spinning up the entire Stack if I have to call a gRPC API t hat talks to a database. When it comes to the actual code I am working at I like to build it directly on the host because it is easier to run debuggers in there and there are not layers that can make my journey more complicated or a waste of time. I don't want to debug intermediate level when I can avoid.
 
