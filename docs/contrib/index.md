@@ -3,7 +3,7 @@ title: Welcome
 date: 2021-02-02
 ---
 
-If you are you are interested in contributing to Tinkerbell, _Welcome!_, and we are thankful you are here.
+If you are you are interested in contributing to Tinkerbell, _Welcome!_ and we are thankful you are here.
 
 Tinkerbell is an open source project made of different components, and a lot of the code is written in Go, but it is not the only way to make a contribution. We use and rely on a lot of different technologies such as: iPXE, Docker, Prometheus, Kubernetes and much more.
 
@@ -24,7 +24,7 @@ Currently, we are doing a lot of work around:
 
 Some advice for getting started is to figure out a way to scope your contribution to a single repository. This is a good practice because it simplifies development and helps us to avoid breaking changes. 
 
-At this current stage we are far from out first stable release, it means that it is a perfect time to actually have breaking changes, you can read more about [this topic at the proposal](https://github.com/tinkerbell/proposals/blob/master/proposals/0011/README.md).
+At this current stage we are far from out first stable release, which means that occasionally we will have breaking changes. For more on our policy about breaking changes, check out the [proposal regarding breaking changes](https://github.com/tinkerbell/proposals/blob/master/proposals/0011/README.md).
 
 ## Proposals
 
