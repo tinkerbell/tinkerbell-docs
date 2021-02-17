@@ -1,27 +1,26 @@
 ---
-title: Contribute to Tink
+title: Contributing to Tink
 date: 2021-02-02
 ---
 
-When we refer to Tink we are speaking about the content of [tinkerbell/tink](https://github.com/tinkerbell/tink) repository.
 
-You can see it as a monorepo for [tink-cli](/services/tink-cli), [tink-server](/services/tink-server), and [tink-worker](/services/tink-worker).
+Tink is the collective term for the codebase that lives in the [`tinkerbell/tink`](https://github.com/tinkerbell/tink) repository, which is a monorepo for the [`tink-cli`](/services/tink-cli), [`tink-server`](/services/tink-server), and [`tink-worker`](/services/tink-worker).
 
-Those 3 sub projects shares the same repo because they have a lot of code in common (mainly coming from the gRPC Client and Server) and it is time consuming to have them in their own repository at the moment. This repository contains the generated gRPC client for Golang as well. I am sure moving forward some of those projects will live in their own repository but for now they are all sharing the same repository.
+These 3 sub-projects share the same repo because they have a lot of code in common, mainly coming from the gRPC client and server. This repository contains the generated gRPC client for Golang as well.
 
-At the time I am writing this article I am not sure about the layout or the evolution for the Contribute guide. I will just create my `H1` title that will explain a personal or specific techniques I use to develop something in the Tink repository.
+Below we have documented some specific techniques used to develop the components of the Tink repository.
 
-## Running the gRPC API and CLI locally
+## Running the gRPC API and CLI Locally
 
-I am a developer who likes to spin up all the dependencies that I need for the code I have to develop, nothing more. I don't the point of spinning up the entire Stack if I have to call a gRPC API t hat talks to a database. When it comes to the actual code I am working at I like to build it directly on the host because it is easier to run debuggers in there and there are not layers that can make my journey more complicated or a waste of time. I don't want to debug intermediate level when I can avoid.
+You can just spin up just the `tink-cli` and the `tink-server` with their dependencies, and nothing more, directly on a host. This makes it easier to run debuggers, and minimizes extra layers that are more complicated or a waste of time.
 
-The only external dependencies that I usually have to solve when working at the tink-cli or tink-server level is Postgres. It is the database used by the Tink Server to store resources like Workflows, Hardware and Template. I use Docker for that:
+The only external dependency that is needed when working on the `tink-cli` or `tink-server` is PostgreSQL. It is the database used by `tink-server` to store resources like Workflows, Hardware Data, and Templates. You can use Docker to manage it for you.
 
 ```terminal
 docker run -d -e POSTGRES_USER=tinkerbell -e POSTGRES_PASSWORD=tinkerbell -p 5432:5432 postgres:10-alpine
 ```
 
-In order to apply the database migration to that Postgres database we have to run the tink-server with the `ONLY_MIGRATION` env var set to `true`.
+In order to apply the database configuration for Tink to the PostgreSQL database, run `tink-server` with the `ONLY_MIGRATION` environment variable set to `true`.
 
 ```terminal
 export PGPASSWORD=tinkerbell
@@ -37,12 +36,9 @@ export ONLY_MIGRATION=true
 go run cmd/tink-server/main.go
 ```
 
-This will run the tink-server in migration-mode. If you `unset ONLY_MIGRATION`
-and you run the `go run` command again it will start the actual gRPC and HTTP
-server.
+This will run `tink-server` in migration mode. If you `unset ONLY_MIGRATION` and you run the `go run` command again it will start the actual gRPC and HTTP server.
 
-At this point you can do what you want, you can develop the tink-cli and run it
-with `go run`
+At this point, you can develop on the `tink-cli` and run it with `go run`.
 
 ```terminal
 go run cmd/tink-cli/main.go help
