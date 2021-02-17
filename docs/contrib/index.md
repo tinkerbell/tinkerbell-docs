@@ -3,7 +3,7 @@ title: Welcome
 date: 2021-02-02
 ---
 
-If you are you are properly interested in contributing to Tinkerbell and we are thankful for that.
+If you are you are interested in contributing to Tinkerbell, _Welcome!_, and we are thankful you are here.
 
 Tinkerbell is an open source project made of different components, a lot of the code is written in Go but it is not the only way to make a contribution obviously we use and rely on a lot of different technologies such as: iPXE, Docker, Promethues, Kubernetes, Golang and much more.
 
@@ -13,7 +13,7 @@ I am sure you will be able to find what you are looking for, the best way to sta
 
 ## Contributing to the Codebase
 
-You can find all our projects on [GitHub](https://github.com/tinkerbell), have a look at issues and pull requests and if you can't figure out anything you want to do let's ping us on Slack.
+You can find all our projects on [GitHub](https://github.com/tinkerbell). Have a look at issues and pull requests and if you can't figure out anything you want to do, ping us on Slack.
 
 Currently we are doing a lot of work around:
 
@@ -22,13 +22,25 @@ Currently we are doing a lot of work around:
 * We have to write an end to end test framework that we can use to test the entire project in integration
 * Documentation, documentation, documentation!
 
-My advice is to figure out a way to scope your contribution in contained for a single repository. This is a good practice because it simplifies the development but it also forces us to avoid breaking changes. At this current stage we are far from out first stable release, it means that it is a perfect time to actually have breaking changes, you can read more about [this topic at the proposal ](https://github.com/tinkerbell/proposals/blob/master/proposals/0011/README.md).
+Some advice for getting started is to figure out a way to scope your contribution to a single repository. 
+
+This is a good practice because it simplifies the development but it also forces us to avoid breaking changes. 
+
+At this current stage we are far from out first stable release, it means that it is a perfect time to actually have breaking changes, you can read more about [this topic at the proposal](https://github.com/tinkerbell/proposals/blob/master/proposals/0011/README.md).
+
+## Proposals
+
+Tinkerbell uses a proposals repository over in [`tinkerbell/proposals`](https://github.com/tinkerbell/proposals).
+
+Proposal workflow is explained in proposal 001. 
 
 ## Contributing for Other Contributors
 
-We think every developer has its own tool chain and mindset when it comes to development environment and we can't have one that works for every developer.
+We think every developer has their own tool chain and mindset when it comes to development environment and we can't have one that works for every developer.
 
 The idea for the Contributors section of the docs is to collect and share the various ways we develop Tinkerbell in order to share practical tips or to serve as inspiration for contributing to the project.
+
+If you want to contribute how you spin up and hack on the various pieces of Tinkerbell components, or lessons you have learned while doing so, please write up and submit a PR to the [`tinkerbell/docs`](https://github.com/tinkerbell/tinkerbell-docs) repository. We are collecting this info in the Contributors section (this section) of the docs.
 
 ## Terms and Stewardship
 
