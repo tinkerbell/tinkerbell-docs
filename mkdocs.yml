@@ -16,20 +16,24 @@ nav:
     - Tink Worker: services/tink-worker.md
     - Tink CLI: services/tink-cli.md
 
+  - Workflows: 
+    - Working with Workflows: workflows/workflows.md
+    - A Hello-world Workflow: workflows/hello-world-workflow.md
+
   - Hardware Data: hardware-data.md
   - Templates: templates.md
-  - Workflows: workflows.md
 
+  - Actions:
+    - Action Architecture: actions/action-architecture.md
+    - Creating a Basic Action: actions/creating-a-basic-action.md
+  
   - Setups:
     - Local Setup with Vagrant: setup/local-vagrant.md
     - Extending the Vagrant Setup: setup/extending-vagrant.md
     - Equinix Metal Setup with Terraform: setup/equinix-metal-terraform.md
     - Bare Metal or Equinix Metal with QEMU: setup/using-qemu.md
     - On bare metal with Docker: setup/on-bare-metal-with-docker.md
-
-  - Examples:
-    - A Hello-world Workflow: examples/hello-world-workflow.md
-
+    
   - Tink CLI Reference:
     - Hardware: cli-reference/hardware.md
     - Template: cli-reference/template.md
