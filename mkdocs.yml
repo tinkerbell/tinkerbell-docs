@@ -39,8 +39,7 @@ nav:
 
   - Contribute:
     - Welcome: contrib/index.md
-    - Codebase: contrib/codebase.md
-    - Tink repository: contrib/tink.md
+    - Contributing to Tink: contrib/tink.md
 
 theme:
   name: material
