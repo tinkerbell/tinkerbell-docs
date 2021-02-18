@@ -17,7 +17,7 @@ nav:
     - Tink CLI: services/tink-cli.md
 
   - Workflows: 
-    - Working with Workflows: workflows/workflows.md
+    - Working with Workflows: workflows/working-with-workflows.md
     - A Hello-world Workflow: workflows/hello-world-workflow.md
 
   - Hardware Data: hardware-data.md
