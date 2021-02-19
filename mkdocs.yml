@@ -12,7 +12,9 @@ nav:
     - Boots: services/boots.md
     - Hegel: services/hegel.md
     - OSIE: services/osie.md
-    - Tink: services/tink.md
+    - Tink Server: services/tink-server.md
+    - Tink Worker: services/tink-worker.md
+    - Tink CLI: services/tink-cli.md
 
   - Hardware Data: hardware-data.md
   - Templates: templates.md
@@ -21,7 +23,9 @@ nav:
   - Setups:
     - Local Setup with Vagrant: setup/local-vagrant.md
     - Extending the Vagrant Setup: setup/extending-vagrant.md
-    - Equinix Metal Setup with Terraform: setup/packet-terraform.md
+    - Equinix Metal Setup with Terraform: setup/equinix-metal-terraform.md
+    - Bare Metal or Equinix Metal with QEMU: setup/using-qemu.md
+    - On bare metal with Docker: setup/on-bare-metal-with-docker.md
 
   - Examples:
     - A Hello-world Workflow: examples/hello-world-workflow.md
@@ -32,6 +36,10 @@ nav:
     - Workflow: cli-reference/workflow.md
 
   - Troubleshooting: troubleshooting.md
+
+  - Contribute:
+    - Welcome: contrib/index.md
+    - Contributing to Tink: contrib/tink.md
 
 theme:
   name: material
@@ -60,3 +68,7 @@ google_analytics:
 
 plugins:
   - search
+
+markdown_extensions:
+  - pymdownx.tabbed
+  - pymdownx.superfences

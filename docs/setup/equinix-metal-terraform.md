@@ -14,7 +14,7 @@ This guide assumes that you already have:
 - [An Equinix Metal account](https://console.equinix.com/login).
 - Your Equinix Metal API Key and Project ID. The Terraform provider needs to have both to create servers in your account. Make sure the API token is a user API token (created/accessed under _API keys_ in your personal settings).
 - [SSH Keys](https://metal.equinix.com/developers/docs/accounts/ssh-keys/) need to be set up on Equinix Metal for the machine where you are running Terraform. Terraform uses your `ssh-agent` to connect to the Provisioner when needed. Double check that the right keys are set.
-- [Terraform](https://www.terraform.io/downloads.html) and the [Equinix Metal Terraform provider](https://registry.terraform.io/providers/packethost/packet/latest/docs) installed on your local machine.
+- [Terraform](https://www.terraform.io/downloads.html) and the [Equinix Metal Terraform provider](https://registry.terraform.io/providers/equinix/metal/latest/docs) installed on your local machine.
 
 ## Using Terraform
 
@@ -25,11 +25,11 @@ git clone https://github.com/tinkerbell/sandbox.git
 cd sandbox/deploy/terraform
 ```
 
-The Equinix Metal Terraform module requires a couple of inputs, the mandatory ones are the `packet_api_token` and the `project_id`. You can define them in a `terraform.ftvars` file. By default, Terraform will load the file when present. You can create one `terraform.tfvars` that looks like this:
+The Equinix Metal Terraform module requires a couple of inputs, the mandatory ones are the `metal_api_token` and the `project_id`. You can define them in a `terraform.ftvars` file. By default, Terraform will load the file when present. You can create one `terraform.tfvars` that looks like this:
 
 ```
 cat terraform.tfvars
-packet_api_token = "awegaga4gs4g"
+metal_api_token = "awegaga4gs4g"
 project_id = "235-23452-245-345"
 ```
 
@@ -40,22 +40,25 @@ Once you have your variables set, run the Terraform commands:
 ```
 terraform init --upgrade
 terraform apply
->
+
+```
+
+As an output, the `terraform apply` command returns the IP address of the Provisioner, the MAC address of the Worker, and an address for the SOS console of the Worker which will help you to follow what the Worker is doing. For example,
+
+```
 Apply complete! Resources: 5 added, 0 changed, 1 destroyed.
 
 Outputs:
 
-provisioner_dns_name = eef33e97.packethost.net
+provisioner_dns_name = eef33e97.platformequinix.com
 provisioner_ip = 136.144.56.237
 worker_mac_addr = [
   "1c:34:da:42:d3:20",
 ]
 worker_sos = [
-  "4ac95ae2-6423-4cad-b91b-3d8c2fcf38d9@sos.dc13.packet.net",
+  "4ac95ae2-6423-4cad-b91b-3d8c2fcf38d9@sos.dc13.platformequinix.com",
 ]
 ```
-
-As an output, the `terraform apply` command returns the IP address of the Provisioner, the MAC address of the Worker, and an address for the SOS console of the Worker which will help you to follow what the Worker is doing.
 
 ### Troubleshooting - Server Creation
 
@@ -140,23 +143,27 @@ cd ./deploy
 docker-compose up -d
 ```
 
-To check if all the services are up and running you can use docker-compose as well. The output should look similar to:
+To check if all the services are up and running you can use `docker-compose`. 
 
 ```
 docker-compose ps
->
+```
+
+The output should look similar to:
+
+```
         Name                      Command               State                         Ports
 ------------------------------------------------------------------------------------------------------------------
 deploy_boots_1         /boots -dhcp-addr 0.0.0.0: ...   Up
 deploy_db_1            docker-entrypoint.sh postgres    Up      0.0.0.0:5432->5432/tcp
 deploy_hegel_1         cmd/hegel                        Up
-deploy_nginx_1         /docker-entrypoint.sh ngin ...   Up      192.168.1.2:80->80/tcp
+deploy_nginx_1         /docker-entrypoint.sh ngin ...   Up      192.168.1.1:8080->80/tcp
 deploy_registry_1      /entrypoint.sh /etc/docker ...   Up
 deploy_tink-cli_1      /bin/sh -c sleep infinity        Up
 deploy_tink-server_1   tink-server                      Up      0.0.0.0:42113->42113/tcp, 0.0.0.0:42114->42114/tcp
 ```
 
-You now have a Provisioner up and running on Packet. The next steps take you through creating a workflow and pushing it to the Worker using the `hello-world` workflow example. If you want to use the example, you need to pull the `hello-world` image from from Docker Hub to the internal registry.
+You now have a Provisioner up and running on Equinix Metal. The next steps take you through creating a workflow and pushing it to the Worker using the `hello-world` workflow example. If you want to use the example, you need to pull the `hello-world` image from from Docker Hub to the internal registry.
 
 ```
 docker pull hello-world
@@ -212,8 +219,6 @@ Now we can push the hardware data to `tink-server`:
 
 ```
 docker exec -i deploy_tink-cli_1 tink hardware push < /root/tink/deploy/hardware-data-0.json
->
-2020/06/17 14:12:45 Hardware data pushed successfully
 ```
 
 A note on the Worker at this point. Ideally the worker should be kept from booting until the Provisioner is ready to serve it OSIE, but on Equinix Metal that probably doesn't happen. Now that the Worker's hardware data is registered with Tinkerbell, you should manually reboot the worker through the [Equinix Metal CLI](https://github.com/packethost/packet-cli/blob/master/docs/packet_device_reboot.md), [API](https://metal.equinix.com/developers/api/devices/#devices-performAction), or Equinix Metal console. Remember to use the SOS console to check what the Worker is doing.
@@ -240,9 +245,7 @@ EOF
 Create the template and push it to the `tink-server` with the `tink template create` command.
 
 ```
-$ docker exec -i deploy_tink-cli_1 tink template create --name hello-world < ./hello-world.yml
-
-Created Template:  75ab8483-6f42-42a9-a80d-a9f6196130df
+docker exec -i deploy_tink-cli_1 tink template create --name hello-world < ./hello-world.yml
 ```
 
 {{% notice note %}}
@@ -250,7 +253,7 @@ TIP: export the the template ID as a bash variable for future use.
 {{% /notice %}}
 
 ```
-$ export TEMPLATE_ID=75ab8483-6f42-42a9-a80d-a9f6196130df
+export TEMPLATE_ID=75ab8483-6f42-42a9-a80d-a9f6196130df
 ```
 
 ## Creating a Workflow
@@ -263,11 +266,9 @@ The next step is to combine both the hardware data and the template to create a 
 Combine these two pieces of information and create the workflow with the `tink workflow create` command.
 
 ```
-$ docker exec -i deploy_tink-cli_1 tink workflow create \
+docker exec -i deploy_tink-cli_1 tink workflow create \
     -t $TEMPLATE_ID \
     -r '{"device_1":'$(jq .network.interfaces[0].dhcp.mac hardware-data-0.json)'}'
-
-Created Workflow:  a8984b09-566d-47ba-b6c5-fbe482d8ad7f
 ```
 
 {{% notice note %}}
@@ -275,7 +276,7 @@ TIP: export the the workflow ID as a bash variable.
 {{% /notice %}}
 
 ```
-$ export WORKFLOW_ID=a8984b09-566d-47ba-b6c5-fbe482d8ad7f
+export WORKFLOW_ID=a8984b09-566d-47ba-b6c5-fbe482d8ad7f
 ```
 
 The command returns a Workflow ID and if you are watching the logs, you will see:
@@ -286,7 +287,7 @@ tink-server_1  | {"level":"info","ts":1592936829.6773047,"caller":"grpc-server/w
 
 ## Checking Workflow Status
 
-You can not SSH directly into the Worker but you can use the `SOS` or `Out of bond` console provided by Packet to follow what happens in the Worker during the workflow. You can SSH into the SOS console with:
+You can not SSH directly into the Worker but you can use the `SOS` or `Out of bond` console provided by Equinix Metal to follow what happens in the Worker during the workflow. You can SSH into the SOS console with:
 
 ```
 ssh $(terraform output -json worker_sos | jq -r '.[0]')
@@ -294,13 +295,13 @@ ssh $(terraform output -json worker_sos | jq -r '.[0]')
 
 You can also use the CLI from the provisioner to validate if the workflow completed correctly using the `tink workflow events` command.
 
-{{% notice note %}}
-Note that an event can take ~5 minutes to show up.
-{{% /notice %}}
-
 ```
 docker exec -i deploy_tink-cli_1 tink workflow events $WORKFLOW_ID
->
+```
+
+The response will look something like:
+
+```
 +--------------------------------------+-------------+-------------+----------------+---------------------------------+--------------------+
 | WORKER ID                            | TASK NAME   | ACTION NAME | EXECUTION TIME | MESSAGE                         |      ACTION STATUS |
 +--------------------------------------+-------------+-------------+----------------+---------------------------------+--------------------+
@@ -308,6 +309,10 @@ docker exec -i deploy_tink-cli_1 tink workflow events $WORKFLOW_ID
 | ce2e62ed-826f-4485-a39f-a82bb74338e2 | hello world | hello_world |              0 | Finished Execution Successfully |     ACTION_SUCCESS |
 +--------------------------------------+-------------+-------------+----------------+---------------------------------+--------------------+
 ```
+
+{{% notice note %}}
+Note that an event can take ~5 minutes to show up.
+{{% /notice %}}
 
 ## Cleanup
 
