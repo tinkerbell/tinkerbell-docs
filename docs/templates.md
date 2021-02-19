@@ -8,7 +8,7 @@ date: 2020-08-03
 A Template is a YAML file that defines the source of a Workflow by declaring one or more _tasks_.
 The tasks are executed sequentially, in the order in which they are declared.
 
-Each task consists of one or more _actions_.
+Each task consists of one or more [_actions_](../actions/action-architecture).
 Each action contains an image to be executed as part of a workflow, identified by the `image` field.
 You can create any script, app, or other set of instructions to be an action image by containerizing it and pushing it into either the local Docker registry included in the Tinkerbell stack or an external image repository.
 
