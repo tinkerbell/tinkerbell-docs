@@ -5,13 +5,13 @@ date: 2021-02-16
 
 # The Basics of Deploying an Operating System
 
-This guide covers deploying Operating Systems, this is important as not all Operating Systems are designed to be deployed in the same manner. Some Operating Systems depend on being laid out on a disk in a specific way, some are almost completely dependant on actually being "installed" and others can be easily automated for quick deployment but require additional steps to customise afterwards. 
+This guide covers deploying Operating Systems, this is important as not all Operating Systems are designed to be deployed in the same manner. Some Operating Systems depend on being laid out on a disk in a specific way, some are almost completely dependent on actually being "installed" and others can be easily automated for quick deployment but require additional steps to customise afterwards. 
 
-## Getting an Operating System deployed
+## Getting an Operating System Deployed
 
 Most Operating Systems are deployed in relatively the same manner:
 
-1. A machine boots and reads from installation media (presented locally or over the network)
+1. A machine boots and reads from installation media (presented locally or over the network).
 2. The target disks are prepared, typically partitions may be created or HA technologies such as disk mirroring and then finally these partitions are “formatted” so that they contain a file system.
 3. Either a minimal set of packages or a custom selection of packages will be installed to the new file system. Most Operating Systems or distributions have their own concept of “packages” but ultimately under the covers the package contains binaries and required libraries for an application along with some logic that dictates where the files should be written too along with some versioning information that the package manager can use.
 4. There may be some final customisation such as setting users, network configuration etc..
@@ -19,7 +19,8 @@ Most Operating Systems are deployed in relatively the same manner:
 
 The order of the steps may differ but pretty much all of the major Operating Systems (Linux, Windows, MacOS) follow the same pattern to deploy on target hardware.
 
-## Options for automating a deployment
+## Options for Automating a Deployment
+
 There are usually two trains of thought when thinking about deploying an Operating System, which are scripted which will go through the steps listed above but no user interaction is required or image based which takes a copy of a deployment and uses that as a “rubber stamp” for other installs.
 
 ### Scripted
@@ -55,7 +56,7 @@ The **Boot sector** is the first place a machine will attempt to boot from once 
 
 A **partition** defines some ring-fenced capacity on an underlying device that can be then presented to the underlying hardware as usable storage. Partitions will then be “formatted” so that they have a structure that understands concepts such as folders/directories and files, along with additional functionality such as permissions.
 
-![](../images/disk-layout.png)
+![Diagram of a disk layout](../images/disk-layout.png)
 
 Now that we know the makeup of a disk we can see that there are lots of different things that we may need to be aware of, such as type of boot loader, size or number of partitions, type of file systems and then the files and packages that need installing within those partitions.
 
