@@ -225,7 +225,7 @@ A note on the Worker at this point. Ideally the worker should be kept from booti
 
 ## Creating a Template
 
-Next, define the template for the workflow. The template sets out tasks for the Worker to preform sequentially. This template contains a single task with a single action, which is to perform [“hello-world”](/examples/hello-world-workflow/). Just as in the hello-world example, the `hello-world` image doesn’t contain any instructions that the Worker will perform. It is just a placeholder in the template so a workflow can be created and pushed to the Worker.
+Next, define the template for the workflow. The template sets out tasks for the Worker to preform sequentially. This template contains a single task with a single action, which is to perform [“hello-world”](../../workflows/hello-world-workflow/). Just as in the hello-world example, the `hello-world` image doesn’t contain any instructions that the Worker will perform. It is just a placeholder in the template so a workflow can be created and pushed to the Worker.
 
 ```
 cat > hello-world.yml  <<EOF
