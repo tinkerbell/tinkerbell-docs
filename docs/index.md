@@ -41,7 +41,7 @@ In addition to the microservices, there are three pieces of infrastructure:
 ​New to Tinkerbell or bare metal provisioning? This is a great place to start!
 
 - Getting Started - Set up Tinkerbell [locally with vagrant](/setup/local-vagrant/) or on [Equinix Metal with Terraform](/setup/packet-terraform/).
-- Run [hello world](/examples/hello-world-workflow) to see Tinkerbell in action.​
+- Run [hello world](workflows/hello-world-workflow) to see Tinkerbell in action.​
 
 
 ## Get Help

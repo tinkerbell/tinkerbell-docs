@@ -20,6 +20,7 @@ A Tinkerbell Action is contained within a container image and should be hosted o
 ## Action Containers
 
 As mentioned above an action runs within a container, which provides a number of inherent benefits:
+
 - Contained code
 - Re-usable modules
 - Well established execution environment
@@ -34,6 +35,7 @@ By default an action container is started as a [privileged](https://docs.docker.
 ### Namespace
 
 By default an action will be created in it's on Linux [Namespace](https://en.wikipedia.org/wiki/Linux_namespaces) meaning that whilst it can see underlying hardware, it is unaware of any other processes or existing network configuration (the Docker engine auto-magically manages external networking through the Docker network). This under the majority of use-cases is good for isolating what tasks an action is performing, however there are a number of use-cases where being able to communicate with the hosts existing processes is a requirement. The most obvious two (so far) are the capability to `reboot` or `kexec` into a new kernel, both of these actions typically involve a few steps:
+
 1. Action calls the `/sbin/reboot` binary or `reboot()` syscall.
 2. Kernel is aware of the reboot and sends a `signal` to process ID 1.
 3. Process ID 1 (which should be `/init`) kills all processes and reboots the machine. 
