@@ -107,6 +107,10 @@ Now let's compile the binary with:
 $ go build -o tink cmd/tink-cli/main.go
 ```
 
-## Future Development
+## Tink CLI Commands
+
+The Tink CLI includes commands to create and manage workflows, templates, and hardware data. Complete usage information is available from `tink --help` or `tink <command> --help`.
 
 There is an ongoing effort to have a more consistent set of commands. Watch out for breaking changes and deprecations. In case of confusion, run `tink --help`.
+
+
