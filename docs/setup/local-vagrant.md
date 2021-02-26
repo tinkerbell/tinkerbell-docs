@@ -11,7 +11,7 @@ It covers some basic aspects of Tinkerbell's functionality:
 
 - setting up a Provisioner
 - creating the hardware data for the Worker
-- creating a template with a placeholder action item, using the [hello-world example](/examples/hello-world-workflow)
+- creating a template with a placeholder action item, using the [hello-world example](../../workflows/hello-world-workflow)
 - and creating a workflow
 
 The last step is to start up the Worker, which will call back to the Provisioner for its workflow.
@@ -42,8 +42,6 @@ Since Vagrant is handling the Provisioner's configuration, including installing 
 
 ```
 vagrant up provisioner
->
-Bringing machine 'provisioner' up with 'virtualbox' provider...
 ```
 
 The Provisioner installs and runs Ubuntu with a couple of additional utilities. The time it takes to spin up the Provisioner varies with connection speed and resources on your local machine.
@@ -60,8 +58,6 @@ Now that the Provisioner's machine is up and running, you can connect and bring 
 
 ```
 vagrant ssh provisioner
->
-vagrant@provisioner:~$
 ```
 
 Tinkerbell is going to be running from a container, so navigate to the `vagrant` directory, set the environment, and start the Tinkerbell stack with `docker-compose`.
@@ -77,14 +73,17 @@ Tinkerbell is now ready to receive templates and workflows. Check out all the Ti
 
 ```
 docker-compose ps
->
+```
+
+The response shows the running services.
+```
         Name                      Command                  State                             Ports
 -------------------------------------------------------------------------------------------------------------------------
 deploy_boots_1         /boots -dhcp-addr 0.0.0.0: ...   Up
 deploy_cacher_1        /cacher                          Up             0.0.0.0:42111->42111/tcp, 0.0.0.0:42112->42112/tcp
 deploy_db_1            docker-entrypoint.sh postgres    Up (healthy)   0.0.0.0:5432->5432/tcp
 deploy_hegel_1         cmd/hegel                        Up
-deploy_nginx_1         /docker-entrypoint.sh ngin ...   Up             192.168.1.2:80->80/tcp
+deploy_nginx_1         /docker-entrypoint.sh ngin ...   Up             192.168.1.1:8080->80/tcp
 deploy_registry_1      /entrypoint.sh /etc/docker ...   Up (healthy)
 deploy_tink-cli_1      /bin/sh -c sleep infinity        Up
 deploy_tink-server_1   tink-server                      Up (healthy)   0.0.0.0:42113->42113/tcp, 0.0.0.0:42114->42114/tcp
@@ -154,7 +153,6 @@ Then, push the hardware data to the database with the `tink hardware push` comma
 
 ```
 docker exec -i deploy_tink-cli_1 tink hardware push < ./hardware-data.json
-> 2020/06/17 14:12:45 Hardware data pushed successfully
 ```
 
 If you are following along in the `tink-server` logs, you should see:
@@ -165,7 +163,7 @@ tink-server_1  | {"level":"info","ts":1592936402.3975577,"caller":"grpc-server/h
 
 ## Creating a Template
 
-Next, define the template for the workflow. The template sets out tasks for the Worker to preform sequentially. This template contains a single task with a single action, which is to perform "hello-world". Just as in the [hello-world example](/examples/hello-world-workflow), the "hello-world" image doesn't contain any instructions that the Worker will perform. It is just a placeholder in the template so a workflow can be created and pushed to the Worker.
+Next, define the template for the workflow. The template sets out tasks for the Worker to preform sequentially. This template contains a single task with a single action, which is to perform "hello-world". Just as in the [hello-world example](../../workflows/hello-world-workflow), the "hello-world" image doesn't contain any instructions that the Worker will perform. It is just a placeholder in the template so a workflow can be created and pushed to the Worker.
 
 ```
 cat > hello-world.yml  <<EOF
@@ -185,9 +183,8 @@ EOF
 Create the template and push it to the database with the `tink template create` command.
 
 ```
-docker exec -i deploy_tink-cli_1 tink template create --name hello-world < ./hello-world.yml
->
-Created Template:  75ab8483-6f42-42a9-a80d-a9f6196130df
+docker exec -i deploy_tink-cli_1 tink template create \
+  --name hello-world < ./hello-world.yml
 ```
 
 The command returns a Template ID, and if you are watching the `tink-server` logs you will see:
@@ -209,8 +206,6 @@ Combine these two pieces of information and create the workflow with the `tink w
 docker exec -i deploy_tink-cli_1 tink workflow create \
     -t <TEMPLATE ID> \
     -r '{"device_1":"08:00:27:00:00:01"}'
->
-Created Workflow:  a8984b09-566d-47ba-b6c5-fbe482d8ad7f
 ```
 
 The command returns a Workflow ID and if you are watching the logs, you will see:

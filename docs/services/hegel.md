@@ -28,10 +28,10 @@ You can also retrieve a AWS EC2 compatible format uses from `/meta-data`.
 $ curl <hegel_ip>:50061/<date>/meta-data
 ```
 
-For example, if you are using the [Vagrant Setup](/setup/local-vagrant/), Hegel runs as part of the Provisioner virtual machine with the IP: `192.168.1.2`. When the Worker starts and if you have logged in to [osie](/services/osie) using the password `root` you can access the metadata for your server via `cURL`:
+For example, if you are using the [Vagrant Setup](/setup/local-vagrant/), Hegel runs as part of the Provisioner virtual machine with the IP: `192.168.1.1`. When the Worker starts and if you have logged in to [osie](/services/osie) using the password `root` you can access the metadata for your server via `cURL`:
 
 ```
-curl -s 192.168.1.2:50061/metadata | jq .
+curl -s 192.168.1.1:50061/metadata | jq .
 >
 {
     "facility": {
@@ -45,7 +45,7 @@ curl -s 192.168.1.2:50061/metadata | jq .
 Or in AWS EC2 format:
 
 ```
-curl -s 192.168.1.2:50061/2009-04-04/meta-data
+curl -s 192.168.1.1:50061/2009-04-04/meta-data
 ```
 
 If you look at the `hardware-data.json` that we used during the Vagrant setup you will find the `facility_code=onprem` as well.
