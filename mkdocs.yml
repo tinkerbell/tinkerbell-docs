@@ -37,11 +37,6 @@ nav:
   - Deploying Operating Systems:
     - The Basics: deploying-operating-systems/the-basics.md
     
-  - Tink CLI Reference:
-    - Hardware: cli-reference/hardware.md
-    - Template: cli-reference/template.md
-    - Workflow: cli-reference/workflow.md
-
   - Troubleshooting: troubleshooting.md
 
   - Contribute:
