@@ -36,6 +36,7 @@ nav:
 
   - Deploying Operating Systems:
     - The Basics: deploying-operating-systems/the-basics.md
+    - The Deployment: deploying-operating-systems/deploying-an-os.md
     
   - Troubleshooting: troubleshooting.md
 

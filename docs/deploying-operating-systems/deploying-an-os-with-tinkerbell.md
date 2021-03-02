@@ -1,9 +1,9 @@
 ---
-title: Deploying an Operating System with Tinkerbell
+title: The Deployment
 date: 2021-02-19
 ---
 
-# Deploying an Operating System with Tinkerbell
+# The Deployment
 
 In the majority of cases there will be a number of steps required before we're able to deploy an Operating System to a new piece of hardware. These steps are largely dependent on the type or format of the Operating System deployment media that the provider distributes or it could be that we need to do some level of preparation to the hardware before we're ready to deploy. 
 
