@@ -5,31 +5,13 @@ date: 2021-02-19
 
 # Deploying an Operating System with Tinkerbell
 
-## Operating System preparation
-
 In the majority of cases there will be a number of steps required before we're able to deploy an Operating System to a new piece of hardware. These steps are largely dependent on the type or format of the Operating System deployment media that the provider distributes or it could be that we need to do some level of preparation to the hardware before we're ready to deploy. 
 
-## Installation media types
+## Using an OS Image
 
-Not all Operating Systems are distributed in the same formats, and in most use-cases either pre-preperation or conversion to a support image type will be required. 
+Not all Operating System images are distributed in the same formats, and in most use-cases either pre-preperation or conversion to a supported image type will be required. 
 
-### OS image
-
-An OS image is a byte-for-byte identical copy of an existing Operating System, when provisioning from an OS image we would typically write the image directly to a block device. We can use an action to write an OS image directly to an underlying block device, which would effectively provision this Operating System to our hardware allowing us to reboot into this new OS. The [image2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) action is designed for this use-case and has the capability to stream an Operating System image from a remote location over HTTP/HTTPS and write it directly to a specified block device.
-
-An example below streams Ubuntu from a web-server and writes the OS image to the block device `/dev/sda`.
-
-```
-actions:
-- name: "stream ubuntu"
-  image: quay.io/tinkerbell-actions/image2disk:v1.0.0
-  timeout: 90
-  environment:
-	  IMG_URL: 192.168.1.2/ubuntu.raw
-	  DEST_DISK: /dev/sda
-```
-
-#### Converting between types
+### Preparing the Image
 
 A large number of Operating System vendors tend to distribute their images using the [qcow](https://en.wikipedia.org/wiki/Qcow) format, which comes from the Qemu virtualisation project. This provides a number of features that end users find desirable:
 
@@ -47,16 +29,48 @@ qemu-img convert -O raw diskimage.qcow2 diskimage.raw
 
 One drawback of this is that a `qcow` image will only occupy the space where data has been written, so if we had a 20G disk image and installed an OS that only used 1G the image size would be the 1G of data. **However**, when we move to a `raw` image then the image will occupy all of the disk image size regardless of the contents.
 
-If we use the image2disk action to write our disk image to a block device then it supports on-the-fly gzip streaming, this allows us to compress our raw image using [gzip](https://en.wikipedia.org/wiki/Gzip) to save local disk space **and** the amount of network traffic to the hosts that are being provisioned.
+### Streaming the Image to Disk
 
-The command `gzip diskimage.raw` will result in a file `diskimage.raw.gz`, which in most cases will be smaller than the original qcow file.
+Once you have your OS image prepared, use an action to write it directly to an underlying block device, which would effectively provision the Operating System to the hardware allowing us to reboot into this new OS. The [`image2disk`](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) action is designed for this use-case and has the capability to stream an Operating System image from a remote location over HTTP/HTTPS and write it directly to a specified block device.
 
+For example, you can stream a raw Ubuntu image from a web-server and write the OS image to the block device `/dev/sda`.
 
-### Filesystem archive
+```
+actions:
+- name: "stream ubuntu"
+  image: quay.io/tinkerbell-actions/image2disk:v1.0.0
+  timeout: 90
+  environment:
+      IMG_URL: 192.168.1.2/ubuntu.raw
+      DEST_DISK: /dev/sda
+```
 
-#### Formatting a block device
+`image2disk` also supports on-the-fly gzip streaming, which allows you to compress the raw image using [gzip](https://en.wikipedia.org/wiki/Gzip) to save local disk space **and** the amount of network traffic to the hosts that are being provisioned.
 
-When provisioning from a filesystem archive we have a **pre-requisite** for the block device to be partioned and formatted with a filesystem before we can write files/directories to the storage. In Tinkerbell we specify in the hardware specification the configuration for the storage:
+```
+gzip diskimage.raw
+```
+
+The resulting file `diskimage.raw.gz` in most cases will be smaller than the original qcow file.
+
+You can then use the `image2disk` action to stream the image to the block device.
+
+```
+actions:
+- name: "stream ubuntu"
+  image: quay.io/tinkerbell-actions/image2disk:v1.0.0
+  timeout: 90
+  environment:
+      IMG_URL: http://192.168.1.2/ubuntu.tar.gz
+      DEST_DISK: /dev/sda
+      COMPRESSED: true
+```
+
+## Using a Filesystem Archive
+
+### Formatting a Block Device
+
+When provisioning from a filesystem archive, there is a **pre-requisite** for the block device to be partitioned and formatted with a filesystem before we can write files and directories to the storage. In Tinkerbell we specify in hardware data the configuration for the storage. For example, the following snippet details the configuration for the block device `/dev/sda`. There are three partitions that will be created and labeled. It also specifies the format and filesystem type for two of those partitions.
 
 ```
 "storage": {
@@ -110,7 +124,7 @@ When provisioning from a filesystem archive we have a **pre-requisite** for the 
 
 **Note**, to know more about block device configuration you can read about Equinix Metals CPR [Custom Partitioning & Raid](https://metal.equinix.com/developers/docs/servers/custom-partitioning-raid/).
 
-The following snippet details the configuration for the block device `/dev/sda`, there are three partitions that will be created and labelled accordingly and it also details the format/filesystem type for two of those partitions. **This** only will update the metadata about the device, we will need an action during provisioning to parse this metadata and actually write these changes to the block device.
+**This** only will update the metadata about the device, we will need an action during provisioning to parse this metadata and actually write these changes to the block device.
 
 We can use the action [rootio](https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio) to parse this metadata and write these changes to disk:
 
@@ -126,7 +140,7 @@ actions:
 
 Once this action has completed we will have successfully modified the underlying block device to have our storage configuration!
 
-#### Extracting our filesystem
+### Extracting the OS to the Filesystem
 
 As detailed in [The Basics of Deploying an Operating System](https://docs.tinkerbell.org/deploying-operating-systems/the-basics/#filesystem-archives), we can download or create a filesystem archive in a number of different ways. Once we have a compressed archive of all of the files that make up our Operating System we will again need to use an action to manage the task of fetching the archive and extracting it to our newly formatted file system. The action [archive2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk) has the functionality to **mount** a filesystem and both **stream**/**extract** a filesystem archive directly to this new filesystem. 
 
@@ -143,11 +157,11 @@ actions:
 	  DEST_PATH: /
 ```
 
-#### Boot Loader
+### Installing a Boot Loader
 
-Whilst we may have deployed a full Operating System to our persistent storage it will be rendered useless at a *reboot* unless we install a boot loader so that the machine knows how to load this new OS. We can automate this process by providing another action whose role would be to execute a command such as `grub-install` or `sysinux` to write the bootloader code to the beginning of the block device where the BIOS knows where to look for it on machine startup.
+Whilst we may have deployed a full Operating System to our persistent storage, it will be rendered useless at a *reboot* unless we install a boot loader so that the machine knows how to load this new OS. We can automate this process by providing another action whose role would be to execute a command such as `grub-install` or `sysinux` to write the bootloader code to the beginning of the block device where the BIOS knows where to look for it on machine startup.
 
-### Installer(s)
+## Using an Installer
 
 Some Operating Systems may require a combination of the two above examples for deployment, however there are other Operating Systems that can also be deployed through the use of an installer. 
 
@@ -155,7 +169,7 @@ These typically will require an installer binary to exist:
 - It may require an action to write the installer binary to persistent storage for it to be ran
 - An action (docker container) may have all of the relevant files required to execute an installer.
 
-#### Debian example
+### Debian example
 
 `Dockerfile`
 
@@ -180,7 +194,7 @@ actions:
   timeout: 90
 ```
 
-#### Additional bootstraps
+### Additional Bootstraps
 
 - [Ubuntu](https://help.ubuntu.com/lts/installation-guide/armhf/apds04.html)
 - [Centos/Rhel](https://github.com/dozzie/yumbootstrap)
