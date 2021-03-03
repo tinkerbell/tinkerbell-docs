@@ -5,7 +5,7 @@ date: 2021-02-19
 
 # The Deployment
 
-In the majority of cases there will be a number of steps required before we're able to deploy an Operating System to a new piece of hardware. These steps are largely dependent on the type or format of the Operating System deployment media that the provider distributes or it could be that we need to do some level of preparation to the hardware before we're ready to deploy. 
+In the majority of cases there will be a number of steps required before we're able to deploy an Operating System to a new piece of hardware. Which steps are largely dependent on the type or format of the Operating System deployment media that the provider distributes or which installation method you want to use.
 
 ## Using an OS Image
 
@@ -122,11 +122,9 @@ When provisioning from a filesystem archive, there is a **pre-requisite** for th
 }
 ```
 
-**Note**, to know more about block device configuration you can read about Equinix Metals CPR [Custom Partitioning & Raid](https://metal.equinix.com/developers/docs/servers/custom-partitioning-raid/).
+> More information about block device configuration is on the Equinix Metal™[Custom Partitioning & Raid](https://metal.equinix.com/developers/docs/servers/custom-partitioning-raid/) page.
 
-**This** only will update the metadata about the device, we will need an action during provisioning to parse this metadata and actually write these changes to the block device.
-
-We can use the action [rootio](https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio) to parse this metadata and write these changes to disk:
+The example blob is just the description of the device in hardware data, we will also need an action during provisioning to parse this metadata and actually write these changes to the block device. This is the job of the [rootio](https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio) action.
 
 ```
 actions:
@@ -142,7 +140,7 @@ Once this action has completed we will have successfully modified the underlying
 
 ### Extracting the OS to the Filesystem
 
-As detailed in [The Basics of Deploying an Operating System](https://docs.tinkerbell.org/deploying-operating-systems/the-basics/#filesystem-archives), we can download or create a filesystem archive in a number of different ways. Once we have a compressed archive of all of the files that make up our Operating System we will again need to use an action to manage the task of fetching the archive and extracting it to our newly formatted file system. The action [archive2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk) has the functionality to **mount** a filesystem and both **stream**/**extract** a filesystem archive directly to this new filesystem. 
+As detailed in [The Basics of Deploying an Operating System](https://docs.tinkerbell.org/deploying-operating-systems/the-basics/#filesystem-archives), we can download or create a filesystem archive in a number of different ways. Once we have a compressed archive of all of the files that make up the Operating System, we will again need to use an action to manage the task of fetching the archive and extracting it to our newly formatted file system. The action [archive2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk) has the functionality to **mount** a filesystem and both **stream**/**extract** a filesystem archive directly to the new filesystem. 
 
 ```
 actions:
@@ -165,8 +163,9 @@ Whilst we may have deployed a full Operating System to our persistent storage, i
 
 Some Operating Systems may require a combination of the two above examples for deployment, however there are other Operating Systems that can also be deployed through the use of an installer. 
 
-These typically will require an installer binary to exist:
-- It may require an action to write the installer binary to persistent storage for it to be ran
+These typically will require an installer binary to exist, as well as:
+
+- It may require an action to write the installer binary to persistent storage for it to be ran.
 - An action (docker container) may have all of the relevant files required to execute an installer.
 
 ### Debian example
@@ -201,4 +200,4 @@ actions:
 
 ## Next Steps
 
-Once an Operating System image **or** a filesystem+bootloader is deployed we may need to customise it or boot into our new system, we can either `reboot` the host or `kexec` directly into the new OS.
+Once an Operating System image **or** a filesystem + bootloader is deployed we may need to customize it or boot into our new system, we can either `reboot` the host or `kexec` directly into the new OS.
