@@ -1,60 +1,56 @@
 ---
-title: Examples: Ubuntu
+title: Example - Ubuntu
 date: 2021-03-12
 ---
 
 # Deploying Ubuntu
 
-This is a guide which walks through the process of deploying Ubuntu through a number of different mechanisms:
+This guide walks through the process of deploying Ubuntu from either an operating system image or a Docker image.
 
-- Operating System Image
-- Docker Image
+## Using an Operating System Image
 
-## Operating System Image
+Ubuntu is distributed in a number of different formats, which are all available on the `cloud-images` web site [https://cloud-images.ubuntu.com/daily/server/focal/current/](https://cloud-images.ubuntu.com/daily/server/focal/current/). 
 
-Ubuntu distribute their Operating System in a number of different formats, which are all available on the `cloud-images` web site [https://cloud-images.ubuntu.com/daily/server/focal/current/](https://cloud-images.ubuntu.com/daily/server/focal/current/). 
-
-Below are two examples of images we can use:
+This example uses the image with the `.img` extension.
 
 ```
 focal-server-cloudimg-amd64.img     2021-03-11 22:27  528M  Ubuntu Server 20.04 LTS (Focal Fossa) daily builds
-focal-server-cloudimg-amd64.tar.gz  2021-03-11 22:30  485M  File system image and Kernel packed
 ```
 
-The first image (with the extension `.img`) is actually a `qcow2` filesystem image and is a **full** disk image including partition tables, partitions filled with filesystems, files and importantly a boot loader at the begging of the disk image. 
-
-The second image is a file system image, in particular it is typically an `ext4` filesystem that contains all of the files in a partition for Ubuntu to run. However in order for us to use this image we would need to:
-
-- Partition the disk
-- Write this data to the partition
-- Install a boot loader
-
-With all of this in mind, it becomes much simpler to convert the `qcow2` image and simply write it to disk.
+This image is actually a `qcow2` filesystem image and is a **full** disk image including partition tables, partitions filled with filesystems and the files, and importantly, a boot loader at the beginning of the disk image.
    
-### Convert Image 
+### Converting Image 
 
-To convert our image to disk we will need to install the `qemu-img` cli tool.
+In order to use this image, it needs to be converted into a `raw` filesystem. In order to do the conversion, install the `qemu-img` CLI tool.
 
-`apt-get install -y qemu-utils`
+```
+apt-get install -y qemu-utils
+```
 
-We can now use this tool to convert our image into a `raw` filesystem:
+Then, use the tool to convert the image into a `raw` filesystem.
 
-`qemu-img convert  ./focal-server-cloudimg-amd64.img -O raw ./focal-server-cloudimg-amd64.raw`
+```
+qemu-img convert  ./focal-server-cloudimg-amd64.img -O raw ./focal-server-cloudimg-amd64.raw
+```
 
-**Optionally** we can compress this raw image to save on both local disk space and network bandwidth when deploying the image.
+**Optional** - You can compress this raw image to save on both local disk space and network bandwidth when deploying the image.
 
-`gzip ./focal-server-cloudimg-amd64.raw`
+```
+gzip ./focal-server-cloudimg-amd64.raw
+```
 
-The raw image will now need moving to a locally accessible web server, we can place our image into the Tinkerbell sandbox webroot to simplify this usage. This will allow us to access our images at the IP address of the `tink-server`. 
+Move the raw image to a locally accessible web server. To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
 
-`mv ./focal-server-cloudimg-amd64.raw ./sandbox/deploy/state/webroot`
+```
+mv ./focal-server-cloudimg-amd64.raw ./sandbox/deploy/state/webroot`
+```
 
-### Writing our workflow
+### Creating the Template
 
-Our workflow will make use of the actions from the [artifact.io](https://artifact.io) hub:
+The template uses actions from the [artifact.io](https://artifact.io) hub.
 
-- [image2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) - to write the OS image to a block device
-- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned Operating System 
+- [image2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) - to write the OS image to a block device.
+- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
 
 ```
 version: "0.1"
@@ -84,11 +80,27 @@ tasks:
 	  	  FS_TYPE: ext4
 ```
 
-## Docker Image
+### File System Images
 
-We can easily make use of the **official** docker images to generate a root filesystem for use when deploying with Tinkerbell
+Note that it is also possible to install Ubuntu from the compressed filesystem image. 
 
-### Download Ubuntu image as root filesystem
+```
+focal-server-cloudimg-amd64.tar.gz  2021-03-11 22:30  485M  File system image and Kernel packed
+```
+
+This filesystem image is typically an `ext4` filesystem that contains all of the files in a partition for Ubuntu to run. However, in order for us to use this image we would need to:
+
+- Partition the disk
+- Write this data to the partition
+- Install a boot loader
+
+With all of this in mind, it becomes much simpler to convert the `qcow2` image and simply write it to disk.
+
+## Using a Docker Image
+
+We can easily make use of the **official** Docker images to generate a root filesystem for use when deploying with Tinkerbell.
+
+### Downloading the Image
 
 ```
 TMPRFS=$(docker container create ubuntu:latest)
@@ -96,22 +108,26 @@ docker export $TMPRFS > ubuntu_rootfs.tar
 docker rm $TMPRFS
 ```
 
-**Optionally** we can compress this filesystem archive to save on both local disk space and network bandwidth when deploying the image.
+**Optional** - You can compress this raw image to save on both local disk space and network bandwidth when deploying the image.
 
-`gzip ./ubuntu_rootfs.tar`
+```
+gzip ./ubuntu_rootfs.tar
+```
 
-The raw image will now need moving to a locally accessible web server, we can place our image into the Tinkerbell sandbox webroot to simplify this usage. This will allow us to access our images at the IP address of the `tink-server`. 
+Move the raw image to a locally accessible web server. To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`. 
 
-`mv ./ubuntu_rootfs.tar.gz ./sandbox/deploy/state/webroot`
+```
+mv ./ubuntu_rootfs.tar.gz ./sandbox/deploy/state/webroot
+```
 
-### Create workflow
+### Creating the Template
 
-Our workflow will make use of the actions from the artifact hub:
+The template makes use of the actions from the artifact hub.
 
-- [rootio](https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio) - to partition our disk and make filesystems
-- [archive2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk) - to write the OS image to a block device
-- [cexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/cexec) - to run commands inside (chroot) our newly provisioned Operating System
-- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned Operating System 
+- [rootio](https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio) - to partition our disk and make filesystems.
+- [archive2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk) - to write the OS image to a block device.
+- [cexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/cexec) - to run commands inside (chroot) our newly provisioned operating system.
+- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system. 
 
 ```
 version: "0.1"
