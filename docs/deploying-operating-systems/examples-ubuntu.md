@@ -9,7 +9,7 @@ This guide walks through the process of deploying Ubuntu from either an operatin
 
 ## Using an Operating System Image
 
-Ubuntu is distributed in a number of different formats, which are all available on the `cloud-images` web site [https://cloud-images.ubuntu.com/daily/server/focal/current/](https://cloud-images.ubuntu.com/daily/server/focal/current/). 
+Ubuntu is distributed in a number of different formats, which are all available on the `cloud-images` web site: [https://cloud-images.ubuntu.com/daily/server/focal/current/](https://cloud-images.ubuntu.com/daily/server/focal/current/). 
 
 This example uses the image with the `.img` extension.
 
