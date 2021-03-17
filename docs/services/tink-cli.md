@@ -15,7 +15,7 @@ page](https://github.com/tinkerbell/sandbox/releases) to retrieve it in the form
 
 The CLI uses the Go gRPC
 [tink/client](https://github.com/tinkerbell/tink/tree/master/client) to
-communicate with the [tink-server](/serviecs/tink-server).
+communicate with the [tink-server](/services/tink-server).
 
 You can use the command line interface to create, delete or update workflows,
 hardware data and templates. Or to fetch and filter those resources.

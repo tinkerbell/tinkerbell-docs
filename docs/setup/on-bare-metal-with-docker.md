@@ -20,7 +20,7 @@ In this project we will use [Sandbox](https://github.com/tinkerbell/sandbox) and
 This guide also provides a little more of an explanation with very little automation for what happens under the hood in guides like:
 
 * [Local Setup with Vagrant](/setup/local-vagrant)
-* [Equinix Metal Setup with Terraform](/setup/packet-terraform)
+* [Equinix Metal Setup with Terraform](/setup/equinix-metal-terraform)
 
 ## Prerequisites
 
