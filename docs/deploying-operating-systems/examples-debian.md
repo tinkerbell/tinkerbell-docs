@@ -1,19 +1,19 @@
 ---
-title: Examples: Debian
+title: Example - Debian
 date: 2021-03-12
 ---
 
 # Deploying Debian
 
-This is a guide which walks through the process of deploying Debian through a number of different mechanisms:
+This guide walks through the process of deploying Debian through:
 
-- Operating System Image
-- Docker Image
+- an Operating System Image
+- a Docker Image
 - Bootstrap
 
-## Operating System Image
+## Using an Operating System Image
 
-Debian distribute their Operating System in a number of different formats, which are all available on the `cloud-images` web site [https://cdimage.debian.org/cdimage/cloud/OpenStack/current/](https://cdimage.debian.org/cdimage/cloud/OpenStack/current/). 
+Debian distributes their Operating System in a number of different formats, which are all available on the `cloud-images` web site: [https://cdimage.debian.org/cdimage/cloud/OpenStack/current/](https://cdimage.debian.org/cdimage/cloud/OpenStack/current/). 
 
 Below are two examples of images we can use:
 
@@ -22,36 +22,38 @@ debian-10-openstack-amd64.qcow2	   2021-03-04 10:56	  577M
 debian-10-openstack-amd64.raw	      2021-03-04 10:53	  2.0G
 ```
 
-The first image is a `qcow2` filesystem image and is a **full** disk image including partition tables, partitions filled with filesystems, files and importantly a boot loader at the begging of the disk image. 
+The first image is a `qcow2` filesystem image and is a **full** disk image including partition tables, partitions filled with filesystems and files, and importantly, a boot loader at the beginning of the disk image. If you use the `qcow2` image, you will need to convert it into a `raw` image by installing the `qemu-img` cli tool,
 
-The second image is a `raw` disk image an we can use it directly as it contains everything that we need to boot directly into Debian.
+```
+apt-get install -y qemu-utils
+```
 
-**Optionally** we can compress this raw image to save on both local disk space and network bandwidth when deploying the image.
+and using it to convert the image into a `raw` filesystem.
 
-`gzip ./debian-10-openstack-amd64.raw`
+```
+qemu-img convert  ./debian-10-openstack-amd64.qcow2 -O raw ./debian-10-openstack-amd64.raw
+```
 
-The raw image will now need moving to a locally accessible web server, we can place our image into the Tinkerbell sandbox webroot to simplify this usage. This will allow us to access our images at the IP address of the `tink-server`. 
+The second image is already a `raw` disk image which can be used as-is because it contains everything that we need to boot directly into Debian.
 
-`mv ./debian-10-openstack-amd64.raw.gz ./sandbox/deploy/state/webroot`
+**Optional** - You can compress the raw image to save on both local disk space and network bandwidth when deploying the image.
 
-### Convert Image 
+```
+gzip ./debian-10-openstack-amd64.raw
+```
 
-To convert our `qcow2` image to disk we will need to install the `qemu-img` cli tool.
+The raw image will need to live at a locally accessible web server. To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
 
-`apt-get install -y qemu-utils`
+```
+mv ./debian-10-openstack-amd64.raw.gz ./sandbox/deploy/state/webroot
+```
 
-We can now use this tool to convert our image into a `raw` filesystem:
+### Creating the Template
 
-`qemu-img convert  ./debian-10-openstack-amd64.qcow2 -O raw ./debian-10-openstack-amd64.raw`
+The template uses actions from the [artifact.io](https://artifact.io) hub.
 
-**Optionally** we can compress this raw image to save on both local disk space and network bandwidth when deploying the image, the instructions are above.
-
-### Writing our workflow
-
-Our workflow will make use of the actions from the [artifact.io](https://artifact.io) hub:
-
-- [image2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) - to write the OS image to a block device
-- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned Operating System 
+- [image2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) - to write the OS image to a block device.
+- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system. 
 
 ```
 version: "0.1"
@@ -81,11 +83,11 @@ tasks:
 			FS_TYPE: ext4
 ```
 
-## Docker Image
+## Using a Docker Image
 
-We can easily make use of the **official** docker images to generate a root filesystem for use when deploying with Tinkerbell
+We can easily make use of the **official** docker images to generate a root filesystem for use when deploying with Tinkerbell.
 
-### Download Debian image as root filesystem
+### Downloading the Image
 
 ```
 TMPRFS=$(docker container create debian:latest)
@@ -93,22 +95,26 @@ docker export $TMPRFS > debian_rootfs.tar
 docker rm $TMPRFS
 ```
 
-**Optionally** we can compress this filesystem archive to save on both local disk space and network bandwidth when deploying the image.
+**Optional** - You can compress the raw image to save on both local disk space and network bandwidth when deploying the image.
 
-`gzip ./debian_rootfs.tar`
+```
+gzip ./debian_rootfs.tar
+```
 
-The raw image will now need moving to a locally accessible web server, we can place our image into the Tinkerbell sandbox webroot to simplify this usage. This will allow us to access our images at the IP address of the `tink-server`. 
+The raw image will need to live at a locally accessible web server. To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`. 
 
-`mv ./debian_rootfs.tar.gz ./sandbox/deploy/state/webroot`
+```
+mv ./debian_rootfs.tar.gz ./sandbox/deploy/state/webroot
+```
 
-### Create workflow
+### Creating the Template
 
-Our workflow will make use of the actions from the artifact hub:
+The template uses actions from the [artifact.io](https://artifact.io) hub.
 
-- [rootio](https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio) - to partition our disk and make filesystems
-- [archive2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk) - to write the OS image to a block device
-- [cexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/cexec) - to run commands inside (chroot) our newly provisioned Operating System
-- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned Operating System 
+- [rootio](https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio) - to partition our disk and make filesystems.
+- [archive2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk) - to write the OS image to a block device.
+- [cexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/cexec) - to run commands inside (chroot) our newly provisioned operating system.
+- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system. 
 
 ```
 version: "0.1"
@@ -160,13 +166,13 @@ tasks:
 		  FS_TYPE: ext4
 ```
 
-## Bootstrap
+## Using Bootstrap
 
 The final method for installing Debian is to use the [grml-debootstrap](https://grml.org/grml-debootstrap/) installer. We will need to create an action that will invoke the installer and install to our local disk.
 
-### Dockerfile
+### Creating the Dockerfile
 
-The below `dockerfile` will create a new image based upon Debian and install all of the components needed for `grml-debootstrap`... finally setting the `ENTRYPOINT` to execute the `grml-debootstrap` program to install to Debian to `/dev/sda3` and install the boot-loader to `/dev/sda`.
+The `dockerfile` creates a new image based upon Debian, installs all of the components needed for `grml-debootstrap`. Then, it sets the `ENTRYPOINT` to execute the `grml-debootstrap` program to install to Debian to `/dev/sda3` and install the boot-loader to `/dev/sda`.
 
 ```
 FROM debian:bullseye
@@ -174,11 +180,13 @@ RUN apt-get update; apt-get install -y grml-debootstrap
 ENTRYPOINT ["grml-debootstrap", "--target", "/dev/sda3", "--grub", "/dev/sda"]
 ```
 
-We can create an action image from our Dockerfile:
+Now create an action image from our Dockerfile.
 
-`docker build -t local-registry/debian:example .`
+```
+docker build -t local-registry/debian:example .
+```
 
-Once we have pushed our new action to the registry we can reference the action in a workflow as shown below.
+Once the new action is pushed to the local registry, it can be used as an action in a template.
 
 ```
 actions:
@@ -187,13 +195,15 @@ actions:
   timeout: 90
 ```
 
-### Workflow
+### Creating the Template
 
-Our workflow will make use of the actions from the artifact hubm and our custom actions:
+The template uses actions from the [artifact.io](https://artifact.io) hub.
 
 - [rootio](https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio) - to partition our disk and make filesystems
-- Our custom action that will invoke the Bootstrap program
-- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned Operating System 
+- Our custom action that will invoke the Bootstrap program.
+- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
+
+As well as the `debian:bootstratp` action from the local registry.
 
 ```
 version: "0.1"
