@@ -78,31 +78,32 @@ Our workflow will make use of the actions from the [artifact.io](https://artifac
 - [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned Operating System 
 
 ```
-version: "0.1"
+version: '0.1'
 name: CentOS_Deployment
 global_timeout: 1800
 tasks:
-  - name: "os-installation"
-	worker: "{{.device_1}}"
+  - name: os-installation
+	worker: '{{.device_1}}'
 	volumes:
-	  - /dev:/dev
-	  - /dev/console:/dev/console
-	  - /lib/firmware:/lib/firmware:ro
+	  - '/dev:/dev'
+	  - '/dev/console:/dev/console'
+	  - '/lib/firmware:/lib/firmware:ro'
 	actions:
-	  - name: "stream CentOS image"
-		image: quay.io/tinkerbell-actions/image2disk:v1.0.0
+	  - name: stream image
+		image: 'quay.io/tinkerbell-actions/image2disk:v1.0.0'
 		timeout: 600
 		environment:
 		  DEST_DISK: /dev/sda
-		  IMG_URL: "http://192.168.1.2/CentOS-8-GenericCloud-8.3.2011-20201204.2.x86_64.raw.gz"
+		  IMG_URL: >-
+			http://192.168.1.2/CentOS-8-GenericCloud-8.3.2011-20201204.2.x86_64.raw.gz
 		  COMPRESSED: true
-	  - name: "kexec CentOS"
-		image: quay.io/tinkerbell-actions/kexec:v1.0.0
+	  - name: kexec
+		image: 'quay.io/tinkerbell-actions/kexec:v1.0.0'
 		timeout: 90
 		pid: host
 		environment:
-	        BLOCK_DEVICE: /dev/sda1
-		    FS_TYPE: ext4
+		  BLOCK_DEVICE: /dev/sda1
+		  FS_TYPE: ext4
 ```
 
 ## Docker Image for CentOS
@@ -135,53 +136,55 @@ tasks:
  - [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned Operating System 
 
  ```
- version: "0.1"
- name: debian_bullseye_provisioning
- global_timeout: 1800
- tasks:
-   - name: "os-installation"
-	 worker: "{{.device_1}}"
-	 volumes:
-	   - /dev:/dev
-	   - /dev/console:/dev/console
-	   - /lib/firmware:/lib/firmware:ro
-	 actions:
-	   actions:
-	   - name: "disk-wipe-partition"
-		 image: quay.io/tinkerbell-actions/rootio:v1.0.0
-		 timeout: 90
-		 command: ["partition"]
-		 environment:
-			 MIRROR_HOST: 192.168.1.2
-	   - name: "format"
-		 image: quay.io/tinkerbell-actions/rootio:v1.0.0
-		 timeout: 90
-		 command: ["format"]
-		 environment:
-			 MIRROR_HOST: 192.168.1.2
-	   - name: "expand debian filesystem to root"
-		 image: quay.io/tinkerbell-actions/archive2disk:v1.0.0
-		 timeout: 90
-		 environment:
-			 ARCHIVE_URL: http://192.168.1.2/centos_rootfs.tar.gz
-			 ARCHIVE_TYPE: targz
-			 DEST_DISK: /dev/sda3
-			 FS_TYPE: ext4
-			 DEST_PATH: /
-	   - name: "Install Grub Bootloader"
-		 image: quay.io/tinkerbell-actions/cexec:v1.0.0
-		 timeout: 90
-		 environment:
-			   BLOCK_DEVICE: /dev/sda3
-			 FS_TYPE: ext4
-			 CHROOT: y
-			 CMD_LINE: "grub-install --root-directory=/boot /dev/sda"
-	   - name: "kexec-debian"
-		 image: quay.io/tinkerbell-actions/kexec:v1.0.0
-		 timeout: 600
-		 environment:
-		   BLOCK_DEVICE: /dev/sda3
-		   FS_TYPE: ext4
+version: '0.1'
+name: debian_bullseye_provisioning
+global_timeout: 1800
+tasks:
+  - name: os-installation
+	worker: '{{.device_1}}'
+	volumes:
+	  - '/dev:/dev'
+	  - '/dev/console:/dev/console'
+	  - '/lib/firmware:/lib/firmware:ro'
+	actions:
+	  actions:
+		- name: disk-wipe-partition
+		  image: 'quay.io/tinkerbell-actions/rootio:v1.0.0'
+		  timeout: 90
+		  command:
+			- partition
+		  environment:
+			MIRROR_HOST: 192.168.1.2
+		- name: format
+		  image: 'quay.io/tinkerbell-actions/rootio:v1.0.0'
+		  timeout: 90
+		  command:
+			- format
+		  environment:
+			MIRROR_HOST: 192.168.1.2
+		- name: expand debian filesystem to root
+		  image: 'quay.io/tinkerbell-actions/archive2disk:v1.0.0'
+		  timeout: 90
+		  environment:
+			ARCHIVE_URL: 'http://192.168.1.2/centos_rootfs.tar.gz'
+			ARCHIVE_TYPE: targz
+			DEST_DISK: /dev/sda3
+			FS_TYPE: ext4
+			DEST_PATH: /
+		- name: Install Grub Bootloader
+		  image: 'quay.io/tinkerbell-actions/cexec:v1.0.0'
+		  timeout: 90
+		  environment:
+			BLOCK_DEVICE: /dev/sda3
+			FS_TYPE: ext4
+			CHROOT: 'y'
+			CMD_LINE: grub-install --root-directory=/boot /dev/sda
+		- name: kexec-debian
+		  image: 'quay.io/tinkerbell-actions/kexec:v1.0.0'
+		  timeout: 600
+		  environment:
+			BLOCK_DEVICE: /dev/sda3
+			FS_TYPE: ext4
  ```
  
  
@@ -216,61 +219,66 @@ Our workflow will make use of the actions from the artifact hub:
   - [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned Operating System 
  
   ```
-version: "0.1"
+version: '0.1'
 name: debian_bullseye_provisioning
 global_timeout: 1800
 tasks:
-- name: "os-installation"
-  worker: "{{.device_1}}"
-  volumes:
-	- /dev:/dev
-	- /dev/console:/dev/console
-	- /lib/firmware:/lib/firmware:ro
-  actions:
+  - name: os-installation
+	worker: '{{.device_1}}'
+	volumes:
+	  - '/dev:/dev'
+	  - '/dev/console:/dev/console'
+	  - '/lib/firmware:/lib/firmware:ro'
 	actions:
-	- name: "disk-wipe-partition"
-	  image: quay.io/tinkerbell-actions/rootio:v1.0.0
-	  timeout: 90
-	  command: ["partition"]
-	  environment:
-		  MIRROR_HOST: 192.168.1.2
-	- name: "format"
-	  image: quay.io/tinkerbell-actions/rootio:v1.0.0
-	  timeout: 90
-	  command: ["format"]
-	  environment:
-		  MIRROR_HOST: 192.168.1.2
-	- name: "expand debian filesystem to root"
-	  image: quay.io/tinkerbell-actions/archive2disk:v1.0.0
-	  timeout: 90
-	  environment:
-		  ARCHIVE_URL: http://192.168.1.2/rhel_rootfs.tar.gz
-		  ARCHIVE_TYPE: targz
-		  DEST_DISK: /dev/sda3
-		  FS_TYPE: ext4
-		  DEST_PATH: /
-    - name: "Install EPEL repo"
-	  image: quay.io/tinkerbell-actions/cexec:v1.0.0
-	  timeout: 90
-	  environment:
-		  BLOCK_DEVICE: /dev/sda3
-		  FS_TYPE: ext4
-		  CHROOT: y
-		  CMD_LINE: "curl -O https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm; yum install ./epel-release-latest-7.noarch.rpm; yum install grub2"
-	- name: "Install Grub Bootloader"
-	  image: quay.io/tinkerbell-actions/cexec:v1.0.0
-	  timeout: 90
-	  environment:
-          BLOCK_DEVICE: /dev/sda3
-		  FS_TYPE: ext4
-		  CHROOT: y
-		  CMD_LINE: "grub-install --root-directory=/boot /dev/sda"
-	- name: "kexec-debian"
-	  image: quay.io/tinkerbell-actions/kexec:v1.0.0
-	  timeout: 600
-	  environment:
-		BLOCK_DEVICE: /dev/sda3
-		FS_TYPE: ext4
+	  actions:
+		- name: disk-wipe-partition
+		  image: 'quay.io/tinkerbell-actions/rootio:v1.0.0'
+		  timeout: 90
+		  command:
+			- partition
+		  environment:
+			MIRROR_HOST: 192.168.1.2
+		- name: format
+		  image: 'quay.io/tinkerbell-actions/rootio:v1.0.0'
+		  timeout: 90
+		  command:
+			- format
+		  environment:
+			MIRROR_HOST: 192.168.1.2
+		- name: expand debian filesystem to root
+		  image: 'quay.io/tinkerbell-actions/archive2disk:v1.0.0'
+		  timeout: 90
+		  environment:
+			ARCHIVE_URL: 'http://192.168.1.2/rhel_rootfs.tar.gz'
+			ARCHIVE_TYPE: targz
+			DEST_DISK: /dev/sda3
+			FS_TYPE: ext4
+			DEST_PATH: /
+		- name: Install EPEL repo
+		  image: 'quay.io/tinkerbell-actions/cexec:v1.0.0'
+		  timeout: 90
+		  environment:
+			BLOCK_DEVICE: /dev/sda3
+			FS_TYPE: ext4
+			CHROOT: 'y'
+			CMD_LINE: >-
+			  curl -O
+			  https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm;
+			  yum install ./epel-release-latest-7.noarch.rpm; yum install grub2
+		- name: Install Grub Bootloader
+		  image: 'quay.io/tinkerbell-actions/cexec:v1.0.0'
+		  timeout: 90
+		  environment:
+			BLOCK_DEVICE: /dev/sda3
+			FS_TYPE: ext4
+			CHROOT: 'y'
+			CMD_LINE: grub-install --root-directory=/boot /dev/sda
+		- name: kexec-debian
+		  image: 'quay.io/tinkerbell-actions/kexec:v1.0.0'
+		  timeout: 600
+		  environment:
+			BLOCK_DEVICE: /dev/sda3
+			FS_TYPE: ext4
   ```
  
  
