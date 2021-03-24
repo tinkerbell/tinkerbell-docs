@@ -3,13 +3,13 @@ title: Example - Windows
 date: 2021-03-24
 ---
 
-# Deploying 
+# Deploying Windows
 
 This is a guide which walks through the process of deploying various Windows versions from an operating system image. 
 
-## Generating Images
+## Generating the Images
 
-The [tinkerbell](https://tinkerbell.org) contains a project called [crocodile](https://github.com/tinkerbell/crocodile) that largely automates the entire process of image creation. 
+The [tinkerbell](https://tinkerbell.org) GitHub organization contains a project called [crocodile](https://github.com/tinkerbell/crocodile) that largely automates the entire process of image creation. 
 
 The pre-requisites for using the `crocodile` project are:
 
@@ -25,17 +25,29 @@ It currently can build the following versions of Windows Operating System images
 
 ### Downloading `crocodile`
 
-`git clone https://github.com/tinkerbell/crocodile`
+First, clone the repo:
 
-Move to the builder directory `cd crocodile`
+```
+git clone https://github.com/tinkerbell/crocodile
+```
 
-### Build the image builder
+Then, move to the builder directory:
+
+```
+cd crocodile
+```
+
+### Building the Image Builder
 
 The `docker build` command will create a local container called `croc:latest` that has everything required to build our Operating System images.
 
-`docker build -t croc .`
+```
+docker build -t croc .
+```
 
-### Create an image
+### Creating an Image
+
+Run `docker run`.
 
 ```
 docker run -it --rm \
@@ -46,7 +58,7 @@ docker run -it --rm \
 croc:latest
 ```
 
-The above command will create folders `packer_cache` and `images` in the current folder, these will be used for assets and the built OS images respectively. 
+The command will create the a `packer_cache` folder and an `images` folder in the current folder. These folders will be used for assets and the built OS images, respectively. 
 
 ```
                           .--.  .--.
@@ -79,13 +91,15 @@ Select "quit"  when you've finished building Operating Systems
 5) quit
 ```
 
-Select the Operating System you'd like to build and the entire process will begin, including the downloading of the required ISO's and configuring of the Operating Systems. 
+Select the Operating System you'd like to build and the entire process will begin, including downloading of the required ISO's and configuring of the Operating Systems. 
 
-Upon completion the newly built Windows Operating Systems will exist in the `images` folder.
+When it finishes, the newly built Windows Operating Systems will exist in the `images` folder.
 
 ## Creating the Template
 
-### Create a `reboot` action `Dockerfile`
+First, the template will need a custom action to reboot the system into the new Operating System after it's written to the device.
+
+### Creating a `reboot` action `Dockerfile`
 
 In a different folder create a `Dockerfile` with the following contents:
 
@@ -94,9 +108,11 @@ FROM busybox
 ENTRYPOINT [ "touch", "/worker/reboot" ]
 ```
 
-We can build our new action with the following command
+Then, build the new action and push it to the local registry.
 
-`docker build -t local-registry/reboot:1.0 .`
+```
+docker build -t local-registry/reboot:1.0 .
+```
 
 Once the new action is pushed to the local registry, it can be used as an action in a template.
 
@@ -109,12 +125,12 @@ actions:
 	- /worker:/worker
 ```
 
-### Our example Workflow
+### The Example Template
 
 The template uses actions from the [artifact.io](https://artifact.io) hub.
 
 - [image2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) - to write the image to a block device.
-- Our custom action that will cause a system reboot into our new Operating System
+- Our custom action that will cause a system reboot into our new Operating System.
 
 ```
 version: "0.1"
