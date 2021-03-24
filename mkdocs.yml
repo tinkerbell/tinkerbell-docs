@@ -42,6 +42,7 @@ nav:
     - Example - Deploying Debian: deploying-operating-systems/examples-debian.md
     - Example - Deploying FreeBSD: deploying-operating-systems/examples-freebsd.md
     - Example - Deploying Red Hat Enterprise Linux and CentOS: deploying-operating-systems/examples-rhel-centos.md
+    - Example - Deploying Windows: deploying-operating-systems/examples-win.md
     
   - Troubleshooting: troubleshooting.md
 

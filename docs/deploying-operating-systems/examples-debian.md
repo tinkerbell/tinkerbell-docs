@@ -203,7 +203,7 @@ The template uses actions from the [artifact.io](https://artifact.io) hub.
 - Our custom action that will invoke the Bootstrap program.
 - [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
 
-As well as the `debian:bootstratp` action from the local registry.
+As well as the `debian:bootstrap` action from the local registry.
 
 ```
 version: "0.1"
