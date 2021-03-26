@@ -1,6 +1,6 @@
 ---
 title: On Bare Metal with Docker
-date: 2021-01-27
+date: 2021-03-25
 ---
 
 # On Bare Metal with Docker
@@ -15,7 +15,7 @@ More than a documentation, this is an example of installing Tinkerbell in a home
 
 This page is inspired by [Aaron](https://geekgonecrazy.com/) a community member who wrote ["Tinkerbell or iPXE boot on OVH"](https://geekgonecrazy.com/2020/09/07/tinkerbell-or-ipxe-boot-on-ovh/).
 
-In this project we will use [Sandbox](https://github.com/tinkerbell/sandbox) and everything it depends on. Pick a server, a laptop, or as in this example, an Intel NUC. 
+In this project we will use [Sandbox](https://github.com/tinkerbell/sandbox) and everything it depends on. Pick a server, a laptop, or as in this example, an Intel NUC.
 
 This guide also provides a little more of an explanation with very little automation for what happens under the hood in guides like:
 
@@ -31,12 +31,24 @@ This guide assumes:
 
 ## Getting Tinkerbell
 
-To get Tinkerbell, clone the `sandbox` repository.
+To get Tinkerbell, clone the `sandbox` repository or download the latest
+release. At time of writing it is v0.5.0.
+
+### git clone
 
 ```
-wget https://github.com/tinkerbell/sandbox/archive/v0.4.0.tar.gz
-tar xf v0.4.0.tar.gz
-cd sandbox-0.4.0
+git clone https://github.com/tinkerbell/sandbox.git
+```
+
+### archive download
+
+```
+ORG_NAME=tinkerbell
+REPO_NAME=sandbox
+LATEST_VERSION=$(curl -s https://api.github.com/repos/${ORG_NAME}/${REPO_NAME}/releases/latest | grep "tag_name" | cut -d'v' -f2 | cut -d'"' -f1)
+curl -L -o ${REPO_NAME}.tar.gz https://github.com/${ORG_NAME}/${REPO_NAME}/archive/v${LATEST_VERSION}.tar.gz
+tar xf sandbox.tar.gz
+cd sandbox-<version> # something like sandbox-0.5.0
 ```
 
 In this case we are using the latest sandbox release that today is [v0.4.0](https://github.com/tinkerbell/sandbox/release/v0.4.0). It is important to checkout a specific version and have a look at the changelog when you update. Tinkerbell is under development, but we guarantee as best as we can that tags are good and working end-to-end.
@@ -46,7 +58,7 @@ In this case we are using the latest sandbox release that today is [v0.4.0](http
 The sandbox sets up Tinkerbell using the `setup.sh` script. `setup.sh` relies on a `.env` file that can be generated running the command:
 
 ```
-./generate-envrc.sh <network-interface> > sandbox/.env
+./generate-envrc.sh <network-interface> > .env
 ```
 
 In this case, the `network-interface` is `eth1`. The output of this command will be stored inside `./.env`. It will look like this:
@@ -144,7 +156,7 @@ The `setup.sh` script's main responsibility is to setup the network. It creates 
 
 > You can use the webroot for your own purposes, it is part of `gitignore` and other than OSIE you can serve other operating systems that you want to install in your other servers, or even public ssh keys (whatever you need a link for).
 
-Now to execute `setup.sh`. 
+Now to execute `setup.sh`.
 
 Load the configuration file:
 
