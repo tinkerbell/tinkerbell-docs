@@ -11,6 +11,7 @@ nav:
   - Services:
     - Boots: services/boots.md
     - Hegel: services/hegel.md
+    - Image Registry: services/registry.md
     - OSIE: services/osie.md
     - Tink Server: services/tink-server.md
     - Tink Worker: services/tink-worker.md
