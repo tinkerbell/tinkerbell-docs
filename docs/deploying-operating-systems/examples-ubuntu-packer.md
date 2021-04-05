@@ -24,7 +24,7 @@ Below are the config and preseed files for creating a minimalistic Ubuntu 20.04 
 
 In config file we have used `virtualbox-iso` builder type and `Compress`post-processor`type, to generate a`vmdk`and`tar`file. The preseed file helps you on automating the deployment of the OS and is placed inside the`http`directory. This while is referenced when the deployment of the OS is in the process. The location of the reference is mentioned inside the`boot_command`list of the`builder`section inside the`config.json` file. Both files are reference files, If you wish to modify something, you can make the changes accordingly. Though, the steps to generate the image will remain the same.
 
-- `congif.json`
+- `config.json`
 
   ```
   {
