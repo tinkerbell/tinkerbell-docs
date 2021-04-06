@@ -15,17 +15,19 @@ Interested in contributing? Check out our [Contributors' Page](https://tinkerbel
 
 ## What's Powering Tinkerbell?
 
-The Tinkerbell stack consists of five microservices, and a grpc API: 
+The Tinkerbell stack consists of several microservices, and a grpc API: 
 
-- [**Tink**](/services/tink) - Tink is the Tinkerbell server and CLI. It communicates over gRPC, and is responsible for processing workflows. The CLI is used to create workflows and their building blocks, templates and hardware data.
+- [**Tink**] - Tink is the short-hand name for the `tink-server`, `tink-worker` and `tink-cli`. `tink-worker` and `tink-server` communicate over gRPC, and are responsible for processing workflows. The CLI is the user-interactive piece for creating workflows and their building blocks, templates and hardware data.
 
 - [**Boots**](/services/boots) - Boots is Tinkerbell's DHCP server. It handles DHCP requests, hands out IPs, and serves up [iPXE](https://ipxe.org/). It uses the Tinkerbell client to pull and push hardware data. It only responds to a predefined set of MAC addresses so it can be deployed in an existing network without interfering with existing DHCP infrastructure.
 
 - [**Hegel**](/services/hegel) - Hegel is the metadata service used by Tinkerbell and OSIE. It collects data from both and transforms it into a JSON format to be consumed as metadata.
 
-- [**OSIE**](/services/osie) - OSIE is an in-memory installation environment for bare metal. It installs operating systems and handles deprovisioning.
+- [**OSIE**](/services/osie) - OSIE is Tinkerbell's default an in-memory installation environment for bare metal. It installs operating systems and handles deprovisioning.
 
-- [**PBnJ**](https://github.com/tinkerbell/pbnj) - PBnJ is a microservice that can communicate with baseboard management controllers (BMCs) to control power and boot settings.
+- [**Hook**](https://github.com/tinkerbell/hook#hook) - An alternative to OSIE, it's the next iteration of the in-memory installation environment to handle operating system installation and deprovisioning.
+
+- [**PBnJ**](https://github.com/tinkerbell/pbnj) - PBnJ is an optional microservice that can communicate with baseboard management controllers (BMCs) to control power and boot settings.
 
 In addition to the microservices, there are three pieces of infrastructure:
 
