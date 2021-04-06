@@ -17,7 +17,7 @@ Interested in contributing? Check out our [Contributors' Page](https://tinkerbel
 
 The Tinkerbell stack consists of several microservices, and a grpc API: 
 
-- [**Tink**] - Tink is the short-hand name for the [`tink-server`](/services/tink-server), [`tink-worker`](/services/tink-worker), and [`tink-cli`](/services/tink-cli). `tink-worker` and `tink-server` communicate over gRPC, and are responsible for processing workflows. The CLI is the user-interactive piece for creating workflows and their building blocks, templates and hardware data.
+- [**Tink**](https://github.com/tinkerbell/tink) - Tink is the short-hand name for the [`tink-server`](/services/tink-server), [`tink-worker`](/services/tink-worker), and [`tink-cli`](/services/tink-cli). `tink-worker` and `tink-server` communicate over gRPC, and are responsible for processing workflows. The CLI is the user-interactive piece for creating workflows and their building blocks, templates and hardware data.
 
 - [**Boots**](/services/boots) - Boots is Tinkerbell's DHCP server. It handles DHCP requests, hands out IPs, and serves up [iPXE](https://ipxe.org/). It uses the Tinkerbell client to pull and push hardware data. It only responds to a predefined set of MAC addresses so it can be deployed in an existing network without interfering with existing DHCP infrastructure.
 
