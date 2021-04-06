@@ -184,7 +184,7 @@ Create the template and push it to the database with the `tink template create` 
 
 ```
 docker exec -i deploy_tink-cli_1 tink template create \
-  --name hello-world < ./hello-world.yml
+  < ./hello-world.yml
 ```
 
 The command returns a Template ID, and if you are watching the `tink-server` logs you will see:
