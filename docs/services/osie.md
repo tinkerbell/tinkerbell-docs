@@ -33,6 +33,20 @@ OSIE gets compiled to a initial ramdisk and a kernel. The initial ramdisk contai
 
 Currently, the OSIE of today is a bit "too fat"! We are in the process of moving a lot of the customization out of OSIE and into workflows.
 
+## Hook, the OSIE Replacement
+
+The Tinkerbell architecture allows for flexibility in terms of the operating system installation environment you can use. It provides OSIE for simplicity, it is possible to develop alternatives.
+
+One possible alternative is Hook, an installation environment built using [LinuxKit](https://github.com/linuxkit/linuxkit). The `tinkerbell/hook` project aims to provide an "in-place" swappable set of files (`kernel`/`initramfs`) that can be used to replace the [OSIE](https://github.com/tinkerbell/osie) environment, which originally came from Equinix Metal. The key aims of this new project are:
+
+- Immutable output
+- Batteries included (but swappable if needed)
+- Ease of build (Subsequent builds of hook are ~47 seconds)
+- Lean and simple design
+- Clean base to build upon
+
+More information and on-going development is in the [`tinkerbell/hook`](https://github.com/tinkerbell/hook) GitHub repository.
+
 ## Write Your Own
 
 As we mentioned you can run your own OSIE. And the reasons can be:
@@ -42,9 +56,7 @@ As we mentioned you can run your own OSIE. And the reasons can be:
 3. You want more visibility and you want to run a monitoring agent when the hardware does netbooting.
 4. Many more...
 
-The Equinix Metal DevRel team wrote [tinkie](https://github.com/gianarb/tinkie), another installation environment built using [LinuxKit](https://github.com/linuxkit/linuxkit). The way it is built and the code is open source. We decided to use LinuxKit because it is an open source builder for a Linux OS. It is part of the Linux Foundation and it is used by Docker Inc. to ship "Docker for Mac". It provides a layer of abstraction between a distro and how it gets built, decreasing the amount of scripting involved. We hope it makes the process clear and easy to figure out.
-
-Along the way of writing an operating system installation environment those are the requirements:
+If you are writing your own operating system installation environment, there are a few requirements:
 
 * It has to run **Tink Worker**. [`tink-worker`](/services/tink) is a Golang application maintained by the Tinkerbell community, you can find it as part of the [tink](https://github.com/tinkerbell/tink) repository, we ship and run it as Docker container. Its responsibility is to execute a workflow. Without it the OS will netboot, but won't do anything more.
 * A [workflow](../../workflows/working-with-workflows) is made of actions, and each action runs in its own **Docker** container. We decided to leverage containers because they are well known as an execution and distribution layer. Developers can write their own actions, and the only thing they have to know is how to build and push a Docker container.
