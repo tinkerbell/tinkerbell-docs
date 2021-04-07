@@ -40,6 +40,7 @@ nav:
     - The Basics: deploying-operating-systems/the-basics.md
     - The Deployment: deploying-operating-systems/the-deployment.md
     - Example - Deploying Ubuntu: deploying-operating-systems/examples-ubuntu.md
+    - Example - Deploying Ubuntu from Packer Machine Image: deploying-operating-systems/examples-ubuntu-packer.md
     - Example - Deploying Debian: deploying-operating-systems/examples-debian.md
     - Example - Deploying FreeBSD: deploying-operating-systems/examples-freebsd.md
     - Example - Deploying Red Hat Enterprise Linux and CentOS: deploying-operating-systems/examples-rhel-centos.md
