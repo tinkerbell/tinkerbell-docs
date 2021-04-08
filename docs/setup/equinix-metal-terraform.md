@@ -245,7 +245,7 @@ EOF
 Create the template and push it to the `tink-server` with the `tink template create` command.
 
 ```
-docker exec -i deploy_tink-cli_1 tink template create --name hello-world < ./hello-world.yml
+docker exec -i deploy_tink-cli_1 tink template create < ./hello-world.yml
 ```
 
 {{% notice note %}}
