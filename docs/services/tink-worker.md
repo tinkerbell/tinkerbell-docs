@@ -13,7 +13,7 @@ The `tink-worker` implementation we ship uses Docker as container runtime engine
 
 ## How `tink-worker` Starts
 
-The way `tink-worker` starts does not follow any particular rule and it is left to the operating system installation environment. Here an example from [OSIE](https://github.com/tinkebell/osie).
+The way `tink-worker` starts does not follow any particular rule and it is left to the operating system installation environment. Here an example from [OSIE](https://github.com/tinkerbell/osie).
 
 As part of the [OSIE init](https://github.com/tinkerbell/osie/blob/7dc902956757e0321369ebed10eb66d8e04c8e43/apps/workflow-helper.sh#L68) script the `tink-worker` container gets executed:
 
