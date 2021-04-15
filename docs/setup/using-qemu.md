@@ -169,13 +169,18 @@ This installation method also requires Docker and [`docker-compose`](https://doc
 10. Start Tinkerbell.
 
     ```
-    # Add Nginx address to Tinkerbell
-    sudo ip addr add 192.168.1.2/24 dev tinkerbell
     cd deploy
     source ../.env; docker-compose up -d
     ```
 
     At this point we now have a server with available resource, we can create virtual machines and Tinkerbell is listening on the correct internal network!
+
+    Resources inside the Tinkrebell will be reachable as per the below details
+
+    ```
+    - webroot: TINKERBELL_IP:8080
+    - webroot/misc/osie/current: TINKERBELL_IP:80
+    ```
 
 ## Create a workflow (Debian example)
 

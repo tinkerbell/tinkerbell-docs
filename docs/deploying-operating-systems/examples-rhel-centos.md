@@ -92,7 +92,7 @@ tasks:
 		environment:
 		  DEST_DISK: /dev/sda
 		  IMG_URL: >-
-			http://192.168.1.2/CentOS-8-GenericCloud-8.3.2011-20201204.2.x86_64.raw.gz
+			http://192.168.1.1:8080/CentOS-8-GenericCloud-8.3.2011-20201204.2.x86_64.raw.gz
 		  COMPRESSED: true
 	  - name: kexec
 		image: 'quay.io/tinkerbell-actions/kexec:v1.0.0'
@@ -167,7 +167,7 @@ tasks:
 		  image: 'quay.io/tinkerbell-actions/archive2disk:v1.0.0'
 		  timeout: 90
 		  environment:
-			ARCHIVE_URL: 'http://192.168.1.2/centos_rootfs.tar.gz'
+			ARCHIVE_URL: 'http://192.168.1.1:8080/centos_rootfs.tar.gz'
 			ARCHIVE_TYPE: targz
 			DEST_DISK: /dev/sda3
 			FS_TYPE: ext4
@@ -253,7 +253,7 @@ tasks:
 		  image: 'quay.io/tinkerbell-actions/archive2disk:v1.0.0'
 		  timeout: 90
 		  environment:
-			ARCHIVE_URL: 'http://192.168.1.2/rhel_rootfs.tar.gz'
+			ARCHIVE_URL: 'http://192.168.1.1:8080/rhel_rootfs.tar.gz'
 			ARCHIVE_TYPE: targz
 			DEST_DISK: /dev/sda3
 			FS_TYPE: ext4
