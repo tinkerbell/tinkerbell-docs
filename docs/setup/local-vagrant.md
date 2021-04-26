@@ -92,7 +92,7 @@ deploy_tink-server_1   tink-server                      Up (healthy)   0.0.0.0:4
 At this point, you might want to open a ssh connection to show logs from the Provisioner, because it will show what the `tink-server` is doing through the rest of the setup. Open a new terminal, ssh in to the provisioner as you did before, and run `docker-compose logs` to tail logs.
 
 ```
-cd tink/deploy/vagrant
+cd sandbox/deploy/vagrant
 vagrant ssh provisioner
 cd /vagrant && source .env && cd deploy
 docker-compose logs -f tink-server boots nginx
@@ -219,7 +219,7 @@ tink-server_1  | {"level":"info","ts":1592936829.6773047,"caller":"grpc-server/w
 You can now bring up the Worker and execute the Workflow. In a new terminal window, move into the `tink/deploy/vagrant` directory, and bring up the Worker with Vagrant, similar to bringing up the Provisioner.
 
 ```
-cd tink/deploy/vagrant
+cd sandbox/deploy/vagrant
 vagrant up worker
 ```
 

@@ -72,7 +72,7 @@ tasks:
 		timeout: 600
 		environment:
 		  DEST_DISK: /dev/sda
-		  IMG_URL: "http://192.168.1.2/debian-10-openstack-amd64.raw.gz"
+		  IMG_URL: "http://192.168.1.1:8080/debian-10-openstack-amd64.raw.gz"
 		  COMPRESSED: true
 	  - name: "kexec debian"
 		image: quay.io/tinkerbell-actions/kexec:v1.0.0
@@ -145,7 +145,7 @@ tasks:
 		image: quay.io/tinkerbell-actions/archive2disk:v1.0.0
 		timeout: 90
 		environment:
-			ARCHIVE_URL: http://192.168.1.2/debian_rootfs.tar.gz
+			ARCHIVE_URL: http://192.168.1.1:8080/debian_rootfs.tar.gz
 			ARCHIVE_TYPE: targz
 			DEST_DISK: /dev/sda3
 			FS_TYPE: ext4

@@ -149,7 +149,7 @@ tasks:
 		timeout: 600
 		environment:
 		  DEST_DISK: /dev/sda
-		  IMG_URL: "http://192.168.1.2/tink-windows-2016.raw.gz"
+		  IMG_URL: "http://192.168.1.1:8080/tink-windows-2016.raw.gz"
 		  COMPRESSED: true
       - name: "reboot into Windows"
         image: local-registry/reboot:1.0
