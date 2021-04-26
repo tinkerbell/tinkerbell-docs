@@ -109,7 +109,7 @@ Sometimes the `/root/tink` directory is only partially copied onto the the Provi
 SSH into the Provisioner and you will find yourself in a copy of the `tink` repository:
 
 ```
-ssh -t root@$(terraform output provisioner_ip) "cd /root/tink && bash"
+ssh -t root@$(terraform output -raw provisioner_ip) "cd /root/tink && bash"
 ```
 
 You have to define and set Tinkerbell's environment. Use the `generate-envrc.sh` script to generate the `.env` file. Using and setting `.env` creates an idempotent workflow and you can use it to configure the `setup.sh` script. For example changing the [OSIE](/services/osie) version.
@@ -171,6 +171,16 @@ docker tag hello-world 192.168.1.1/hello-world
 docker push 192.168.1.1/hello-world
 ```
 
+## Convenience aliases
+
+To make sure that your environment is correct on subsequent logins and to make it easier to run tink commands
+create a `.bash_aliases` file:
+
+```
+echo "source ~/tink/.env ; alias tink='docker exec -i deploy_tink-cli_1 tink'" > ~/.bash_aliases
+source ~/.bash_aliases
+```
+
 ## Registering the Worker
 
 As part of the `terraform apply` output you get the MAC address for the worker and it generates a file that contains the JSON describing it. Now time to register it with Tinkerbell.
@@ -218,7 +228,7 @@ The mac address is the same we get from the Terraform output
 Now we can push the hardware data to `tink-server`:
 
 ```
-docker exec -i deploy_tink-cli_1 tink hardware push < /root/tink/deploy/hardware-data-0.json
+tink hardware push < /root/tink/deploy/hardware-data-0.json
 ```
 
 A note on the Worker at this point. Ideally the worker should be kept from booting until the Provisioner is ready to serve it OSIE, but on Equinix Metal that probably doesn't happen. Now that the Worker's hardware data is registered with Tinkerbell, you should manually reboot the worker through the [Equinix Metal CLI](https://github.com/packethost/packet-cli/blob/master/docs/packet_device_reboot.md), [API](https://metal.equinix.com/developers/api/devices/#devices-performAction), or Equinix Metal console. Remember to use the SOS console to check what the Worker is doing.
@@ -244,16 +254,12 @@ EOF
 
 Create the template and push it to the `tink-server` with the `tink template create` command.
 
-```
-docker exec -i deploy_tink-cli_1 tink template create < ./hello-world.yml
-```
-
 {{% notice note %}}
 TIP: export the the template ID as a bash variable for future use.
 {{% /notice %}}
 
 ```
-export TEMPLATE_ID=75ab8483-6f42-42a9-a80d-a9f6196130df
+export TEMPLATE_ID=$(tink template create < install.yaml | tee /dev/stderr | sed 's|.*: ||')
 ```
 
 ## Creating a Workflow
@@ -266,8 +272,8 @@ The next step is to combine both the hardware data and the template to create a 
 Combine these two pieces of information and create the workflow with the `tink workflow create` command.
 
 ```
-docker exec -i deploy_tink-cli_1 tink workflow create \
-    -t $TEMPLATE_ID \
+tink workflow create \
+    -t ${TEMPLATE_ID:?} \
     -r '{"device_1":'$(jq .network.interfaces[0].dhcp.mac hardware-data-0.json)'}'
 ```
 
@@ -296,7 +302,7 @@ ssh $(terraform output -json worker_sos | jq -r '.[0]')
 You can also use the CLI from the provisioner to validate if the workflow completed correctly using the `tink workflow events` command.
 
 ```
-docker exec -i deploy_tink-cli_1 tink workflow events $WORKFLOW_ID
+tink workflow events $WORKFLOW_ID
 ```
 
 The response will look something like:
@@ -313,6 +319,88 @@ The response will look something like:
 {{% notice note %}}
 Note that an event can take ~5 minutes to show up.
 {{% /notice %}}
+
+## Deploying Ubuntu with Crocodile and Hook
+
+Back on the machine where you ran terraform you can build and deploy
+Hook, and a disk image of Ubuntu:
+
+```
+export PROV=$(terraform output -raw provisioner_ip)
+cd ../../..
+export TOP=$(pwd)
+git clone https://github.com/tinkerbell/hook
+git clone https://github.com/tinkerbell/crocodile
+
+cd ${TOP:?}/hook
+nix-shell
+make image-amd64
+ln -s hook-x86_64-kernel out/vmlinuz-x86_64
+ln -s hook-x86_64-initrd.img out/initramfs-x86_64
+
+cd ${TOP:?}/crocodile
+docker build -t croc .
+echo -e "6\n\n" | docker run -i --rm -v $PWD/packer_cache:/packer/packer_cache -v $PWD/images:/var/tmp/images --net=host --device=/dev/kvm croc:latest
+
+scp -r ${TOP:?}/hook/out/ root@${PROV:?}:tink/deploy/state/webroot/misc/osie/hook
+scp ${TOP:?}/crocodile/images/tink-ubuntu-2004.raw.gz root@${PROV:?}:tink/deploy/state/webroot/
+```
+
+Create a workflow for deploying Ubuntu to your bare metal worker
+```
+cat > focal.yaml <<EOF
+version: "0.1"
+name: Ubuntu_Focal
+global_timeout: 1800
+tasks:
+  - name: "os-installation"
+    worker: "{{.device_1}}"
+    volumes:
+      - /dev:/dev
+      - /dev/console:/dev/console
+      - /lib/firmware:/lib/firmware:ro
+    actions:
+      - name: "stream-ubuntu-image"
+        image: quay.io/tinkerbell-actions/image2disk:v1.0.0
+        timeout: 600
+        environment:
+          DEST_DISK: /dev/sda
+          IMG_URL: "http://192.168.1.1:8080/tink-ubuntu-2004.raw.gz"
+          COMPRESSED: true
+      - name: "fix-serial"
+        image: quay.io/tinkerbell-actions/cexec:v1.0.0
+        timeout: 90
+        pid: host
+        environment:
+          BLOCK_DEVICE: /dev/sda1
+          FS_TYPE: ext4
+          CHROOT: y
+          DEFAULT_INTERPRETER: "/bin/sh -c"
+          CMD_LINE: "sed -e 's|ttyS0|ttyS1,115200|g' -i /etc/default/grub.d/50-cloudimg-settings.cfg ; update-grub"
+      - name: "kexec-ubuntu"
+        image: quay.io/tinkerbell-actions/kexec:v1.0.0
+        timeout: 90
+        pid: host
+        environment:
+          BLOCK_DEVICE: /dev/sda1
+          FS_TYPE: ext4
+EOF
+
+scp focal.yaml root@${PROV:?}:
+ssh root@${PROV:?}
+```
+
+On the provisioner machine, switch to Hook, import the required action images, create the template, and create a workflow
+
+```
+mv /root/tink/deploy/state/webroot/misc/osie/{current,osie}
+ln -s hook /root/tink/deploy/state/webroot/misc/osie/current
+grep "image:" focal.yaml | sed 's|.*: ||' | while read image; do docker pull $image; docker tag $image 192.168.1.1/$image; docker push 192.168.1.1/$image; done;
+export TEMPLATE_ID=$(tink template create < focal.yaml | tee /dev/stderr | sed 's|.*: ||')
+tink workflow create \
+    -t ${TEMPLATE_ID:?} \
+    -r '{"device_1":'$(jq .network.interfaces[0].dhcp.mac /root/tink/deploy/hardware-data-0.json)'}'
+```
 
 ## Cleanup
 
