@@ -95,7 +95,7 @@ tasks:
 		timeout: 600
 		environment:
 		  DEST_DISK: /dev/sda
-		  IMG_URL: "http://192.168.1.2/FreeBSD-12.2-RELEASE-amd64.raw.gz"
+		  IMG_URL: "http://192.168.1.1:8080/FreeBSD-12.2-RELEASE-amd64.raw.gz"
 		  COMPRESSED: true
       - name: "kexec FreeBSD"
 	    image: quay.io/tinkerbell-actions/kexec:v1.0.0
