@@ -9,7 +9,7 @@ Everything you need to know about Tinkerbell and its major component microservic
 ​
 ## What is Tinkerbell?
 
-Tinkerbell is an open-source, bare metal provisioning engine, built and maintained by the team at Equinix Metal.
+Tinkerbell is an open-source, bare metal provisioning engine, built by the team at Equinix Metal.
 
 Interested in contributing? Check out our [Contributors' Page](https://tinkerbell.org/community/contributors/).
 
