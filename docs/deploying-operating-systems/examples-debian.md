@@ -67,7 +67,7 @@ tasks:
 	  - /dev/console:/dev/console
 	  - /lib/firmware:/lib/firmware:ro
 	actions:
-	  - name: "stream debian image"
+	  - name: "stream-debian-image"
 		image: quay.io/tinkerbell-actions/image2disk:v1.0.0
 		timeout: 600
 		environment:
@@ -82,6 +82,10 @@ tasks:
 		  BLOCK_DEVICE: /dev/sda1
 			FS_TYPE: ext4
 ```
+
+## Important
+
+Don't forget to pull, tag and push quay.io/tinkerbell-actions/image2disk:v1.0.0 prior to using it.
 
 ## Using a Docker Image
 
