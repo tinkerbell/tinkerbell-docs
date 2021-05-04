@@ -72,6 +72,8 @@ The template uses actions from the [artifact.io](https://artifact.io) hub.
 - [image2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) - to write the OS image to a block device.
 - [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
 
+> Important: Don't forget to pull, tag and push `quay.io/tinkerbell-actions/image2disk:v1.0.0` prior to using it.
+
 The example template uses the CentOS images, but you can modify it for other the other distributions such as RHEL or Fedora CoreOS.
 
 ```
@@ -86,7 +88,7 @@ tasks:
 	  - '/dev/console:/dev/console'
 	  - '/lib/firmware:/lib/firmware:ro'
 	actions:
-	  - name: stream image
+	  - name: stream-image
 		image: 'quay.io/tinkerbell-actions/image2disk:v1.0.0'
 		timeout: 600
 		environment:
@@ -163,7 +165,7 @@ tasks:
 			- format
 		  environment:
 			MIRROR_HOST: 192.168.1.2
-		- name: expand debian filesystem to root
+		- name: expand-filesystem-to-root
 		  image: 'quay.io/tinkerbell-actions/archive2disk:v1.0.0'
 		  timeout: 90
 		  environment:
@@ -172,7 +174,7 @@ tasks:
 			DEST_DISK: /dev/sda3
 			FS_TYPE: ext4
 			DEST_PATH: /
-		- name: Install Grub Bootloader
+		- name: install-grub-bootloader
 		  image: 'quay.io/tinkerbell-actions/cexec:v1.0.0'
 		  timeout: 90
 		  environment:
@@ -180,7 +182,7 @@ tasks:
 			FS_TYPE: ext4
 			CHROOT: 'y'
 			CMD_LINE: grub-install --root-directory=/boot /dev/sda
-		- name: kexec-debian
+		- name: kexec
 		  image: 'quay.io/tinkerbell-actions/kexec:v1.0.0'
 		  timeout: 600
 		  environment:
@@ -249,7 +251,7 @@ tasks:
 			- format
 		  environment:
 			MIRROR_HOST: 192.168.1.2
-		- name: expand debian filesystem to root
+		- name: expand-filesystem-to-root
 		  image: 'quay.io/tinkerbell-actions/archive2disk:v1.0.0'
 		  timeout: 90
 		  environment:
@@ -258,7 +260,7 @@ tasks:
 			DEST_DISK: /dev/sda3
 			FS_TYPE: ext4
 			DEST_PATH: /
-		- name: Install EPEL repo
+		- name: install-EPEL-repo
 		  image: 'quay.io/tinkerbell-actions/cexec:v1.0.0'
 		  timeout: 90
 		  environment:
@@ -269,7 +271,7 @@ tasks:
 			  curl -O
 			  https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm;
 			  yum install ./epel-release-latest-7.noarch.rpm; yum install grub2
-		- name: Install Grub Bootloader
+		- name: install-grub-bootloader
 		  image: 'quay.io/tinkerbell-actions/cexec:v1.0.0'
 		  timeout: 90
 		  environment:
@@ -277,7 +279,7 @@ tasks:
 			FS_TYPE: ext4
 			CHROOT: 'y'
 			CMD_LINE: grub-install --root-directory=/boot /dev/sda
-		- name: kexec-debian
+		- name: kexec
 		  image: 'quay.io/tinkerbell-actions/kexec:v1.0.0'
 		  timeout: 600
 		  environment:
