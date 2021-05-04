@@ -78,6 +78,8 @@ The template uses actions from the [artifact.io](https://artifact.io) hub.
 - [image2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) - to write the image to a block device.
 - [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system. 
 
+> Important: Don't forget to pull, tag and push `quay.io/tinkerbell-actions/image2disk:v1.0.0` prior to using it.
+
 ```
 version: "0.1"
 name: FreeBSD_deployment
@@ -90,14 +92,14 @@ tasks:
 	  - /dev/console:/dev/console
 	  - /lib/firmware:/lib/firmware:ro
 	actions:
-      - name: "stream FreeBSD image"
+      - name: "stream-FreeBSD-image"
         image: quay.io/tinkerbell-actions/image2disk:v1.0.0
 		timeout: 600
 		environment:
 		  DEST_DISK: /dev/sda
 		  IMG_URL: "http://192.168.1.1:8080/FreeBSD-12.2-RELEASE-amd64.raw.gz"
 		  COMPRESSED: true
-      - name: "kexec FreeBSD"
+      - name: "kexec-FreeBSD"
 	    image: quay.io/tinkerbell-actions/kexec:v1.0.0
 	    timeout: 90
 	    pid: host
