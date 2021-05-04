@@ -132,6 +132,8 @@ The template uses actions from the [artifact.io](https://artifact.io) hub.
 - [image2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) - to write the image to a block device.
 - Our custom action that will cause a system reboot into our new Operating System.
 
+> Important: Don't forget to pull, tag, and push `quay.io/tinkerbell-actions/image2disk:v1.0.0` prior to using it.
+
 ```
 version: "0.1"
 name: Windows_deployment
@@ -144,7 +146,7 @@ tasks:
 	  - /dev/console:/dev/console
 	  - /lib/firmware:/lib/firmware:ro
 	actions:
-      - name: "stream Windows image"
+      - name: "stream-Windows-image"
         image: quay.io/tinkerbell-actions/image2disk:v1.0.0
 		timeout: 600
 		environment:
