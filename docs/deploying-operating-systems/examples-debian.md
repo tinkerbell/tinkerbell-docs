@@ -74,7 +74,7 @@ tasks:
 		  DEST_DISK: /dev/sda
 		  IMG_URL: "http://192.168.1.1:8080/debian-10-openstack-amd64.raw.gz"
 		  COMPRESSED: true
-	  - name: "kexec debian"
+	  - name: "kexec-debian"
 		image: quay.io/tinkerbell-actions/kexec:v1.0.0
 		timeout: 90
 		pid: host
@@ -85,7 +85,7 @@ tasks:
 
 ## Important
 
-Don't forget to pull, tag and push quay.io/tinkerbell-actions/image2disk:v1.0.0 prior to using it.
+Don't forget to pull, tag and push `quay.io/tinkerbell-actions/image2disk:v1.0.0` prior to using it.
 
 ## Using a Docker Image
 
@@ -145,7 +145,7 @@ tasks:
 		command: ["format"]
 		environment:
 			MIRROR_HOST: 192.168.1.2
-	  - name: "expand debian filesystem to root"
+	  - name: "expand-debian-filesystem-to-root"
 		image: quay.io/tinkerbell-actions/archive2disk:v1.0.0
 		timeout: 90
 		environment:
@@ -154,7 +154,7 @@ tasks:
 			DEST_DISK: /dev/sda3
 			FS_TYPE: ext4
 			DEST_PATH: /
-	  - name: "Install Grub Bootloader"
+	  - name: "install-grub-bootloader"
 		image: quay.io/tinkerbell-actions/cexec:v1.0.0
 		timeout: 90
 		environment:

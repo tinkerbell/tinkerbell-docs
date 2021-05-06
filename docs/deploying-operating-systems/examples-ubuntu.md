@@ -52,6 +52,8 @@ The template uses actions from the [artifact.io](https://artifact.io) hub.
 - [image2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) - to write the OS image to a block device.
 - [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
 
+> Important: Don't forget to pull, tag, and push `quay.io/tinkerbell-actions/image2disk:v1.0.0` prior to using it.
+
 ```
 version: "0.1"
 name: Ubuntu_Focal
@@ -64,14 +66,14 @@ tasks:
 	  - /dev/console:/dev/console
 	  - /lib/firmware:/lib/firmware:ro
 	actions:
-      - name: "stream ubuntu image"
+      - name: "stream-ubuntu-image"
         image: quay.io/tinkerbell-actions/image2disk:v1.0.0
 		timeout: 600
 		environment:
 		  DEST_DISK: /dev/sda
 		  IMG_URL: "http://192.168.1.1:8080/focal-server-cloudimg-amd64.raw.gz"
 		  COMPRESSED: true
-      - name: "kexec ubuntu"
+      - name: "kexec-ubuntu"
 	    image: quay.io/tinkerbell-actions/kexec:v1.0.0
 	    timeout: 90
 	    pid: host
@@ -154,7 +156,7 @@ tasks:
 		command: ["format"]
 		environment:
 			MIRROR_HOST: 192.168.1.2
-	  - name: "expand ubuntu filesystem to root"
+	  - name: "expand-ubuntu-filesystem-to-root"
 	    image: quay.io/tinkerbell-actions/archive2disk:v1.0.0
 	    timeout: 90
 	    environment:
@@ -163,7 +165,7 @@ tasks:
 		    DEST_DISK: /dev/sda3
 		    FS_TYPE: ext4
 		    DEST_PATH: /
-      - name: "Install Grub Bootloader"
+      - name: "install-grub-bootloader"
         image: quay.io/tinkerbell-actions/cexec:v1.0.0
         timeout: 90
 		environment:
