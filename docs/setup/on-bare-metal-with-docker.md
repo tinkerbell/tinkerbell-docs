@@ -58,7 +58,7 @@ In this case we are using the latest sandbox release that today is [v0.4.0](http
 The sandbox sets up Tinkerbell using the `setup.sh` script. `setup.sh` relies on a `.env` file that can be generated running the command:
 
 ```
-./generate-envrc.sh <network-interface> > .env
+./generate-env.sh <network-interface> > .env
 ```
 
 In this case, the `network-interface` is `eth1`. The output of this command will be stored inside `./.env`. It will look like this:
