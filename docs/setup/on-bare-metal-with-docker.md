@@ -63,7 +63,7 @@ The sandbox sets up Tinkerbell using the `setup.sh` script. `setup.sh` relies on
 
 In this case, the `network-interface` is `eth1`. The output of this command will be stored inside `./.env`. It will look like this:
 
-```
+```sh
 # Tinkerbell Stack version
 
 export OSIE_DOWNLOAD_LINK=https://tinkerbell-oss.s3.amazonaws.com/osie-uploads/osie-v0-n=366,c=1aec189,b=master.tar.gz
@@ -96,6 +96,10 @@ export TINKERBELL_TINK_PASSWORD="1efbd196ae2fa3037c25983b1bc46e4c1230d270d21ed52
 export TINKERBELL_REGISTRY_USERNAME=admin
 export TINKERBELL_REGISTRY_PASSWORD="e32a696ef314bf10a1e17ff94f08ee711cb9a108667f9739e9c0cee0fadb0e76"
 
+# Tink cli options
+export TINKERBELL_GRPC_AUTHORITY=192.168.1.1:42113
+export TINKERBELL_CERT_URL=http://192.168.1.1:42114/cert
+
 # Legacy options, to be deleted:
 export FACILITY=onprem
 export ROLLBAR_TOKEN=ignored
@@ -111,8 +115,8 @@ Tinkerbell needs a static and predictable IP, that's why the `setup.sh` script s
 If your Tinkerbell host IP and LAN CIDR is different than `192.168.1.1/29`, you
 can set the following environment variables before running the script:
 ```sh
-export TINKERBELL_HOST_IP=10.1.1.11
-export TINKERBELL_CIDR=24
+export TINKERBELL_HOST_IP="10.1.1.11"
+export TINKERBELL_CIDR="24"
 ```
 
 ## Install Dependencies
