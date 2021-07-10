@@ -1,6 +1,6 @@
 ---
 title: Example - Debian
-date: 2021-03-12
+date: 2021-06-10
 ---
 
 # Deploying Debian
@@ -132,7 +132,6 @@ tasks:
 	  - /dev/console:/dev/console
 	  - /lib/firmware:/lib/firmware:ro
 	actions:
-	  actions:
 	  - name: "disk-wipe-partition"
 		image: quay.io/tinkerbell-actions/rootio:v1.0.0
 		timeout: 90
@@ -158,7 +157,7 @@ tasks:
 		image: quay.io/tinkerbell-actions/cexec:v1.0.0
 		timeout: 90
 		environment:
-			  BLOCK_DEVICE: /dev/sda3
+			BLOCK_DEVICE: /dev/sda3
 			FS_TYPE: ext4
 			CHROOT: y
 			CMD_LINE: "grub-install --root-directory=/boot /dev/sda"
@@ -166,8 +165,8 @@ tasks:
 		image: quay.io/tinkerbell-actions/kexec:v1.0.0
 		timeout: 600
 		environment:
-		  BLOCK_DEVICE: /dev/sda3
-		  FS_TYPE: ext4
+			BLOCK_DEVICE: /dev/sda3
+			FS_TYPE: ext4
 ```
 
 ## Using Bootstrap
