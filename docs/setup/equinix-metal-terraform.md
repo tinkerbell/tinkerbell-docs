@@ -221,9 +221,7 @@ cat /root/tink/deploy/hardware-data-0.json
 }
 ```
 
-{{% notice note %}}
-The mac address is the same we get from the Terraform output
-{{% /notice %}}
+> The mac address is the same we get from the Terraform output.
 
 Now we can push the hardware data to `tink-server`:
 
@@ -254,9 +252,7 @@ EOF
 
 Create the template and push it to the `tink-server` with the `tink template create` command.
 
-{{% notice note %}}
-TIP: export the the template ID as a bash variable for future use.
-{{% /notice %}}
+> TIP: export the the template ID as a bash variable for future use.
 
 ```
 export TEMPLATE_ID=$(tink template create < install.yaml | tee /dev/stderr | sed 's|.*: ||')
@@ -277,9 +273,7 @@ tink workflow create \
     -r '{"device_1":'$(jq .network.interfaces[0].dhcp.mac hardware-data-0.json)'}'
 ```
 
-{{% notice note %}}
-TIP: export the the workflow ID as a bash variable.
-{{% /notice %}}
+> TIP: export the the workflow ID as a bash variable.
 
 ```
 export WORKFLOW_ID=a8984b09-566d-47ba-b6c5-fbe482d8ad7f
@@ -316,9 +310,7 @@ The response will look something like:
 +--------------------------------------+-------------+-------------+----------------+---------------------------------+--------------------+
 ```
 
-{{% notice note %}}
-Note that an event can take ~5 minutes to show up.
-{{% /notice %}}
+> Note that an event can take ~5 minutes to show up.
 
 ## Deploying Ubuntu with Crocodile and Hook
 
