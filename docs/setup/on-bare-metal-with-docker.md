@@ -63,7 +63,7 @@ The sandbox sets up Tinkerbell using the `setup.sh` script. `setup.sh` relies on
 
 In this case, the `network-interface` is `eth1`. The output of this command will be stored inside `./.env`. It will look like this:
 
-```
+```sh
 # Tinkerbell Stack version
 
 export OSIE_DOWNLOAD_LINK=https://tinkerbell-oss.s3.amazonaws.com/osie-uploads/osie-v0-n=366,c=1aec189,b=master.tar.gz
@@ -96,6 +96,10 @@ export TINKERBELL_TINK_PASSWORD="1efbd196ae2fa3037c25983b1bc46e4c1230d270d21ed52
 export TINKERBELL_REGISTRY_USERNAME=admin
 export TINKERBELL_REGISTRY_PASSWORD="e32a696ef314bf10a1e17ff94f08ee711cb9a108667f9739e9c0cee0fadb0e76"
 
+# Tink cli options
+export TINKERBELL_GRPC_AUTHORITY=192.168.1.1:42113
+export TINKERBELL_CERT_URL=http://192.168.1.1:42114/cert
+
 # Legacy options, to be deleted:
 export FACILITY=onprem
 export ROLLBAR_TOKEN=ignored
@@ -107,6 +111,13 @@ The `./.env` file has some explanatory comments, but there are a few things to n
 > If you are developing or you want to test a different version of a particular tool let's say Hegel, you can build and push a docker image, replace `TINKERBELL_TINK_HEGEL_IMAGE` with your tag and you are good to go.
 
 Tinkerbell needs a static and predictable IP, that's why the `setup.sh` script specifies and sets its own with `TINKEBELL_HOST_IP`. It is used by [Boots](https://github.com/tinkerbell/boots) to serve the operating system installation environment, for example. And Sandbox provisions (via Docker Compose) an Nginx server that you can use to serve any file you want (OSIE is served via that Nginx).
+
+If your Tinkerbell host IP and LAN CIDR is different than `192.168.1.1/29`, you
+can set the following environment variables before running the script:
+```sh
+export TINKERBELL_HOST_IP="10.1.1.11"
+export TINKERBELL_CIDR="24"
+```
 
 ## Install Dependencies
 
@@ -155,6 +166,10 @@ Before running the [setup.sh](https://github.com/tinkerbell/sandbox/blob/master/
 The `setup.sh` script's main responsibility is to setup the network. It creates a certificate that will be used to setup the registry ([this will may change soon](https://github.com/tinkerbell/sandbox/issues/45)). It downloads [OSIE](https://github.com/tinkerbell/osie) and places it inside the Nginx weboot (`./deploy/state/webroot/`).
 
 > You can use the webroot for your own purposes, it is part of `gitignore` and other than OSIE you can serve other operating systems that you want to install in your other servers, or even public ssh keys (whatever you need a link for).
+
+If you're managing machines on a physical network (as in, not Vagrant VMs), you
+can set the environment variable `TINKERBELL_SKIP_NETWORKING` to a non-empty
+value to bypass virtual networking setup.
 
 Now to execute `setup.sh`.
 
