@@ -1,6 +1,6 @@
 ---
 title: Equinix Metal Setup with Terraform
-date: 2020-09-08
+date: 2021-07-27
 ---
 
 # Equinix Metal Setup with Terraform
@@ -73,10 +73,10 @@ This error notifies you that the facility you are using (by default sjc1) does n
 You can check availability of device type in a particular facility through the Equinix Metal CLI using the `capacity get` command.
 
 ```
-packet capacity get
+metal capacity get
 ```
 
-You are looking for a facility that has a `normal` level of `c3.small.x84`.
+You are looking for a facility that has a `normal` level of `c3.small.x86`.
 
 ### Troubleshooting - SSH Error
 
@@ -112,10 +112,10 @@ SSH into the Provisioner and you will find yourself in a copy of the `tink` repo
 ssh -t root@$(terraform output -raw provisioner_ip) "cd /root/tink && bash"
 ```
 
-You have to define and set Tinkerbell's environment. Use the `generate-envrc.sh` script to generate the `.env` file. Using and setting `.env` creates an idempotent workflow and you can use it to configure the `setup.sh` script. For example changing the [OSIE](/services/osie) version.
+You have to define and set Tinkerbell's environment. Use the `generate-env.sh` script to generate the `.env` file. Using and setting `.env` creates an idempotent workflow and you can use it to configure the `setup.sh` script. For example changing the [OSIE](/services/osie) version.
 
 ```
-./generate-envrc.sh enp1s0f1 > .env
+./generate-env.sh enp1s0f1 > .env
 source .env
 ```
 
@@ -229,7 +229,7 @@ Now we can push the hardware data to `tink-server`:
 tink hardware push < /root/tink/deploy/hardware-data-0.json
 ```
 
-A note on the Worker at this point. Ideally the worker should be kept from booting until the Provisioner is ready to serve it OSIE, but on Equinix Metal that probably doesn't happen. Now that the Worker's hardware data is registered with Tinkerbell, you should manually reboot the worker through the [Equinix Metal CLI](https://github.com/packethost/packet-cli/blob/master/docs/packet_device_reboot.md), [API](https://metal.equinix.com/developers/api/devices/#devices-performAction), or Equinix Metal console. Remember to use the SOS console to check what the Worker is doing.
+A note on the Worker at this point. Ideally the worker should be kept from booting until the Provisioner is ready to serve it OSIE, but on Equinix Metal that probably doesn't happen. Now that the Worker's hardware data is registered with Tinkerbell, you should manually reboot the worker through the [Equinix Metal CLI](https://github.com/equinix/metal-cli/blob/main/docs/metal_device_reboot.md), [API](https://metal.equinix.com/developers/api/devices/#devices-performAction), or Equinix Metal console. Remember to use the SOS console to check what the Worker is doing.
 
 ## Creating a Template
 
@@ -255,7 +255,7 @@ Create the template and push it to the `tink-server` with the `tink template cre
 > TIP: export the the template ID as a bash variable for future use.
 
 ```
-export TEMPLATE_ID=$(tink template create < install.yaml | tee /dev/stderr | sed 's|.*: ||')
+export TEMPLATE_ID=$(tink template create < hello-world.yml | tee /dev/stderr | sed 's|.*: ||')
 ```
 
 ## Creating a Workflow
