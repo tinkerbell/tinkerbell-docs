@@ -254,4 +254,4 @@ Getting set up locally is a good way to sample Tinkerbell's functionality. The V
 
 If you are looking to extend your local setup to develop or test out other workflows, check out the [Extending the Vagrant Setup](/setup/extending-vagrant) doc.
 
-That's it! Let us know what you think about it on [Slack](https://slack.equinixmetal.com/).
+That's it! Let us know what you think about it in the #tinkerbell channel on the [CNCF Community Slack](https://slack.cncf.org/).
