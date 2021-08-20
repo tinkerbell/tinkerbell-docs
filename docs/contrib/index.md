@@ -9,7 +9,7 @@ Tinkerbell is an open source project made of different components, and a lot of 
 
 The projects inside Tinkerbell are designed to be as independent as possible, some are ready and others have a long way to go. In general, deciding where you want to contribute depends on what you are working towards.
 
-The best way to start is to join the `#tinkerbell` channel over on the [Equinix Metal Slack](https://slack.equinixmetal.com/) or the [Contributor Mailing list](https://github.com/tinkerbell/.github/blob/master/COMMUNICATION.md#contributors-mailing-list). You can find more about how we communicate on the [COMMUNICATION page](https://github.com/tinkerbell/.github/blob/master/COMMUNICATION.md) in the `tinkerbell/.github` repo.
+The best way to start is to join the `#tinkerbell` channel over on the [CNCF Slack ](https://slack.cncf.org/) or the [Contributor Mailing list](https://github.com/tinkerbell/.github/blob/master/COMMUNICATION.md#contributors-mailing-list). You can find more about how we communicate on the [COMMUNICATION page](https://github.com/tinkerbell/.github/blob/master/COMMUNICATION.md) in the `tinkerbell/.github` repo.
 
 ## Contributing to the Codebase
 
