@@ -51,5 +51,5 @@ In addition to the microservices, there are three pieces of infrastructure:
 Need a little help getting started? We're here!
 
 - Check out the [FAQs](https://tinkerbell.org/faq/) - When there are questions, we document the answers.
-- Join our [Community Slack](https://slack.equinixmetal.com/). Look for the `#tinkerbell` channel.
+- Join the [CNCF Community Slack](https://slack.cncf.org/). Look for the `#tinkerbell` channel.
 - Submit an issue on [Github](https://github.com/tinkerbell/).
