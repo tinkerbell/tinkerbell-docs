@@ -50,6 +50,7 @@ nav:
 
   - Contribute:
     - Welcome: contrib/index.md
+    - Triage: contrib/triage.md
     - Contributing to Tink: contrib/tink.md
 
 theme:
@@ -81,5 +82,6 @@ plugins:
   - search
 
 markdown_extensions:
+  - admonition
   - pymdownx.tabbed
   - pymdownx.superfences
