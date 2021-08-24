@@ -4,7 +4,7 @@ date: 2021-08-24
 ---
 
 !!! note
-    The [Community Triage Party call](https://equinix.zoom.us/j/97929441410?pwd=NlRmZzgyTjRPamVLWEl0bTk3WWR4QT09) takes place **every other Wednesday** at **3pm UTC (11am ETC/8am PST)** - join us to learn more about Tinkerbell!
+    The [Community Triage Party call](https://equinix.zoom.us/j/97929441410?pwd=NlRmZzgyTjRPamVLWEl0bTk3WWR4QT09) takes place **every other Tuesday** at **3pm UTC (11am ETC/8am PST)** - join us to learn more about Tinkerbell!
 
 ## Summary
 
