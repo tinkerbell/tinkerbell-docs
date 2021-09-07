@@ -14,7 +14,7 @@ Checkout the [Sandbox release
 page](https://github.com/tinkerbell/sandbox/releases) to retrieve it in the format you need.
 
 The CLI uses the Go gRPC
-[tink/client](https://github.com/tinkerbell/tink/tree/master/client) to
+[tink/client](https://github.com/tinkerbell/tink/tree/main/client) to
 communicate with the [tink-server](/services/tink-server).
 
 You can use the command line interface to create, delete or update workflows,

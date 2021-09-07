@@ -24,7 +24,7 @@ go test ./test/_vagrant/...
 
 While playing with Tinkerbell locally, it becomes a pain to download `osie.tar.gz` as part of the provisioner setup each time you recreate the stack.
 However, we can skip the download and resuse existing `osie.tar.gz` by setting the `TB_OSIE_TAR` environment variable.
-Check [setup.sh](https://github.com/tinkerbell/tink/blob/master/setup.sh#L259) for reference.
+Check [setup.sh](https://github.com/tinkerbell/tink/blob/main/setup.sh#L259) for reference.
 
 Download Osie before starting the setup
 
