@@ -107,8 +107,8 @@ The last step for the Provisioner to do at this point is to pull down the image 
 
 ```
 docker pull hello-world
-docker tag hello-world 192.168.1.1/hello-world
-docker push 192.168.1.1/hello-world
+docker tag hello-world 192.168.50.4/hello-world
+docker push 192.168.50.4/hello-world
 ```
 
 ## Creating the Worker's Hardware Data
