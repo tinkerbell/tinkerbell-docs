@@ -55,41 +55,41 @@ When the Provisioner is ready, you should see the following message:
 INFO: tinkerbell stack setup completed successfully on ubuntu server
 ```
 
-## Starting Tinkerbell
+## Inspecting the running Tinkerbell containers
 
-Now that the Provisioner's machine is up and running, you can connect and bring up Tinkerbell. SSH into the Provisioner.
+Now that the Provisioner's machine is up and running, SSH into the Provisioner.
 
 ```
 vagrant ssh provisioner
 ```
 
-Tinkerbell is going to be running from a container, so navigate to the `vagrant` directory, set the environment, and start the Tinkerbell stack with `docker-compose`.
-
-```
-cd /vagrant/compose && source .env
-docker-compose up -d
-```
-
-The Tinkerbell server, and more importantly the CLI, are now managed like a standard Docker Compose project. Just make sure to have sourced the `.env` before issuing docker-compose commands.
-
-Tinkerbell is now ready to receive templates and workflows. Check out all the Tinkerbell services are running.
+The Tinkerbell stack is already running in a set of container through Docker Compose. Check that all the Tinkerbell services are running.
 
 ```
 docker-compose ps
 ```
 
 The response shows the running services.
+
 ```
-        Name                      Command                  State                             Ports
--------------------------------------------------------------------------------------------------------------------------
-deploy_boots_1         /boots -dhcp-addr 0.0.0.0: ...   Up
-deploy_cacher_1        /cacher                          Up             0.0.0.0:42111->42111/tcp, 0.0.0.0:42112->42112/tcp
-deploy_db_1            docker-entrypoint.sh postgres    Up (healthy)   0.0.0.0:5432->5432/tcp
-deploy_hegel_1         cmd/hegel                        Up
-deploy_nginx_1         /docker-entrypoint.sh ngin ...   Up             192.168.1.1:8080->80/tcp
-deploy_registry_1      /entrypoint.sh /etc/docker ...   Up (healthy)
-deploy_tink-cli_1      /bin/sh -c sleep infinity        Up
-deploy_tink-server_1   tink-server                      Up (healthy)   0.0.0.0:42113->42113/tcp, 0.0.0.0:42114->42114/tcp
+$ docker-compose ps
+               Name                             Command                  State                             Ports                       
+---------------------------------------------------------------------------------------------------------------------------------------
+compose_boots_1                      /usr/bin/boots -dhcp-addr  ...   Up                                                               
+compose_create-tink-records_1        /manifests/exec_in_bash.sh ...   Exit 0                                                           
+compose_db_1                         docker-entrypoint.sh postgres    Up (healthy)   0.0.0.0:5432->5432/tcp                            
+compose_hegel_1                      /usr/bin/hegel                   Up             0.0.0.0:50060->50060/tcp, 0.0.0.0:50061->50061/tcp
+compose_images-to-local-registry_1   /registry/upload.sh admin  ...   Exit 0                                                           
+compose_osie-bootloader_1            /docker-entrypoint.sh ngin ...   Up             0.0.0.0:8080->80/tcp                              
+compose_osie-work_1                  /scripts/lastmile.sh https ...   Exit 0                                                           
+compose_registry-auth_1              htpasswd -Bbc .htpasswd ad ...   Exit 0                                                           
+compose_registry-ca-crt-download_1   wget http://192.168.50.4:4 ...   Exit 0                                                           
+compose_registry_1                   /entrypoint.sh /etc/docker ...   Up (healthy)                                                     
+compose_tink-cli_1                   /bin/sh -c sleep infinity        Up                                                               
+compose_tink-server-migration_1      /usr/bin/tink-server             Exit 0                                                           
+compose_tink-server_1                /usr/bin/tink-server             Up (healthy)   0.0.0.0:42113->42113/tcp, 0.0.0.0:42114->42114/tcp
+compose_tls-gen_1                    /code/tls/generate.sh 192. ...   Exit 0                                                           
+compose_ubuntu-image-setup_1         /scripts/setup_ubuntu.sh h ...   Exit 0                        
 ```
 
 At this point, you might want to open a ssh connection to show logs from the Provisioner, because it will show what the `tink-server` is doing through the rest of the setup. Open a new terminal, ssh in to the provisioner as you did before, and run `docker-compose logs -f` to tail logs.
@@ -103,7 +103,9 @@ docker-compose logs -f tink-server boots hegel
 
 Later in the tutorial you can check the logs from `tink-server` in order to see the execution of the workflow.
 
-The last step for the Provisioner to do at this point is to pull down the image that will be used in the workflow. Tinkerbell uses Docker registry to host images locally, so pull down the ["Hello World" docker image](https://hub.docker.com/_/hello-world/) and push it to the registry.
+## Preparing an action image
+
+As you'll see shortly, each step in a Tinkerbell workflow is referred to as an Action Image, and is simply a Docker image. Before you move ahead, let's pull down the image that will be used in the example workflow. Tinkerbell uses Docker registry to host images locally, so pull down the ["Hello World" docker image](https://hub.docker.com/_/hello-world/) and push it to the registry.
 
 ```
 docker pull hello-world
