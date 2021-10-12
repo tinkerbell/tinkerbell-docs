@@ -66,7 +66,7 @@ vagrant ssh provisioner
 Tinkerbell is going to be running from a container, so navigate to the `vagrant` directory, set the environment, and start the Tinkerbell stack with `docker-compose`.
 
 ```
-cd /vagrant && source .env && cd deploy
+cd /vagrant/compose && source .env
 docker-compose up -d
 ```
 
