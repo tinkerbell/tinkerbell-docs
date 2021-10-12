@@ -63,9 +63,11 @@ Now that the Provisioner's machine is up and running, SSH into the Provisioner.
 vagrant ssh provisioner
 ```
 
-The Tinkerbell stack is already running in a set of container through Docker Compose. Check that all the Tinkerbell services are running.
+The Tinkerbell stack is already running in a set of containers through Docker Compose. Check that all the Tinkerbell services are running.
 
 ```
+cd /vagrant/compose
+source .env
 docker-compose ps
 ```
 
