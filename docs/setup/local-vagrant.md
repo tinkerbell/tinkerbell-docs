@@ -21,6 +21,9 @@ The last step is to start up the Worker, which will call back to the Provisioner
 - [The host's processor should support virtualization](https://www.cyberciti.biz/faq/linux-xen-vmware-kvm-intel-vt-amd-v-support/)
 - [Vagrant](https://www.vagrantup.com/downloads) is installed
 - Either [VirtualBox](https://www.virtualbox.org/) or [libvirtd](https://libvirt.org/) is installed.
+- If using VirtualBox be sure to install both:
+  - The Vagrant *vagrant-vbguest* plugin: `vagrant plugin install vagrant-vbguest`
+  - The [VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads)
 
 ## Getting Tinkerbell
 
