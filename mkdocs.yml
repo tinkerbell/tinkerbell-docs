@@ -2,6 +2,7 @@ site_name: Tinkerbell Docs
 site_url: https://docs.tinkerbell.org
 site_description: Designed for scalable provisioning of physical hardware, Tinkerbell is both open-source and cloud native. Contributed by Equinix Metal.
 site_image: https://tinkerbell.org/images/social/tinkerbell-social-image.png
+repo_url: https://github.com/tinkerbell/tinkerbell-docs
 
 nav:
   - Home: index.md
