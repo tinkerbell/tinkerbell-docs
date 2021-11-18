@@ -4,8 +4,6 @@
   --md-primary-fg-color--dark:  #05254c;
 }
 
-@import url('//cloud.typography.com/6193438/7900212/css/fonts.css');
-
 body {
     font-family: Gotham A, Gotham B, Helvetica, Roboto, Arial, sans-serif;
     background: #f8f8f8;
@@ -130,12 +128,15 @@ pre, code, kbd {
         white-space: nowrap;
         width: 100%;
         padding-top: 0;
-        padding-bottom: 20px
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
     .nav ul {
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-left: 20px;
     }
     .nav ul li {
         margin: 0 10px;
@@ -163,23 +164,39 @@ pre, code, kbd {
     color: #3e3e3e;
     padding-top: 20px;
     padding-bottom: 20px;
+    text-align: center;
 }
 
 #footer-wrapper * {
     font-size: 12px;
 }
 
+#footer-container {
+    border-top: 0.5px solid #c9c9cc;
+    padding-top: 30px;
+}
+
 #footer-wrapper a {
     display: inline-block;
+    text-decoration: underline;
+}
+
+#footer-wrapper p {
+    margin-bottom: 5px;
+    margin-top: 0;
 }
 
 #footer-wrapper .text {
     margin: 0;
 }
 
+#nav-footer {
+    padding-bottom: 20px;
+}
+
 #nav-footer ul {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     margin: 0;
     padding: 0;
@@ -200,6 +217,7 @@ pre, code, kbd {
 
 #nav-footer ul li a {
     line-height: 1;
+    text-decoration: none;
 }
 
 #nav-footer ul li a:hover {
@@ -227,26 +245,7 @@ pre, code, kbd {
 }
 
 @media print, screen and (max-width:63.99875em) {
-    #nav-footer ul {
-        margin-top: 30px;
-        display: block
-    }
-
-    #nav-footer ul li {
-        margin-bottom: 7px;
-        padding-left: 0
-    }
-
-    #nav-footer ul li:after {
-        display: none
-    }
-
-    #footer-wrapper p {
-        display: block
-    }
-    #footer-wrapper .packet-logo {
-        margin-left: 0
-    }
+    
 }
 
 .md-footer-nav {display: none}

@@ -1,15 +1,15 @@
 ---
-title: Workflows
+title: Working with Workflows
 date: 2020-07-28
 ---
 
-# Workflows
+# Working with Workflows
 
 A workflow is the complete set of operations to be run on a Worker. It consists of two building blocks: a Worker's [hardware data](/hardware-data) and a [template](/templates). Workflows are immutable. Updating a template or hardware data does not update existing workflows.
 
 ## Creating a Workflow
 
-You create a workflow with the [`tink workflow create`](/cli-reference/workflow/#tink-workflow-create)command, which takes a template ID and a JSON object that identifies the Worker, and combines them into a workflow. The workflow is stored in the database on the Provisioner and returns a workflow ID.
+You create a workflow with the `tink workflow create` command, which takes a template ID and a JSON object that identifies the Worker, and combines them into a workflow. The workflow is stored in the database on the Provisioner and returns a workflow ID.
 
 For example,
 
@@ -22,7 +22,7 @@ tink workflow create \
 
 The template ID is `75ab8483-6f42-42a9-a80d-a9f6196130df`. The MAC address of the Worker is `08:00:27:00:00:01`, which should match the MAC address of hardware data that you have already created to identify that Worker. It is mapped to `device_1`, which is where the MAC address will be substituted into the template when the workflow is created.
 
-After creating a workflow, you can retrieve it from the database by ID with [`tink workflow get`](/cli-reference/workflow/#tink-workflow-get). This is particularly useful to check to see that the MAC address or IP Address of the Worker was correctly substituted when you created the workflow.
+After creating a workflow, you can retrieve it from the database by ID with `tink workflow get`. This is particularly useful to check to see that the MAC address or IP Address of the Worker was correctly substituted when you created the workflow.
 
 ```
 tink workflow get a8984b09-566d-47ba-b6c5-fbe482d8ad7f
@@ -39,7 +39,7 @@ tasks:
         timeout: 60
 ```
 
-In addition, you can list all the workflows stored in the database with [`tink workflow list`](/cli-reference/workflow/#tink-workflow-list). Delete a workflow with [`tink workflow delete`](/cli-reference/workflow/#tink-workflow-delete).
+In addition, you can list all the workflows stored in the database with `tink workflow list`. Delete a workflow with `tink workflow delete`.
 
 ## Workflow Execution
 
@@ -49,7 +49,7 @@ On the first boot, the Worker is PXE booted, asks Boots for it's IP address, and
 
 If there are no workflows defined for the Worker, the Provisioner will ignore the Worker's request. If as a part of the workflow, a new OS is installed and completes successfully, then the boot request (after reboot) will be handled by newly installed OS. If as a part of the workflow, an OS is **not** installed, then the Worker after reboot will request PXE-boot from the Provisioner.
 
-You can view the events and the state of a workflow during or after its execution with the tink CLI using the [`tink workflow events`](/cli-reference/workflow/#tink-workflow-events) an the [`tink workflow state`](/cli-reference/workflow/#tink-workflow-state) commands.
+You can view the events and the state of a workflow during or after its execution with the tink CLI using the `tink workflow events` an the `tink workflow state` commands.
 
 ## Ephemeral Data
 
@@ -89,4 +89,4 @@ The other worker may retrieve and use this data and eventually add some more:
 }
 ```
 
-You can get the ephemeral data associated with a workflow with the [`tink workflow data`](/cli-reference/workflow/) tink CLI command.
+You can get the ephemeral data associated with a workflow with the `tink workflow data` tink CLI command.
