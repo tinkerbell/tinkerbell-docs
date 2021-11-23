@@ -64,10 +64,10 @@ vagrant ssh provisioner
 vagrant@provisioner:~$
 ```
 
-Tinkerbell is going to be running from a container, so navigate to the `vagrant` directory, set the environment, and start the Tinkerbell stack with `docker-compose`.
+Tinkerbell is going to be running from a container, so navigate to the `/vagrant/compose` directory, set the environment, and start the Tinkerbell stack with `docker-compose`.
 
 ```
-cd /vagrant && source .env && cd deploy
+cd /vagrant/compose && source .env
 docker-compose up -d
 ```
 
@@ -93,10 +93,10 @@ deploy_tink-server_1   tink-server                      Up (healthy)   0.0.0.0:4
 At this point, you might want to open a ssh connection to show logs from the Provisioner, because it will show what the `tink-server` is doing through the rest of the setup. Open a new terminal, ssh in to the provisioner as you did before, and run `docker-compose logs` to tail logs.
 
 ```
-cd tink/deploy/vagrant
+cd sandbox/deploy/vagrant
 vagrant ssh provisioner
-cd /vagrant && source .env && cd deploy
-docker-compose logs -f tink-server boots nginx
+cd /vagrant/compose && source .env
+docker-compose logs -f tink-server boots osie-bootloader
 ```
 
 Later in the tutorial you can check the logs from `tink-server` in order to see the execution of the workflow.
