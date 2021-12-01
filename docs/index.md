@@ -9,23 +9,25 @@ Everything you need to know about Tinkerbell and its major component microservic
 ​
 ## What is Tinkerbell?
 
-Tinkerbell is an open-source, bare metal provisioning engine, built and maintained by the team at Equinix Metal.
+Tinkerbell is an open-source, bare metal provisioning engine, built by the team at Equinix Metal.
 
 Interested in contributing? Check out our [Contributors' Page](https://tinkerbell.org/community/contributors/).
 
 ## What's Powering Tinkerbell?
 
-The Tinkerbell stack consists of five microservices, and a grpc API: 
+The Tinkerbell stack consists of several microservices, and a grpc API: 
 
-- [**Tink**](/services/tink) - Tink is the Tinkerbell server and CLI. It communicates over gRPC, and is responsible for processing workflows. The CLI is used to create workflows and their building blocks, templates and hardware data.
+- [**Tink**](https://github.com/tinkerbell/tink) - Tink is the short-hand name for the [`tink-server`](/services/tink-server), [`tink-worker`](/services/tink-worker), and [`tink-cli`](/services/tink-cli). `tink-worker` and `tink-server` communicate over gRPC, and are responsible for processing workflows. The CLI is the user-interactive piece for creating workflows and their building blocks, templates and hardware data.
 
 - [**Boots**](/services/boots) - Boots is Tinkerbell's DHCP server. It handles DHCP requests, hands out IPs, and serves up [iPXE](https://ipxe.org/). It uses the Tinkerbell client to pull and push hardware data. It only responds to a predefined set of MAC addresses so it can be deployed in an existing network without interfering with existing DHCP infrastructure.
 
 - [**Hegel**](/services/hegel) - Hegel is the metadata service used by Tinkerbell and OSIE. It collects data from both and transforms it into a JSON format to be consumed as metadata.
 
-- [**OSIE**](/services/osie) - OSIE is an in-memory installation environment for bare metal. It installs operating systems and handles deprovisioning.
+- [**OSIE**](/services/osie) - OSIE is Tinkerbell's default an in-memory installation environment for bare metal. It installs operating systems and handles deprovisioning.
 
-- [**PBnJ**](https://github.com/tinkerbell/pbnj) - PBnJ is a microservice that can communicate with baseboard management controllers (BMCs) to control power and boot settings.
+- [**Hook**](https://github.com/tinkerbell/hook#hook) - An alternative to OSIE, it's the next iteration of the in-memory installation environment to handle operating system installation and deprovisioning.
+
+- [**PBnJ**](https://github.com/tinkerbell/pbnj) - PBnJ is an optional microservice that can communicate with baseboard management controllers (BMCs) to control power and boot settings.
 
 In addition to the microservices, there are three pieces of infrastructure:
 
@@ -40,8 +42,8 @@ In addition to the microservices, there are three pieces of infrastructure:
 
 ​New to Tinkerbell or bare metal provisioning? This is a great place to start!
 
-- Getting Started - Set up Tinkerbell [locally with vagrant](/setup/local-vagrant/) or on [Equinix Metal with Terraform](/setup/packet-terraform/).
-- Run [hello world](/examples/hello-world-workflow) to see Tinkerbell in action.​
+- Getting Started - Set up Tinkerbell [locally with vagrant](/setup/local-vagrant/) or on [Equinix Metal with Terraform](/setup/equinix-metal-terraform/).
+- Run [hello world](workflows/hello-world-workflow) to see Tinkerbell in action.​
 
 
 ## Get Help
@@ -49,5 +51,5 @@ In addition to the microservices, there are three pieces of infrastructure:
 Need a little help getting started? We're here!
 
 - Check out the [FAQs](https://tinkerbell.org/faq/) - When there are questions, we document the answers.
-- Join our [Community Slack](https://slack.equinixmetal.com/). Look for the `#tinkerbell` channel.
+- Join the [CNCF Community Slack](https://slack.cncf.org/). Look for the `#tinkerbell` channel.
 - Submit an issue on [Github](https://github.com/tinkerbell/).

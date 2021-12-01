@@ -2,6 +2,7 @@ site_name: Tinkerbell Docs
 site_url: https://docs.tinkerbell.org
 site_description: Designed for scalable provisioning of physical hardware, Tinkerbell is both open-source and cloud native. Contributed by Equinix Metal.
 site_image: https://tinkerbell.org/images/social/tinkerbell-social-image.png
+repo_url: https://github.com/tinkerbell/tinkerbell-docs
 
 nav:
   - Home: index.md
@@ -11,27 +12,47 @@ nav:
   - Services:
     - Boots: services/boots.md
     - Hegel: services/hegel.md
+    - Image Registry: services/registry.md
     - OSIE: services/osie.md
-    - Tink: services/tink.md
+    - Tink Server: services/tink-server.md
+    - Tink Worker: services/tink-worker.md
+    - Tink CLI: services/tink-cli.md
+
+  - Workflows: 
+    - Working with Workflows: workflows/working-with-workflows.md
+    - A Hello-world Workflow: workflows/hello-world-workflow.md
 
   - Hardware Data: hardware-data.md
   - Templates: templates.md
-  - Workflows: workflows.md
 
-  - Setups:
+  - Actions:
+    - ActionHub: https://artifacthub.io/packages/search?kind=4
+    - Action Architecture: actions/action-architecture.md
+    - Creating a Basic Action: actions/creating-a-basic-action.md
+  
+  - Setting Up Tinkerbell:
     - Local Setup with Vagrant: setup/local-vagrant.md
     - Extending the Vagrant Setup: setup/extending-vagrant.md
-    - Equinix Metal Setup with Terraform: setup/packet-terraform.md
+    - Equinix Metal Setup with Terraform: setup/equinix-metal-terraform.md
+    - Bare Metal or Equinix Metal with QEMU: setup/using-qemu.md
+    - On bare metal with Docker: setup/on-bare-metal-with-docker.md
 
-  - Examples:
-    - A Hello-world Workflow: examples/hello-world-workflow.md
-
-  - Tink CLI Reference:
-    - Hardware: cli-reference/hardware.md
-    - Template: cli-reference/template.md
-    - Workflow: cli-reference/workflow.md
-
+  - Deploying Operating Systems:
+    - The Basics: deploying-operating-systems/the-basics.md
+    - The Deployment: deploying-operating-systems/the-deployment.md
+    - Example - Deploying Ubuntu: deploying-operating-systems/examples-ubuntu.md
+    - Example - Deploying Ubuntu from Packer Machine Image: deploying-operating-systems/examples-ubuntu-packer.md
+    - Example - Deploying Debian: deploying-operating-systems/examples-debian.md
+    - Example - Deploying FreeBSD: deploying-operating-systems/examples-freebsd.md
+    - Example - Deploying Red Hat Enterprise Linux and CentOS: deploying-operating-systems/examples-rhel-centos.md
+    - Example - Deploying Windows: deploying-operating-systems/examples-win.md
+    
   - Troubleshooting: troubleshooting.md
+
+  - Contribute:
+    - Welcome: contrib/index.md
+    - Triage: contrib/triage.md
+    - Contributing to Tink: contrib/tink.md
 
 theme:
   name: material
@@ -50,7 +71,7 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/tinkerbell
     - icon: fontawesome/brands/slack
-      link: https://slack.equinixmetal.com/
+      link: https://slack.cncf.org/
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/tinkerbell_oss
 
@@ -60,3 +81,8 @@ google_analytics:
 
 plugins:
   - search
+
+markdown_extensions:
+  - admonition
+  - pymdownx.tabbed
+  - pymdownx.superfences

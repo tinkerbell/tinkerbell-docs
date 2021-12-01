@@ -11,7 +11,7 @@ It covers some basic aspects of Tinkerbell's functionality:
 
 - setting up a Provisioner
 - creating the hardware data for the Worker
-- creating a template with a placeholder action item, using the [hello-world example](/examples/hello-world-workflow)
+- creating a template with a placeholder action item, using the [hello-world example](../../workflows/hello-world-workflow)
 - and creating a workflow
 
 The last step is to start up the Worker, which will call back to the Provisioner for its workflow.
@@ -21,6 +21,9 @@ The last step is to start up the Worker, which will call back to the Provisioner
 - [The host's processor should support virtualization](https://www.cyberciti.biz/faq/linux-xen-vmware-kvm-intel-vt-amd-v-support/)
 - [Vagrant](https://www.vagrantup.com/downloads) is installed
 - Either [VirtualBox](https://www.virtualbox.org/) or [libvirtd](https://libvirt.org/) is installed.
+- If using VirtualBox be sure to install both:
+  - The Vagrant *vagrant-vbguest* plugin: `vagrant plugin install vagrant-vbguest`
+  - The [VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads)
 
 ## Getting Tinkerbell
 
@@ -60,14 +63,12 @@ When the Provisioner is ready, you should see the following message:
 INFO: tinkerbell stack setup completed successfully on ubuntu server
 ```
 
-## Starting Tinkerbell
+## Inspecting the running Tinkerbell containers
 
-Now that the Provisioner's machine is up and running, you can connect and bring up Tinkerbell. SSH into the Provisioner.
+Now that the Provisioner's machine is up and running, SSH into the Provisioner.
 
 ```
 vagrant ssh provisioner
->
-vagrant@provisioner:~$
 ```
 
 Tinkerbell is going to be running from a container, so navigate to the `/vagrant/compose` directory, so navigate to the `/vagrant/compose` directory and load up the .env file that has all our environment's settings in it, and start the Tinkerbell stack with `docker-compose`.
@@ -77,11 +78,10 @@ cd /vagrant/compose && source .env
 docker-compose up -d
 ```
 
-The Tinkerbell server, and more importantly the CLI, are now managed like a standard Docker Compose project. Just make sure to have sourced the `.env` before issuing docker-compose commands.
-
-Tinkerbell is now ready to receive templates and workflows. Check out all the Tinkerbell services are running.
+The response shows the running services.
 
 ```
+
 docker-compose ps
 >
                Name                             Command                  State                             Ports
@@ -101,9 +101,10 @@ compose_tink-server-migration_1      /usr/bin/tink-server             Exit 0
 compose_tink-server_1                /usr/bin/tink-server             Up (healthy)   0.0.0.0:42113->42113/tcp, 0.0.0.0:42114->42114/tcp
 compose_tls-gen_1                    /code/tls/generate.sh 192. ...   Exit 0
 compose_ubuntu-image-setup_1         /scripts/setup_ubuntu.sh h ...   Exit 0
+
 ```
 
-At this point, you might want to open a ssh connection to show logs from the Provisioner, because it will show what the `tink-server` is doing through the rest of the setup. Open a new terminal, ssh in to the provisioner as you did before, and run `docker-compose logs` to tail logs.
+At this point, you might want to open a ssh connection to show logs from the Provisioner, because it will show what the `tink-server` is doing through the rest of the setup. Open a new terminal, ssh in to the provisioner as you did before, and run `docker-compose logs -f` to tail logs.
 
 ```
 cd sandbox/deploy/vagrant
@@ -270,4 +271,4 @@ Getting set up locally is a good way to sample Tinkerbell's functionality. The V
 
 If you are looking to extend your local setup to develop or test out other workflows, check out the [Extending the Vagrant Setup](/setup/extending-vagrant) doc.
 
-That's it! Let us know what you think about it on [Slack](https://slack.equinixmetal.com/).
+That's it! Let us know what you think about it in the #tinkerbell channel on the [CNCF Community Slack](https://slack.cncf.org/).
