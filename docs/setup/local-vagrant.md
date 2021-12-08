@@ -26,6 +26,7 @@ The last step is to start up the Worker, which will call back to the Provisioner
 - If using VirtualBox be sure to install both:
   - The Vagrant *vagrant-vbguest* plugin: `vagrant plugin install vagrant-vbguest`
   - The [VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads)
+- If using VirtualBox, you may get an error about valid IP addresses for host-only networks. [This page from the Virtual Box manual explains how to add additional address ranges to your setup.](https://www.virtualbox.org/manual/ch06.html#network_hostonly)
 
 ## Getting Tinkerbell
 
