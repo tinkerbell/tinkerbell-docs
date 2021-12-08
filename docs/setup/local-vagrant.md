@@ -7,6 +7,8 @@ date: 2021-11-30
 
 If you want to dive in to trying out Tinkerbell, this tutorial sets it up locally using Vagrant. Vagrant manages the Tinkerbell installation for this tutorial's Provisioner, and runs both the Provisioner and Worker on VirtualBox or `libvirtd`.
 
+These docs were tested against v0.6.0 of github.com/tinkerbell/sandbox
+
 It covers some basic aspects of Tinkerbell's functionality:
 
 - setting up a Provisioner
@@ -27,10 +29,10 @@ The last step is to start up the Worker, which will call back to the Provisioner
 
 ## Getting Tinkerbell
 
-To get Tinkerbell, clone the `sandbox` repository.
+To get Tinkerbell, clone the `sandbox` repository at version v0.6.0.
 
 ```
-git clone https://github.com/tinkerbell/sandbox.git
+git clone https://github.com/tinkerbell/sandbox.git -b v0.6.0
 ```
 
 Move into the `deploy/vagrant` directory. This folder contains a Vagrant configuration file (Vagrantfile) needed to setup the Provisioner and the Worker.
@@ -41,11 +43,13 @@ cd sandbox/deploy/vagrant
 
 ## Start the Provisioner
 
-First we need to make a quick edit to the Vagrant configuration file to set the mac and IP address of the worker machine we'll be using later.
+First we need to delete the default template and hardware definition that the sandbox repo comes with. This let's us practice setting up the template and workflow in tinkerbell without any conflicts with what comes pre-defined in the sandbox repo.
 
 ```
-sed -i 's/0800279EF53A/820000000001/' Vagrantfile
-sed -i 's/192.168.50.43/192.168.50.44/' Vagrantfile
+rm ../compose/manifests/hardware/hardware-libvirt.json
+rm ../compose/manifests/hardware/hardware.json
+rm ../compose/manifests/template/ubuntu-libvirt.yaml
+rm ../compose/manifests/template/ubuntu.yaml
 ```
 
 
@@ -56,12 +60,6 @@ vagrant up provisioner
 ```
 
 The Provisioner installs and runs Ubuntu with a couple of additional utilities. The time it takes to spin up the Provisioner varies with connection speed and resources on your local machine.
-
-When the Provisioner is ready, you should see the following message:
-
-```
-INFO: tinkerbell stack setup completed successfully on ubuntu server
-```
 
 ## Inspecting the running Tinkerbell containers
 
@@ -74,16 +72,11 @@ vagrant ssh provisioner
 Tinkerbell is going to be running from a container, so navigate to the `/vagrant/compose` directory, so navigate to the `/vagrant/compose` directory and load up the .env file that has all our environment's settings in it, and start the Tinkerbell stack with `docker-compose`.
 
 ```
-cd /vagrant/compose && source .env
-docker-compose up -d
-```
-
-The response shows the running services.
-
-```
-
+cd /vagrant/compose
 docker-compose ps
->
+```
+
+```
                Name                             Command                  State                             Ports
 ---------------------------------------------------------------------------------------------------------------------------------------
 compose_boots_1                      /usr/bin/boots -dhcp-addr  ...   Up
@@ -104,7 +97,27 @@ compose_ubuntu-image-setup_1         /scripts/setup_ubuntu.sh h ...   Exit 0
 
 ```
 
-At this point, you might want to open a ssh connection to show logs from the Provisioner, because it will show what the `tink-server` is doing through the rest of the setup. Open a new terminal, ssh in to the provisioner as you did before, and run `docker-compose logs -f` to tail logs.
+
+
+## Preparing an action image
+
+As you'll see shortly, each step in a Tinkerbell workflow is referred to as an Action Image, and is simply a Docker image. Before you move ahead, let's pull down the image that will be used in the example workflow. Tinkerbell uses Docker registry to host images locally, so pull down the  ["Hello World" docker image](https://hub.docker.com/_/hello-world/) and push it to the registry.
+
+Let's trust the SSL certs of the registry container.
+```
+cd /vagrant/compose && source .env
+echo | openssl s_client -showcerts -connect $TINKERBELL_HOST_IP:443 2>/dev/null | openssl x509 | sudo tee /usr/local/share/ca-certificates/tinkerbell.crt
+sudo update-ca-certificates
+sudo systemctl restart docker
+```
+Then let's login, get the image, and upload it to our registry.
+```
+docker login $TINKERBELL_HOST_IP -u admin -p Admin1234
+docker pull hello-world
+docker tag hello-world $TINKERBELL_HOST_IP/hello-world
+docker push $TINKERBELL_HOST_IP/hello-world
+```
+At this point, you might want to open a separate terminal  window to show logs from the Provisioner, because it will show what the `tink-server` is doing through the rest of the setup. Open a new terminal, ssh in to the provisioner as you did before, and run `docker-compose logs -f` to tail logs.
 
 ```
 cd sandbox/deploy/vagrant
@@ -114,15 +127,6 @@ docker-compose logs -f tink-server boots osie-bootloader
 ```
 
 Later in the tutorial you can check the logs from `tink-server` in order to see the execution of the workflow.
-
-The last step for the Provisioner to do at this point is to pull down the image that will be used in the workflow. Tinkerbell uses Docker registry to host images locally, so we need to pull down the ["Hello World" docker image](https://hub.docker.com/_/hello-world/) and push it to the registry. Normally we would need proper SSL set up to push to a docker registry, so we'll make things easier for ourselves in this demo and use the skopeo utility from redhat to pull down the docker image and push it to our local registry. 
-
-```
-docker run -it --rm quay.io/containers/skopeo copy --all \
---dest-tls-verify=false --dest-creds="admin":"Admin1234" \
-docker://hello-world:linux docker://192.168.50.4/hello-world:linux
-```
-
 ## Creating the Worker's Hardware Data
 
 With the provisioner up and running, it's time to set up the worker's configuration.
@@ -150,7 +154,7 @@ cat > hardware-data.json <<EOF
             "gateway": "192.168.50.1",
             "netmask": "255.255.255.0"
           },
-          "mac": "82:00:00:00:00:01",
+          "mac": "08:00:27:9E:F5:3A",
           "uefi": false
         },
         "netboot": {
@@ -164,11 +168,10 @@ cat > hardware-data.json <<EOF
 EOF
 ```
 
-First delete the conflicting hardware definition that came with the sandbox repository. Then, push the hardware data to the database with the `tink hardware push` command. 
+Then, push the hardware data to the database with the `tink hardware push` command. 
 
 ```
 docker exec -i compose_tink-cli_1 tink hardware push < ./hardware-data.json
-> 2021/11/30 21:05:31 Hardware data pushed successfully
 ```
 
 If you are following along in the `tink-server` logs, you should see:
@@ -191,7 +194,7 @@ tasks:
     worker: "{{.device_1}}"
     actions:
       - name: "hello_world"
-        image: hello-world:linux
+        image: hello-world
         timeout: 60
 EOF
 ```
@@ -200,8 +203,6 @@ Create the template and push it to the database with the `tink template create` 
 
 ```
 docker exec -i compose_tink-cli_1 tink template create  < ./hello-world.yml
->
-Created Template:  5508142d-5221-11ec-89e8-0242ac120005
 ```
 
 The command returns a Template ID, and if you are watching the `tink-server` logs you will see:
@@ -220,9 +221,7 @@ The next step is to combine both the hardware data and the template to create a 
 Combine these two pieces of information and create the workflow with the `tink workflow create` command.
 
 ```
-docker exec -i compose_tink-cli_1 tink workflow create -r '{"device_1":"82:00:00:00:00:01"}' -t <TEMPLATE ID>
->
-Created Workflow:  a5ba16e0-5221-11ec-89e8-0242ac120005
+docker exec -i compose_tink-cli_1 tink workflow create -r '{"device_1":"08:00:27:9E:F5:3A"}' -t <TEMPLATE ID>
 ```
 
 The command returns a Workflow ID and if you are watching the logs, you will see:
