@@ -44,7 +44,7 @@ cd sandbox/deploy/vagrant
 
 ## Start the Provisioner
 
-First we need to delete the default template and hardware definition that the sandbox repo comes with. This let's us practice setting up the template and workflow in tinkerbell without any conflicts with what comes pre-defined in the sandbox repo.
+First we need to delete the default template and hardware definition that the sandbox repo comes with. This lets us practice setting up the template and workflow in tinkerbell without any conflicts with what comes pre-defined in the sandbox repo.
 
 ```
 rm ../compose/manifests/hardware/hardware-libvirt.json
@@ -70,7 +70,7 @@ Now that the Provisioner's machine is up and running, SSH into the Provisioner.
 vagrant ssh provisioner
 ```
 
-Tinkerbell is going to be running from a container, so navigate to the `/vagrant/compose` directory, so navigate to the `/vagrant/compose` directory and load up the .env file that has all our environment's settings in it, and start the Tinkerbell stack with `docker-compose`.
+Tinkerbell is going to be running from a container, so navigate to the `/vagrant/compose` directory and load up the .env file that has all our environment's settings in it, and start the Tinkerbell stack with `docker-compose`.
 
 ```
 cd /vagrant/compose
@@ -102,22 +102,26 @@ compose_ubuntu-image-setup_1         /scripts/setup_ubuntu.sh h ...   Exit 0
 
 ## Preparing an action image
 
-As you'll see shortly, each step in a Tinkerbell workflow is referred to as an Action Image, and is simply a Docker image. Before you move ahead, let's pull down the image that will be used in the example workflow. Tinkerbell uses Docker registry to host images locally, so pull down the  ["Hello World" docker image](https://hub.docker.com/_/hello-world/) and push it to the registry.
+As you'll see shortly, each step in a Tinkerbell workflow is referred to as an Action Image, and is simply a Docker image. Before you move ahead, let's pull down the image that will be used in the example workflow. Tinkerbell uses Docker registry to host images locally, so pull down the ["Hello World" docker image](https://hub.docker.com/_/hello-world/) and push it to the registry.
 
 Let's trust the SSL certs of the registry container.
+
 ```
 cd /vagrant/compose && source .env
 echo | openssl s_client -showcerts -connect $TINKERBELL_HOST_IP:443 2>/dev/null | openssl x509 | sudo tee /usr/local/share/ca-certificates/tinkerbell.crt
 sudo update-ca-certificates
 sudo systemctl restart docker
 ```
+
 Then let's login, get the image, and upload it to our registry.
+
 ```
 docker login $TINKERBELL_HOST_IP -u admin -p Admin1234
 docker pull hello-world
 docker tag hello-world $TINKERBELL_HOST_IP/hello-world
 docker push $TINKERBELL_HOST_IP/hello-world
 ```
+
 At this point, you might want to open a separate terminal  window to show logs from the Provisioner, because it will show what the `tink-server` is doing through the rest of the setup. Open a new terminal, ssh in to the provisioner as you did before, and run `docker-compose logs -f` to tail logs.
 
 ```
@@ -132,7 +136,7 @@ Later in the tutorial you can check the logs from `tink-server` in order to see 
 
 With the provisioner up and running, it's time to set up the worker's configuration.
 
-First, define the Worker's hardware data, which is used to identify the Worker as the target of a workflow. Very minimal hardware data is required for this example, but it does at least need to contain the MAC Address of the Worker, which is hardcoded in the Vagrant file!!!!!!, and have the Worker set to allow PXE booting and accept workflows.
+First, define the Worker's hardware data, which is used to identify the Worker as the target of a workflow. Very minimal hardware data is required for this example, but it does at least need to contain the MAC Address of the Worker, which is hardcoded in the Vagrant file, and have the Worker set to allow PXE booting and accept workflows.
 
 ```
 cat > hardware-data.json <<EOF
@@ -169,7 +173,7 @@ cat > hardware-data.json <<EOF
 EOF
 ```
 
-Then, push the hardware data to the database with the `tink hardware push` command. 
+Then, push the hardware data to the database with the `tink hardware push` command.
 
 ```
 docker exec -i compose_tink-cli_1 tink hardware push < ./hardware-data.json
