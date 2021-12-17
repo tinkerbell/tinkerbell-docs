@@ -47,7 +47,7 @@ mv ./focal-server-cloudimg-amd64.raw ./sandbox/deploy/state/webroot`
 
 ### Creating the Template
 
-The template uses actions from the [artifact.io](https://artifact.io) hub.
+The template uses [actions](https://github.com/artifacthub/hub/blob/master/docs/metadata/artifacthub-pkg.yml) from the [artifacthub.io](https://artifacthub.io).
 
 - [image2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) - to write the OS image to a block device.
 - [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
