@@ -11,7 +11,7 @@ More than a documentation, this is an example of installing Tinkerbell in a home
 2. Tink Server
 3. Tink CLI
 4. PostgreSQL
-5. And everything that runs as part of the [docker-compose in sandbox](https://github.com/tinkerbell/sandbox/blob/main/deploy/docker-compose.yml)
+5. And everything that runs as part of the [docker-compose in sandbox](https://github.com/tinkerbell/sandbox/blob/main/deploy/compose/docker-compose.yml)
 
 This page is inspired by [Aaron](https://geekgonecrazy.com/) a community member who wrote ["Tinkerbell or iPXE boot on OVH"](https://geekgonecrazy.com/2020/09/07/tinkerbell-or-ipxe-boot-on-ovh/).
 
