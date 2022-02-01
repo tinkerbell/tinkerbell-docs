@@ -7,6 +7,7 @@ date: 2020-07-06
 
 Everything you need to know about Tinkerbell and its major component microservices.
 ​
+
 ## What is Tinkerbell?
 
 Tinkerbell is an open-source, bare metal provisioning engine, built by the team at Equinix Metal.
@@ -15,7 +16,7 @@ Interested in contributing? Check out our [Contributors' Page](https://tinkerbel
 
 ## What's Powering Tinkerbell?
 
-The Tinkerbell stack consists of several microservices, and a grpc API: 
+The Tinkerbell stack consists of several microservices, and a grpc API:
 
 - [**Tink**](https://github.com/tinkerbell/tink) - Tink is the short-hand name for the [`tink-server`](/services/tink-server), [`tink-worker`](/services/tink-worker), and [`tink-cli`](/services/tink-cli). `tink-worker` and `tink-server` communicate over gRPC, and are responsible for processing workflows. The CLI is the user-interactive piece for creating workflows and their building blocks, templates and hardware data.
 
@@ -37,14 +38,12 @@ In addition to the microservices, there are three pieces of infrastructure:
 
 - [**NGINX**](https://www.nginx.com/) - NGINX is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache. Tinkerbell uses NGINX to serve the required boot files and OS images during workflow execution.
 
-
 ## First Steps
 
 ​New to Tinkerbell or bare metal provisioning? This is a great place to start!
 
 - Getting Started - Set up Tinkerbell [locally with vagrant](/setup/local-vagrant/) or on [Equinix Metal with Terraform](/setup/equinix-metal-terraform/).
 - Run [hello world](workflows/hello-world-workflow) to see Tinkerbell in action.​
-
 
 ## Get Help
 

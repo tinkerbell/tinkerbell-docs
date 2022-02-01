@@ -3,7 +3,6 @@ title: Extending the Vagrant Setup
 date: 2020-08-14
 ---
 
-
 # Extending the Vagrant Setup
 
 If you have followed the guide to getting Vagrant set up locally, you might be interested in other things you can do with it. There are some steps that you may need to take in order to make the setup a bit more functional.

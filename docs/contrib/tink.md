@@ -3,7 +3,6 @@ title: Contributing to Tink
 date: 2021-02-02
 ---
 
-
 Tink is the collective term for the codebase that lives in the [`tinkerbell/tink`](https://github.com/tinkerbell/tink) repository, which is a monorepo for the [`tink-cli`](/services/tink-cli), [`tink-server`](/services/tink-server), and [`tink-worker`](/services/tink-worker).
 
 These 3 sub-projects share the same repo because they have a lot of code in common, mainly coming from the gRPC client and server. This repository contains the generated gRPC client for Golang as well.

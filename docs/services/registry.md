@@ -11,10 +11,10 @@ Container images are also efficient in the way they are built, cached and shippe
 
 You can use any registry you want:
 
-* It can be a self hosted one like: [distribution](https://github.com/distribution/distribution) or Harbor(https://goharbor.io/)
-* A public one like: Quay or Docker Hub
-* A SaaS like GiHub container registry.
-* Or even a mix of everything, it is not important
+- It can be a self hosted one like: [distribution](https://github.com/distribution/distribution) or Harbor(https://goharbor.io/)
+- A public one like: Quay or Docker Hub
+- A SaaS like GiHub container registry.
+- Or even a mix of everything, it is not important
 
 ## How and where the registry sits in Tinkerbell stack
 

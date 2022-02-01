@@ -143,7 +143,7 @@ cd ./deploy
 docker-compose up -d
 ```
 
-To check if all the services are up and running you can use `docker-compose`. 
+To check if all the services are up and running you can use `docker-compose`.
 
 ```
 docker-compose ps
@@ -339,6 +339,7 @@ scp ${TOP:?}/crocodile/images/tink-ubuntu-2004.raw.gz root@${PROV:?}:tink/deploy
 ```
 
 Create a workflow for deploying Ubuntu to your bare metal worker
+
 ```
 cat > focal.yaml <<EOF
 version: "0.1"

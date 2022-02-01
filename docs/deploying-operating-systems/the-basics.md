@@ -5,7 +5,7 @@ date: 2021-02-16
 
 # The Basics of Deploying an Operating System
 
-This guide covers deploying Operating Systems, this is important as not all Operating Systems are designed to be deployed in the same manner. Some Operating Systems depend on being laid out on a disk in a specific way, some are almost completely dependent on actually being "installed" and others can be easily automated for quick deployment but require additional steps to customise afterwards. 
+This guide covers deploying Operating Systems, this is important as not all Operating Systems are designed to be deployed in the same manner. Some Operating Systems depend on being laid out on a disk in a specific way, some are almost completely dependent on actually being "installed" and others can be easily automated for quick deployment but require additional steps to customise afterwards.
 
 ## Getting an Operating System Deployed
 
@@ -33,7 +33,7 @@ Operating Systems were originally designed to be ran on hardware of a predetermi
 
 All of these factors suddenly required an Operating System to support more and more types of hardware and it’s required configuration(s), furthermore end-users required the capability to tailor an Operating System to behave as needed. To provide this functionality Operating System vendors built rudimentary user interfaces that would ask questions or provide the capability for a user installing the OS to set various configuration options. This worked for a period of time but as more and more computer systems were deployed this became an administrative nightmare, as it was impossible to automate multiple installations as they required interaction to proceed and finally the need for humans to interact brings about the possibility of human error during the deployment.
 
-In order for large scale IT system installations to take place then operations needed a method for [unattended installations](https://en.wikipedia.org/wiki/Installation_(computer_programs)), where installations can happen without any involvement. The technique for this to work was to modify the Operating System installation code so that it could take a file that can answer all of the questions that would have previously required user input in order to progress the installation. These technologies are all named in a way that reflects that:
+In order for large scale IT system installations to take place then operations needed a method for [unattended installations](<https://en.wikipedia.org/wiki/Installation_(computer_programs)>), where installations can happen without any involvement. The technique for this to work was to modify the Operating System installation code so that it could take a file that can answer all of the questions that would have previously required user input in order to progress the installation. These technologies are all named in a way that reflects that:
 
 - preseed
 - answer file(s)
@@ -60,7 +60,7 @@ A **partition** defines some ring-fenced capacity on an underlying device that c
 
 Now that we know the makeup of a disk we can see that there are lots of different things that we may need to be aware of, such as type of boot loader, size or number of partitions, type of file systems and then the files and packages that need installing within those partitions.
 
-We can safely move away from all of this by taking a full copy of the disk! Starting from position 0 we can read every byte until we’ve reached the end of the disk (EOF) and we have a full copy of *everything* from boot loaders to partitions and the underlying files.
+We can safely move away from all of this by taking a full copy of the disk! Starting from position 0 we can read every byte until we’ve reached the end of the disk (EOF) and we have a full copy of _everything_ from boot loaders to partitions and the underlying files.
 
 The steps for creating and using a machine image are usually:
 
@@ -70,11 +70,11 @@ The steps for creating and using a machine image are usually:
 
 ### Filesystem archives
 
-The other alternative that is common for Operating System deployment is a hybrid of the two above, and involves an a compressed archive of all files that would make up the Operating System. It usually requires the block devices on the server to have been partitioned and formatted in advance in order for the files in the archive to be written to the filesystem. Once the contents of the archive have been written to the filesystem, the remaining steps are to install a boot loader and perform and post-installation configuration (accounts/network configuration). 
+The other alternative that is common for Operating System deployment is a hybrid of the two above, and involves an a compressed archive of all files that would make up the Operating System. It usually requires the block devices on the server to have been partitioned and formatted in advance in order for the files in the archive to be written to the filesystem. Once the contents of the archive have been written to the filesystem, the remaining steps are to install a boot loader and perform and post-installation configuration (accounts/network configuration).
 
 #### Creating a filesystem archive
 
-A number of Linux Distributions provide a root file system archive that can already be downloaded quite easily, or a method to create your own: 
+A number of Linux Distributions provide a root file system archive that can already be downloaded quite easily, or a method to create your own:
 
 - [Ubuntu](http://cdimage.ubuntu.com/ubuntu-base/releases/20.04/release/)
 - [Debian](https://wiki.debian.org/Debootstrap)

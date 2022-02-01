@@ -19,8 +19,8 @@ In this project we will use [Sandbox](https://github.com/tinkerbell/sandbox) and
 
 This guide also provides a little more of an explanation with very little automation for what happens under the hood in guides like:
 
-* [Local Setup with Vagrant](/setup/local-vagrant)
-* [Equinix Metal Setup with Terraform](/setup/equinix-metal-terraform)
+- [Local Setup with Vagrant](/setup/local-vagrant)
+- [Equinix Metal Setup with Terraform](/setup/equinix-metal-terraform)
 
 ## Prerequisites
 
@@ -106,7 +106,7 @@ export ROLLBAR_TOKEN=ignored
 export ROLLBAR_DISABLE=1
 ```
 
-The `./.env` file has some explanatory comments, but there are a few things to note about the contents. The environment variables in the `Tinkerbell Stack version` block pin the various parts of the stack to a specific version. You can think of  it as a release bundle.
+The `./.env` file has some explanatory comments, but there are a few things to note about the contents. The environment variables in the `Tinkerbell Stack version` block pin the various parts of the stack to a specific version. You can think of it as a release bundle.
 
 > If you are developing or you want to test a different version of a particular tool let's say Hegel, you can build and push a docker image, replace `TINKERBELL_TINK_HEGEL_IMAGE` with your tag and you are good to go.
 
@@ -114,6 +114,7 @@ Tinkerbell needs a static and predictable IP, that's why the `setup.sh` script s
 
 If your Tinkerbell host IP and LAN CIDR is different than `192.168.1.1/29`, you
 can set the following environment variables before running the script:
+
 ```sh
 export TINKERBELL_HOST_IP="10.1.1.11"
 export TINKERBELL_CIDR="24"

@@ -22,7 +22,7 @@ Currently, we are doing a lot of work around:
 - We have to write an end-to-end testing framework that we can use to run integration tests on the entire project.
 - Documentation, documentation, documentation!
 
-Some advice for getting started is to figure out a way to scope your contribution to a single repository. This is a good practice because it simplifies development and helps us to avoid breaking changes. 
+Some advice for getting started is to figure out a way to scope your contribution to a single repository. This is a good practice because it simplifies development and helps us to avoid breaking changes.
 
 At this current stage we are far from out first stable release, which means that occasionally we will have breaking changes. For more on our policy about breaking changes, check out the [proposal regarding breaking changes](https://github.com/tinkerbell/proposals/blob/main/proposals/0011/README.md).
 

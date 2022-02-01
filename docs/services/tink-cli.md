@@ -6,7 +6,7 @@ date: 2021-02-03
 # Tink CLI
 
 The `tink-cli` is an utility provided by the Tinkerbell community. It is open
-source and you can find it as part of the 
+source and you can find it as part of the
 [tinkerbell/tink](https://github.com/tinkerbell/tink) repository.
 
 It is used as part of sandbox and delivered as a container or as binary.
@@ -112,5 +112,3 @@ $ go build -o tink cmd/tink-cli/main.go
 The Tink CLI includes commands to create and manage workflows, templates, and hardware data. Complete usage information is available from `tink --help` or `tink <command> --help`.
 
 There is an ongoing effort to have a more consistent set of commands. Watch out for breaking changes and deprecations. In case of confusion, run `tink --help`.
-
-

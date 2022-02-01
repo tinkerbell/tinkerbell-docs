@@ -13,7 +13,7 @@ This guide walks through the process of deploying Debian through:
 
 ## Using an Operating System Image
 
-Debian distributes their Operating System in a number of different formats, which are all available on the `cloud-images` web site: [https://cdimage.debian.org/cdimage/cloud/OpenStack/current/](https://cdimage.debian.org/cdimage/cloud/OpenStack/current/). 
+Debian distributes their Operating System in a number of different formats, which are all available on the `cloud-images` web site: [https://cdimage.debian.org/cdimage/cloud/OpenStack/current/](https://cdimage.debian.org/cdimage/cloud/OpenStack/current/).
 
 Below are two examples of images we can use:
 
@@ -53,7 +53,7 @@ mv ./debian-10-openstack-amd64.raw.gz ./sandbox/deploy/state/webroot
 The template uses actions from the [artifact.io](https://artifact.io) hub.
 
 - [image2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) - to write the OS image to a block device.
-- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system. 
+- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
 
 ```
 version: "0.1"
@@ -105,7 +105,7 @@ docker rm $TMPRFS
 gzip ./debian_rootfs.tar
 ```
 
-The raw image will need to live at a locally accessible web server. To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`. 
+The raw image will need to live at a locally accessible web server. To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
 
 ```
 mv ./debian_rootfs.tar.gz ./sandbox/deploy/state/webroot
@@ -118,7 +118,7 @@ The template uses actions from the [artifact.io](https://artifact.io) hub.
 - [rootio](https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio) - to partition our disk and make filesystems.
 - [archive2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk) - to write the OS image to a block device.
 - [cexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/cexec) - to run commands inside (chroot) our newly provisioned operating system.
-- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system. 
+- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
 
 ```
 version: "0.1"

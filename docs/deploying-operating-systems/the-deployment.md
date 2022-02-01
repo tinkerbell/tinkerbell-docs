@@ -9,7 +9,7 @@ In the majority of cases there will be a number of steps required before we're a
 
 ## Using an OS Image
 
-Not all Operating System images are distributed in the same formats, and in most use-cases either pre-preperation or conversion to a supported image type will be required. 
+Not all Operating System images are distributed in the same formats, and in most use-cases either pre-preperation or conversion to a supported image type will be required.
 
 ### Preparing the Image
 
@@ -140,7 +140,7 @@ Once this action has completed we will have successfully modified the underlying
 
 ### Extracting the OS to the Filesystem
 
-As detailed in [The Basics of Deploying an Operating System](https://docs.tinkerbell.org/deploying-operating-systems/the-basics/#filesystem-archives), we can download or create a filesystem archive in a number of different ways. Once we have a compressed archive of all of the files that make up the Operating System, we will again need to use an action to manage the task of fetching the archive and extracting it to our newly formatted file system. The action [archive2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk) has the functionality to **mount** a filesystem and both **stream**/**extract** a filesystem archive directly to the new filesystem. 
+As detailed in [The Basics of Deploying an Operating System](https://docs.tinkerbell.org/deploying-operating-systems/the-basics/#filesystem-archives), we can download or create a filesystem archive in a number of different ways. Once we have a compressed archive of all of the files that make up the Operating System, we will again need to use an action to manage the task of fetching the archive and extracting it to our newly formatted file system. The action [archive2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk) has the functionality to **mount** a filesystem and both **stream**/**extract** a filesystem archive directly to the new filesystem.
 
 ```
 actions:
@@ -157,11 +157,11 @@ actions:
 
 ### Installing a Boot Loader
 
-Whilst we may have deployed a full Operating System to our persistent storage, it will be rendered useless at a *reboot* unless we install a boot loader so that the machine knows how to load this new OS. We can automate this process by providing another action whose role would be to execute a command such as `grub-install` or `sysinux` to write the bootloader code to the beginning of the block device where the BIOS knows where to look for it on machine startup.
+Whilst we may have deployed a full Operating System to our persistent storage, it will be rendered useless at a _reboot_ unless we install a boot loader so that the machine knows how to load this new OS. We can automate this process by providing another action whose role would be to execute a command such as `grub-install` or `sysinux` to write the bootloader code to the beginning of the block device where the BIOS knows where to look for it on machine startup.
 
 ## Using an Installer
 
-Some Operating Systems may require a combination of the two above examples for deployment, however there are other Operating Systems that can also be deployed through the use of an installer. 
+Some Operating Systems may require a combination of the two above examples for deployment, however there are other Operating Systems that can also be deployed through the use of an installer.
 
 These typically will require an installer binary to exist, as well as:
 

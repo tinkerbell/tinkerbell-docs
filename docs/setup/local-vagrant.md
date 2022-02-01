@@ -24,7 +24,7 @@ The last step is to start up the Worker, which will call back to the Provisioner
 - [Vagrant](https://www.vagrantup.com/downloads) is installed
 - Either [VirtualBox](https://www.virtualbox.org/) or [libvirtd](https://libvirt.org/) is installed.
 - If using VirtualBox be sure to install both:
-  - The Vagrant *vagrant-vbguest* plugin: `vagrant plugin install vagrant-vbguest`
+  - The Vagrant _vagrant-vbguest_ plugin: `vagrant plugin install vagrant-vbguest`
   - The [VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads)
 - If using VirtualBox, you may get an error about valid IP addresses for host-only networks. [This page from the Virtual Box manual explains how to add additional address ranges to your setup.](https://www.virtualbox.org/manual/ch06.html#network_hostonly)
 
@@ -52,7 +52,6 @@ rm ../compose/manifests/hardware/hardware.json
 rm ../compose/manifests/template/ubuntu-libvirt.yaml
 rm ../compose/manifests/template/ubuntu.yaml
 ```
-
 
 Since Vagrant is handling the Provisioner's configuration, including installing the Tinkerbell stack, run the command to start it up.
 
@@ -98,8 +97,6 @@ compose_ubuntu-image-setup_1         /scripts/setup_ubuntu.sh h ...   Exit 0
 
 ```
 
-
-
 ## Preparing an action image
 
 As you'll see shortly, each step in a Tinkerbell workflow is referred to as an Action Image, and is simply a Docker image. Before you move ahead, let's pull down the image that will be used in the example workflow. Tinkerbell uses Docker registry to host images locally, so pull down the ["Hello World" docker image](https://hub.docker.com/_/hello-world/) and push it to the registry.
@@ -122,7 +119,7 @@ docker tag hello-world $TINKERBELL_HOST_IP/hello-world
 docker push $TINKERBELL_HOST_IP/hello-world
 ```
 
-At this point, you might want to open a separate terminal  window to show logs from the Provisioner, because it will show what the `tink-server` is doing through the rest of the setup. Open a new terminal, ssh in to the provisioner as you did before, and run `docker-compose logs -f` to tail logs.
+At this point, you might want to open a separate terminal window to show logs from the Provisioner, because it will show what the `tink-server` is doing through the rest of the setup. Open a new terminal, ssh in to the provisioner as you did before, and run `docker-compose logs -f` to tail logs.
 
 ```
 cd sandbox/deploy/vagrant
@@ -132,6 +129,7 @@ docker-compose logs -f tink-server boots osie-bootloader
 ```
 
 Later in the tutorial you can check the logs from `tink-server` in order to see the execution of the workflow.
+
 ## Creating the Worker's Hardware Data
 
 With the provisioner up and running, it's time to set up the worker's configuration.
@@ -271,7 +269,6 @@ docker exec -i compose_tink-cli_1 tink workflow events a8984b09-566d-47ba-b6c5-f
 ## Summary
 
 Getting set up locally is a good way to sample Tinkerbell's functionality. The Vagrant set up is not necessarily intended to be persistent, but while it's up and running, you can use the Provisioner to test out the CLI commands or just explore the stack.
-
 
 If you are looking to extend your local setup to develop or test out other workflows, check out the [Extending the Vagrant Setup](/setup/extending-vagrant) doc.
 

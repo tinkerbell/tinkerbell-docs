@@ -29,13 +29,13 @@ a70a54baff08        deploy_hegel_1         0.00%               2.984MiB / 7.79Gi
 2fa8a6064036        deploy_nginx_1         0.00%               2.867MiB / 7.79GiB   0.04%               341kB / 0B          0B / 0B             3
 ```
 
-We can see that the components for the Tinkerbell stack are particularly light, with this in mind we can be very confident that we can have all of our userland components (tinkerbell/docker/bash etc..) within 1 GB of ram and leave all remaining memory for the virtual machines. 
+We can see that the components for the Tinkerbell stack are particularly light, with this in mind we can be very confident that we can have all of our userland components (tinkerbell/docker/bash etc..) within 1 GB of ram and leave all remaining memory for the virtual machines.
 
 That brings us onto the next part, which is how big should the virtual machines be?
 
 ### Operating System Installation Environment (OSIE)
 
-Every machine that is booted by Tinkerbell will be passed the in-memory Operating System called `OSIE` which is an alpine based Linux OS that ultimately will run the workflows. As this is all in-memory, we will need to account for a few things before we install our Operating System through a workflow. 
+Every machine that is booted by Tinkerbell will be passed the in-memory Operating System called `OSIE` which is an alpine based Linux OS that ultimately will run the workflows. As this is all in-memory, we will need to account for a few things before we install our Operating System through a workflow.
 
 - OSIE kernel
 - OSIE RAM Disk (Includes Alpine userland and the docker engine) - The **OSIE Ram Disk**, whilst it looks like a normal filesystem, is actually held in the memory of the host itself so it will immediately withhold that memory from other usage.
@@ -44,7 +44,7 @@ Every machine that is booted by Tinkerbell will be passed the in-memory Operatin
 
 The majority of this memory usage is for the in-memory filesystem in order to host the userland tools and the images listed in the workflow. From testing we've normally seen that **> 2 GB** is required, however if your workflow consists of large action images then this will need adjusting accordingly.
 
-With all this in consideration, we can use Equinix Metal machines T-Shirt sizes to determine the size of machine required. Given the minimal overhead for Tinkerbell and userland then a `t1.small.x86`  with 1 CPU and 8 GB of RAM is sufficient. However if you're looking at deploying multiple machines with Tinkerbell then ideally a machine with 32 GB of ram will comfortably allow a comfortable amount of headroom.
+With all this in consideration, we can use Equinix Metal machines T-Shirt sizes to determine the size of machine required. Given the minimal overhead for Tinkerbell and userland then a `t1.small.x86` with 1 CPU and 8 GB of RAM is sufficient. However if you're looking at deploying multiple machines with Tinkerbell then ideally a machine with 32 GB of ram will comfortably allow a comfortable amount of headroom.
 
 ### Recommended machine size and OS
 
@@ -64,27 +64,28 @@ For speed of deployment and modernity of the Operating System, either Ubuntu 18.
 
 This examples uses a `c3.small.x86` in the Amsterdam facility `ams6` with `ubuntu 20.04`. Once our machine is up and running, we'll need to install our required packages for running Tinkerbell and our virtual machines.
 
-1. Update the packages.
+1.  Update the packages.
 
     ```
     apt-get update -y
     ```
 
-2. Install the required dependencies.
+2.  Install the required dependencies.
 
-    ```
-    apt-get install -y apt-transport-https \
-     ca-certificates \
-     curl \
-     gnupg-agent \
-     software-properties-common \
-     qemu-kvm \
-     libguestfs-tools \
-     libosinfo-bin \
-     git
-     jq
-    ```
-This installation method also requires Docker and [`docker-compose`](https://docs.docker.com/compose/install/#install-compose-on-linux-systems):
+        ```
+        apt-get install -y apt-transport-https \
+         ca-certificates \
+         curl \
+         gnupg-agent \
+         software-properties-common \
+         qemu-kvm \
+         libguestfs-tools \
+         libosinfo-bin \
+         git
+         jq
+        ```
+
+    This installation method also requires Docker and [`docker-compose`](https://docs.docker.com/compose/install/#install-compose-on-linux-systems):
 
 ```
     apt-get install -y docker.io ; \
@@ -94,77 +95,77 @@ This installation method also requires Docker and [`docker-compose`](https://doc
 
 3. Grab shack (QEMU wrapper).
 
-    ```
-    wget https://github.com/plunder-app/shack/releases/download/v0.0.0/shack-0.0.0.tar.gz; \
-    tar -xvzf shack-0.0.0.tar.gz; \
-    mv shack /usr/local/bin
-    ```
+   ```
+   wget https://github.com/plunder-app/shack/releases/download/v0.0.0/shack-0.0.0.tar.gz; \
+   tar -xvzf shack-0.0.0.tar.gz; \
+   mv shack /usr/local/bin
+   ```
 
 4. Create our internal Tinkerbell network (optional).
 
-    ```
-    sudo ip link add tinkerbell type bridge
-    ```
+   ```
+   sudo ip link add tinkerbell type bridge
+   ```
 
 5. Create shack configuration.
 
-    ```
-    shack example > shack.yaml
-    ```
+   ```
+   shack example > shack.yaml
+   ```
 
 6. Edit and apply the configuration.
 
-    Change the bridgeName: from `plunder` to `tinkerbell`, then run `shack network create`. This will create a new interface on our Tinkerbell bridge
+   Change the bridgeName: from `plunder` to `tinkerbell`, then run `shack network create`. This will create a new interface on our Tinkerbell bridge
 
-    Run `shack network create`
+   Run `shack network create`
 
 7. Test virtual machine creation.
 
-    ```
-    shack vm start --id f0cb3c -v
-    <...>
-    shack VM configuration
-    Network Device:	plndrVM-f0cb3c
-    VM MAC Address:	c0:ff:ee:f0:cb:3c
-    VM UUID:	f0cb3c
-    VNC Port:	6671
-    ```
+   ```
+   shack vm start --id f0cb3c -v
+   <...>
+   shack VM configuration
+   Network Device:	plndrVM-f0cb3c
+   VM MAC Address:	c0:ff:ee:f0:cb:3c
+   VM UUID:	f0cb3c
+   VNC Port:	6671
+   ```
 
-    We can also examine that this has worked, by examining `ip addr`:
+   We can also examine that this has worked, by examining `ip addr`:
 
-    ```
-    11: tinkerbell: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
-        link/ether 2a:27:61:44:d2:07 brd ff:ff:ff:ff:ff:ff
-        inet 192.168.1.1/24 brd 192.168.1.255 scope global plunder
-           valid_lft forever preferred_lft forever
-        inet6 fe80::bcc7:caff:fe63:8016/64 scope link 
-           valid_lft forever preferred_lft forever
-    12: plndrVM-f0cb3c: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel master plunder state UP group default qlen 1000
-        link/ether 2a:27:61:44:d2:07 brd ff:ff:ff:ff:ff:ff
-        inet6 fe80::2827:61ff:fe44:d207/64 scope link 
-           valid_lft forever preferred_lft forever
-    ```
+   ```
+   11: tinkerbell: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default
+       link/ether 2a:27:61:44:d2:07 brd ff:ff:ff:ff:ff:ff
+       inet 192.168.1.1/24 brd 192.168.1.255 scope global plunder
+          valid_lft forever preferred_lft forever
+       inet6 fe80::bcc7:caff:fe63:8016/64 scope link
+          valid_lft forever preferred_lft forever
+   12: plndrVM-f0cb3c: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel master plunder state UP group default qlen 1000
+       link/ether 2a:27:61:44:d2:07 brd ff:ff:ff:ff:ff:ff
+       inet6 fe80::2827:61ff:fe44:d207/64 scope link
+          valid_lft forever preferred_lft forever
+   ```
 
-    Connect to the VNC port with a client (the random port generated in this example is `6671`).. it will be exposed on the public address of our Equinix Metal host.
+   Connect to the VNC port with a client (the random port generated in this example is `6671`).. it will be exposed on the public address of our Equinix Metal host.
 
-    Kill the VM:
+   Kill the VM:
 
-    ```
-    shack vm stop --id f0cb3c -d
-    ```
+   ```
+   shack vm stop --id f0cb3c -d
+   ```
 
 8. Install sandbox dependencies.
 
-    The steps for deploying the Tinkerbell sandbox can be found here [https://docs.tinkerbell.org/setup/on-bare-metal-with-docker/#getting-tinkerbell](https://docs.tinkerbell.org/setup/on-bare-metal-with-docker/#getting-tinkerbell)
+   The steps for deploying the Tinkerbell sandbox can be found here [https://docs.tinkerbell.org/setup/on-bare-metal-with-docker/#getting-tinkerbell](https://docs.tinkerbell.org/setup/on-bare-metal-with-docker/#getting-tinkerbell)
 
-    As we're using QEMU and the shack program we will need to set things up slightly different, using the steps below.
+   As we're using QEMU and the shack program we will need to set things up slightly different, using the steps below.
 
 9. Configure the sandbox.
 
-    ```
-    ./generate-envrc.sh tinkerbell > .env
-    ./setup.sh
-    ```
+   ```
+   ./generate-envrc.sh tinkerbell > .env
+   ./setup.sh
+   ```
 
 10. Start Tinkerbell.
 
@@ -186,33 +187,33 @@ This installation method also requires Docker and [`docker-compose`](https://doc
 
 1. Clone the Debian repository.
 
-    ``` 
-    cd $HOME
-    git clone https://github.com/fransvanberckel/debian-workflow
-    cd debian-workflow/debian
-    ```
+   ```
+   cd $HOME
+   git clone https://github.com/fransvanberckel/debian-workflow
+   cd debian-workflow/debian
+   ```
 
 2. Build the Debian content.
 
-    ```
-    ./verify_json_tweaks.sh 
-    # The JSON syntax is valid
-    ./build_and_push_images.sh
-    ```
+   ```
+   ./verify_json_tweaks.sh
+   # The JSON syntax is valid
+   ./build_and_push_images.sh
+   ```
 
 3. Edit the configuration.
 
-    Modify the `create_tink_workflow.sh` so that the mac address is `c0:ff:ee:f0:cb:3c`, this is the mac address we will be using as part of our demonstration. 
+   Modify the `create_tink_workflow.sh` so that the mac address is `c0:ff:ee:f0:cb:3c`, this is the mac address we will be using as part of our demonstration.
 
-    For using VNC, modify the `facility.facility_code` from `"onprem"` to `"onprem console=ttys0 vha=normal"`. This will ensure all output is printed to the VNC window that we connect to.
+   For using VNC, modify the `facility.facility_code` from `"onprem"` to `"onprem console=ttys0 vha=normal"`. This will ensure all output is printed to the VNC window that we connect to.
 
 4. Create the workflow.
 
-    Here we will be asked for some password credentials for our new machine:
+   Here we will be asked for some password credentials for our new machine:
 
-    ```
-    ./create_tink_workflow.sh
-    ```
+   ```
+   ./create_tink_workflow.sh
+   ```
 
 ## Start our virtual host to install on!
 
@@ -232,8 +233,8 @@ We can now watch the install on the VNC port `6671`
 
 - **could not configure /dev/net/tun (plndrVM-f0cb3c): Device or resource busy**
 
-    This means that an old QEMU session left an old adapter, we can remove it with the command, `ip link delete plndrVM-f0cb3c`.
+  This means that an old QEMU session left an old adapter, we can remove it with the command, `ip link delete plndrVM-f0cb3c`.
 
-- **Is another process using the image [f0cb3c.qcow2]?** 
+- **Is another process using the image [f0cb3c.qcow2]?**
 
-    We've left an old disk image laying around, we can remove this with `rm`.
+  We've left an old disk image laying around, we can remove this with `rm`.

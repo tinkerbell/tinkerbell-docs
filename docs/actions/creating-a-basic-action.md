@@ -5,7 +5,6 @@ date: 2021-02-15
 
 # Creating a Basic Action
 
-
 This guide will step through creating a basic action, whilst also discussing a number of things an action builder should be aware of.
 
 ## Basic principles for an action
@@ -13,14 +12,14 @@ This guide will step through creating a basic action, whilst also discussing a n
 Ideally when creating an action it should follow a few basic principles:
 
 - Minimal image size (action images need to be downloaded to `tmpfs` and will use the servers memory both at rest and runtime)
-- Single use, one action should not try to do all things. Actions should follow the linux philosophy of do one thing, and do one thing well. 
+- Single use, one action should not try to do all things. Actions should follow the linux philosophy of do one thing, and do one thing well.
 - Image re-use, where possible an image should be both simple and single-use but have the ability to be customised for other users.
 - Chain together well with other actions, most actions will store in-use data on `/statedir`. Keeping with these standards ensures other actions know where to find this persistent data.
 - Fail on unrecoverable error, an action when it encounters a point it can't continue should fail (with sufficient logging). No other changes should occur allowing the Tinkerbell operator the capability to debug why this failure has taken place.
 
 ## Our example action
 
-A common task is manipulating the filesystem of the newly provisioned Operating System, there are numerous reasons for this such as users, network config, ssh keys or other files that require change. This example will use bash to make it as simple as possible to understand, however the we're aiming to use Golang where possible for a lot of the tinkerbell actions on the [hub](https://github.com/tinkerbell/hub/tree/main/actions). 
+A common task is manipulating the filesystem of the newly provisioned Operating System, there are numerous reasons for this such as users, network config, ssh keys or other files that require change. This example will use bash to make it as simple as possible to understand, however the we're aiming to use Golang where possible for a lot of the tinkerbell actions on the [hub](https://github.com/tinkerbell/hub/tree/main/actions).
 
 Our simple action will mount our newly provisioned Operating System, and [touch](https://www.tecmint.com/8-pratical-examples-of-linux-touch-command/) a file to a location that we have specified.
 
@@ -41,7 +40,7 @@ set -x
 # Check that the environment variable is set, so we know what device to mount
 if [[ ! -v BLOCK_DEVICE ]]; then
   echo "BLOCK_DEVICE NEEDS SETTING"
-  exit 1  
+  exit 1
 fi
 
 # Check for other variables FS_TYPE / TOUCH_PATH
@@ -93,7 +92,7 @@ actions:
 	  TOUCH_PATH: /tmp/hello
 ```
 
-In an ideal scenario previous actions will do things such as wipe disks and create filesystems, allowing us to use the partition/filesystem in later actions. 
+In an ideal scenario previous actions will do things such as wipe disks and create filesystems, allowing us to use the partition/filesystem in later actions.
 
 ## Further reading
 

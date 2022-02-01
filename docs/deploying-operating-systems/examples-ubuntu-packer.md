@@ -5,7 +5,7 @@ date: 2021-04-02
 
 # Deploying Ubuntu from Packer Machine Image
 
-This guide will walk you through how you create a minimalistic raw Ubuntu image using [Packer](https://www.packer.io/), an awesome tool to build automated machine images. 
+This guide will walk you through how you create a minimalistic raw Ubuntu image using [Packer](https://www.packer.io/), an awesome tool to build automated machine images.
 
 Currently, Packer does not officially provide a way to make bare metal machine images. So, in this example, we will use `virtualbox-iso` builder to create a Virtual Machine Disk (VDMK) and then convert it to a raw image.
 
@@ -127,7 +127,7 @@ ubuntu_packer_image
 
 ## Generating the VMDK
 
-Run `packer build` to generate the VMDK and `tar` file. 
+Run `packer build` to generate the VMDK and `tar` file.
 
 ```
 PACKER_LOG=1 packer build config.json

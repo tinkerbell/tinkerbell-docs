@@ -9,7 +9,7 @@ This is a guide which walks through the process of deploying FreeBSD from an ope
 
 ## Getting the Image
 
-FreeBSD distributes their Operating System in a number of different formats, which are all available on the `cloud-images` web site [https://download.freebsd.org/ftp/releases/VM-IMAGES/12.2-RELEASE/amd64/Latest/](https://download.freebsd.org/ftp/releases/VM-IMAGES/12.2-RELEASE/amd64/Latest/). 
+FreeBSD distributes their Operating System in a number of different formats, which are all available on the `cloud-images` web site [https://download.freebsd.org/ftp/releases/VM-IMAGES/12.2-RELEASE/amd64/Latest/](https://download.freebsd.org/ftp/releases/VM-IMAGES/12.2-RELEASE/amd64/Latest/).
 
 Below are two examples of images we can use:
 
@@ -27,7 +27,7 @@ xz -d <file.xz>
 The `raw` image is a disk image which ontains a full partition table (including OS and Swap partition) and boot loader for our FreeBSD system. You can examine this with `losetup`.
 
 ```
-$ losetup -f -P ./FreeBSD-12.2-RELEASE-amd64.raw 
+$ losetup -f -P ./FreeBSD-12.2-RELEASE-amd64.raw
 
 $ fdisk -l /dev/loop1
 
@@ -65,7 +65,7 @@ Once you have a `raw` filesystem image, you can optionally compress the raw imag
 gzip ./FreeBSD-12.2-RELEASE-amd64.raw
 ```
 
-The raw image will need to live at a locally accessible web server. To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the tink-server. 
+The raw image will need to live at a locally accessible web server. To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the tink-server.
 
 ```
 mv ./FreeBSD-12.2-RELEASE-amd64.raw.gz ./sandbox/deploy/state/webroot
@@ -76,7 +76,7 @@ mv ./FreeBSD-12.2-RELEASE-amd64.raw.gz ./sandbox/deploy/state/webroot
 The template uses actions from the [artifact.io](https://artifact.io) hub.
 
 - [image2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) - to write the image to a block device.
-- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system. 
+- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
 
 > Important: Don't forget to pull, tag and push `quay.io/tinkerbell-actions/image2disk:v1.0.0` prior to using it.
 
@@ -107,4 +107,3 @@ tasks:
     	  BLOCK_DEVICE: /dev/sda1
 	  	  FS_TYPE: ext4
 ```
-

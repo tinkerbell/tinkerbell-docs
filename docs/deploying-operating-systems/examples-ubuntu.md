@@ -9,7 +9,7 @@ This guide walks through the process of deploying Ubuntu from either an operatin
 
 ## Using an Operating System Image
 
-Ubuntu is distributed in a number of different formats, which are all available on the `cloud-images` web site: [https://cloud-images.ubuntu.com/daily/server/focal/current/](https://cloud-images.ubuntu.com/daily/server/focal/current/). 
+Ubuntu is distributed in a number of different formats, which are all available on the `cloud-images` web site: [https://cloud-images.ubuntu.com/daily/server/focal/current/](https://cloud-images.ubuntu.com/daily/server/focal/current/).
 
 This example uses the image with the `.img` extension.
 
@@ -18,8 +18,8 @@ focal-server-cloudimg-amd64.img     2021-03-11 22:27  528M  Ubuntu Server 20.04 
 ```
 
 This image is actually a `qcow2` filesystem image and is a **full** disk image including partition tables, partitions filled with filesystems and the files, and importantly, a boot loader at the beginning of the disk image.
-   
-### Converting Image 
+
+### Converting Image
 
 In order to use this image, it needs to be converted into a `raw` filesystem. In order to do the conversion, install the `qemu-img` CLI tool.
 
@@ -84,7 +84,7 @@ tasks:
 
 ### File System Images
 
-Note that it is also possible to install Ubuntu from the compressed filesystem image. 
+Note that it is also possible to install Ubuntu from the compressed filesystem image.
 
 ```
 focal-server-cloudimg-amd64.tar.gz  2021-03-11 22:30  485M  File system image and Kernel packed
@@ -116,7 +116,7 @@ docker rm $TMPRFS
 gzip ./ubuntu_rootfs.tar
 ```
 
-Move the raw image to a locally accessible web server. To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`. 
+Move the raw image to a locally accessible web server. To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
 
 ```
 mv ./ubuntu_rootfs.tar.gz ./sandbox/deploy/state/webroot
@@ -129,7 +129,7 @@ The template makes use of the actions from the artifact hub.
 - [rootio](https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio) - to partition our disk and make filesystems.
 - [archive2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk) - to write the OS image to a block device.
 - [cexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/cexec) - to run commands inside (chroot) our newly provisioned operating system.
-- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system. 
+- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
 
 ```
 version: "0.1"

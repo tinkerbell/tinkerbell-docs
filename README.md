@@ -31,7 +31,7 @@ All the markdown source files for the documentation are in the `docs/` folder. F
 
 ### Page metadata
 
-Currently the metadata for the page is yaml formatted, with two fields: title and date. If you edit a doc, update the date to when you made your edits. 
+Currently the metadata for the page is yaml formatted, with two fields: title and date. If you edit a doc, update the date to when you made your edits.
 
 ### Adding Images
 

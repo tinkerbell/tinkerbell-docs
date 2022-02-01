@@ -7,20 +7,20 @@ date: 2021-03-16
 
 This is a guide which walks through the process of deploying either Red Hat Enterprise Linux (RHEL) or CentOS from an operating system image or a Docker image.
 
-## Using an Operating System Image 
+## Using an Operating System Image
 
 RedHat provides both RHEL and CoreOS images in the RedHat provide RHEL Operating System images in the `qcow2` format.
 
 The CentOS images are available the `cloud-images` web site [https://cloud.centos.org/centos/8/x86_64/images/](https://cloud.centos.org/centos/8/x86_64/images/).
 
-RHEL images require a Red Hat Account in order to download, and are available at (login required): 
+RHEL images require a Red Hat Account in order to download, and are available at (login required):
 
 - RHEL8: [https://access.redhat.com/downloads/content/479/ver=/rhel—8/8.0/x86_64/product-software](https://access.redhat.com/downloads/content/479/ver=/rhel—8/8.0/x86_64/product-software)
 - RHEL7: [https://access.redhat.com/downloads/content/69/ver=/rhel—7/7.1/x86_64/product-downloads](https://access.redhat.com/downloads/content/69/ver=/rhel—7/7.1/x86_64/product-downloads)
 
 A `qcow2` filesystem image which is a **full** disk image including partition tables, partitions filled with filesystems and the files, and importantly, a boot loader at the beginning of the disk image. It will need to be converted to a `raw` filesystem image in order to use it.
 
-### Converting Image 
+### Converting Image
 
 In order to use this image, it needs to be converted into a `raw` filesystem. In order to do the conversion, install the `qemu-img` CLI tool.
 
@@ -48,7 +48,7 @@ mv ./CentOS-8-GenericCloud-8.3.2011-20201204.2.x86_64.raw.gz ./sandbox/deploy/st
 
 ### Fedora CoreOS
 
-CentOS 8 is the last release and will be going EOL at the end of 2021, but following the acquisition of CoreOS by Red Hat, they distribute an additional operating system called Fedora CoreOS. It is available at [https://getfedora.org/en/coreos/download?tab=metal_virtualized&stream=stable](https://getfedora.org/en/coreos/download?tab=metal_virtualized&stream=stable), and distributed in both `raw` and `qcow2` format. 
+CentOS 8 is the last release and will be going EOL at the end of 2021, but following the acquisition of CoreOS by Red Hat, they distribute an additional operating system called Fedora CoreOS. It is available at [https://getfedora.org/en/coreos/download?tab=metal_virtualized&stream=stable](https://getfedora.org/en/coreos/download?tab=metal_virtualized&stream=stable), and distributed in both `raw` and `qcow2` format.
 
 ```
 fedora-coreos-33.20210217.3.0-metal.x86_64.qcow2.xz
@@ -190,31 +190,30 @@ tasks:
 			FS_TYPE: ext4
 ```
 
- 
 ## Using a Docker Image for Red Hat Enterprise Linux
 
 We can easily make use of the **official** docker images to generate a root filesystem for use when deploying with Tinkerbell.
 
 ### Download the RHEL Image
- 
+
 ```
 TMPRFS=$(docker container create registry.access.redhat.com/rhel7:latest)
 docker export $TMPRFS > rhel_rootfs.tar
 docker rm $TMPRFS
 ```
- 
+
 **Optional** - You can compress this filesystem archive to save on both local disk space and network bandwidth when deploying the image.
- 
+
 ```
 gzip ./rhel_rootfs.tar
 ```
- 
-Move the raw image to a locally accessible web server. To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`. 
- 
+
+Move the raw image to a locally accessible web server. To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
+
 ```
 mv ./rhel_rootfs.tar.gz ./sandbox/deploy/state/webroot
 ```
- 
+
 ### Creating the RHEL Template
 
 The template makes use of the actions from the artifact hub.
@@ -223,7 +222,7 @@ The template makes use of the actions from the artifact hub.
 - [archive2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk) - to write the OS image to a block device.
 - [cexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/cexec) - to run commands inside (chroot) our newly provisioned operating system.
 - [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
- 
+
 ```
 version: '0.1'
 name: debian_bullseye_provisioning
@@ -286,5 +285,3 @@ tasks:
 			BLOCK_DEVICE: /dev/sda3
 			FS_TYPE: ext4
 ```
- 
- 

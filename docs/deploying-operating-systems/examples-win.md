@@ -5,11 +5,11 @@ date: 2021-03-24
 
 # Deploying Windows
 
-This is a guide which walks through the process of deploying various Windows versions from an operating system image. 
+This is a guide which walks through the process of deploying various Windows versions from an operating system image.
 
 ## Generating the Images
 
-The [tinkerbell](https://tinkerbell.org) GitHub organization contains a project called [crocodile](https://github.com/tinkerbell/crocodile) that largely automates the entire process of image creation. 
+The [tinkerbell](https://tinkerbell.org) GitHub organization contains a project called [crocodile](https://github.com/tinkerbell/crocodile) that largely automates the entire process of image creation.
 
 The pre-requisites for using the `crocodile` project are:
 
@@ -58,7 +58,7 @@ docker run -it --rm \
 croc:latest
 ```
 
-The command will create the a `packer_cache` folder and an `images` folder in the current folder. These folders will be used for assets and the built OS images, respectively. 
+The command will create the a `packer_cache` folder and an `images` folder in the current folder. These folders will be used for assets and the built OS images, respectively.
 
 ```
                           .--.  .--.
@@ -91,7 +91,7 @@ Select "quit"  when you've finished building Operating Systems
 5) quit
 ```
 
-Select the Operating System you'd like to build and the entire process will begin, including downloading of the required ISO's and configuring of the Operating Systems. 
+Select the Operating System you'd like to build and the entire process will begin, including downloading of the required ISO's and configuring of the Operating Systems.
 
 When it finishes, the newly built Windows Operating Systems will exist in the `images` folder.
 
@@ -159,4 +159,3 @@ tasks:
         volumes:
 	    - /worker:/worker
 ```
-
