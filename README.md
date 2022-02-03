@@ -2,47 +2,28 @@
 
 # Tinkerbell Docs
 
-This is the source repo for the Tinkerbell docs. They are build using static-site generator [`mkdocs`](https://www.mkdocs.org/) and using the [`mkdocs-material`](https://squidfunk.github.io/mkdocs-material/) theme, then served by netlify to [docs.tinkerbell.org](https://docs.tinkerbell.org/). 
+This is the source repo for the Tinkerbell docs.
+They are build using static-site generator [`mkdocs`](https://www.mkdocs.org/) and using the [`mkdocs-material`](https://squidfunk.github.io/mkdocs-material/) theme, then served by netlify to [docs.tinkerbell.org](https://docs.tinkerbell.org/).
 
 ## Development
 
-This repository uses [MkDocs](https://www.mkdocs.org/) as the documentation framework. If you wish, you can install `mkdocs` and `mkdocs-material` to build the docs locally. Make sure to have [Python installed](https://www.python.org/downloads/).
-
-### Virtual environments
-
-Before installing the dependencies of this project, you may decide create a virtual environment. This will prevent you from polluting your global environment with a lot of packages and ensure that you don't get version conflicts between different repositories.
-
-If you dont't want to install additional dependencies, you can use the following commands to create and activate a virtual environment:
+This repository uses [MkDocs](https://www.mkdocs.org/) as the documentation framework and [Poetry](https://python-poetry.org/) to manage it's dependencies.
+Make sure to have [Python installed](https://www.python.org/downloads/).
+If you wish, you can install `mkdocs` and other dependencies to build the docs locally by running the following commands
 
 ```bash
-$ python -m venv .venv
-$ source .venv/bin/activate
+poetry install
+poetry run mkdocs serve
 ```
 
-If you frequently work with Python and you don't mind installing and configuring a new tool, you should have a look at [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/). With `virtualenvwrapper` you can use the following commands to create and activate your virtual environment:
+If you wish to work within a development environment you can use Poetry's virtualenv environment:
 
 ```bash
-$ mkvirtualenv tinkerbell-docs
-$ workon tinkerbell-docs
+$ poetry install
+$ poetry shell
 ```
 
-To deactivate the virtual environment, regardless of which tool you are using, simply run `deactivate`.
-
-### MkDocs
-
-If you are using a virtual environment you can simply install all dependencies by running `pip install -r requirements.txt`.
-
-To [install `mkdocs`](https://www.mkdocs.org/#installation):
-
-`pip install mkdocs`
-
-Next you'll need to [install the `mkdocs-material` theme](https://squidfunk.github.io/mkdocs-material/getting-started/#installation):
-
-`pip install mkdocs-material`
-
-To build locally, clone the repo and from `tinkerbell-docs`, run:
-
-`mkdocs serve`
+To deactivate the virtual environment, simply run `deactivate`.
 
 ## Contributing to the Tinkerbell Docs
 
