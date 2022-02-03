@@ -1,6 +1,6 @@
-/node_modules
 .DS_Store
-.sass-cache
-package-lock.json
 mix-manifest.json
+/node_modules
+package-lock.json
+.sass-cache
 .venv
