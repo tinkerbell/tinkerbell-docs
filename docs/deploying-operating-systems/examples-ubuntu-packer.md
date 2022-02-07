@@ -7,7 +7,8 @@ date: 2021-04-02
 
 This guide will walk you through how you create a minimalistic raw Ubuntu image using [Packer](https://www.packer.io/), an awesome tool to build automated machine images.
 
-Currently, Packer does not officially provide a way to make bare metal machine images. So, in this example, we will use `virtualbox-iso` builder to create a Virtual Machine Disk (VDMK) and then convert it to a raw image.
+Currently, Packer does not officially provide a way to make bare metal machine images.
+So, in this example, we will use `virtualbox-iso` builder to create a Virtual Machine Disk (VDMK) and then convert it to a raw image.
 
 The raw image can then be deployed on a bare metal server using Tinkerbell.
 
@@ -15,7 +16,8 @@ The raw image can then be deployed on a bare metal server using Tinkerbell.
 
 Below are the preseed file and the config file for creating a minimalistic Ubuntu 20.04 image.
 
-When building an image using `virtualbox-iso`, the [preseed file](https://www.packer.io/guides/automatic-operating-system-installs/preseed_ubuntu) will help with automating the deployment. It is placed inside the `http` directory, and the config file references the location of the preseed file in the `boot_command` list of the `builders` object.
+When building an image using `virtualbox-iso`, the [preseed file](https://www.packer.io/guides/automatic-operating-system-installs/preseed_ubuntu) will help with automating the deployment.
+It is placed inside the `http` directory, and the config file references the location of the preseed file in the `boot_command` list of the `builders` object.
 
 - `pressed.cfg`
 
@@ -114,7 +116,8 @@ In config file, the builder type is set to `virtualbox-iso` to generate the VMDK
 }
 ```
 
-Both files are reference files, if you wish to modify something, you can make the changes accordingly. The steps to generate the image will remain the same.
+Both files are reference files, if you wish to modify something, you can make the changes accordingly.
+The steps to generate the image will remain the same.
 
 The files will need to be placed in the directory structure of the Packer image builder.
 
@@ -139,7 +142,8 @@ When you run `packer build` with the example config file, the VMDK will be insid
 
 ## Converting the Image
 
-Currently, the raw image can not be built directly from `virtualbox-iso` builder, so we will convert and then compress it. (If you are using `qemu` builder type instead of the `virtualbox-iso` builder, then you can skip the conversion step as Packer lets you directly create a raw image.)
+Currently, the raw image can not be built directly from `virtualbox-iso` builder, so we will convert and then compress it.
+Note, if you are using `qemu` builder type instead of the `virtualbox-iso` builder, then you can skip the conversion step as Packer lets you directly create a raw image.
 
 First, get the `qemu-img` CLI tool.
 
@@ -159,11 +163,14 @@ Once you have a `raw` filesystem image, you can compress the raw image.
 gzip test_packer.raw
 ```
 
-The result is a `test_packer.raw.gz` file which can now be deployed on Tinkerbell. You can also use the `raw` file `test_packer.raw` directly, the benefit of having the compressed file is that it will be streamed over the network in less time.
+The result is a `test_packer.raw.gz` file which can now be deployed on Tinkerbell.
+You can also use the `raw` file `test_packer.raw` directly, the benefit of having the compressed file is that it will be streamed over the network in less time.
 
 ## Creating a Template
 
-Below is a reference file for creating a Template using above Ubuntu Packer image. This section is similar to the other examples we have in the `Deploying Operating systems` section. You can follow them for more references.
+Below is a reference file for creating a Template using above Ubuntu Packer image.
+This section is similar to the other examples we have in the `Deploying Operating systems` section.
+You can follow them for more references.
 
 The template uses actions from the [artifact.io](https://artifact.io) hub.
 

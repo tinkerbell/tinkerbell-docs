@@ -5,7 +5,8 @@ date: 2021-02-19
 
 # The Deployment
 
-In the majority of cases there will be a number of steps required before we're able to deploy an Operating System to a new piece of hardware. Which steps are largely dependent on the type or format of the Operating System deployment media that the provider distributes or which installation method you want to use.
+In the majority of cases there will be a number of steps required before we're able to deploy an Operating System to a new piece of hardware.
+Which steps are largely dependent on the type or format of the Operating System deployment media that the provider distributes or which installation method you want to use.
 
 ## Using an OS Image
 
@@ -13,7 +14,8 @@ Not all Operating System images are distributed in the same formats, and in most
 
 ### Preparing the Image
 
-A large number of Operating System vendors tend to distribute their images using the [qcow](https://en.wikipedia.org/wiki/Qcow) format, which comes from the Qemu virtualisation project. This provides a number of features that end users find desirable:
+A large number of Operating System vendors tend to distribute their images using the [qcow](https://en.wikipedia.org/wiki/Qcow) format, which comes from the Qemu virtualisation project.
+This provides a number of features that end users find desirable:
 
 - Small image size (an image is typically only as large as the data written, not the size of the logical block device)
 - The image can be used directly by the qemu/kvm hypervisor (used by a number of cloud providers)
@@ -27,11 +29,13 @@ We can convert a `qcow` image to a `raw` image with the following command:
 qemu-img convert -O raw diskimage.qcow2 diskimage.raw
 ```
 
-One drawback of this is that a `qcow` image will only occupy the space where data has been written, so if we had a 20G disk image and installed an OS that only used 1G the image size would be the 1G of data. **However**, when we move to a `raw` image then the image will occupy all of the disk image size regardless of the contents.
+One drawback of this is that a `qcow` image will only occupy the space where data has been written, so if we had a 20G disk image and installed an OS that only used 1G the image size would be the 1G of data.
+**However**, when we move to a `raw` image then the image will occupy all of the disk image size regardless of the contents.
 
 ### Streaming the Image to Disk
 
-Once you have your OS image prepared, use an action to write it directly to an underlying block device, which would effectively provision the Operating System to the hardware allowing us to reboot into this new OS. The [`image2disk`](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) action is designed for this use-case and has the capability to stream an Operating System image from a remote location over HTTP/HTTPS and write it directly to a specified block device.
+Once you have your OS image prepared, use an action to write it directly to an underlying block device, which would effectively provision the Operating System to the hardware allowing us to reboot into this new OS.
+The [`image2disk`](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) action is designed for this use-case and has the capability to stream an Operating System image from a remote location over HTTP/HTTPS and write it directly to a specified block device.
 
 For example, you can stream a raw Ubuntu image from a web-server and write the OS image to the block device `/dev/sda`.
 
@@ -70,7 +74,11 @@ actions:
 
 ### Formatting a Block Device
 
-When provisioning from a filesystem archive, there is a **pre-requisite** for the block device to be partitioned and formatted with a filesystem before we can write files and directories to the storage. In Tinkerbell we specify in hardware data the configuration for the storage. For example, the following snippet details the configuration for the block device `/dev/sda`. There are three partitions that will be created and labeled. It also specifies the format and filesystem type for two of those partitions.
+When provisioning from a filesystem archive, there is a **pre-requisite** for the block device to be partitioned and formatted with a filesystem before we can write files and directories to the storage.
+In Tinkerbell we specify in hardware data the configuration for the storage.
+For example, the following snippet details the configuration for the block device `/dev/sda`.
+There are three partitions that will be created and labeled.
+It also specifies the format and filesystem type for two of those partitions.
 
 ```
 "storage": {
@@ -124,7 +132,8 @@ When provisioning from a filesystem archive, there is a **pre-requisite** for th
 
 > More information about block device configuration is on the Equinix Metal™[Custom Partitioning & Raid](https://metal.equinix.com/developers/docs/servers/custom-partitioning-raid/) page.
 
-The example blob is just the description of the device in hardware data, we will also need an action during provisioning to parse this metadata and actually write these changes to the block device. This is the job of the [rootio](https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio) action.
+The example blob is just the description of the device in hardware data, we will also need an action during provisioning to parse this metadata and actually write these changes to the block device.
+This is the job of the [rootio](https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio) action.
 
 ```
 actions:
@@ -140,7 +149,9 @@ Once this action has completed we will have successfully modified the underlying
 
 ### Extracting the OS to the Filesystem
 
-As detailed in [The Basics of Deploying an Operating System](https://docs.tinkerbell.org/deploying-operating-systems/the-basics/#filesystem-archives), we can download or create a filesystem archive in a number of different ways. Once we have a compressed archive of all of the files that make up the Operating System, we will again need to use an action to manage the task of fetching the archive and extracting it to our newly formatted file system. The action [archive2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk) has the functionality to **mount** a filesystem and both **stream**/**extract** a filesystem archive directly to the new filesystem.
+As detailed in [The Basics of Deploying an Operating System](https://docs.tinkerbell.org/deploying-operating-systems/the-basics/#filesystem-archives), we can download or create a filesystem archive in a number of different ways.
+Once we have a compressed archive of all of the files that make up the Operating System, we will again need to use an action to manage the task of fetching the archive and extracting it to our newly formatted file system.
+The action [archive2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk) has the functionality to **mount** a filesystem and both **stream**/**extract** a filesystem archive directly to the new filesystem.
 
 ```
 actions:
@@ -157,7 +168,8 @@ actions:
 
 ### Installing a Boot Loader
 
-Whilst we may have deployed a full Operating System to our persistent storage, it will be rendered useless at a _reboot_ unless we install a boot loader so that the machine knows how to load this new OS. We can automate this process by providing another action whose role would be to execute a command such as `grub-install` or `sysinux` to write the bootloader code to the beginning of the block device where the BIOS knows where to look for it on machine startup.
+Whilst we may have deployed a full Operating System to our persistent storage, it will be rendered useless at a _reboot_ unless we install a boot loader so that the machine knows how to load this new OS.
+We can automate this process by providing another action whose role would be to execute a command such as `grub-install` or `sysinux` to write the bootloader code to the beginning of the block device where the BIOS knows where to look for it on machine startup.
 
 ## Using an Installer
 

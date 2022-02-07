@@ -21,7 +21,8 @@ This image is actually a `qcow2` filesystem image and is a **full** disk image i
 
 ### Converting Image
 
-In order to use this image, it needs to be converted into a `raw` filesystem. In order to do the conversion, install the `qemu-img` CLI tool.
+In order to use this image, it needs to be converted into a `raw` filesystem.
+In order to do the conversion, install the `qemu-img` CLI tool.
 
 ```
 apt-get install -y qemu-utils
@@ -39,7 +40,8 @@ qemu-img convert  ./focal-server-cloudimg-amd64.img -O raw ./focal-server-cloudi
 gzip ./focal-server-cloudimg-amd64.raw
 ```
 
-Move the raw image to a locally accessible web server. To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
+Move the raw image to a locally accessible web server.
+To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
 
 ```
 mv ./focal-server-cloudimg-amd64.raw ./sandbox/deploy/state/webroot`
@@ -90,7 +92,8 @@ Note that it is also possible to install Ubuntu from the compressed filesystem i
 focal-server-cloudimg-amd64.tar.gz  2021-03-11 22:30  485M  File system image and Kernel packed
 ```
 
-This filesystem image is typically an `ext4` filesystem that contains all of the files in a partition for Ubuntu to run. However, in order for us to use this image we would need to:
+This filesystem image is typically an `ext4` filesystem that contains all of the files in a partition for Ubuntu to run.
+However, in order for us to use this image we would need to:
 
 - Partition the disk
 - Write this data to the partition
@@ -116,7 +119,8 @@ docker rm $TMPRFS
 gzip ./ubuntu_rootfs.tar
 ```
 
-Move the raw image to a locally accessible web server. To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
+Move the raw image to a locally accessible web server.
+To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
 
 ```
 mv ./ubuntu_rootfs.tar.gz ./sandbox/deploy/state/webroot

@@ -5,7 +5,8 @@ date: 2021-11-30
 
 # Local Setup with Vagrant
 
-If you want to dive in to trying out Tinkerbell, this tutorial sets it up locally using Vagrant. Vagrant manages the Tinkerbell installation for this tutorial's Provisioner, and runs both the Provisioner and Worker on VirtualBox or `libvirtd`.
+If you want to dive in to trying out Tinkerbell, this tutorial sets it up locally using Vagrant.
+Vagrant manages the Tinkerbell installation for this tutorial's Provisioner, and runs both the Provisioner and Worker on VirtualBox or `libvirtd`.
 
 These docs were tested against v0.6.0 of github.com/tinkerbell/sandbox
 
@@ -36,7 +37,8 @@ To get Tinkerbell, clone the `sandbox` repository at version v0.6.0.
 git clone https://github.com/tinkerbell/sandbox.git -b v0.6.0
 ```
 
-Move into the `deploy/vagrant` directory. This folder contains a Vagrant configuration file (Vagrantfile) needed to setup the Provisioner and the Worker.
+Move into the `deploy/vagrant` directory.
+This folder contains a Vagrant configuration file (Vagrantfile) needed to setup the Provisioner and the Worker.
 
 ```
 cd sandbox/deploy/vagrant
@@ -44,7 +46,8 @@ cd sandbox/deploy/vagrant
 
 ## Start the Provisioner
 
-First we need to delete the default template and hardware definition that the sandbox repo comes with. This lets us practice setting up the template and workflow in tinkerbell without any conflicts with what comes pre-defined in the sandbox repo.
+First we need to delete the default template and hardware definition that the sandbox repo comes with.
+This lets us practice setting up the template and workflow in tinkerbell without any conflicts with what comes pre-defined in the sandbox repo.
 
 ```
 rm ../compose/manifests/hardware/hardware-libvirt.json
@@ -59,7 +62,8 @@ Since Vagrant is handling the Provisioner's configuration, including installing 
 vagrant up provisioner
 ```
 
-The Provisioner installs and runs Ubuntu with a couple of additional utilities. The time it takes to spin up the Provisioner varies with connection speed and resources on your local machine.
+The Provisioner installs and runs Ubuntu with a couple of additional utilities.
+The time it takes to spin up the Provisioner varies with connection speed and resources on your local machine.
 
 ## Inspecting the running Tinkerbell containers
 
@@ -99,7 +103,9 @@ compose_ubuntu-image-setup_1         /scripts/setup_ubuntu.sh h ...   Exit 0
 
 ## Preparing an action image
 
-As you'll see shortly, each step in a Tinkerbell workflow is referred to as an Action Image, and is simply a Docker image. Before you move ahead, let's pull down the image that will be used in the example workflow. Tinkerbell uses Docker registry to host images locally, so pull down the ["Hello World" docker image](https://hub.docker.com/_/hello-world/) and push it to the registry.
+As you'll see shortly, each step in a Tinkerbell workflow is referred to as an Action Image, and is simply a Docker image.
+Before you move ahead, let's pull down the image that will be used in the example workflow.
+Tinkerbell uses Docker registry to host images locally, so pull down the ["Hello World" docker image](https://hub.docker.com/_/hello-world/) and push it to the registry.
 
 Let's trust the SSL certs of the registry container.
 
@@ -119,7 +125,8 @@ docker tag hello-world $TINKERBELL_HOST_IP/hello-world
 docker push $TINKERBELL_HOST_IP/hello-world
 ```
 
-At this point, you might want to open a separate terminal window to show logs from the Provisioner, because it will show what the `tink-server` is doing through the rest of the setup. Open a new terminal, ssh in to the provisioner as you did before, and run `docker-compose logs -f` to tail logs.
+At this point, you might want to open a separate terminal window to show logs from the Provisioner, because it will show what the `tink-server` is doing through the rest of the setup.
+Open a new terminal, ssh in to the provisioner as you did before, and run `docker-compose logs -f` to tail logs.
 
 ```
 cd sandbox/deploy/vagrant
@@ -134,7 +141,8 @@ Later in the tutorial you can check the logs from `tink-server` in order to see 
 
 With the provisioner up and running, it's time to set up the worker's configuration.
 
-First, define the Worker's hardware data, which is used to identify the Worker as the target of a workflow. Very minimal hardware data is required for this example, but it does at least need to contain the MAC Address of the Worker, which is hardcoded in the Vagrant file, and have the Worker set to allow PXE booting and accept workflows.
+First, define the Worker's hardware data, which is used to identify the Worker as the target of a workflow.
+Very minimal hardware data is required for this example, but it does at least need to contain the MAC Address of the Worker, which is hardcoded in the Vagrant file, and have the Worker set to allow PXE booting and accept workflows.
 
 ```
 cat > hardware-data.json <<EOF
@@ -185,7 +193,11 @@ tink-server_1               | {"level":"info","ts":1638306331.943881,"caller":"g
 
 ## Creating a Template
 
-Next, define the template for the workflow. The template sets out tasks for the Worker to preform sequentially. This template contains a single task with a single action, which is to perform "hello-world". Just as in the [hello-world example](/workflows/hello-world-workflow), the "hello-world" image doesn't contain any instructions that the Worker will perform. It is just a placeholder in the template so a workflow can be created and pushed to the Worker.
+Next, define the template for the workflow.
+The template sets out tasks for the Worker to preform sequentially.
+This template contains a single task with a single action, which is to perform "hello-world".
+Just as in the [hello-world example](/workflows/hello-world-workflow), the "hello-world" image doesn't contain any instructions that the Worker will perform.
+It is just a placeholder in the template so a workflow can be created and pushed to the Worker.
 
 ```
 cat > hello-world.yml  <<EOF
@@ -218,8 +230,11 @@ tink-server_1               | {"level":"info","ts":1638306365.5689096,"caller":"
 
 The next step is to combine both the hardware data and the template to create a workflow.
 
-- First, the workflow needs to know which template to execute. The Template ID you should use was returned by `tink template create` command executed above.
-- Second, the Workflow needs a target, defined by the hardware data. In this example, the target is identified by a MAC address set in the hardware data for our Worker, so `08:00:27:00:00:01`. !!!!!!!(Note: this MAC address is the one we hard coded in the Vagrantfile earlier.)
+- First, the workflow needs to know which template to execute.
+  The Template ID you should use was returned by `tink template create` command executed above.
+- Second, the Workflow needs a target, defined by the hardware data.
+  In this example, the target is identified by a MAC address set in the hardware data for our Worker, so `08:00:27:00:00:01`.
+  !!!!!!! (Note: this MAC address is the one we hard coded in the Vagrantfile earlier.)
 
 Combine these two pieces of information and create the workflow with the `tink workflow create` command.
 
@@ -235,18 +250,22 @@ tink-server_1               | {"level":"info","ts":1638306500.9581006,"caller":"
 
 ## Start the Worker
 
-You can now bring up the Worker and execute the Workflow. In a new terminal window, move into the `tink/deploy/vagrant` directory, and bring up the Worker with Vagrant, similar to bringing up the Provisioner.
+You can now bring up the Worker and execute the Workflow.
+In a new terminal window, move into the `tink/deploy/vagrant` directory, and bring up the Worker with Vagrant, similar to bringing up the Provisioner.
 
 ```
 cd sandbox/deploy/vagrant
 vagrant up machine1
 ```
 
-If you are using VirtualBox, it will bring up a UI, and after the setup, you will see a login screen. You can login with the username `root` and no password is required. Tinkerbell will netboot a custom AlpineOS that runs in RAM, so any changes you make won't be persisted between reboots.
+If you are using VirtualBox, it will bring up a UI, and after the setup, you will see a login screen.
+You can login with the username `root` and no password is required.
+Tinkerbell will netboot a custom AlpineOS that runs in RAM, so any changes you make won't be persisted between reboots.
 
 > Note: If you have a high-resolution monitor, here are a few notes about how to make the [UI bigger](https://github.com/tinkerbell/tinkerbell.org/pull/76#discussion_r442151095).
 
-At this point you should check on the Provisioner to confirm that the Workflow was executed on the Worker. If you opened a terminal window to monitor the Tinkerbell logs, you should see the execution in them.
+At this point you should check on the Provisioner to confirm that the Workflow was executed on the Worker.
+If you opened a terminal window to monitor the Tinkerbell logs, you should see the execution in them.
 
 ```
 tink-server_1               | {"level":"info","ts":1638388091.1408234,"caller":"grpc-server/tinkerbell.go:97","msg":"received action status: STATE_SUCCESS","service":"github.com/tinkerbell/tink","actionName":"hello_world","workflowID":"6e40f68f-52df-11ec-974f-0242ac120006"}
@@ -268,8 +287,10 @@ docker exec -i compose_tink-cli_1 tink workflow events a8984b09-566d-47ba-b6c5-f
 
 ## Summary
 
-Getting set up locally is a good way to sample Tinkerbell's functionality. The Vagrant set up is not necessarily intended to be persistent, but while it's up and running, you can use the Provisioner to test out the CLI commands or just explore the stack.
+Getting set up locally is a good way to sample Tinkerbell's functionality.
+The Vagrant set up is not necessarily intended to be persistent, but while it's up and running, you can use the Provisioner to test out the CLI commands or just explore the stack.
 
 If you are looking to extend your local setup to develop or test out other workflows, check out the [Extending the Vagrant Setup](/setup/extending-vagrant) doc.
 
-That's it! Let us know what you think about it in the #tinkerbell channel on the [CNCF Community Slack](https://slack.cncf.org/).
+That's it!
+Let us know what you think about it in the #tinkerbell channel on the [CNCF Community Slack](https://slack.cncf.org/).

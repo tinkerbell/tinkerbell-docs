@@ -12,7 +12,8 @@ The following are possible errors you might run into and their possible solution
 
 ```
 PowerEdge R6415 - BIOS 1.8.7
-A system restart is required. The system detected an exception during the UEFI
+A system restart is required.
+The system detected an exception during the UEFI
 pre-boot environment.
 ```
 

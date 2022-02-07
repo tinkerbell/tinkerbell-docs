@@ -18,25 +18,44 @@ Interested in contributing? Check out our [Contributors' Page](https://tinkerbel
 
 The Tinkerbell stack consists of several microservices, and a grpc API:
 
-- [**Tink**](https://github.com/tinkerbell/tink) - Tink is the short-hand name for the [`tink-server`](/services/tink-server), [`tink-worker`](/services/tink-worker), and [`tink-cli`](/services/tink-cli). `tink-worker` and `tink-server` communicate over gRPC, and are responsible for processing workflows. The CLI is the user-interactive piece for creating workflows and their building blocks, templates and hardware data.
+- [**Tink**](https://github.com/tinkerbell/tink) -
+  Tink is the short-hand name for the [`tink-server`](/services/tink-server), [`tink-worker`](/services/tink-worker), and [`tink-cli`](/services/tink-cli).
+  `tink-worker` and `tink-server` communicate over gRPC, and are responsible for processing workflows.
+  The CLI is the user-interactive piece for creating workflows and their building blocks, templates and hardware data.
 
-- [**Boots**](/services/boots) - Boots is Tinkerbell's DHCP server. It handles DHCP requests, hands out IPs, and serves up [iPXE](https://ipxe.org/). It uses the Tinkerbell client to pull and push hardware data. It only responds to a predefined set of MAC addresses so it can be deployed in an existing network without interfering with existing DHCP infrastructure.
+- [**Boots**](/services/boots) -
+  Boots is Tinkerbell's DHCP server.
+  It handles DHCP requests, hands out IPs, and serves up [iPXE](https://ipxe.org/).
+  It uses the Tinkerbell client to pull and push hardware data.
+  It only responds to a predefined set of MAC addresses so it can be deployed in an existing network without interfering with existing DHCP infrastructure.
 
-- [**Hegel**](/services/hegel) - Hegel is the metadata service used by Tinkerbell and OSIE. It collects data from both and transforms it into a JSON format to be consumed as metadata.
+- [**Hegel**](/services/hegel) -
+  Hegel is the metadata service used by Tinkerbell and OSIE.
+  It collects data from both and transforms it into a JSON format to be consumed as metadata.
 
-- [**OSIE**](/services/osie) - OSIE is Tinkerbell's default an in-memory installation environment for bare metal. It installs operating systems and handles deprovisioning.
+- [**OSIE**](/services/osie) -
+  OSIE is Tinkerbell's default an in-memory installation environment for bare metal.
+  It installs operating systems and handles deprovisioning.
 
-- [**Hook**](https://github.com/tinkerbell/hook#hook) - An alternative to OSIE, it's the next iteration of the in-memory installation environment to handle operating system installation and deprovisioning.
+- [**Hook**](https://github.com/tinkerbell/hook#hook) -
+  An alternative to OSIE, it's the next iteration of the in-memory installation environment to handle operating system installation and deprovisioning.
 
-- [**PBnJ**](https://github.com/tinkerbell/pbnj) - PBnJ is an optional microservice that can communicate with baseboard management controllers (BMCs) to control power and boot settings.
+- [**PBnJ**](https://github.com/tinkerbell/pbnj) -
+  PBnJ is an optional microservice that can communicate with baseboard management controllers (BMCs) to control power and boot settings.
 
 In addition to the microservices, there are three pieces of infrastructure:
 
-- [**PostgreSQL**](https://www.postgresql.org/) - Tinkerbell uses PostgreSQL as its data store. PostgreSQL is a free and open-source relational database management system, and it stores Tinkerbell's hardware data, templates, and workflows.
+- [**PostgreSQL**](https://www.postgresql.org/) -
+  Tinkerbell uses PostgreSQL as its data store.
+  PostgreSQL is a free and open-source relational database management system, and it stores Tinkerbell's hardware data, templates, and workflows.
 
-- [**Image Repository**](https://hub.docker.com/_/registry) - Tinkerbell uses a local image repository to store all of the action images used in a workflow. This is particularly useful for secure environments that don't have access to the internet. You can also choose to use [Quay](https://quay.io/) or [DockerHub](https://hub.docker.com/) as the repository to store images for if your environment does have internet access.
+- [**Image Repository**](https://hub.docker.com/_/registry) -
+  Tinkerbell uses a local image repository to store all of the action images used in a workflow.
+  This is particularly useful for secure environments that don't have access to the internet.
+  You can also choose to use [Quay](https://quay.io/) or [DockerHub](https://hub.docker.com/) as the repository to store images for if your environment does have internet access.
 
-- [**NGINX**](https://www.nginx.com/) - NGINX is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache. Tinkerbell uses NGINX to serve the required boot files and OS images during workflow execution.
+- [**NGINX**](https://www.nginx.com/) - NGINX is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache.
+  Tinkerbell uses NGINX to serve the required boot files and OS images during workflow execution.
 
 ## First Steps
 
@@ -50,5 +69,6 @@ In addition to the microservices, there are three pieces of infrastructure:
 Need a little help getting started? We're here!
 
 - Check out the [FAQs](https://tinkerbell.org/faq/) - When there are questions, we document the answers.
-- Join the [CNCF Community Slack](https://slack.cncf.org/). Look for the `#tinkerbell` channel.
+- Join the [CNCF Community Slack](https://slack.cncf.org/).
+  Look for the `#tinkerbell` channel.
 - Submit an issue on [Github](https://github.com/tinkerbell/).

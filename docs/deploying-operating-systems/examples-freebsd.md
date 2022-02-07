@@ -24,7 +24,8 @@ Both images come with compressed with the `xz` compression format, you will need
 xz -d <file.xz>
 ```
 
-The `raw` image is a disk image which ontains a full partition table (including OS and Swap partition) and boot loader for our FreeBSD system. You can examine this with `losetup`.
+The `raw` image is a disk image which ontains a full partition table (including OS and Swap partition) and boot loader for our FreeBSD system.
+You can examine this with `losetup`.
 
 ```
 $ losetup -f -P ./FreeBSD-12.2-RELEASE-amd64.raw
@@ -47,7 +48,8 @@ Device         Start      End Sectors  Size Type
 
 The `raw` image comes with everything that we will need to install and deploy FreeBSD.
 
-The other image, with the extension `.qcow2.xz` is a compressed `qcow2` filesystem image and is a **full** disk image including partition tables, partitions filled with filesystems and files, and importantly, a boot loader at the beginning of the disk image. However, if you want to use the `qcow` image you will have to convert it with the `qemu-img` CLI tool.
+The other image, with the extension `.qcow2.xz` is a compressed `qcow2` filesystem image and is a **full** disk image including partition tables, partitions filled with filesystems and files, and importantly, a boot loader at the beginning of the disk image.
+However, if you want to use the `qcow` image you will have to convert it with the `qemu-img` CLI tool.
 
 ```
 apt-get install -y qemu-utils
@@ -65,7 +67,8 @@ Once you have a `raw` filesystem image, you can optionally compress the raw imag
 gzip ./FreeBSD-12.2-RELEASE-amd64.raw
 ```
 
-The raw image will need to live at a locally accessible web server. To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the tink-server.
+The raw image will need to live at a locally accessible web server.
+To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the tink-server.
 
 ```
 mv ./FreeBSD-12.2-RELEASE-amd64.raw.gz ./sandbox/deploy/state/webroot

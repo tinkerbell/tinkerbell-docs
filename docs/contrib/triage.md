@@ -8,14 +8,16 @@ The [Community Triage Party call](https://equinix.zoom.us/j/96016156757?pwd=NzZk
 
 ## Summary
 
-Regularly triaging incoming issues and pull requests is critical to the health of an open-source project. The triage process ensures that communication flows openly between users and contributors, even as people vacation or move to new projects. In particular:
+Regularly triaging incoming issues and pull requests is critical to the health of an open-source project.
+The triage process ensures that communication flows openly between users and contributors, even as people vacation or move to new projects.
+In particular:
 
 - Lower issue response latency encourages users to become contributors
 - Lower PR review latency encourages first-time contributors to become regular
 - Labeled issues help the community to prioritize work
 
-All community members are welcome and encouraged to join and help us triage Tinkerbell. It's a great way to learn more about how the project functions, and
-gain exposure to different parts of the codebase.
+All community members are welcome and encouraged to join and help us triage Tinkerbell.
+It's a great way to learn more about how the project functions, and gain exposure to different parts of the codebase.
 
 ## Triage access
 
@@ -25,14 +27,17 @@ At the beginning of our Community Triage Party call, we will also ask at the beg
 
 ## Daily Triage Process
 
-The goal of daily triage is to be the initial point of contact for an incoming issue or pull request. Anyone can participate on any day of the week!
+The goal of daily triage is to be the initial point of contact for an incoming issue or pull request.
+Anyone can participate on any day of the week!
 
-The dashboard of items requiring a response can be found at the [Daily Triage Dashboard](http://triage.meyu.us:32374/s/daily). Each box of items
-is defined by a rule and has a listed `Resolution` action. Once the requested action has been taken, the issue will disappear from the list.
+The dashboard of items requiring a response can be found at the [Daily Triage Dashboard](http://triage.meyu.us:32374/s/daily).
+Each box of items is defined by a rule and has a listed `Resolution` action.
+Once the requested action has been taken, the issue will disappear from the list.
 
 - _Unresponded issues_ need a follow-up by someone who is a member of the Tinkerbell organization
 - _Review Ready_ PRs require a code review follow-up
-- _Unkinded issues_ are those requiring a label describing the kind of issue. In Tinkerbell, we use:
+- _Unkinded issues_ are those requiring a label describing the kind of issue.
+  In Tinkerbell, we use:
   - `enhancement`, `bug`, `documentation`, `question`, `todo`, `idea`, `epic`
 
 Other labels we use are:
@@ -44,12 +49,15 @@ Other labels we use are:
 
 The goal of bi-weekly triage is to catch items that may have fallen through the cracks.
 
-The dashboard of items requiring a response can be found at the [Bi-Weekly Triage Dashboard](http://triage.meyu.us:32374/s/weekly). Each box of items
-is defined by a rule and has a listed `Resolution` action. Once the defined action has been taken, the issue will disappear from the list.
+The dashboard of items requiring a response can be found at the [Bi-Weekly Triage Dashboard](http://triage.meyu.us:32374/s/weekly).
+Each box of items is defined by a rule and has a listed `Resolution` action.
+Once the defined action has been taken, the issue will disappear from the list.
 
 At the beginning of the call, we will ask if anyone requires triage permissions to participate.
 
-- _Stale Pull Requests_ are PRs that appear to be going nowhere. If we haven't heard back from the user in 30 days, the PR should be closed with care. The author can reopen it when they are ready.
+- _Stale Pull Requests_ are PRs that appear to be going nowhere.
+  If we haven't heard back from the user in 30 days, the PR should be closed with care.
+  The author can reopen it when they are ready.
 
 ## Prioritization
 
@@ -58,15 +66,20 @@ These labels have not yet been finalized - but are based on what is used in othe
 
 If the issue is not `question`, it needs a [priority label](https://github.com/kubernetes/community/blob/master/contributors/guide/issue-triage.md#define-priority):
 
-- `priority/critical-urgent`: someone's top priority ASAP, such as security issue or issue that causes data loss. Rarely used. to be resolved within 5 days.
-- `priority/important-soon`: high priority for the team. To be resolved within 8 weeks.
-- `priority/important-longterm`: a long-term priority. To be resolved within a year.
-- `priority/backlog`: agreed that this would be good to have, but not yet a priority. Consider tagging as `help wanted`
+- `priority/critical-urgent`: someone's top priority ASAP, such as security issue or issue that causes data loss.
+  Rarely used, to be resolved within 5 days.
+- `priority/important-soon`: high priority for the team.
+  To be resolved within 8 weeks.
+- `priority/important-longterm`: a long-term priority.
+  To be resolved within a year.
+- `priority/backlog`: agreed that this would be good to have, but not yet a priority.
+  Consider tagging as `help wanted`
 - `priority/awaiting-more-evidence`: may be useful, but there is not yet enough evidence to support inclusion on the backlog.
 
 ## Example follow-ups
 
-When a user submits a pull request or issue, it's essential to be respectful of the time the user has invested in opening the issue. Be kind.
+When a user submits a pull request or issue, it's essential to be respectful of the time the user has invested in opening the issue.
+Be kind.
 
 These are some templates that you can use as [Github Saved replies](https://docs.github.com/en/github/writing-on-github/working-with-saved-replies/using-saved-replies) for easy access during triage.
 

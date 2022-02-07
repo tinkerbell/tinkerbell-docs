@@ -5,7 +5,8 @@ date: 2021-03-25
 
 # On Bare Metal with Docker
 
-More than a documentation, this is an example of installing Tinkerbell in a homelab. The homelab is made of 10 Intel NUCs, with one of them picked to be the Provisioner machine running:
+More than a documentation, this is an example of installing Tinkerbell in a homelab.
+The homelab is made of 10 Intel NUCs, with one of them picked to be the Provisioner machine running:
 
 1. Nginx
 2. Tink Server
@@ -15,7 +16,8 @@ More than a documentation, this is an example of installing Tinkerbell in a home
 
 This page is inspired by [Aaron](https://geekgonecrazy.com/) a community member who wrote ["Tinkerbell or iPXE boot on OVH"](https://geekgonecrazy.com/2020/09/07/tinkerbell-or-ipxe-boot-on-ovh/).
 
-In this project we will use [Sandbox](https://github.com/tinkerbell/sandbox) and everything it depends on. Pick a server, a laptop, or as in this example, an Intel NUC.
+In this project we will use [Sandbox](https://github.com/tinkerbell/sandbox) and everything it depends on.
+Pick a server, a laptop, or as in this example, an Intel NUC.
 
 This guide also provides a little more of an explanation with very little automation for what happens under the hood in guides like:
 
@@ -31,8 +33,8 @@ This guide assumes:
 
 ## Getting Tinkerbell
 
-To get Tinkerbell, clone the `sandbox` repository or download the latest
-release. At time of writing it is v0.5.0.
+To get Tinkerbell, clone the `sandbox` repository or download the latest release.
+At time of writing it is v0.5.0.
 
 ### git clone
 
@@ -51,7 +53,9 @@ tar xf sandbox.tar.gz
 cd sandbox-<version> # something like sandbox-0.5.0
 ```
 
-In this case we are using the latest sandbox release that today is [v0.4.0](https://github.com/tinkerbell/sandbox/release/v0.4.0). It is important to checkout a specific version and have a look at the changelog when you update. Tinkerbell is under development, but we guarantee as best as we can that tags are good and working end-to-end.
+In this case we are using the latest sandbox release that today is [v0.4.0](https://github.com/tinkerbell/sandbox/release/v0.4.0).
+It is important to checkout a specific version and have a look at the changelog when you update.
+Tinkerbell is under development, but we guarantee as best as we can that tags are good and working end-to-end.
 
 ## Generate the Configuration File
 
@@ -61,7 +65,9 @@ The sandbox sets up Tinkerbell using the `setup.sh` script. `setup.sh` relies on
 ./generate-env.sh <network-interface> > .env
 ```
 
-In this case, the `network-interface` is `eth1`. The output of this command will be stored inside `./.env`. It will look like this:
+In this case, the `network-interface` is `eth1`.
+The output of this command will be stored inside `./.env`.
+It will look like this:
 
 ```sh
 # Tinkerbell Stack version
@@ -76,9 +82,9 @@ export TINKERBELL_TINK_WORKER_IMAGE=quay.io/tinkerbell/tink-worker:sha-0e8e5733
 # Network interface for Tinkerbell's network
 export TINKERBELL_NETWORK_INTERFACE="eth1"
 
-# Decide on a subnet for provisioning. Tinkerbell should "own" this
-# network space. Its subnet should be just large enough to be able
-# to provision your hardware.
+# Decide on a subnet for provisioning.
+# Tinkerbell should "own" this network space.
+# Its subnet should be just large enough to be able to provision your hardware.
 export TINKERBELL_CIDR=29
 
 # Host IP is used by provisioner to expose different services such as
@@ -106,11 +112,15 @@ export ROLLBAR_TOKEN=ignored
 export ROLLBAR_DISABLE=1
 ```
 
-The `./.env` file has some explanatory comments, but there are a few things to note about the contents. The environment variables in the `Tinkerbell Stack version` block pin the various parts of the stack to a specific version. You can think of it as a release bundle.
+The `./.env` file has some explanatory comments, but there are a few things to note about the contents.
+The environment variables in the `Tinkerbell Stack version` block pin the various parts of the stack to a specific version.
+You can think of it as a release bundle.
 
 > If you are developing or you want to test a different version of a particular tool let's say Hegel, you can build and push a docker image, replace `TINKERBELL_TINK_HEGEL_IMAGE` with your tag and you are good to go.
 
-Tinkerbell needs a static and predictable IP, that's why the `setup.sh` script specifies and sets its own with `TINKEBELL_HOST_IP`. It is used by [Boots](https://github.com/tinkerbell/boots) to serve the operating system installation environment, for example. And Sandbox provisions (via Docker Compose) an Nginx server that you can use to serve any file you want (OSIE is served via that Nginx).
+Tinkerbell needs a static and predictable IP, that's why the `setup.sh` script specifies and sets its own with `TINKEBELL_HOST_IP`.
+It is used by [Boots](https://github.com/tinkerbell/boots) to serve the operating system installation environment, for example.
+And Sandbox provisions (via Docker Compose) an Nginx server that you can use to serve any file you want (OSIE is served via that Nginx).
 
 If your Tinkerbell host IP and LAN CIDR is different than `192.168.1.1/29`, you
 can set the following environment variables before running the script:
@@ -122,8 +132,7 @@ export TINKERBELL_CIDR="24"
 
 ## Install Dependencies
 
-The `setup.sh` script does a bunch of manipulation to your local environment, so first we
-need to install the required dependencies:
+The `setup.sh` script does a bunch of manipulation to your local environment, so first we need to install the required dependencies:
 
 === "Ubuntu"
 
@@ -164,7 +173,9 @@ need to install the required dependencies:
 
 Before running the [setup.sh](https://github.com/tinkerbell/sandbox/blob/main/setup.sh) script, there are a few handy things to know about it.
 
-The `setup.sh` script's main responsibility is to setup the network. It creates a certificate that will be used to setup the registry ([this will may change soon](https://github.com/tinkerbell/sandbox/issues/45)). It downloads [OSIE](https://github.com/tinkerbell/osie) and places it inside the Nginx weboot (`./deploy/state/webroot/`).
+The `setup.sh` script's main responsibility is to setup the network.
+It creates a certificate that will be used to setup the registry ([this will may change soon](https://github.com/tinkerbell/sandbox/issues/45)).
+It downloads [OSIE](https://github.com/tinkerbell/osie) and places it inside the Nginx weboot (`./deploy/state/webroot/`).
 
 > You can use the webroot for your own purposes, it is part of `gitignore` and other than OSIE you can serve other operating systems that you want to install in your other servers, or even public ssh keys (whatever you need a link for).
 
@@ -196,4 +207,5 @@ docker-compose up -d
 
 ## Time to Party
 
-At this point let me point you to the ["Local with Vagrant"](/setup/local-vagrant#starting-tinkerbell) setup guide because you have everything you need to play with Tinkerbell. Enjoy
+At this point let me point you to the ["Local with Vagrant"](/setup/local-vagrant#starting-tinkerbell) setup guide because you have everything you need to play with Tinkerbell.
+Enjoy!

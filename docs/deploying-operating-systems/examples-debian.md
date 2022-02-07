@@ -22,7 +22,8 @@ debian-10-openstack-amd64.qcow2	   2021-03-04 10:56	  577M
 debian-10-openstack-amd64.raw	      2021-03-04 10:53	  2.0G
 ```
 
-The first image is a `qcow2` filesystem image and is a **full** disk image including partition tables, partitions filled with filesystems and files, and importantly, a boot loader at the beginning of the disk image. If you use the `qcow2` image, you will need to convert it into a `raw` image by installing the `qemu-img` cli tool,
+The first image is a `qcow2` filesystem image and is a **full** disk image including partition tables, partitions filled with filesystems and files, and importantly, a boot loader at the beginning of the disk image.
+If you use the `qcow2` image, you will need to convert it into a `raw` image by installing the `qemu-img` cli tool,
 
 ```
 apt-get install -y qemu-utils
@@ -42,7 +43,8 @@ The second image is already a `raw` disk image which can be used as-is because i
 gzip ./debian-10-openstack-amd64.raw
 ```
 
-The raw image will need to live at a locally accessible web server. To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
+The raw image will need to live at a locally accessible web server.
+To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
 
 ```
 mv ./debian-10-openstack-amd64.raw.gz ./sandbox/deploy/state/webroot
@@ -105,7 +107,8 @@ docker rm $TMPRFS
 gzip ./debian_rootfs.tar
 ```
 
-The raw image will need to live at a locally accessible web server. To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
+The raw image will need to live at a locally accessible web server.
+To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
 
 ```
 mv ./debian_rootfs.tar.gz ./sandbox/deploy/state/webroot
@@ -171,11 +174,13 @@ tasks:
 
 ## Using Bootstrap
 
-The final method for installing Debian is to use the [grml-debootstrap](https://grml.org/grml-debootstrap/) installer. We will need to create an action that will invoke the installer and install to our local disk.
+The final method for installing Debian is to use the [grml-debootstrap](https://grml.org/grml-debootstrap/) installer.
+We will need to create an action that will invoke the installer and install to our local disk.
 
 ### Creating the Dockerfile
 
-The `dockerfile` creates a new image based upon Debian, installs all of the components needed for `grml-debootstrap`. Then, it sets the `ENTRYPOINT` to execute the `grml-debootstrap` program to install to Debian to `/dev/sda3` and install the boot-loader to `/dev/sda`.
+The `dockerfile` creates a new image based upon Debian, installs all of the components needed for `grml-debootstrap`.
+Then, it sets the `ENTRYPOINT` to execute the `grml-debootstrap` program to install to Debian to `/dev/sda3` and install the boot-loader to `/dev/sda`.
 
 ```
 FROM debian:bullseye

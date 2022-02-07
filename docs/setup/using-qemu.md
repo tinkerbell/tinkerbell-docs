@@ -16,7 +16,8 @@ This is a rough shopping list of skills/accounts that will be a benefit for this
 
 ## Our Tinkerbell server considerations
 
-Some "finger in the air" mathematics are generally required when selecting an appropriately sized physical host. But if we take a quick look at the expected requirements:
+Some "finger in the air" mathematics are generally required when selecting an appropriately sized physical host.
+But if we take a quick look at the expected requirements:
 
 ```
 CONTAINER ID        NAME                   CPU %               MEM USAGE / LIMIT    MEM %               NET I/O             BLOCK I/O           PIDS
@@ -35,16 +36,20 @@ That brings us onto the next part, which is how big should the virtual machines 
 
 ### Operating System Installation Environment (OSIE)
 
-Every machine that is booted by Tinkerbell will be passed the in-memory Operating System called `OSIE` which is an alpine based Linux OS that ultimately will run the workflows. As this is all in-memory, we will need to account for a few things before we install our Operating System through a workflow.
+Every machine that is booted by Tinkerbell will be passed the in-memory Operating System called `OSIE` which is an alpine based Linux OS that ultimately will run the workflows.
+As this is all in-memory, we will need to account for a few things before we install our Operating System through a workflow.
 
 - OSIE kernel
 - OSIE RAM Disk (Includes Alpine userland and the docker engine) - The **OSIE Ram Disk**, whilst it looks like a normal filesystem, is actually held in the memory of the host itself so it will immediately withhold that memory from other usage.
 - Action images (at rest) - The **Action image** will be pulled locally from a repository and again written to disk, **however** the disk that these images are written to is a RAM disk, so these images will withhold available memory.
 - Action containers (running) - These images, when run (**Action containers**), will have binaries in them that will require available memory in order to run.
 
-The majority of this memory usage is for the in-memory filesystem in order to host the userland tools and the images listed in the workflow. From testing we've normally seen that **> 2 GB** is required, however if your workflow consists of large action images then this will need adjusting accordingly.
+The majority of this memory usage is for the in-memory filesystem in order to host the userland tools and the images listed in the workflow.
+From testing we've normally seen that **> 2 GB** is required, however if your workflow consists of large action images then this will need adjusting accordingly.
 
-With all this in consideration, we can use Equinix Metal machines T-Shirt sizes to determine the size of machine required. Given the minimal overhead for Tinkerbell and userland then a `t1.small.x86` with 1 CPU and 8 GB of RAM is sufficient. However if you're looking at deploying multiple machines with Tinkerbell then ideally a machine with 32 GB of ram will comfortably allow a comfortable amount of headroom.
+With all this in consideration, we can use Equinix Metal machines T-Shirt sizes to determine the size of machine required.
+Given the minimal overhead for Tinkerbell and userland then a `t1.small.x86` with 1 CPU and 8 GB of RAM is sufficient.
+However if you're looking at deploying multiple machines with Tinkerbell then ideally a machine with 32 GB of ram will comfortably allow a comfortable amount of headroom.
 
 ### Recommended machine size and OS
 
@@ -62,7 +67,8 @@ For speed of deployment and modernity of the Operating System, either Ubuntu 18.
 
 ## Deploying Tinkerbell
 
-This examples uses a `c3.small.x86` in the Amsterdam facility `ams6` with `ubuntu 20.04`. Once our machine is up and running, we'll need to install our required packages for running Tinkerbell and our virtual machines.
+This examples uses a `c3.small.x86` in the Amsterdam facility `ams6` with `ubuntu 20.04`.
+Once our machine is up and running, we'll need to install our required packages for running Tinkerbell and our virtual machines.
 
 1.  Update the packages.
 
@@ -115,7 +121,8 @@ This examples uses a `c3.small.x86` in the Amsterdam facility `ams6` with `ubunt
 
 6. Edit and apply the configuration.
 
-   Change the bridgeName: from `plunder` to `tinkerbell`, then run `shack network create`. This will create a new interface on our Tinkerbell bridge
+   Change the bridgeName: from `plunder` to `tinkerbell`, then run `shack network create`.
+   This will create a new interface on our Tinkerbell bridge
 
    Run `shack network create`
 
@@ -146,7 +153,8 @@ This examples uses a `c3.small.x86` in the Amsterdam facility `ams6` with `ubunt
           valid_lft forever preferred_lft forever
    ```
 
-   Connect to the VNC port with a client (the random port generated in this example is `6671`).. it will be exposed on the public address of our Equinix Metal host.
+   Connect to the VNC port with a client (the random port generated in this example is `6671`).
+   It will be exposed on the public address of our Equinix Metal host.
 
    Kill the VM:
 
@@ -205,7 +213,8 @@ This examples uses a `c3.small.x86` in the Amsterdam facility `ams6` with `ubunt
 
    Modify the `create_tink_workflow.sh` so that the mac address is `c0:ff:ee:f0:cb:3c`, this is the mac address we will be using as part of our demonstration.
 
-   For using VNC, modify the `facility.facility_code` from `"onprem"` to `"onprem console=ttys0 vha=normal"`. This will ensure all output is printed to the VNC window that we connect to.
+   For using VNC, modify the `facility.facility_code` from `"onprem"` to `"onprem console=ttys0 vha=normal"`.
+   This will ensure all output is printed to the VNC window that we connect to.
 
 4. Create the workflow.
 

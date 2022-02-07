@@ -18,17 +18,20 @@ RHEL images require a Red Hat Account in order to download, and are available at
 - RHEL8: [https://access.redhat.com/downloads/content/479/ver=/rhel—8/8.0/x86_64/product-software](https://access.redhat.com/downloads/content/479/ver=/rhel—8/8.0/x86_64/product-software)
 - RHEL7: [https://access.redhat.com/downloads/content/69/ver=/rhel—7/7.1/x86_64/product-downloads](https://access.redhat.com/downloads/content/69/ver=/rhel—7/7.1/x86_64/product-downloads)
 
-A `qcow2` filesystem image which is a **full** disk image including partition tables, partitions filled with filesystems and the files, and importantly, a boot loader at the beginning of the disk image. It will need to be converted to a `raw` filesystem image in order to use it.
+A `qcow2` filesystem image which is a **full** disk image including partition tables, partitions filled with filesystems and the files, and importantly, a boot loader at the beginning of the disk image.
+It will need to be converted to a `raw` filesystem image in order to use it.
 
 ### Converting Image
 
-In order to use this image, it needs to be converted into a `raw` filesystem. In order to do the conversion, install the `qemu-img` CLI tool.
+In order to use this image, it needs to be converted into a `raw` filesystem.
+In order to do the conversion, install the `qemu-img` CLI tool.
 
 ```
 apt-get install -y qemu-utils
 ```
 
-Then, use the tool to convert the image into a `raw` filesystem. This example uses one of the CentOS images.
+Then, use the tool to convert the image into a `raw` filesystem.
+This example uses one of the CentOS images.
 
 ```
 qemu-img convert  ./CentOS-8-GenericCloud-8.3.2011-20201204.2.x86_64.qcow2 -O raw ./CentOS-8-GenericCloud-8.3.2011-20201204.2.x86_64.raw
@@ -40,7 +43,8 @@ qemu-img convert  ./CentOS-8-GenericCloud-8.3.2011-20201204.2.x86_64.qcow2 -O ra
 gzip ./CentOS-8-GenericCloud-8.3.2011-20201204.2.x86_64.raw
 ```
 
-Move the raw image to a locally accessible web server. To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
+Move the raw image to a locally accessible web server.
+To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
 
 ```
 mv ./CentOS-8-GenericCloud-8.3.2011-20201204.2.x86_64.raw.gz ./sandbox/deploy/state/webroot
@@ -48,14 +52,16 @@ mv ./CentOS-8-GenericCloud-8.3.2011-20201204.2.x86_64.raw.gz ./sandbox/deploy/st
 
 ### Fedora CoreOS
 
-CentOS 8 is the last release and will be going EOL at the end of 2021, but following the acquisition of CoreOS by Red Hat, they distribute an additional operating system called Fedora CoreOS. It is available at [https://getfedora.org/en/coreos/download?tab=metal_virtualized&stream=stable](https://getfedora.org/en/coreos/download?tab=metal_virtualized&stream=stable), and distributed in both `raw` and `qcow2` format.
+CentOS 8 is the last release and will be going EOL at the end of 2021, but following the acquisition of CoreOS by Red Hat, they distribute an additional operating system called Fedora CoreOS.
+It is available at [https://getfedora.org/en/coreos/download?tab=metal_virtualized&stream=stable](https://getfedora.org/en/coreos/download?tab=metal_virtualized&stream=stable), and distributed in both `raw` and `qcow2` format.
 
 ```
 fedora-coreos-33.20210217.3.0-metal.x86_64.qcow2.xz
 fedora-coreos-33.20210217.3.0-metal.x86_64.raw.xz
 ```
 
-Both images come with compressed with the `xz` compression format. You can decompress these image with the `xz` command.
+Both images come with compressed with the `xz` compression format.
+You can decompress these image with the `xz` command.
 
 ```
 xz -d <file.xz>
@@ -63,7 +69,8 @@ xz -d <file.xz>
 
 The `raw` disk image contains a full partition table (including OS and Swap partition) and boot loader for our Fedora CoreOS system, and can be used without converting it first.
 
-The `.qcow2.xz` image is a **full** disk image including partition tables, partitions filled with filesystems and the files, and importantly, a boot loader at the beginning of the disk image. It will need to be converted to a `raw` filesystem image in order to use it, like RHEL and CentOS.
+The `.qcow2.xz` image is a **full** disk image including partition tables, partitions filled with filesystems and the files, and importantly, a boot loader at the beginning of the disk image.
+It will need to be converted to a `raw` filesystem image in order to use it, like RHEL and CentOS.
 
 ### Creating the Template
 
@@ -123,7 +130,8 @@ docker rm $TMPRFS
 gzip ./centos_rootfs.tar
 ```
 
-Move the raw image to a locally accessible web server. To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
+Move the raw image to a locally accessible web server.
+To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
 
 ```
 mv ./centos_rootfs.tar.gz ./sandbox/deploy/state/webroot
@@ -208,7 +216,8 @@ docker rm $TMPRFS
 gzip ./rhel_rootfs.tar
 ```
 
-Move the raw image to a locally accessible web server. To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
+Move the raw image to a locally accessible web server.
+To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
 
 ```
 mv ./rhel_rootfs.tar.gz ./sandbox/deploy/state/webroot

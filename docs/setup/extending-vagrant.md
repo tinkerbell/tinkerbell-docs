@@ -5,11 +5,13 @@ date: 2020-08-14
 
 # Extending the Vagrant Setup
 
-If you have followed the guide to getting Vagrant set up locally, you might be interested in other things you can do with it. There are some steps that you may need to take in order to make the setup a bit more functional.
+If you have followed the guide to getting Vagrant set up locally, you might be interested in other things you can do with it.
+There are some steps that you may need to take in order to make the setup a bit more functional.
 
 ## Running Tests with Vagrant
 
-If you are developing on Tinkerbell, it might be handy to know that the Vagrant setup serves as the backbone of some of the end-to-end testing. The scripts that set up and run the tests are in the `tink` repository, in the `test/_vagrant` directory.
+If you are developing on Tinkerbell, it might be handy to know that the Vagrant setup serves as the backbone of some of the end-to-end testing.
+The scripts that set up and run the tests are in the `tink` repository, in the `test/_vagrant` directory.
 
 The requirements for the tests are the same as the Vagrant setup itself, along with Go installed on your local machine.
 

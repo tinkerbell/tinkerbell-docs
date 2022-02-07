@@ -5,21 +5,26 @@ date: 2020-07-10
 
 # A Hello-world Workflow
 
-The "Hello World" example uses an example hardware data, template, and workflow to show off some basic Tinkerbell functionality, and the interaction between a Provisioner and a Worker. It uses the hello-world docker image as an example task that could be performed on a Worker as part of a workflow.
+The "Hello World" example uses an example hardware data, template, and workflow to show off some basic Tinkerbell functionality, and the interaction between a Provisioner and a Worker.
+It uses the hello-world docker image as an example task that could be performed on a Worker as part of a workflow.
 
 ## Prerequisites
 
-- You have a Provisioner up and running, with the Tinkerbell stack installed and configured. This can be done locally with Vagrant as an experimental environment, on Equinix Metal for a more robust setup, or installed on any other environment that you have configured.
+- You have a Provisioner up and running, with the Tinkerbell stack installed and configured.
+  This can be done locally with Vagrant as an experimental environment, on Equinix Metal for a more robust setup, or installed on any other environment that you have configured.
 
 - You have a Worker that has not yet been brought up, or can be restarted.
 
 ## Hardware Data
 
-This example is intended to be environment agnostic, and assumes that you have a Worker machine as the intended target. The workflow in this example is simple enough that you can use the [Minimal Hardware Data example](/hardware-data/#the-minimal-hardware-data) with your targeted Worker's MAC Address and/or IP Address substituted in.
+This example is intended to be environment agnostic, and assumes that you have a Worker machine as the intended target.
+The workflow in this example is simple enough that you can use the [Minimal Hardware Data example](/hardware-data/#the-minimal-hardware-data) with your targeted Worker's MAC Address and/or IP Address substituted in.
 
 ## The `hello-world` Action Image
 
-The workflow will have a single task that will have a single action. Actions are stored as images in an image repository either locally or remotely. For this example, pull down the `hello-world` image from Docker to host it locally in the Docker registry on the Provisioner.
+The workflow will have a single task that will have a single action.
+Actions are stored as images in an image repository either locally or remotely.
+For this example, pull down the `hello-world` image from Docker to host it locally in the Docker registry on the Provisioner.
 
 ```bash
 docker pull hello-world
@@ -31,7 +36,9 @@ This image doesn't have any instructions that the Worker will be able to perform
 
 ## The Template
 
-A template is a YAML file that lays out the series of tasks that you want to perform on the Worker after it boots up. The template for this workflow contains the one task with single `hello-world` action. The worker field contains a reference to `device_1` which will be substituted with either the MAC Address or the IP Address of your Worker when you run the `tink workflow create` command in the next step.
+A template is a YAML file that lays out the series of tasks that you want to perform on the Worker after it boots up.
+The template for this workflow contains the one task with single `hello-world` action.
+The worker field contains a reference to `device_1` which will be substituted with either the MAC Address or the IP Address of your Worker when you run the `tink workflow create` command in the next step.
 
 Save this template as `hello-world.tmpl`.
 
@@ -55,7 +62,9 @@ If you haven't already, be sure to have
 - Pushed the Worker's hardware data to the database with `tink hardware push`.
 - Created the template in the database with `tink template create`.
 
-You can now use the hardware data and the template to create a workflow. You need two pieces of information. The MAC Address or IP Address of your Worker as specified in the hardware data and the Template ID that is returned from the `tink template create` command.
+You can now use the hardware data and the template to create a workflow.
+You need two pieces of information.
+The MAC Address or IP Address of your Worker as specified in the hardware data and the Template ID that is returned from the `tink template create` command.
 
 ```bash
 tink workflow create -t <template_id> -r '{"device_1": "<MAC address/IP address>"}'

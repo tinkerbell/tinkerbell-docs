@@ -58,7 +58,8 @@ docker run -it --rm \
 croc:latest
 ```
 
-The command will create the a `packer_cache` folder and an `images` folder in the current folder. These folders will be used for assets and the built OS images, respectively.
+The command will create the a `packer_cache` folder and an `images` folder in the current folder.
+These folders will be used for assets and the built OS images, respectively.
 
 ```
                           .--.  .--.
