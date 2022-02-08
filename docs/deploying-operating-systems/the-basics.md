@@ -13,9 +13,9 @@ Some Operating Systems depend on being laid out on a disk in a specific way, som
 Most Operating Systems are deployed in relatively the same manner:
 
 1. A machine boots and reads from installation media (presented locally or over the network).
-2. The target disks are prepared, typically partitions may be created or HA technologies such as disk mirroring and then finally these partitions are “formatted” so that they contain a file system.
+2. The target disks are prepared, typically partitions may be created or HA technologies such as disk mirroring and then finally these partitions are "formatted" so that they contain a file system.
 3. Either a minimal set of packages or a custom selection of packages will be installed to the new file system.
-   Most Operating Systems or distributions have their own concept of “packages” but ultimately under the covers the package contains binaries and required libraries for an application along with some logic that dictates where the files should be written too along with some versioning information that the package manager can use.
+   Most Operating Systems or distributions have their own concept of "packages" but ultimately under the covers the package contains binaries and required libraries for an application along with some logic that dictates where the files should be written too along with some versioning information that the package manager can use.
 4. There may be some final customization such as setting users, network configuration etc..
 5. A Boot loader is written to the target disk so that when the machine is next powered on it can boot the newly provisioned Operating System.
 
@@ -23,7 +23,7 @@ The order of the steps may differ but pretty much all of the major Operating Sys
 
 ## Options for Automating a Deployment
 
-There are usually two trains of thought when thinking about deploying an Operating System, which are scripted which will go through the steps listed above but no user interaction is required or image based which takes a copy of a deployment and uses that as a “rubber stamp” for other installs.
+There are usually two trains of thought when thinking about deploying an Operating System, which are scripted which will go through the steps listed above but no user interaction is required or image based which takes a copy of a deployment and uses that as a "rubber stamp" for other installs.
 
 ### Scripted
 
@@ -47,8 +47,8 @@ These technologies are all named in a way that reflects that:
 - kickstart
 - jumpstart
 
-Once a member of the operations team has “designed” the set of responses for their chosen Operating System then this single configuration can be re-used as many times as required.
-This removes the human element from accidentally entering the wrong data or clicking the wrong button during an Operating System installation and ensures that the installation is standardized and “documented”.
+Once a member of the operations team has "designed" the set of responses for their chosen Operating System then this single configuration can be re-used as many times as required.
+This removes the human element from accidentally entering the wrong data or clicking the wrong button during an Operating System installation and ensures that the installation is standardized and "documented".
 
 **However**, one thing to consider is that although a scripted installation is a repeatable procedure that requires no human interaction it is not always 100% reliable.
 This installation still runs through a **lot** of steps, such as every package has to be installed along with the prerequisite package management along with configuring devices and other things that happen during that initial installation phase.
@@ -71,7 +71,7 @@ The **Boot sector** is the first place a machine will attempt to boot from once 
 In the majority of examples a computer will boot the first phase from this boot sector and then be told where to look for the subsequent phases and more than likely the remaining code will live within a partition.
 
 A **partition** defines some ring-fenced capacity on an underlying device that can be then presented to the underlying hardware as usable storage.
-Partitions will then be “formatted” so that they have a structure that understands concepts such as folders/directories and files, along with additional functionality such as permissions.
+Partitions will then be "formatted" so that they have a structure that understands concepts such as folders/directories and files, along with additional functionality such as permissions.
 
 ![Diagram of a disk layout](../images/disk-layout.png)
 
@@ -84,7 +84,7 @@ The steps for creating and using a machine image are usually:
 
 - Install an Operating System once (correctly)
 - Create an image of this deployed Operating System
-- Deploy the “golden image” to all other hosts
+- Deploy the "golden image" to all other hosts
 
 ### Filesystem archives
 

@@ -19,3 +19,6 @@ venv: .venv/pyvenv.cfg
 
 site/index.html: venv
 	poetry run mkdocs build
+
+checkquotes:
+	git grep '[“”]' | (grep -v rules.mk || :) | (! grep .)

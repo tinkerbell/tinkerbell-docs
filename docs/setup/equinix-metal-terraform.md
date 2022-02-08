@@ -257,7 +257,7 @@ Remember to use the SOS console to check what the Worker is doing.
 
 Next, define the template for the workflow.
 The template sets out tasks for the Worker to preform sequentially.
-This template contains a single task with a single action, which is to perform [“hello-world”](../../workflows/hello-world-workflow/).
+This template contains a single task with a single action, which is to perform ["hello-world"](../../workflows/hello-world-workflow/).
 Just as in the hello-world example, the `hello-world` image doesn’t contain any instructions that the Worker will perform.
 It is just a placeholder in the template so a workflow can be created and pushed to the Worker.
 

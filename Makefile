@@ -10,4 +10,4 @@ build: site/index.html  ## Build the site
 serve: venv ## Serve the site locally (set MKDOCS_ARGS for extra args)
 	poetry run mkdocs serve ${MKDOCS_ARGS}
 
-test: ## Run the tests
+test: checkquotes # Run the tests
