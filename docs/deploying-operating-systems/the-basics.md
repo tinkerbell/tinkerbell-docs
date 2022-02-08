@@ -38,7 +38,7 @@ All of these factors suddenly required an Operating System to support more and m
 To provide this functionality Operating System vendors built rudimentary user interfaces that would ask questions or provide the capability for a user installing the OS to set various configuration options.
 This worked for a period of time but as more and more computer systems were deployed this became an administrative nightmare, as it was impossible to automate multiple installations as they required interaction to proceed and finally the need for humans to interact brings about the possibility of human error during the deployment.
 
-In order for large scale IT system installations to take place then operations needed a method for [unattended installations](<https://en.wikipedia.org/wiki/Installation_(computer_programs)>), where installations can happen without any involvement.
+In order for large scale IT system installations to take place then operations needed a method for [unattended installations], where installations can happen without any involvement.
 The technique for this to work was to modify the Operating System installation code so that it could take a file that can answer all of the questions that would have previously required user input in order to progress the installation.
 These technologies are all named in a way that reflects that:
 
@@ -59,7 +59,7 @@ This has typically led to numerous installation failures and can be thought of a
 
 ### Image
 
-Creating an image of an existing Operating System has existed for a long time, we can see it referenced in this [1960s IBM manual](https://web.archive.org/web/20140701185435/http://www.demorton.com/Tech/$OSTL.pdf) for their mainframes.
+Creating an image of an existing Operating System has existed for a long time, we can see it referenced in this [1960s IBM manual] for their mainframes.
 To understand imaging, we first need to understand the anatomy of a physical block device.
 
 #### Anatomy of a disk
@@ -73,7 +73,7 @@ In the majority of examples a computer will boot the first phase from this boot 
 A **partition** defines some ring-fenced capacity on an underlying device that can be then presented to the underlying hardware as usable storage.
 Partitions will then be "formatted" so that they have a structure that understands concepts such as folders/directories and files, along with additional functionality such as permissions.
 
-![Diagram of a disk layout](../images/disk-layout.png)
+![Diagram of a disk layout]
 
 Now that we know the makeup of a disk we can see that there are lots of different things that we may need to be aware of, such as type of boot loader, size or number of partitions, type of file systems and then the files and packages that need installing within those partitions.
 
@@ -96,9 +96,9 @@ Once the contents of the archive have been written to the filesystem, the remain
 
 A number of Linux Distributions provide a root file system archive that can already be downloaded quite easily, or a method to create your own:
 
-- [Ubuntu](http://cdimage.ubuntu.com/ubuntu-base/releases/20.04/release/)
-- [Debian](https://wiki.debian.org/Debootstrap)
-- [Arch](https://archive.archlinux.org/iso/) (The `rootfs` is in the format `archlinux-bootstrap-<version>-<arch>.tar.gz`)
+- [Ubuntu]
+- [Debian]
+- [Arch] (The rootfs is in the format archlinux-bootstrap-<version>-<arch>.tar.gz)
 
 We can also make use of root file systems created by the Docker maintainers
 
@@ -108,4 +108,12 @@ docker export $TMPRFS > rootfs.tar
 docker rm $TMPRFS
 ```
 
-Finally there is plenty of tooling to create your own root file systems, a good example is [livemedia-creator](https://weldr.io/lorax/livemedia-creator.html).
+Finally there is plenty of tooling to create your own root file systems, a good example is [livemedia-creator].
+
+[1960s ibm manual]: https://web.archive.org/web/20140701185435/http://www.demorton.com/Tech/$OSTL.pdf
+[arch]: https://archive.archlinux.org/iso/
+[debian]: https://wiki.debian.org/debootstrap
+[diagram of a disk layout]: ../images/disk-layout.png
+[livemedia-creator]: https://weldr.io/lorax/livemedia-creator.html
+[ubuntu]: http://cdimage.ubuntu.com/ubuntu-base/releases/20.04/release/
+[unattended installations]: https://en.wikipedia.org/wiki/Installation_(computer_programs)

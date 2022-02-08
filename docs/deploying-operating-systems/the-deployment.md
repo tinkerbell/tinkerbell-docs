@@ -14,14 +14,14 @@ Not all Operating System images are distributed in the same formats, and in most
 
 ### Preparing the Image
 
-A large number of Operating System vendors tend to distribute their images using the [qcow](https://en.wikipedia.org/wiki/Qcow) format, which comes from the Qemu virtualisation project.
+A large number of Operating System vendors tend to distribute their images using the [qcow] format, which comes from the Qemu virtualisation project.
 This provides a number of features that end users find desirable:
 
 - Small image size (an image is typically only as large as the data written, not the size of the logical block device)
 - The image can be used directly by the qemu/kvm hypervisor (used by a number of cloud providers)
 - The `qcow` image can be easily converted to other formats.
 
-The qemu project provides a number of useful tools to manage Operating System image files, the [qemu-image](https://en.wikibooks.org/wiki/QEMU/Images#Copying_an_image_to_a_physical_device) tool is commonly used to create/convert disk images.
+The qemu project provides a number of useful tools to manage Operating System image files, the [qemu-image] tool is commonly used to create/convert disk images.
 
 We can convert a `qcow` image to a `raw` image with the following command:
 
@@ -35,7 +35,7 @@ One drawback of this is that a `qcow` image will only occupy the space where dat
 ### Streaming the Image to Disk
 
 Once you have your OS image prepared, use an action to write it directly to an underlying block device, which would effectively provision the Operating System to the hardware allowing us to reboot into this new OS.
-The [`image2disk`](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) action is designed for this use-case and has the capability to stream an Operating System image from a remote location over HTTP/HTTPS and write it directly to a specified block device.
+The [image2disk] action is designed for this use-case and has the capability to stream an Operating System image from a remote location over HTTP/HTTPS and write it directly to a specified block device.
 
 For example, you can stream a raw Ubuntu image from a web-server and write the OS image to the block device `/dev/sda`.
 
@@ -49,7 +49,7 @@ actions:
       DEST_DISK: /dev/sda
 ```
 
-`image2disk` also supports on-the-fly gzip streaming, which allows you to compress the raw image using [gzip](https://en.wikipedia.org/wiki/Gzip) to save local disk space **and** the amount of network traffic to the hosts that are being provisioned.
+[image2disk] also supports on-the-fly gzip streaming, which allows you to compress the raw image using [gzip] to save local disk space **and** the amount of network traffic to the hosts that are being provisioned.
 
 ```
 gzip diskimage.raw
@@ -57,7 +57,7 @@ gzip diskimage.raw
 
 The resulting file `diskimage.raw.gz` in most cases will be smaller than the original qcow file.
 
-You can then use the `image2disk` action to stream the image to the block device.
+You can then use the [image2disk] action to stream the image to the block device.
 
 ```
 actions:
@@ -130,10 +130,10 @@ It also specifies the format and filesystem type for two of those partitions.
 }
 ```
 
-> More information about block device configuration is on the Equinix Metal™[Custom Partitioning & Raid](https://metal.equinix.com/developers/docs/servers/custom-partitioning-raid/) page.
+> More information about block device configuration is on the Equinix Metal™ [Custom Partitioning & Raid] page.
 
 The example blob is just the description of the device in hardware data, we will also need an action during provisioning to parse this metadata and actually write these changes to the block device.
-This is the job of the [rootio](https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio) action.
+This is the job of the [rootio] action.
 
 ```
 actions:
@@ -149,9 +149,9 @@ Once this action has completed we will have successfully modified the underlying
 
 ### Extracting the OS to the Filesystem
 
-As detailed in [The Basics of Deploying an Operating System](https://docs.tinkerbell.org/deploying-operating-systems/the-basics/#filesystem-archives), we can download or create a filesystem archive in a number of different ways.
+As detailed in [The Basics of Deploying an Operating System], we can download or create a filesystem archive in a number of different ways.
 Once we have a compressed archive of all of the files that make up the Operating System, we will again need to use an action to manage the task of fetching the archive and extracting it to our newly formatted file system.
-The action [archive2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk) has the functionality to **mount** a filesystem and both **stream**/**extract** a filesystem archive directly to the new filesystem.
+The action [archive2disk] has the functionality to **mount** a filesystem and both **stream**/**extract** a filesystem archive directly to the new filesystem.
 
 ```
 actions:
@@ -207,9 +207,20 @@ actions:
 
 ### Additional Bootstraps
 
-- [Ubuntu](https://help.ubuntu.com/lts/installation-guide/armhf/apds04.html)
-- [Centos/Rhel](https://github.com/dozzie/yumbootstrap)
+- [Ubuntu]
+- [Centos/Rhel]
 
 ## Next Steps
 
 Once an Operating System image **or** a filesystem + bootloader is deployed we may need to customize it or boot into our new system, we can either `reboot` the host or `kexec` directly into the new OS.
+
+[archive2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk
+[centos/rhel]: https://github.com/dozzie/yumbootstrap
+[custom partitioning & raid]: https://metal.equinix.com/developers/docs/servers/custom-partitioning-raid/
+[gzip]: https://en.wikipedia.org/wiki/Gzip
+[image2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk
+[qcow]: https://en.wikipedia.org/wiki/Qcow
+[qemu-image]: https://en.wikibooks.org/wiki/QEMU/Images#Copying_an_image_to_a_physical_device
+[rootio]: https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio
+[the basics of deploying an operating system]: https://docs.tinkerbell.org/deploying-operating-systems/the-basics/#filesystem-archives
+[ubuntu]: https://help.ubuntu.com/lts/installation-guide/armhf/apds04.html

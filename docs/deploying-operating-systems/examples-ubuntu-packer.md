@@ -5,7 +5,7 @@ date: 2021-04-02
 
 # Deploying Ubuntu from Packer Machine Image
 
-This guide will walk you through how you create a minimalistic raw Ubuntu image using [Packer](https://www.packer.io/), an awesome tool to build automated machine images.
+This guide will walk you through how you create a minimalistic raw Ubuntu image using [Packer], an awesome tool to build automated machine images.
 
 Currently, Packer does not officially provide a way to make bare metal machine images.
 So, in this example, we will use `virtualbox-iso` builder to create a Virtual Machine Disk (VDMK) and then convert it to a raw image.
@@ -16,7 +16,7 @@ The raw image can then be deployed on a bare metal server using Tinkerbell.
 
 Below are the preseed file and the config file for creating a minimalistic Ubuntu 20.04 image.
 
-When building an image using `virtualbox-iso`, the [preseed file](https://www.packer.io/guides/automatic-operating-system-installs/preseed_ubuntu) will help with automating the deployment.
+When building an image using `virtualbox-iso`, the [preseed file] will help with automating the deployment.
 It is placed inside the `http` directory, and the config file references the location of the preseed file in the `boot_command` list of the `builders` object.
 
 - `pressed.cfg`
@@ -172,10 +172,10 @@ Below is a reference file for creating a Template using above Ubuntu Packer imag
 This section is similar to the other examples we have in the `Deploying Operating systems` section.
 You can follow them for more references.
 
-The template uses actions from the [artifact.io](https://artifact.io) hub.
+The template uses actions from the [artifact hub].
 
-- [image2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) - to write the OS image to a block device.
-- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
+- [image2disk] - to write the OS image to a block device.
+- [kexec] - to `kexec` into our newly provisioned operating system.
 
 ```
 version: "0.1"
@@ -204,3 +204,9 @@ tasks:
           BLOCK_DEVICE: /dev/sda1
             FS_TYPE: ext4
 ```
+
+[artifact hub]: https://artifact.io
+[image2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk
+[kexec]: https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec
+[packer]: https://www.packer.io/
+[preseed file]: https://www.packer.io/guides/automatic-operating-system-installs/preseed_ubuntu

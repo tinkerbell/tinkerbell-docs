@@ -14,20 +14,20 @@ It covers some basic aspects of Tinkerbell's functionality:
 
 - setting up a Provisioner
 - creating the hardware data for the Worker
-- creating a template with a placeholder action item, using the [hello-world example](../../workflows/hello-world-workflow)
+- creating a template with a placeholder action item, using the [hello-world template]
 - and creating a workflow
 
 The last step is to start up the Worker, which will call back to the Provisioner for its workflow.
 
 ## Prerequisites
 
-- [The host's processor should support virtualization](https://www.cyberciti.biz/faq/linux-xen-vmware-kvm-intel-vt-amd-v-support/)
-- [Vagrant](https://www.vagrantup.com/downloads) is installed
-- Either [VirtualBox](https://www.virtualbox.org/) or [libvirtd](https://libvirt.org/) is installed.
+- [The host's processor should support virtualization]
+- [Vagrant] is installed
+- Either [VirtualBox] or [libvirtd] is installed.
 - If using VirtualBox be sure to install both:
   - The Vagrant _vagrant-vbguest_ plugin: `vagrant plugin install vagrant-vbguest`
-  - The [VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads)
-- If using VirtualBox, you may get an error about valid IP addresses for host-only networks. [This page from the Virtual Box manual explains how to add additional address ranges to your setup.](https://www.virtualbox.org/manual/ch06.html#network_hostonly)
+  - The [VirtualBox Extension Pack]
+- If using VirtualBox, you may get an error about valid IP addresses for host-only networks. [This page from the Virtual Box manual explains how to add additional address ranges to your setup.]
 
 ## Getting Tinkerbell
 
@@ -105,7 +105,7 @@ compose_ubuntu-image-setup_1         /scripts/setup_ubuntu.sh h ...   Exit 0
 
 As you'll see shortly, each step in a Tinkerbell workflow is referred to as an Action Image, and is simply a Docker image.
 Before you move ahead, let's pull down the image that will be used in the example workflow.
-Tinkerbell uses Docker registry to host images locally, so pull down the ["Hello World" docker image](https://hub.docker.com/_/hello-world/) and push it to the registry.
+Tinkerbell uses Docker registry to host images locally, so pull down the [Hello World] docker image and push it to the registry.
 
 Let's trust the SSL certs of the registry container.
 
@@ -196,7 +196,7 @@ tink-server_1               | {"level":"info","ts":1638306331.943881,"caller":"g
 Next, define the template for the workflow.
 The template sets out tasks for the Worker to preform sequentially.
 This template contains a single task with a single action, which is to perform "hello-world".
-Just as in the [hello-world example](/workflows/hello-world-workflow), the "hello-world" image doesn't contain any instructions that the Worker will perform.
+Just as in the [hello-world example], the "hello-world" image doesn't contain any instructions that the Worker will perform.
 It is just a placeholder in the template so a workflow can be created and pushed to the Worker.
 
 ```
@@ -262,7 +262,7 @@ If you are using VirtualBox, it will bring up a UI, and after the setup, you wil
 You can login with the username `root` and no password is required.
 Tinkerbell will netboot a custom AlpineOS that runs in RAM, so any changes you make won't be persisted between reboots.
 
-> Note: If you have a high-resolution monitor, here are a few notes about how to make the [UI bigger](https://github.com/tinkerbell/tinkerbell.org/pull/76#discussion_r442151095).
+> Note: If you have a high-resolution monitor, here are a few notes about how to make the [UI bigger].
 
 At this point you should check on the Provisioner to confirm that the Workflow was executed on the Worker.
 If you opened a terminal window to monitor the Tinkerbell logs, you should see the execution in them.
@@ -290,7 +290,19 @@ docker exec -i compose_tink-cli_1 tink workflow events a8984b09-566d-47ba-b6c5-f
 Getting set up locally is a good way to sample Tinkerbell's functionality.
 The Vagrant set up is not necessarily intended to be persistent, but while it's up and running, you can use the Provisioner to test out the CLI commands or just explore the stack.
 
-If you are looking to extend your local setup to develop or test out other workflows, check out the [Extending the Vagrant Setup](/setup/extending-vagrant) doc.
+If you are looking to extend your local setup to develop or test out other workflows, check out the [Extending the Vagrant Setup] doc.
 
 That's it!
-Let us know what you think about it in the #tinkerbell channel on the [CNCF Community Slack](https://slack.cncf.org/).
+Let us know what you think about it in the #tinkerbell channel on the [CNCF Community Slack].
+
+[cncf community slack]: https://slack.cncf.org/
+[extending the vagrant setup]: /setup/extending-vagrant
+[hello world]: https://hub.docker.com/_/hello-world/
+[hello-world template]: /workflows/hello-world-workflow
+[libvirtd]: https://libvirt.org/
+[the host's processor should support virtualization]: https://www.cyberciti.biz/faq/linux-xen-vmware-kvm-intel-vt-amd-v-support/
+[this page from the virtual box manual explains how to add additional address ranges to your setup.]: https://www.virtualbox.org/manual/ch06.html#network_hostonly
+[ui bigger]: https://github.com/tinkerbell/tinkerbell.org/pull/76#discussion_r442151095
+[vagrant]: https://www.vagrantup.com/downloads
+[virtualbox extension pack]: https://www.virtualbox.org/wiki/downloads
+[virtualbox]: https://www.virtualbox.org/

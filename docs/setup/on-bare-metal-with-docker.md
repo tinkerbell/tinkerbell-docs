@@ -12,17 +12,17 @@ The homelab is made of 10 Intel NUCs, with one of them picked to be the Provisio
 2. Tink Server
 3. Tink CLI
 4. PostgreSQL
-5. And everything that runs as part of the [docker-compose in sandbox](https://github.com/tinkerbell/sandbox/blob/main/deploy/compose/docker-compose.yml)
+5. And everything that runs as part of the [docker-compose in sandbox]
 
-This page is inspired by [Aaron](https://geekgonecrazy.com/) a community member who wrote ["Tinkerbell or iPXE boot on OVH"](https://geekgonecrazy.com/2020/09/07/tinkerbell-or-ipxe-boot-on-ovh/).
+This page is inspired by [Aaron] a community member who wrote ["Tinkerbell or iPXE boot on OVH"].
 
-In this project we will use [Sandbox](https://github.com/tinkerbell/sandbox) and everything it depends on.
+In this project we will use [Sandbox] and everything it depends on.
 Pick a server, a laptop, or as in this example, an Intel NUC.
 
 This guide also provides a little more of an explanation with very little automation for what happens under the hood in guides like:
 
-- [Local Setup with Vagrant](/setup/local-vagrant)
-- [Equinix Metal Setup with Terraform](/setup/equinix-metal-terraform)
+- [Local Setup with Vagrant]
+- [Equinix Metal Setup with Terraform]
 
 ## Prerequisites
 
@@ -53,7 +53,7 @@ tar xf sandbox.tar.gz
 cd sandbox-<version> # something like sandbox-0.5.0
 ```
 
-In this case we are using the latest sandbox release that today is [v0.4.0](https://github.com/tinkerbell/sandbox/release/v0.4.0).
+In this case we are using the latest sandbox release that today is [v0.4.0].
 It is important to checkout a specific version and have a look at the changelog when you update.
 Tinkerbell is under development, but we guarantee as best as we can that tags are good and working end-to-end.
 
@@ -119,7 +119,7 @@ You can think of it as a release bundle.
 > If you are developing or you want to test a different version of a particular tool let's say Hegel, you can build and push a docker image, replace `TINKERBELL_TINK_HEGEL_IMAGE` with your tag and you are good to go.
 
 Tinkerbell needs a static and predictable IP, that's why the `setup.sh` script specifies and sets its own with `TINKEBELL_HOST_IP`.
-It is used by [Boots](https://github.com/tinkerbell/boots) to serve the operating system installation environment, for example.
+It is used by [Boots] to serve the operating system installation environment, for example.
 And Sandbox provisions (via Docker Compose) an Nginx server that you can use to serve any file you want (OSIE is served via that Nginx).
 
 If your Tinkerbell host IP and LAN CIDR is different than `192.168.1.1/29`, you
@@ -171,11 +171,11 @@ The `setup.sh` script does a bunch of manipulation to your local environment, so
 
 ## Run the Setup Script
 
-Before running the [setup.sh](https://github.com/tinkerbell/sandbox/blob/main/setup.sh) script, there are a few handy things to know about it.
+Before running the [setup.sh] script, there are a few handy things to know about it.
 
 The `setup.sh` script's main responsibility is to setup the network.
-It creates a certificate that will be used to setup the registry ([this will may change soon](https://github.com/tinkerbell/sandbox/issues/45)).
-It downloads [OSIE](https://github.com/tinkerbell/osie) and places it inside the Nginx weboot (`./deploy/state/webroot/`).
+It creates a certificate that will be used to setup the registry ([this will may change soon]).
+It downloads [OSIE] and places it inside the Nginx weboot (./deploy/state/webroot/).
 
 > You can use the webroot for your own purposes, it is part of `gitignore` and other than OSIE you can serve other operating systems that you want to install in your other servers, or even public ssh keys (whatever you need a link for).
 
@@ -207,5 +207,16 @@ docker-compose up -d
 
 ## Time to Party
 
-At this point let me point you to the ["Local with Vagrant"](/setup/local-vagrant#starting-tinkerbell) setup guide because you have everything you need to play with Tinkerbell.
+At this point let me point you to the [Local Setup with Vagrant] guide because you have everything you need to play with Tinkerbell.
 Enjoy!
+
+[aaron]: https://geekgonecrazy.com/
+[boots]: https://github.com/tinkerbell/boots
+[docker-compose in sandbox]: https://github.com/tinkerbell/sandbox/blob/main/deploy/compose/docker-compose.yml
+[equinix metal setup with terraform]: /setup/equinix-metal-terraform
+[local setup with vagrant]: /setup/local-vagrant
+[osie]: https://github.com/tinkerbell/osie
+[sandbox]: https://github.com/tinkerbell/sandbox
+[setup.sh]: https://github.com/tinkerbell/sandbox/blob/main/setup.sh
+[this will may change soon]: https://github.com/tinkerbell/sandbox/issues/45
+[v0.4.0]: https://github.com/tinkerbell/sandbox/release/v0.4.0

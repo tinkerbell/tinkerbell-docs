@@ -18,7 +18,7 @@ It uses the hello-world docker image as an example task that could be performed 
 ## Hardware Data
 
 This example is intended to be environment agnostic, and assumes that you have a Worker machine as the intended target.
-The workflow in this example is simple enough that you can use the [Minimal Hardware Data example](/hardware-data/#the-minimal-hardware-data) with your targeted Worker's MAC Address and/or IP Address substituted in.
+The workflow in this example is simple enough that you can use the [Minimal Hardware Data example] with your targeted Worker's MAC Address and/or IP Address substituted in.
 
 ## The `hello-world` Action Image
 
@@ -92,3 +92,5 @@ tink workflow events <ID>
 ```
 
 If you reboot the Worker at this point, it will again PXE boot, since no alternate operating system was installed as part of the `hello-world` workflow.
+
+[minimal hardware data example]: /hardware-data/#the-minimal-hardware-data

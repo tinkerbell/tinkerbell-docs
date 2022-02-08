@@ -9,7 +9,7 @@ This is a guide which walks through the process of deploying various Windows ver
 
 ## Generating the Images
 
-The [tinkerbell](https://tinkerbell.org) GitHub organization contains a project called [crocodile](https://github.com/tinkerbell/crocodile) that largely automates the entire process of image creation.
+The [tinkerbell] GitHub organization contains a project called [crocodile] that largely automates the entire process of image creation.
 
 The pre-requisites for using the `crocodile` project are:
 
@@ -128,9 +128,9 @@ actions:
 
 ### The Example Template
 
-The template uses actions from the [artifact.io](https://artifact.io) hub.
+The template uses actions from the [artifact hub].
 
-- [image2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) - to write the image to a block device.
+- [image2disk] - to write the image to a block device.
 - Our custom action that will cause a system reboot into our new Operating System.
 
 > Important: Don't forget to pull, tag, and push `quay.io/tinkerbell-actions/image2disk:v1.0.0` prior to using it.
@@ -160,3 +160,8 @@ tasks:
         volumes:
 	    - /worker:/worker
 ```
+
+[artifact hub]: https://artifact.io
+[crocodile]: https://github.com/tinkerbell/crocodile
+[image2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk
+[tinkerbell]: https://tinkerbell.org

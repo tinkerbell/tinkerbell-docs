@@ -13,7 +13,7 @@ This guide walks through the process of deploying Debian through:
 
 ## Using an Operating System Image
 
-Debian distributes their Operating System in a number of different formats, which are all available on the `cloud-images` web site: [https://cdimage.debian.org/cdimage/cloud/OpenStack/current/](https://cdimage.debian.org/cdimage/cloud/OpenStack/current/).
+Debian distributes their Operating System in a number of different formats, which are all available on the [cloud-images] site.
 
 Below are two examples of images we can use:
 
@@ -52,10 +52,10 @@ mv ./debian-10-openstack-amd64.raw.gz ./sandbox/deploy/state/webroot
 
 ### Creating the Template
 
-The template uses actions from the [artifact.io](https://artifact.io) hub.
+The template uses actions from the [artifact hub].
 
-- [image2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) - to write the OS image to a block device.
-- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
+- [image2disk] - to write the OS image to a block device.
+- [kexec] - to `kexec` into our newly provisioned operating system.
 
 ```
 version: "0.1"
@@ -116,12 +116,12 @@ mv ./debian_rootfs.tar.gz ./sandbox/deploy/state/webroot
 
 ### Creating the Template
 
-The template uses actions from the [artifact.io](https://artifact.io) hub.
+The template uses actions from the [artifact. hub].
 
-- [rootio](https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio) - to partition our disk and make filesystems.
-- [archive2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk) - to write the OS image to a block device.
-- [cexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/cexec) - to run commands inside (chroot) our newly provisioned operating system.
-- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
+- [rootio] - to partition our disk and make filesystems.
+- [archive2disk] - to write the OS image to a block device.
+- [cexec] - to run commands inside (chroot) our newly provisioned operating system.
+- [kexec] - to `kexec` into our newly provisioned operating system.
 
 ```
 version: "0.1"
@@ -174,7 +174,7 @@ tasks:
 
 ## Using Bootstrap
 
-The final method for installing Debian is to use the [grml-debootstrap](https://grml.org/grml-debootstrap/) installer.
+The final method for installing Debian is to use the [grml-debootstrap] installer.
 We will need to create an action that will invoke the installer and install to our local disk.
 
 ### Creating the Dockerfile
@@ -205,11 +205,11 @@ actions:
 
 ### Creating the Template
 
-The template uses actions from the [artifact.io](https://artifact.io) hub.
+The template uses actions from the [artifact hub].
 
-- [rootio](https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio) - to partition our disk and make filesystems
+- [rootio] - to partition our disk and make filesystems
 - Our custom action that will invoke the Bootstrap program.
-- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
+- [kexec] - to `kexec` into our newly provisioned operating system.
 
 As well as the `debian:bootstrap` action from the local registry.
 
@@ -248,3 +248,12 @@ tasks:
 	        BLOCK_DEVICE: /dev/sda3
 	        FS_TYPE: ext4
 ```
+
+[archive2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk
+[artifact hub]: https://artifact.io
+[cexec]: https://artifacthub.io/packages/tbaction/tinkerbell-community/cexec
+[cloud-images]: https://cdimage.debian.org/cdimage/cloud/OpenStack/current/
+[grml-debootstrap]: https://grml.org/grml-debootstrap/
+[image2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk
+[kexec]: https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec
+[rootio]: https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio

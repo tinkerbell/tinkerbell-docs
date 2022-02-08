@@ -12,14 +12,14 @@ Then uses the `hello-world` example workflow as an introduction to Tinkerbell. _
 
 This guide assumes that you already have:
 
-- [An Equinix Metal account](https://console.equinix.com/login).
+- [An Equinix Metal account].
 - Your Equinix Metal API Key and Project ID.
   The Terraform provider needs to have both to create servers in your account.
   Make sure the API token is a user API token (created/accessed under _API keys_ in your personal settings).
-- [SSH Keys](https://metal.equinix.com/developers/docs/accounts/ssh-keys/) need to be set up on Equinix Metal for the machine where you are running Terraform.
+- [SSH Keys] need to be set up on Equinix Metal for the machine where you are running Terraform.
   Terraform uses your `ssh-agent` to connect to the Provisioner when needed.
   Double check that the right keys are set.
-- [Terraform](https://www.terraform.io/downloads.html) and the [Equinix Metal Terraform provider](https://registry.terraform.io/providers/equinix/metal/latest/docs) installed on your local machine.
+- [Terraform] and the [Equinix Metal Terraform provider] installed on your local machine.
 
 ## Using Terraform
 
@@ -96,7 +96,7 @@ You are looking for a facility that has a `normal` level of `c3.small.x86`.
 > attempted methods [none publickey], no supported methods remain
 ```
 
-Terraform uses the Terraform [file](https://www.terraform.io/docs/provisioners/file.html) function to copy the `tink` directory from your local environment to the Provisioner.
+Terraform uses the Terraform [file] function to copy the tink directory from your local environment to the Provisioner.
 You can get this error if your local `ssh-agent` properly You should start the agent and add the `private_key` that you use to SSH into the Provisioner.
 
 ```
@@ -127,7 +127,7 @@ ssh -t root@$(terraform output -raw provisioner_ip) "cd /root/tink && bash"
 You have to define and set Tinkerbell's environment.
 Use the `generate-env.sh` script to generate the `.env` file.
 Using and setting `.env` creates an idempotent workflow and you can use it to configure the `setup.sh` script.
-For example changing the [OSIE](/services/osie) version.
+For example changing the [OSIE] version.
 
 ```
 ./generate-env.sh enp1s0f1 > .env
@@ -142,11 +142,11 @@ Then, you run the `setup.sh` script.
 
 `setup.sh` uses the `.env` to install and configure:
 
-- [tink-server](/services/tink)
-- [hegel](/services/hegel)
-- [boots](/services/boots)
+- [tink-server]
+- [hegel]
+- [boots]
 - postgres
-- nginx to serve [OSIE](/services/osie)
+- nginx to serve [OSIE]
 - A docker registry.
 
 ## Running Tinkerbell
@@ -250,14 +250,14 @@ tink hardware push < /root/tink/deploy/hardware-data-0.json
 
 A note on the Worker at this point.
 Ideally the worker should be kept from booting until the Provisioner is ready to serve it OSIE, but on Equinix Metal that probably doesn't happen.
-Now that the Worker's hardware data is registered with Tinkerbell, you should manually reboot the worker through the [Equinix Metal CLI](https://github.com/equinix/metal-cli/blob/main/docs/metal_device_reboot.md), [API](https://metal.equinix.com/developers/api/devices/#devices-performAction), or Equinix Metal console.
+Now that the Worker's hardware data is registered with Tinkerbell, you should manually reboot the worker through the [Equinix Metal CLI], [API], or Equinix Metal console.
 Remember to use the SOS console to check what the Worker is doing.
 
 ## Creating a Template
 
 Next, define the template for the workflow.
 The template sets out tasks for the Worker to preform sequentially.
-This template contains a single task with a single action, which is to perform ["hello-world"](../../workflows/hello-world-workflow/).
+This template contains a single task with a single action, which is to perform [hello-world].
 Just as in the hello-world example, the `hello-world` image doesn’t contain any instructions that the Worker will perform.
 It is just a placeholder in the template so a workflow can be created and pushed to the Worker.
 
@@ -430,3 +430,16 @@ You can terminate worker and provisioner with the `terraform destroy` command:
 ```
 terraform destroy
 ```
+
+[an equinix metal account]: https://console.equinix.com/login
+[api]: https://metal.equinix.com/developers/api/devices/#devices-performaction
+[boots]: /services/boots
+[equinix metal cli]: https://github.com/equinix/metal-cli/blob/main/docs/metal_device_reboot.md
+[equinix metal terraform provider]: https://registry.terraform.io/providers/equinix/metal/latest/docs
+[file]: https://www.terraform.io/docs/provisioners/file.html
+[hegel]: /services/hegel
+[hello-world]: ../../workflows/hello-world-workflow/
+[osie]: /services/osie
+[ssh keys]: https://metal.equinix.com/developers/docs/accounts/ssh-keys/
+[terraform]: https://www.terraform.io/downloads.html
+[tink-server]: /services/tink

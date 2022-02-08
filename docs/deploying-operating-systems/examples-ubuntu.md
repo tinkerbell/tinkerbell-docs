@@ -9,7 +9,7 @@ This guide walks through the process of deploying Ubuntu from either an operatin
 
 ## Using an Operating System Image
 
-Ubuntu is distributed in a number of different formats, which are all available on the `cloud-images` web site: [https://cloud-images.ubuntu.com/daily/server/focal/current/](https://cloud-images.ubuntu.com/daily/server/focal/current/).
+Ubuntu is distributed in a number of different formats, which are all available on the [cloud-images] site.
 
 This example uses the image with the `.img` extension.
 
@@ -49,10 +49,10 @@ mv ./focal-server-cloudimg-amd64.raw ./sandbox/deploy/state/webroot`
 
 ### Creating the Template
 
-The template uses [actions](https://github.com/artifacthub/hub/blob/master/docs/metadata/artifacthub-pkg.yml) from the [artifacthub.io](https://artifacthub.io).
+The template uses [actions] from the [artifact hub].
 
-- [image2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) - to write the OS image to a block device.
-- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
+- [image2disk] - to write the OS image to a block device.
+- [kexec] - to `kexec` into our newly provisioned operating system.
 
 > Important: Don't forget to pull, tag, and push `quay.io/tinkerbell-actions/image2disk:v1.0.0` prior to using it.
 
@@ -130,10 +130,10 @@ mv ./ubuntu_rootfs.tar.gz ./sandbox/deploy/state/webroot
 
 The template makes use of the actions from the artifact hub.
 
-- [rootio](https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio) - to partition our disk and make filesystems.
-- [archive2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk) - to write the OS image to a block device.
-- [cexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/cexec) - to run commands inside (chroot) our newly provisioned operating system.
-- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
+- [rootio] - to partition our disk and make filesystems.
+- [archive2disk] - to write the OS image to a block device.
+- [cexec] - to run commands inside (chroot) our newly provisioned operating system.
+- [kexec] - to `kexec` into our newly provisioned operating system.
 
 ```
 version: "0.1"
@@ -183,3 +183,12 @@ tasks:
 		  BLOCK_DEVICE: /dev/sda3
 		  FS_TYPE: ext4
 ```
+
+[actions]: https://github.com/artifacthub/hub/blob/master/docs/metadata/artifacthub-pkg.yml
+[archive2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk
+[artifact hub]: https://artifact.io
+[cexec]: https://artifacthub.io/packages/tbaction/tinkerbell-community/cexec
+[cloud-images]: https://cloud-images.ubuntu.com/daily/server/focal/current/
+[image2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk
+[kexec]: https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec
+[rootio]: https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio

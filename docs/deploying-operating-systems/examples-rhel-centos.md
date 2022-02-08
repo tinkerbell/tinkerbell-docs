@@ -11,12 +11,12 @@ This is a guide which walks through the process of deploying either Red Hat Ente
 
 RedHat provides both RHEL and CoreOS images in the RedHat provide RHEL Operating System images in the `qcow2` format.
 
-The CentOS images are available the `cloud-images` web site [https://cloud.centos.org/centos/8/x86_64/images/](https://cloud.centos.org/centos/8/x86_64/images/).
+The CentOS images are available the [cloud-images] site.
 
 RHEL images require a Red Hat Account in order to download, and are available at (login required):
 
-- RHEL8: [https://access.redhat.com/downloads/content/479/ver=/rhel—8/8.0/x86_64/product-software](https://access.redhat.com/downloads/content/479/ver=/rhel—8/8.0/x86_64/product-software)
-- RHEL7: [https://access.redhat.com/downloads/content/69/ver=/rhel—7/7.1/x86_64/product-downloads](https://access.redhat.com/downloads/content/69/ver=/rhel—7/7.1/x86_64/product-downloads)
+- [RHEL8]
+- [RHEL7]
 
 A `qcow2` filesystem image which is a **full** disk image including partition tables, partitions filled with filesystems and the files, and importantly, a boot loader at the beginning of the disk image.
 It will need to be converted to a `raw` filesystem image in order to use it.
@@ -53,7 +53,7 @@ mv ./CentOS-8-GenericCloud-8.3.2011-20201204.2.x86_64.raw.gz ./sandbox/deploy/st
 ### Fedora CoreOS
 
 CentOS 8 is the last release and will be going EOL at the end of 2021, but following the acquisition of CoreOS by Red Hat, they distribute an additional operating system called Fedora CoreOS.
-It is available at [https://getfedora.org/en/coreos/download?tab=metal_virtualized&stream=stable](https://getfedora.org/en/coreos/download?tab=metal_virtualized&stream=stable), and distributed in both `raw` and `qcow2` format.
+It is available at [Get Fedora], and distributed in both `raw` and `qcow2` format.
 
 ```
 fedora-coreos-33.20210217.3.0-metal.x86_64.qcow2.xz
@@ -74,10 +74,10 @@ It will need to be converted to a `raw` filesystem image in order to use it, lik
 
 ### Creating the Template
 
-The template uses actions from the [artifact.io](https://artifact.io) hub.
+The template uses actions from the [artifact hub].
 
-- [image2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) - to write the OS image to a block device.
-- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
+- [image2disk] - to write the OS image to a block device.
+- [kexec] - to `kexec` into our newly provisioned operating system.
 
 > Important: Don't forget to pull, tag and push `quay.io/tinkerbell-actions/image2disk:v1.0.0` prior to using it.
 
@@ -141,10 +141,10 @@ mv ./centos_rootfs.tar.gz ./sandbox/deploy/state/webroot
 
 The template makes use of the actions from the artifact hub.
 
-- [rootio](https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio) - to partition our disk and make filesystems.
-- [archive2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk) - to write the OS image to a block device.
-- [cexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/cexec) - to run commands inside (chroot) our newly provisioned operating system.
-- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
+- [rootio] - to partition our disk and make filesystems.
+- [archive2disk] - to write the OS image to a block device.
+- [cexec] - to run commands inside (chroot) our newly provisioned operating system.
+- [kexec] - to `kexec` into our newly provisioned operating system.
 
 ```
 version: '0.1'
@@ -227,10 +227,10 @@ mv ./rhel_rootfs.tar.gz ./sandbox/deploy/state/webroot
 
 The template makes use of the actions from the artifact hub.
 
-- [rootio](https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio) - to partition our disk and make filesystems.
-- [archive2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk) - to write the OS image to a block device.
-- [cexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/cexec) - to run commands inside (chroot) our newly provisioned operating system.
-- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
+- [rootio] - to partition our disk and make filesystems.
+- [archive2disk] - to write the OS image to a block device.
+- [cexec] - to run commands inside (chroot) our newly provisioned operating system.
+- [kexec] - to `kexec` into our newly provisioned operating system.
 
 ```
 version: '0.1'
@@ -294,3 +294,14 @@ tasks:
 			BLOCK_DEVICE: /dev/sda3
 			FS_TYPE: ext4
 ```
+
+[archive2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk
+[artifact hub]: https://artifact.io
+[cexec]: https://artifacthub.io/packages/tbaction/tinkerbell-community/cexec
+[cloud-images]: https://cloud.centos.org/centos/8/x86_64/images/
+[get fedora]: https://getfedora.org/en/coreos/download?tab=metal_virtualized&stream=stable
+[image2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk
+[kexec]: https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec
+[rhel7]: https://access.redhat.com/downloads/content/69/ver=/rhel—7/7.1/x86_64/product-downloads
+[rhel8]: https://access.redhat.com/downloads/content/479/ver=/rhel—8/8.0/x86_64/product-software
+[rootio]: https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio

@@ -10,7 +10,7 @@ Boots is Tinkerbell's DHCP server, handling IP addresses and requests.
 It is also the TFTP server, serving iPXE and the initial installation image.
 
 Boots is written in Go, and can built, run, and tested outside of the Tinkerbell stack.
-Take a look at the code in its GitHub repository: [tinkerbell/boots](https://github.com/tinkerbell/boots).
+Take a look at the code in the [tinkerbell/boots] GitHub repository.
 
 ## What Boots does
 
@@ -19,7 +19,7 @@ Boots receives the request and assigns the Worker its IP Address as defined in t
 
 Next, Boots communicates over TFTP to download the iPXE script to the Worker.
 
-The iPXE script tells the Worker to download and boot an in-memory operating system called [Osie](/services/osie).
+The iPXE script tells the Worker to download and boot an in-memory operating system called [hook].
 From there you are inside an OS and you can do what you like, the most common action is to partition your hard drive and installing the actual operating system.
 Tinkerbell abstracts those actions with the concept of a workflow.
 
@@ -32,6 +32,12 @@ If you use Provisioner with an API, like Tinkerbell does, things get even more c
 
 There are a lot of articles and use cases for netbooting, here a few that our contributors enjoyed or even wrote:
 
-- [First journeys with netboot and ipxe installing Ubuntu](https://gianarb.it/blog/first-journeys-with-netboot-ipxe)
-- [The state of netbooting Raspberry Pis](https://blog.alexellis.io/the-state-of-netbooting-raspberry-pi/)
-- [RedHat Enterprise Linux: PREPARING FOR A NETWORK INSTALLATION](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/installation_guide/chap-installation-server-setup)
+- [First journeys with netboot and ipxe installing Ubuntu]
+- [The state of netbooting Raspberry Pis]
+- [RedHat Enterprise Linux: PREPARING FOR A NETWORK INSTALLATION]
+
+[first journeys with netboot and ipxe installing ubuntu]: https://gianarb.it/blog/first-journeys-with-netboot-ipxe
+[hook]: /services/osie
+[redhat enterprise linux: preparing for a network installation]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/installation_guide/chap-installation-server-setup
+[the state of netbooting raspberry pis]: https://blog.alexellis.io/the-state-of-netbooting-raspberry-pi/
+[tinkerbell/boots]: https://github.com/tinkerbell/boots

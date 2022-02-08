@@ -11,7 +11,7 @@ Container images are also efficient in the way they are built, cached and shippe
 
 You can use any registry you want:
 
-- It can be a self hosted one like: [distribution](https://github.com/distribution/distribution) or Harbor(https://goharbor.io/)
+- It can be a self hosted one like: [distribution] or [Harbor]
 - A public one like: Quay or Docker Hub
 - A SaaS like GiHub container registry.
 - Or even a mix of everything, it is not important
@@ -35,6 +35,9 @@ REGISTRY_PASSWORD: $TINKERBELL_REGISTRY_PASSWORD
 
 ## Things to know about Registry in Sandbox
 
-Sandbox ships [distribution](https://github.com/distribution/distribution) a registry written by Docker and now part of the Cloud Native Computing Foundation.
+Sandbox ships [distribution] a registry written by Docker and now part of the Cloud Native Computing Foundation.
 Distribution supports many storage like S3, a file system and so on.
 Sandbox uses docker-compose and the file system adapter storing images on disks.
+
+[distribution]: https://github.com/distribution/distribution
+[harbor]: https://goharbor.io/

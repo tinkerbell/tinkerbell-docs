@@ -1,14 +1,14 @@
-![](https://img.shields.io/badge/Stability-Experimental-red.svg)
+![][stability badge]
 
 # Tinkerbell Docs
 
 This is the source repo for the Tinkerbell docs.
-They are build using static-site generator [`mkdocs`](https://www.mkdocs.org/) and using the [`mkdocs-material`](https://squidfunk.github.io/mkdocs-material/) theme, then served by netlify to [docs.tinkerbell.org](https://docs.tinkerbell.org/).
+They are build using static-site generator [MkDocs] and using the [mkdocs-material] theme, then served by netlify to [docs.tinkerbell.org].
 
 ## Development
 
-This repository uses [MkDocs](https://www.mkdocs.org/) as the documentation framework and [Poetry](https://python-poetry.org/) to manage it's dependencies.
-Make sure to have [Python installed](https://www.python.org/downloads/).
+This repository uses [MkDocs] as the documentation framework and [Poetry] to manage it's dependencies.
+Make sure to have [Python] installed.
 If you wish, you can install `mkdocs` and other dependencies to build the docs locally by running the following commands
 
 ```bash
@@ -44,10 +44,18 @@ To pull the image into your doc, use a relative link to the image file.
 Example:
 
 ```
-![Architecture](/images/architecture-diagram.png)
+![Architecture]
 ```
 
 ### Adding a page
 
 If you would like to submit a new page to the documentation, be sure to add it to the `nav` section in mkdocs.yml.
 This will ensure that the page appears in the table of contents.
+
+[architecture]: /images/architecture-diagram.png
+[docs.tinkerbell.org]: https://docs.tinkerbell.org/
+[mkdocs]: https://www.mkdocs.org/
+[mkdocs-material]: https://squidfunk.github.io/mkdocs-material/
+[poetry]: https://python-poetry.org/
+[python]: https://www.python.org/downloads/
+[stability badge]: https://img.shields.io/badge/Stability-Experimental-red.svg

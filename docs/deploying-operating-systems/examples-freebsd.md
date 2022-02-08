@@ -9,7 +9,7 @@ This is a guide which walks through the process of deploying FreeBSD from an ope
 
 ## Getting the Image
 
-FreeBSD distributes their Operating System in a number of different formats, which are all available on the `cloud-images` web site [https://download.freebsd.org/ftp/releases/VM-IMAGES/12.2-RELEASE/amd64/Latest/](https://download.freebsd.org/ftp/releases/VM-IMAGES/12.2-RELEASE/amd64/Latest/).
+FreeBSD distributes their Operating System in a number of different formats, which are all available on the [cloud-images] site.
 
 Below are two examples of images we can use:
 
@@ -76,10 +76,10 @@ mv ./FreeBSD-12.2-RELEASE-amd64.raw.gz ./sandbox/deploy/state/webroot
 
 ## Creating the Template
 
-The template uses actions from the [artifact.io](https://artifact.io) hub.
+The template uses actions from the [artifact hub].
 
-- [image2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) - to write the image to a block device.
-- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
+- [image2disk] - to write the image to a block device.
+- [kexec] - to `kexec` into our newly provisioned operating system.
 
 > Important: Don't forget to pull, tag and push `quay.io/tinkerbell-actions/image2disk:v1.0.0` prior to using it.
 
@@ -110,3 +110,8 @@ tasks:
     	  BLOCK_DEVICE: /dev/sda1
 	  	  FS_TYPE: ext4
 ```
+
+[artifact hub]: https://artifact.io
+[cloud-images]: https://download.freebsd.org/ftp/releases/VM-IMAGES/12.2-RELEASE/amd64/Latest/
+[image2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk
+[kexec]: https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec

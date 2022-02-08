@@ -5,12 +5,12 @@ date: 2020-07-22
 
 # Architecture
 
-![Architecture](/images/architecture-diagram.png)
+![Architecture]
 
 ## Provisioner
 
 The provisioner machine is the main driver for executing a workflow.
-The Provisioner houses and runs the [Tinkerbell stack](/#whats-powering-tinkerbell), acts as the DHCP server, keeps track of hardware data, templates, and workflows.
+The Provisioner houses and runs the [Tinkerbell stack], acts as the DHCP server, keeps track of hardware data, templates, and workflows.
 You may divide these components into multiple servers that would then all function as your Provisioner.
 
 ### Provisioner Requirements
@@ -44,3 +44,6 @@ There are some very basic requirements that a Worker machine must meet in order 
 
 There are no Disk requirements for a Worker since OSIE runs an in-memory operating system.
 Your disk requirements will be determined by the OS you are going to install and other use-case considerations.
+
+[architecture]: /images/architecture-diagram.png
+[tinkerbell stack]: /#whats-powering-tinkerbell

@@ -6,12 +6,12 @@ date: 2021-02-03
 # Tink CLI
 
 The `tink-cli` is an utility provided by the Tinkerbell community.
-It is open source and you can find it as part of the [tinkerbell/tink](https://github.com/tinkerbell/tink) repository.
+It is open source and you can find it as part of the [tinkerbell/tink] repository.
 
 It is used as part of sandbox and delivered as a container or as binary.
-Checkout the [Sandbox release page](https://github.com/tinkerbell/sandbox/releases) to retrieve it in the format you need.
+Checkout the [Sandbox release page] to retrieve it in the format you need.
 
-The CLI uses the Go gRPC [tink/client](https://github.com/tinkerbell/tink/tree/main/client) to communicate with the [tink-server](/services/tink-server).
+The CLI uses the Go gRPC [tink/client] to communicate with the [tink-server].
 
 You can use the command line interface to create, delete or update workflows, hardware data and templates.
 Or to fetch and filter those resources.
@@ -112,3 +112,8 @@ Complete usage information is available from `tink --help` or `tink <command> --
 There is an ongoing effort to have a more consistent set of commands.
 Watch out for breaking changes and deprecations.
 In case of confusion, run `tink --help`.
+
+[sandbox release page]: https://github.com/tinkerbell/sandbox/releases
+[tink/client]: https://github.com/tinkerbell/tink/tree/main/client
+[tinkerbell/tink]: https://github.com/tinkerbell/tink
+[tink-server]: /services/tink-server

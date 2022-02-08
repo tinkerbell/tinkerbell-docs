@@ -14,7 +14,7 @@ An action ideally should contain a single task used as part of a longer chain of
 - Write keys to a TPM
 - Create Users
 - Write a cloud-init file
-- [Kexec](https://wiki.archlinux.org/index.php/kexec#:~:text=Kexec%20is%20a%20system%20call,BIOS%20boot%20process%20to%20finish.) to a new Operating System
+- [Kexec] to a new Operating System
 
 A Tinkerbell Action is contained within a container image and should be hosted on a registry.
 As the tink-worker executes a workflow it will pull action containers sequentially and execute them as containers.
@@ -32,12 +32,12 @@ However, there are a number of usage concerns that must be considered when passi
 
 ### Action Container privileges
 
-By default an action container is started as a [privileged](https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities) container, in numerous environments this is discouraged however with a requirement to the underlying hardware this is a requirement for a Tinkerbell action.
+By default an action container is started as a [privileged] container, in numerous environments this is discouraged however with a requirement to the underlying hardware this is a requirement for a Tinkerbell action.
 This means that an action has direct access to hardware, such as block devices e.g. `/dev/sda` allowing us to wipe/partition/image the storage as an action.
 
 ### Namespace
 
-By default an action will be created in it's on Linux [Namespace](https://en.wikipedia.org/wiki/Linux_namespaces) meaning that whilst it can see underlying hardware, it is unaware of any other processes or existing network configuration (the Docker engine auto-magically manages external networking through the Docker network).
+By default an action will be created in it's on [Linux Namespace] meaning that whilst it can see underlying hardware, it is unaware of any other processes or existing network configuration (the Docker engine auto-magically manages external networking through the Docker network).
 This under the majority of use-cases is good for isolating what tasks an action is performing, however there are a number of use-cases where being able to communicate with the hosts existing processes is a requirement.
 The most obvious two (so far) are the capability to `reboot` or `kexec` into a new kernel, both of these actions typically involve a few steps:
 
@@ -53,7 +53,7 @@ With the action in the host process ID namespace both a `reboot` or `kexec` will
 
 Most actions can make use of reading the metadata during runtime, however there may be use-cases to keep a large standardised set of actions that can be written directly into a workflow.
 
-An action should be created using an [`ENTRYPOINT`](https://docs.docker.com/engine/reference/builder/#entrypoint) meaning that we don't need to specify what needs to run within the action image.
+An action should be created using an [ENTRYPOINT] meaning that we don't need to specify what needs to run within the action image.
 However if required there is the possibility to override this with the `command` section of the action configuration.
 
 e.g. Overwriting the command
@@ -75,4 +75,10 @@ environment:
   FS_TYPE: ext4
 ```
 
-With this understanding of the basic architecture of we can start to look at what would be required to [create your own action](./create-a-basic-action/).
+With this understanding of the basic architecture of we can start to look at what would be required to [create your own action].
+
+[create your own action]: /create-a-basic-action/
+[entrypoint]: https://docs.docker.com/engine/reference/builder/#entrypoint
+[kexec]: https://wiki.archlinux.org/title/Kexec
+[linux namespace]: https://en.wikipedia.org/wiki/Linux_namespaces
+[privileged]: https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities

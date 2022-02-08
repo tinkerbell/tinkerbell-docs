@@ -91,7 +91,7 @@ Once our machine is up and running, we'll need to install our required packages 
          jq
         ```
 
-    This installation method also requires Docker and [`docker-compose`](https://docs.docker.com/compose/install/#install-compose-on-linux-systems):
+    This installation method also requires Docker and [docker-compose]:
 
 ```
     apt-get install -y docker.io ; \
@@ -164,7 +164,7 @@ Once our machine is up and running, we'll need to install our required packages 
 
 8. Install sandbox dependencies.
 
-   The steps for deploying the Tinkerbell sandbox can be found here [https://docs.tinkerbell.org/setup/on-bare-metal-with-docker/#getting-tinkerbell](https://docs.tinkerbell.org/setup/on-bare-metal-with-docker/#getting-tinkerbell)
+   Follow the steps for deploying the Tinkerbell [sandbox].
 
    As we're using QEMU and the shack program we will need to set things up slightly different, using the steps below.
 
@@ -247,3 +247,6 @@ We can now watch the install on the VNC port `6671`
 - **Is another process using the image [f0cb3c.qcow2]?**
 
   We've left an old disk image laying around, we can remove this with `rm`.
+
+[docker-compose]: https://docs.docker.com/compose/install/#install-compose-on-linux-systems
+[sandbox]: /setup/on-bare-metal-with-docker/#getting-tinkerbell

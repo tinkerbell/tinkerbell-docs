@@ -4,7 +4,7 @@ date: 2021-08-24
 ---
 
 !!! note
-The [Community Triage Party call](https://equinix.zoom.us/j/96016156757?pwd=NzZkczZMbFdvSm9ubHNzaHRYNGdvdz09) takes place **every other Tuesday** at **3pm UTC (11am ETC/8am PST)** - join us to learn more about Tinkerbell!
+The [Community Triage Party call] takes place **every other Tuesday** at **3pm UTC (11am ETC/8am PST)** - join us to learn more about Tinkerbell!
 
 ## Summary
 
@@ -21,7 +21,7 @@ It's a great way to learn more about how the project functions, and gain exposur
 
 ## Triage access
 
-Open an issue in the [Tinkerbell .github repo](https://github.com/tinkerbell/.github/issues) to request triage access if you do not already have access to add labels to issues.
+Open an issue in the [Tinkerbell .github repo] to request triage access if you do not already have access to add labels to issues.
 
 At the beginning of our Community Triage Party call, we will also ask at the beginning of the call if anyone requires triage access to participate.
 
@@ -30,7 +30,7 @@ At the beginning of our Community Triage Party call, we will also ask at the beg
 The goal of daily triage is to be the initial point of contact for an incoming issue or pull request.
 Anyone can participate on any day of the week!
 
-The dashboard of items requiring a response can be found at the [Daily Triage Dashboard](http://triage.meyu.us:32374/s/daily).
+The dashboard of items requiring a response can be found at the [Daily Triage Dashboard].
 Each box of items is defined by a rule and has a listed `Resolution` action.
 Once the requested action has been taken, the issue will disappear from the list.
 
@@ -49,7 +49,7 @@ Other labels we use are:
 
 The goal of bi-weekly triage is to catch items that may have fallen through the cracks.
 
-The dashboard of items requiring a response can be found at the [Bi-Weekly Triage Dashboard](http://triage.meyu.us:32374/s/weekly).
+The dashboard of items requiring a response can be found at the [Bi-Weekly Triage Dashboard].
 Each box of items is defined by a rule and has a listed `Resolution` action.
 Once the defined action has been taken, the issue will disappear from the list.
 
@@ -64,7 +64,7 @@ At the beginning of the call, we will ask if anyone requires triage permissions 
 !! note
 These labels have not yet been finalized - but are based on what is used in other CNCF projects.
 
-If the issue is not `question`, it needs a [priority label](https://github.com/kubernetes/community/blob/master/contributors/guide/issue-triage.md#define-priority):
+If the issue is not question, it needs a [priority label]:
 
 - `priority/critical-urgent`: someone's top priority ASAP, such as security issue or issue that causes data loss.
   Rarely used, to be resolved within 5 days.
@@ -81,7 +81,7 @@ If the issue is not `question`, it needs a [priority label](https://github.com/k
 When a user submits a pull request or issue, it's essential to be respectful of the time the user has invested in opening the issue.
 Be kind.
 
-These are some templates that you can use as [Github Saved replies](https://docs.github.com/en/github/writing-on-github/working-with-saved-replies/using-saved-replies) for easy access during triage.
+These are some templates that you can use as [Github Saved replies] for easy access during triage.
 
 ### Stale PR with an outstanding comment
 
@@ -127,3 +127,10 @@ If an issue hasn't been active for more than 8 weeks, and the author has been pi
 Once a PR is 30 days old and pinged at least twice, it's safe to close it:
 
 > Closing this PR as stale. Please reopen this PR when you are ready to retake a look at it. Thank you for your contribution!
+
+[bi-weekly triage dashboard]: http://triage.meyu.us:32374/s/weekly
+[community triage party call]: https://equinix.zoom.us/j/96016156757?pwd=nzzkczzmbfdvsm9ubhnzahryngdvdz09
+[daily triage dashboard]: http://triage.meyu.us:32374/s/daily
+[github saved replies]: https://docs.github.com/en/github/writing-on-github/working-with-saved-replies/using-saved-replies
+[priority label]: https://github.com/kubernetes/community/blob/master/contributors/guide/issue-triage.md#define-priority
+[tinkerbell .github repo]: https://github.com/tinkerbell/.github/issues
