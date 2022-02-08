@@ -3,6 +3,7 @@ site_url: https://docs.tinkerbell.org
 site_description: Designed for scalable provisioning of physical hardware, Tinkerbell is both open-source and cloud native. Contributed by Equinix Metal.
 site_image: https://tinkerbell.org/images/social/tinkerbell-social-image.png
 repo_url: https://github.com/tinkerbell/tinkerbell-docs
+edit_uri: 'edit/main/docs/'
 
 nav:
   - Home: index.md
@@ -18,7 +19,7 @@ nav:
     - Tink Worker: services/tink-worker.md
     - Tink CLI: services/tink-cli.md
 
-  - Workflows: 
+  - Workflows:
     - Working with Workflows: workflows/working-with-workflows.md
     - A Hello-world Workflow: workflows/hello-world-workflow.md
 
@@ -29,7 +30,7 @@ nav:
     - ActionHub: https://artifacthub.io/packages/search?kind=4
     - Action Architecture: actions/action-architecture.md
     - Creating a Basic Action: actions/creating-a-basic-action.md
-  
+
   - Setting Up Tinkerbell:
     - Local Setup with Vagrant: setup/local-vagrant.md
     - Extending the Vagrant Setup: setup/extending-vagrant.md
@@ -46,7 +47,7 @@ nav:
     - Example - Deploying FreeBSD: deploying-operating-systems/examples-freebsd.md
     - Example - Deploying Red Hat Enterprise Linux and CentOS: deploying-operating-systems/examples-rhel-centos.md
     - Example - Deploying Windows: deploying-operating-systems/examples-win.md
-    
+
   - Troubleshooting: troubleshooting.md
 
   - Contribute:

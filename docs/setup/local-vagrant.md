@@ -1,11 +1,13 @@
 ---
 title: Local Setup with Vagrant
-date: 2020-07-13
+date: 2021-11-30
 ---
 
 # Local Setup with Vagrant
 
 If you want to dive in to trying out Tinkerbell, this tutorial sets it up locally using Vagrant. Vagrant manages the Tinkerbell installation for this tutorial's Provisioner, and runs both the Provisioner and Worker on VirtualBox or `libvirtd`.
+
+These docs were tested against v0.6.0 of github.com/tinkerbell/sandbox
 
 It covers some basic aspects of Tinkerbell's functionality:
 
@@ -24,13 +26,14 @@ The last step is to start up the Worker, which will call back to the Provisioner
 - If using VirtualBox be sure to install both:
   - The Vagrant *vagrant-vbguest* plugin: `vagrant plugin install vagrant-vbguest`
   - The [VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads)
+- If using VirtualBox, you may get an error about valid IP addresses for host-only networks. [This page from the Virtual Box manual explains how to add additional address ranges to your setup.](https://www.virtualbox.org/manual/ch06.html#network_hostonly)
 
 ## Getting Tinkerbell
 
-To get Tinkerbell, clone the `sandbox` repository.
+To get Tinkerbell, clone the `sandbox` repository at version v0.6.0.
 
 ```
-git clone https://github.com/tinkerbell/sandbox.git
+git clone https://github.com/tinkerbell/sandbox.git -b v0.6.0
 ```
 
 Move into the `deploy/vagrant` directory. This folder contains a Vagrant configuration file (Vagrantfile) needed to setup the Provisioner and the Worker.
@@ -41,6 +44,16 @@ cd sandbox/deploy/vagrant
 
 ## Start the Provisioner
 
+First we need to delete the default template and hardware definition that the sandbox repo comes with. This lets us practice setting up the template and workflow in tinkerbell without any conflicts with what comes pre-defined in the sandbox repo.
+
+```
+rm ../compose/manifests/hardware/hardware-libvirt.json
+rm ../compose/manifests/hardware/hardware.json
+rm ../compose/manifests/template/ubuntu-libvirt.yaml
+rm ../compose/manifests/template/ubuntu.yaml
+```
+
+
 Since Vagrant is handling the Provisioner's configuration, including installing the Tinkerbell stack, run the command to start it up.
 
 ```
@@ -48,12 +61,6 @@ vagrant up provisioner
 ```
 
 The Provisioner installs and runs Ubuntu with a couple of additional utilities. The time it takes to spin up the Provisioner varies with connection speed and resources on your local machine.
-
-When the Provisioner is ready, you should see the following message:
-
-```
-INFO: tinkerbell stack setup completed successfully on ubuntu server
-```
 
 ## Inspecting the running Tinkerbell containers
 
@@ -63,58 +70,68 @@ Now that the Provisioner's machine is up and running, SSH into the Provisioner.
 vagrant ssh provisioner
 ```
 
-The Tinkerbell stack is already running in a set of containers through Docker Compose. Check that all the Tinkerbell services are running.
+Tinkerbell is going to be running from a container, so navigate to the `/vagrant/compose` directory and load up the .env file that has all our environment's settings in it, and start the Tinkerbell stack with `docker-compose`.
 
 ```
 cd /vagrant/compose
-source .env
 docker-compose ps
 ```
 
-The response shows the running services.
-
 ```
-$ docker-compose ps
-               Name                             Command                  State                             Ports                       
+               Name                             Command                  State                             Ports
 ---------------------------------------------------------------------------------------------------------------------------------------
-compose_boots_1                      /usr/bin/boots -dhcp-addr  ...   Up                                                               
-compose_create-tink-records_1        /manifests/exec_in_bash.sh ...   Exit 0                                                           
-compose_db_1                         docker-entrypoint.sh postgres    Up (healthy)   0.0.0.0:5432->5432/tcp                            
+compose_boots_1                      /usr/bin/boots -dhcp-addr  ...   Up
+compose_create-tink-records_1        /manifests/exec_in_bash.sh ...   Exit 0
+compose_db_1                         docker-entrypoint.sh postgres    Up (healthy)   0.0.0.0:5432->5432/tcp
 compose_hegel_1                      /usr/bin/hegel                   Up             0.0.0.0:50060->50060/tcp, 0.0.0.0:50061->50061/tcp
-compose_images-to-local-registry_1   /registry/upload.sh admin  ...   Exit 0                                                           
-compose_osie-bootloader_1            /docker-entrypoint.sh ngin ...   Up             0.0.0.0:8080->80/tcp                              
-compose_osie-work_1                  /scripts/lastmile.sh https ...   Exit 0                                                           
-compose_registry-auth_1              htpasswd -Bbc .htpasswd ad ...   Exit 0                                                           
-compose_registry-ca-crt-download_1   wget http://192.168.50.4:4 ...   Exit 0                                                           
-compose_registry_1                   /entrypoint.sh /etc/docker ...   Up (healthy)                                                     
-compose_tink-cli_1                   /bin/sh -c sleep infinity        Up                                                               
-compose_tink-server-migration_1      /usr/bin/tink-server             Exit 0                                                           
+compose_images-to-local-registry_1   /registry/upload.sh admin  ...   Exit 1
+compose_osie-bootloader_1            /docker-entrypoint.sh ngin ...   Up             0.0.0.0:8080->80/tcp
+compose_osie-work_1                  /scripts/lastmile.sh https ...   Exit 0
+compose_registry-auth_1              htpasswd -Bbc .htpasswd ad ...   Exit 0
+compose_registry-ca-crt-download_1   wget http://192.168.50.4:4 ...   Exit 0
+compose_registry_1                   /entrypoint.sh /etc/docker ...   Up (healthy)
+compose_tink-cli_1                   /bin/sh -c sleep infinity        Up
+compose_tink-server-migration_1      /usr/bin/tink-server             Exit 0
 compose_tink-server_1                /usr/bin/tink-server             Up (healthy)   0.0.0.0:42113->42113/tcp, 0.0.0.0:42114->42114/tcp
-compose_tls-gen_1                    /code/tls/generate.sh 192. ...   Exit 0                                                           
-compose_ubuntu-image-setup_1         /scripts/setup_ubuntu.sh h ...   Exit 0                        
-```
-
-At this point, you might want to open a ssh connection to show logs from the Provisioner, because it will show what the `tink-server` is doing through the rest of the setup. Open a new terminal, ssh in to the provisioner as you did before, and run `docker-compose logs -f` to tail logs.
+compose_tls-gen_1                    /code/tls/generate.sh 192. ...   Exit 0
+compose_ubuntu-image-setup_1         /scripts/setup_ubuntu.sh h ...   Exit 0
 
 ```
-cd sandbox/deploy/vagrant
-vagrant ssh provisioner
-cd /vagrant/compose && source .env
-docker-compose logs -f tink-server boots hegel
-```
 
-Later in the tutorial you can check the logs from `tink-server` in order to see the execution of the workflow.
+
 
 ## Preparing an action image
 
 As you'll see shortly, each step in a Tinkerbell workflow is referred to as an Action Image, and is simply a Docker image. Before you move ahead, let's pull down the image that will be used in the example workflow. Tinkerbell uses Docker registry to host images locally, so pull down the ["Hello World" docker image](https://hub.docker.com/_/hello-world/) and push it to the registry.
 
+Let's trust the SSL certs of the registry container.
+
 ```
-docker pull hello-world
-docker tag hello-world 192.168.50.4/hello-world
-docker push 192.168.50.4/hello-world
+cd /vagrant/compose && source .env
+echo | openssl s_client -showcerts -connect $TINKERBELL_HOST_IP:443 2>/dev/null | openssl x509 | sudo tee /usr/local/share/ca-certificates/tinkerbell.crt
+sudo update-ca-certificates
+sudo systemctl restart docker
 ```
 
+Then let's login, get the image, and upload it to our registry.
+
+```
+docker login $TINKERBELL_HOST_IP -u admin -p Admin1234
+docker pull hello-world
+docker tag hello-world $TINKERBELL_HOST_IP/hello-world
+docker push $TINKERBELL_HOST_IP/hello-world
+```
+
+At this point, you might want to open a separate terminal  window to show logs from the Provisioner, because it will show what the `tink-server` is doing through the rest of the setup. Open a new terminal, ssh in to the provisioner as you did before, and run `docker-compose logs -f` to tail logs.
+
+```
+cd sandbox/deploy/vagrant
+vagrant ssh provisioner
+cd /vagrant/compose && source .env
+docker-compose logs -f tink-server boots osie-bootloader
+```
+
+Later in the tutorial you can check the logs from `tink-server` in order to see the execution of the workflow.
 ## Creating the Worker's Hardware Data
 
 With the provisioner up and running, it's time to set up the worker's configuration.
@@ -124,7 +141,7 @@ First, define the Worker's hardware data, which is used to identify the Worker a
 ```
 cat > hardware-data.json <<EOF
 {
-  "id": "ce2e62ed-826f-4485-a39f-a82bb74338e2",
+  "id": "7462cca3-5539-4524-90e9-ab98c3fabf27",
   "metadata": {
     "facility": {
       "facility_code": "onprem"
@@ -138,11 +155,11 @@ cat > hardware-data.json <<EOF
         "dhcp": {
           "arch": "x86_64",
           "ip": {
-            "address": "192.168.1.5",
-            "gateway": "192.168.1.1",
-            "netmask": "255.255.255.248"
+            "address": "192.168.50.44",
+            "gateway": "192.168.50.1",
+            "netmask": "255.255.255.0"
           },
-          "mac": "08:00:27:00:00:01",
+          "mac": "08:00:27:9E:F5:3A",
           "uefi": false
         },
         "netboot": {
@@ -159,18 +176,18 @@ EOF
 Then, push the hardware data to the database with the `tink hardware push` command.
 
 ```
-docker exec -i deploy_tink-cli_1 tink hardware push < ./hardware-data.json
+docker exec -i compose_tink-cli_1 tink hardware push < ./hardware-data.json
 ```
 
 If you are following along in the `tink-server` logs, you should see:
 
 ```
-tink-server_1  | {"level":"info","ts":1592936402.3975577,"caller":"grpc-server/hardware.go:37","msg":"data pushed","service":"github.com/tinkerbell/tink","id":"ce2e62ed-826f-4485-a39f-a82bb74338e2"}
+tink-server_1               | {"level":"info","ts":1638306331.943881,"caller":"grpc-server/hardware.go:82","msg":"data pushed","service":"github.com/tinkerbell/tink","id":"7462cca3-5539-4524-90e9-ab98c3fabf27"}
 ```
 
 ## Creating a Template
 
-Next, define the template for the workflow. The template sets out tasks for the Worker to preform sequentially. This template contains a single task with a single action, which is to perform "hello-world". Just as in the [hello-world example](../../workflows/hello-world-workflow), the "hello-world" image doesn't contain any instructions that the Worker will perform. It is just a placeholder in the template so a workflow can be created and pushed to the Worker.
+Next, define the template for the workflow. The template sets out tasks for the Worker to preform sequentially. This template contains a single task with a single action, which is to perform "hello-world". Just as in the [hello-world example](/workflows/hello-world-workflow), the "hello-world" image doesn't contain any instructions that the Worker will perform. It is just a placeholder in the template so a workflow can be created and pushed to the Worker.
 
 ```
 cat > hello-world.yml  <<EOF
@@ -190,14 +207,13 @@ EOF
 Create the template and push it to the database with the `tink template create` command.
 
 ```
-docker exec -i deploy_tink-cli_1 tink template create \
-  < ./hello-world.yml
+docker exec -i compose_tink-cli_1 tink template create  < ./hello-world.yml
 ```
 
 The command returns a Template ID, and if you are watching the `tink-server` logs you will see:
 
 ```
-tink-server_1  | {"level":"info","ts":1592934670.2717152,"caller":"grpc-server/template.go:34","msg":"done creating a new Template","service":"github.com/tinkerbell/tink"}
+tink-server_1               | {"level":"info","ts":1638306365.5689096,"caller":"grpc-server/template.go:42","msg":"done creating a new Template","service":"github.com/tinkerbell/tink"}
 ```
 
 ## Creating the Workflow
@@ -205,20 +221,18 @@ tink-server_1  | {"level":"info","ts":1592934670.2717152,"caller":"grpc-server/t
 The next step is to combine both the hardware data and the template to create a workflow.
 
 - First, the workflow needs to know which template to execute. The Template ID you should use was returned by `tink template create` command executed above.
-- Second, the Workflow needs a target, defined by the hardware data. In this example, the target is identified by a MAC address set in the hardware data for our Worker, so `08:00:27:00:00:01`. (Note: this MAC address is hard coded in the Vagrantfile.)
+- Second, the Workflow needs a target, defined by the hardware data. In this example, the target is identified by a MAC address set in the hardware data for our Worker, so `08:00:27:00:00:01`. !!!!!!!(Note: this MAC address is the one we hard coded in the Vagrantfile earlier.)
 
 Combine these two pieces of information and create the workflow with the `tink workflow create` command.
 
 ```
-docker exec -i deploy_tink-cli_1 tink workflow create \
-    -t <TEMPLATE ID> \
-    -r '{"device_1":"08:00:27:00:00:01"}'
+docker exec -i compose_tink-cli_1 tink workflow create -r '{"device_1":"08:00:27:9E:F5:3A"}' -t <TEMPLATE ID>
 ```
 
 The command returns a Workflow ID and if you are watching the logs, you will see:
 
 ```
-tink-server_1  | {"level":"info","ts":1592936829.6773047,"caller":"grpc-server/workflow.go:63","msg":"done creating a new workflow","service":"github.com/tinkerbell/tink"}
+tink-server_1               | {"level":"info","ts":1638306500.9581006,"caller":"grpc-server/workflow.go:70","msg":"done creating a new workflow","service":"github.com/tinkerbell/tink","workflowID":"a5ba16e0-5221-11ec-89e8-0242ac120005"}
 ```
 
 ## Start the Worker
@@ -227,7 +241,7 @@ You can now bring up the Worker and execute the Workflow. In a new terminal wind
 
 ```
 cd sandbox/deploy/vagrant
-vagrant up worker
+vagrant up machine1
 ```
 
 If you are using VirtualBox, it will bring up a UI, and after the setup, you will see a login screen. You can login with the username `root` and no password is required. Tinkerbell will netboot a custom AlpineOS that runs in RAM, so any changes you make won't be persisted between reboots.
@@ -237,20 +251,20 @@ If you are using VirtualBox, it will bring up a UI, and after the setup, you wil
 At this point you should check on the Provisioner to confirm that the Workflow was executed on the Worker. If you opened a terminal window to monitor the Tinkerbell logs, you should see the execution in them.
 
 ```
-tink-server_1  | Received action status: workflow_id:"a8984b09-566d-47ba-b6c5-fbe482d8ad7f" task_name:"hello world" action_name:"hello_world" action_status:ACTION_SUCCESS message:"Finished Execution Successfully" worker_id:"ce2e62ed-826f-4485-a39f-a82bb74338e2"
-tink-server_1  | Current context workflow_id:"a8984b09-566d-47ba-b6c5-fbe482d8ad7f" current_worker:"ce2e62ed-826f-4485-a39f-a82bb74338e2" current_task:"hello world" current_action:"hello_world" current_action_state:ACTION_SUCCESS total_number_of_actions:1
+tink-server_1               | {"level":"info","ts":1638388091.1408234,"caller":"grpc-server/tinkerbell.go:97","msg":"received action status: STATE_SUCCESS","service":"github.com/tinkerbell/tink","actionName":"hello_world","workflowID":"6e40f68f-52df-11ec-974f-0242ac120006"}
+tink-server_1               | {"level":"info","ts":1638388091.1498456,"caller":"grpc-server/tinkerbell.go:147","msg":"current workflow context","service":"github.com/tinkerbell/tink","workflowID":"6e40f68f-52df-11ec-974f-0242ac120006","currentWorker":"7462cca3-5539-4524-90e9-ab98c3fabf27","currentTask":"hello world","currentAction":"hello_world","currentActionIndex":"0","currentActionState":"STATE_SUCCESS","totalNumberOfActions":1}
 ```
 
 You can also check using the `tink workflow events` and the Workflow ID on the Provisioner.
 
 ```
-docker exec -i deploy_tink-cli_1 tink workflow events a8984b09-566d-47ba-b6c5-fbe482d8ad7f
+docker exec -i compose_tink-cli_1 tink workflow events a8984b09-566d-47ba-b6c5-fbe482d8ad7f
 >
 +--------------------------------------+-------------+-------------+----------------+---------------------------------+--------------------+
 | WORKER ID                            | TASK NAME   | ACTION NAME | EXECUTION TIME | MESSAGE                         |      ACTION STATUS |
 +--------------------------------------+-------------+-------------+----------------+---------------------------------+--------------------+
-| ce2e62ed-826f-4485-a39f-a82bb74338e2 | hello world | hello_world |              0 | Started execution               | ACTION_IN_PROGRESS |
-| ce2e62ed-826f-4485-a39f-a82bb74338e2 | hello world | hello_world |              0 | Finished Execution Successfully |     ACTION_SUCCESS |
+| 7462cca3-5539-4524-90e9-ab98c3fabf27 | hello world | hello_world |              0 | Started execution               | ACTION_IN_PROGRESS |
+| 7462cca3-5539-4524-90e9-ab98c3fabf27 | hello world | hello_world |              0 | Finished Execution Successfully |     ACTION_SUCCESS |
 +--------------------------------------+-------------+-------------+----------------+---------------------------------+--------------------+
 ```
 
