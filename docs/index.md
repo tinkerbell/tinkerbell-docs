@@ -74,7 +74,7 @@ Need a little help getting started? We're here!
 - Submit an issue on [Github].
 
 [**boots**]: /services/boots
-[cncf community slack]: https://slack.cncf.org/
+[cncf community slack]: https://slack.cncf.io/
 [contributors' page]: https://tinkerbell.org/community/contributors/
 [docker hub]: https://hub.docker.com/
 [equinix metal setup with terraform]: /setup/equinix-metal-terraform

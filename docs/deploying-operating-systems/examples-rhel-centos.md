@@ -299,9 +299,9 @@ tasks:
 [artifact hub]: https://artifacthub.io/packages/search?kind=4
 [cexec]: https://artifacthub.io/packages/tbaction/tinkerbell-community/cexec
 [cloud-images]: https://cloud.centos.org/centos/8/x86_64/images/
-[get fedora]: https://getfedora.org/en/coreos/download?tab=metal_virtualized&stream=stable
+[get fedora]: https://getfedora.org/en/coreos/download/?tab=metal_virtualized&stream=stable&arch=x86_64
 [image2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk
 [kexec]: https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec
-[rhel7]: https://access.redhat.com/downloads/content/69/ver=/rhel—7/7.1/x86_64/product-downloads
-[rhel8]: https://access.redhat.com/downloads/content/479/ver=/rhel—8/8.0/x86_64/product-software
+[rhel7]: https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.9/x86_64/product-software
+[rhel8]: https://access.redhat.com/downloads/content/479/ver=/rhel---8/8.5/x86_64/product-software
 [rootio]: https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio

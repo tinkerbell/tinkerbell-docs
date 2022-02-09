@@ -295,7 +295,7 @@ If you are looking to extend your local setup to develop or test out other workf
 That's it!
 Let us know what you think about it in the #tinkerbell channel on the [CNCF Community Slack].
 
-[cncf community slack]: https://slack.cncf.org/
+[cncf community slack]: https://slack.cncf.io/
 [extending the vagrant setup]: /setup/extending-vagrant
 [hello world docker image]: https://hub.docker.com/_/hello-world/
 [hello world]: /workflows/hello-world-workflow
@@ -304,5 +304,5 @@ Let us know what you think about it in the #tinkerbell channel on the [CNCF Comm
 [this page from the virtual box manual explains how to add additional address ranges to your setup.]: https://www.virtualbox.org/manual/ch06.html#network_hostonly
 [ui bigger]: https://github.com/tinkerbell/tinkerbell.org/pull/76#discussion_r442151095
 [vagrant]: https://www.vagrantup.com/downloads
-[virtualbox extension pack]: https://www.virtualbox.org/wiki/downloads
+[virtualbox extension pack]: https://www.virtualbox.org/wiki/Downloads
 [virtualbox]: https://www.virtualbox.org/

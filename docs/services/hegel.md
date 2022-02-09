@@ -62,9 +62,9 @@ Some examples are:
 - [GCP: Storing and retrieving instance metadata]
 - [Equinix Metal: Metadata]
 
-[aws: instance metadata and user data]: https://docs.aws.amazon.com/awsec2/latest/userguide/ec2-instance-metadata.html
+[aws: instance metadata and user data]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
 [equinix metal: metadata]: https://metal.equinix.com/developers/docs/servers/metadata/
-[gcp: storing and retrieving instance metadata]: https://cloud.google.com/compute/docs/storing-retrieving-metadata
+[gcp: storing and retrieving instance metadata]: https://cloud.google.com/compute/docs/metadata/overview
 [hook]: /services/osie
 [tinkerbell/hegel]: https://github.com/tinkerbell/hegel
 [local setup with vagrant]: /setup/local-vagrant

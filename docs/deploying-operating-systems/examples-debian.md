@@ -252,7 +252,7 @@ tasks:
 [archive2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk
 [artifact hub]: https://artifacthub.io/packages/search?kind=4
 [cexec]: https://artifacthub.io/packages/tbaction/tinkerbell-community/cexec
-[cloud-images]: https://cdimage.debian.org/cdimage/cloud/OpenStack/current/
+[cloud-images]: https://cloud.debian.org/images/cloud/
 [grml-debootstrap]: https://grml.org/grml-debootstrap/
 [image2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk
 [kexec]: https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec

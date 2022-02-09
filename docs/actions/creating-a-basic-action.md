@@ -106,4 +106,4 @@ All of the source code for these actions are available on the GitHub repository 
 [alpine linux]: https://alpinelinux.org
 [artifact hub]: https://artifacthub.io/packages/search?kind=4
 [tinkerbell hub]: https://github.com/tinkerbell/hub/tree/main/actions
-[touch]: https://www.tecmint.com/8-pratical-examples-of-linux-touch-command
+[touch]: https://www.tecmint.com/8-pratical-examples-of-linux-touch-command/

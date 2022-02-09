@@ -50,28 +50,29 @@ We are collecting this info in the Contributors section (this section) of the do
 
 ## Terms and Stewardship
 
-The [tinkerbell/.github] repository contains all the information relating to the license and code of conduct.
+The [tinkerbell/.github] repository contains all the information relating to the code of conduct.
 
 - [Contributor Covenant Code of Conduct]
+
+The [tinkerbell/org] repository contains all the information relating to the license and documents on project owner responsibilities and maintainer information.
+
 - [License]
-
-It also contains documents on project owner responsibilities and maintainers' information.
-
-- [Owners]
 - [Maintainers]
+- [Owners]
 
 [artifact hub]: https://artifacthub.io/packages/search?kind=4
-[cncf community slack]: https://slack.cncf.org/
-[communication page]: https://github.com/tinkerbell/.github/blob/main/COMMUNICATION.md
+[cncf community slack]: https://slack.cncf.io/
+[communication page]: https://github.com/tinkerbell/org/blob/main/COMMUNICATION.md
 [contributor covenant code of conduct]: https://github.com/tinkerbell/.github/blob/main/CODE_OF_CONDUCT.md
-[contributor mailing list]: https://github.com/tinkerbell/.github/blob/main/COMMUNICATION.md#contributors-mailing-list
+[contributor mailing list]: https://github.com/tinkerbell/org/blob/main/COMMUNICATION.md#contributors-mailing-list
 [github]: https://github.com/tinkerbell
-[license]: https://github.com/tinkerbell/.github/blob/main/LICENSE
-[maintainers]: https://github.com/tinkerbell/.github/blob/main/MAINTAINERS.md
-[owners]: https://github.com/tinkerbell/.github/blob/main/OWNERS.md
+[license]: https://github.com/tinkerbell/org/blob/main/LICENSE
+[maintainers]: https://github.com/tinkerbell/org/blob/main/MAINTAINERS.md
+[owners]: https://github.com/tinkerbell/org/blob/main/OWNERS.md
 [proposal 001]: https://github.com/tinkerbell/proposals/tree/main/proposals/0001
 [proposal regarding breaking changes]: https://github.com/tinkerbell/proposals/blob/main/proposals/0011/README.md
 [tinkerbell/docs]: https://github.com/tinkerbell/tinkerbell-docs
 [tinkerbell/.github]: https://github.com/tinkerbell/.github
 [tinkerbell/hub]: https://github.com/tinkerbell/hub
+[tinkerbell/org]: https://github.com/tinkerbell/org
 [tinkerbell/proposals]: https://github.com/tinkerbell/proposals

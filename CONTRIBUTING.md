@@ -28,6 +28,6 @@ We'll try to add comments as soon as possible, though.
 
 ## Code Style Guides
 
-[dco]: docs/dco.md
+[dco]: DCO.md
 [code of conduct]: https://github.com/tinkerbell/.github/blob/main/code_of_conduct.md
 [issues]: https://github.com/tinkerbell/tinkerbell-docs/issues

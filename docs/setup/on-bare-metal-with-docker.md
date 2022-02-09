@@ -217,6 +217,6 @@ Enjoy!
 [local setup with vagrant]: /setup/local-vagrant
 [osie]: /services/osie
 [sandbox]: https://github.com/tinkerbell/sandbox
-[setup.sh]: https://github.com/tinkerbell/sandbox/blob/main/setup.sh
+[setup.sh]: https://github.com/tinkerbell/sandbox/blob/main/deploy/terraform/setup.sh
 [this will change soon]: https://github.com/tinkerbell/sandbox/issues/45
-[v0.4.0]: https://github.com/tinkerbell/sandbox/release/v0.4.0
+[v0.4.0]: https://github.com/tinkerbell/sandbox/releases/tag/v0.4.0

@@ -436,10 +436,10 @@ terraform destroy
 [boots]: /services/boots
 [equinix metal cli]: https://github.com/equinix/metal-cli/blob/main/docs/metal_device_reboot.md
 [equinix metal terraform provider]: https://registry.terraform.io/providers/equinix/metal/latest/docs
-[file]: https://www.terraform.io/docs/provisioners/file.html
+[file]: https://www.terraform.io/language/resources/provisioners/file
 [hegel]: /services/hegel
 [hello world]: /workflows/hello-world-workflow
 [osie]: /services/osie
 [ssh keys]: https://metal.equinix.com/developers/docs/accounts/ssh-keys/
-[terraform]: https://www.terraform.io/downloads.html
+[terraform]: https://www.terraform.io/downloads
 [tink-server]: /services/tink-server

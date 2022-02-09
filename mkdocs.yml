@@ -72,7 +72,7 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/tinkerbell
     - icon: fontawesome/brands/slack
-      link: https://slack.cncf.org/
+      link: https://slack.cncf.io/
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/tinkerbell_oss
 

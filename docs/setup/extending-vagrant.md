@@ -45,4 +45,4 @@ export TB_OSIE_TAR='/vagrant/deploy/vagrant/osie.tar.gz'
 
 Start the vagrant setup.
 
-[setup.sh]: https://github.com/tinkerbell/tink/blob/main/setup.sh#l259
+[setup.sh]: https://github.com/tinkerbell/sandbox/blob/main/deploy/terraform/setup.sh

@@ -128,9 +128,9 @@ Once a PR is 30 days old and pinged at least twice, it's safe to close it:
 
 > Closing this PR as stale. Please reopen this PR when you are ready to retake a look at it. Thank you for your contribution!
 
-[bi-weekly triage dashboard]: http://triage.meyu.us:32374/s/weekly
+[bi-weekly triage dashboard]: https://triage.meyu.us/s/weekly
 [community triage party call]: https://equinix.zoom.us/j/96016156757?pwd=nzzkczzmbfdvsm9ubhnzahryngdvdz09
-[daily triage dashboard]: http://triage.meyu.us:32374/s/daily
-[github saved replies]: https://docs.github.com/en/github/writing-on-github/working-with-saved-replies/using-saved-replies
+[daily triage dashboard]: https://triage.meyu.us/s/daily
+[github saved replies]: https://docs.github.com/en/get-started/writing-on-github/working-with-saved-replies/using-saved-replies
 [priority label]: https://github.com/kubernetes/community/blob/master/contributors/guide/issue-triage.md#define-priority
 [tinkerbell .github repo]: https://github.com/tinkerbell/.github/issues
