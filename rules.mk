@@ -22,3 +22,7 @@ site/index.html: venv
 
 checkquotes:
 	git grep '[“”]' | (grep -v rules.mk || :) | (! grep .)
+
+checklinks: build
+	./.github/workflows/check-links
+
