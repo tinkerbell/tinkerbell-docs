@@ -22,7 +22,7 @@ Right now we ship our one [OSIE] but you can build your own or modify the operat
 
 ## When You See OSIE
 
-If you follow the [Vagrant Setup] tutorial you encounter OSIE at the section "Start the Worker".
+If you follow the [Local Setup with Vagrant] tutorial you encounter OSIE at the section "Start the Worker".
 
 At that time the Worker has netbooted and Boots has pushed OSIE to the Worker, the workflow has started, and the Worker does not have an operating system yet.
 
@@ -32,7 +32,7 @@ The `Welcome to Alpine Linux 4.7` message comes from OSIE.
 
 ## The Current OSIE
 
-Tinkerbell's current [OSIE] is based on [AlpineLinux], a well known to be small (~130MB of storage) and easy to customize distribution.
+Tinkerbell's current [OSIE] is based on [Alpine Linux], a well known to be small (~130MB of storage) and easy to customize distribution.
 The boot process is minimal and it does not require much configuration.
 OSIE builds on that to provide an environment capable of running the right actions required to configure your Worker and install a persistent operating system.
 
@@ -81,7 +81,7 @@ If you are writing your own operating system installation environment, there are
   We decided to leverage containers because they are well known as an execution and distribution layer.
   Developers can write their own actions, and the only thing they have to know is how to build and push a Docker container.
 
-[alpinelinux]: https://alpinelinux.org
+[alpine linux]: https://alpinelinux.org
 [boots]: /services/boots
 [linuxkit]: https://github.com/linuxkit/linuxkit
 [osie]: https://github.com/tinkerbell/osie
@@ -89,6 +89,6 @@ If you are writing your own operating system installation environment, there are
 [tinkerbell/hook]: https://github.com/tinkerbell/hook
 [tink]: https://github.com/tinkerbell/tink
 [tink-server]: /services/tink-server
-[tink-worker]: /services/tink
-[vagrant setup]: /setup/local-vagrant
-[workflow]: ../../workflows/working-with-workflows
+[tink-worker]: /services/tink-worker
+[local setup with vagrant]: /setup/local-vagrant
+[workflow]: /workflows/working-with-workflows

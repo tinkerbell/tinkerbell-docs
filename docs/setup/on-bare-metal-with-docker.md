@@ -119,7 +119,7 @@ You can think of it as a release bundle.
 > If you are developing or you want to test a different version of a particular tool let's say Hegel, you can build and push a docker image, replace `TINKERBELL_TINK_HEGEL_IMAGE` with your tag and you are good to go.
 
 Tinkerbell needs a static and predictable IP, that's why the `setup.sh` script specifies and sets its own with `TINKEBELL_HOST_IP`.
-It is used by [Boots] to serve the operating system installation environment, for example.
+It is used by [Boots] to serve [osie], for example.
 And Sandbox provisions (via Docker Compose) an Nginx server that you can use to serve any file you want (OSIE is served via that Nginx).
 
 If your Tinkerbell host IP and LAN CIDR is different than `192.168.1.1/29`, you
@@ -174,7 +174,7 @@ The `setup.sh` script does a bunch of manipulation to your local environment, so
 Before running the [setup.sh] script, there are a few handy things to know about it.
 
 The `setup.sh` script's main responsibility is to setup the network.
-It creates a certificate that will be used to setup the registry ([this will may change soon]).
+It creates a certificate that will be used to setup the registry ([this will change soon]).
 It downloads [OSIE] and places it inside the Nginx weboot (./deploy/state/webroot/).
 
 > You can use the webroot for your own purposes, it is part of `gitignore` and other than OSIE you can serve other operating systems that you want to install in your other servers, or even public ssh keys (whatever you need a link for).
@@ -207,7 +207,7 @@ docker-compose up -d
 
 ## Time to Party
 
-At this point let me point you to the [Local Setup with Vagrant] guide because you have everything you need to play with Tinkerbell.
+At this point let me point you to the [Local Setup with Vagrant][local vagrant setup] guide because you have everything you need to play with Tinkerbell.
 Enjoy!
 
 [aaron]: https://geekgonecrazy.com/
@@ -215,8 +215,8 @@ Enjoy!
 [docker-compose in sandbox]: https://github.com/tinkerbell/sandbox/blob/main/deploy/compose/docker-compose.yml
 [equinix metal setup with terraform]: /setup/equinix-metal-terraform
 [local setup with vagrant]: /setup/local-vagrant
-[osie]: https://github.com/tinkerbell/osie
+[osie]: /services/osie
 [sandbox]: https://github.com/tinkerbell/sandbox
 [setup.sh]: https://github.com/tinkerbell/sandbox/blob/main/setup.sh
-[this will may change soon]: https://github.com/tinkerbell/sandbox/issues/45
+[this will change soon]: https://github.com/tinkerbell/sandbox/issues/45
 [v0.4.0]: https://github.com/tinkerbell/sandbox/release/v0.4.0

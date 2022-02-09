@@ -113,7 +113,7 @@ Finally there is plenty of tooling to create your own root file systems, a good 
 [1960s ibm manual]: https://web.archive.org/web/20140701185435/http://www.demorton.com/Tech/$OSTL.pdf
 [arch]: https://archive.archlinux.org/iso/
 [debian]: https://wiki.debian.org/debootstrap
-[diagram of a disk layout]: ../images/disk-layout.png
+[diagram of a disk layout]: /images/disk-layout.png
 [livemedia-creator]: https://weldr.io/lorax/livemedia-creator.html
 [ubuntu]: http://cdimage.ubuntu.com/ubuntu-base/releases/20.04/release/
 [unattended installations]: https://en.wikipedia.org/wiki/Installation_(computer_programs)

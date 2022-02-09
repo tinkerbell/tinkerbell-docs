@@ -52,7 +52,7 @@ mv ./debian-10-openstack-amd64.raw.gz ./sandbox/deploy/state/webroot
 
 ### Creating the Template
 
-The template uses actions from the [artifact hub].
+The template uses actions from the [Artifact Hub].
 
 - [image2disk] - to write the OS image to a block device.
 - [kexec] - to `kexec` into our newly provisioned operating system.
@@ -250,7 +250,7 @@ tasks:
 ```
 
 [archive2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk
-[artifact hub]: https://artifact.io
+[artifact hub]: https://artifacthub.io/packages/search?kind=4
 [cexec]: https://artifacthub.io/packages/tbaction/tinkerbell-community/cexec
 [cloud-images]: https://cdimage.debian.org/cdimage/cloud/OpenStack/current/
 [grml-debootstrap]: https://grml.org/grml-debootstrap/

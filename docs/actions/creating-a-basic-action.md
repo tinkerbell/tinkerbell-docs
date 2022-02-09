@@ -27,7 +27,7 @@ This example will use bash to make it as simple as possible to understand, howev
 
 Our simple action will mount our newly provisioned Operating System, and [touch] a file to a location that we have specified.
 
-As this action will use bash, and require shelling out to a number of other commands we will start with one of the smallest "distro" images [alpine].
+As this action will use bash, and require shelling out to a number of other commands we will start with one of the smallest "distro" images [Alpine Linux].
 
 We will pass three pieces of information as environment variables into this action:
 
@@ -103,7 +103,7 @@ In an ideal scenario previous actions will do things such as wipe disks and crea
 The Tinkerbell community has created a number of actions that are available on the [Artifact Hub].
 All of the source code for these actions are available on the GitHub repository for the [Tinkerbell Hub].
 
-[alpine]: https://alpinelinux.org
-[artifact hub]: https://artifacthub.io/packages/search?page=1&ts_query_web=Tinkerbell+Action
-[tinkerbell hub]: https://github.com/tinkerbell/hub/tree/main/actions).
+[alpine linux]: https://alpinelinux.org
+[artifact hub]: https://artifacthub.io/packages/search?kind=4
+[tinkerbell hub]: https://github.com/tinkerbell/hub/tree/main/actions
 [touch]: https://www.tecmint.com/8-pratical-examples-of-linux-touch-command

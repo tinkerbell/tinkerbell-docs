@@ -52,7 +52,7 @@ In addition to the microservices, there are three pieces of infrastructure:
 - [**Image Repository**] -
   Tinkerbell uses a local image repository to store all of the action images used in a workflow.
   This is particularly useful for secure environments that don't have access to the internet.
-  You can also choose to use [Quay] or [DockerHub] as the repository to store images for if your environment does have internet access.
+  You can also choose to use [Quay] or [Docker Hub] as the repository to store images for if your environment does have internet access.
 
 - [**NGINX**] - NGINX is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache.
   Tinkerbell uses NGINX to serve the required boot files and OS images during workflow execution.
@@ -61,8 +61,8 @@ In addition to the microservices, there are three pieces of infrastructure:
 
 ​New to Tinkerbell or bare metal provisioning? This is a great place to start!
 
-- Getting Started - Set up Tinkerbell [locally with vagrant] or on [Equinix Metal with Terraform].
-- Run [hello world] to see Tinkerbell in action.​
+- Getting Started - Set up Tinkerbell following either of the [Local Setup with Vagrant] or [Equinix Metal Setup with Terraform] guides.
+- Run the [hello world] workflow to see Tinkerbell in action.​
 
 ## Get Help
 
@@ -76,14 +76,14 @@ Need a little help getting started? We're here!
 [**boots**]: /services/boots
 [cncf community slack]: https://slack.cncf.org/
 [contributors' page]: https://tinkerbell.org/community/contributors/
-[dockerhub]: https://hub.docker.com/
-[equinix metal with terraform]: /setup/equinix-metal-terraform/
+[docker hub]: https://hub.docker.com/
+[equinix metal setup with terraform]: /setup/equinix-metal-terraform
 [faqs]: https://tinkerbell.org/faq/
-[github]: https://github.com/tinkerbell/
+[github]: https://github.com/tinkerbell
 [**hegel**]: /services/hegel
-[hello world]: workflows/hello-world-workflow
+[hello world]: /workflows/hello-world-workflow
 [ipxe]: https://ipxe.org/
-[locally with vagrant]: /setup/local-vagrant/
+[local setup with vagrant]: /setup/local-vagrant
 [**nginx**]: https://www.nginx.com/
 [**osie**]: /services/osie
 [**pbnj**]: https://github.com/tinkerbell/pbnj

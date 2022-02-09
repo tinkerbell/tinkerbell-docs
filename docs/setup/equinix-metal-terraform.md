@@ -257,7 +257,7 @@ Remember to use the SOS console to check what the Worker is doing.
 
 Next, define the template for the workflow.
 The template sets out tasks for the Worker to preform sequentially.
-This template contains a single task with a single action, which is to perform [hello-world].
+This template contains a single task with a single action, which is to perform [hello world].
 Just as in the hello-world example, the `hello-world` image doesn’t contain any instructions that the Worker will perform.
 It is just a placeholder in the template so a workflow can be created and pushed to the Worker.
 
@@ -438,8 +438,8 @@ terraform destroy
 [equinix metal terraform provider]: https://registry.terraform.io/providers/equinix/metal/latest/docs
 [file]: https://www.terraform.io/docs/provisioners/file.html
 [hegel]: /services/hegel
-[hello-world]: ../../workflows/hello-world-workflow/
+[hello world]: /workflows/hello-world-workflow
 [osie]: /services/osie
 [ssh keys]: https://metal.equinix.com/developers/docs/accounts/ssh-keys/
 [terraform]: https://www.terraform.io/downloads.html
-[tink-server]: /services/tink
+[tink-server]: /services/tink-server

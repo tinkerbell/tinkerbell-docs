@@ -14,7 +14,7 @@ It covers some basic aspects of Tinkerbell's functionality:
 
 - setting up a Provisioner
 - creating the hardware data for the Worker
-- creating a template with a placeholder action item, using the [hello-world template]
+- creating a template with a placeholder action item, using the [hello world] template
 - and creating a workflow
 
 The last step is to start up the Worker, which will call back to the Provisioner for its workflow.
@@ -105,7 +105,7 @@ compose_ubuntu-image-setup_1         /scripts/setup_ubuntu.sh h ...   Exit 0
 
 As you'll see shortly, each step in a Tinkerbell workflow is referred to as an Action Image, and is simply a Docker image.
 Before you move ahead, let's pull down the image that will be used in the example workflow.
-Tinkerbell uses Docker registry to host images locally, so pull down the [Hello World] docker image and push it to the registry.
+Tinkerbell uses Docker registry to host images locally, so pull down the [Hello World Docker image] and push it to the registry.
 
 Let's trust the SSL certs of the registry container.
 
@@ -297,8 +297,8 @@ Let us know what you think about it in the #tinkerbell channel on the [CNCF Comm
 
 [cncf community slack]: https://slack.cncf.org/
 [extending the vagrant setup]: /setup/extending-vagrant
-[hello world]: https://hub.docker.com/_/hello-world/
-[hello-world template]: /workflows/hello-world-workflow
+[hello world docker image]: https://hub.docker.com/_/hello-world/
+[hello world]: /workflows/hello-world-workflow
 [libvirtd]: https://libvirt.org/
 [the host's processor should support virtualization]: https://www.cyberciti.biz/faq/linux-xen-vmware-kvm-intel-vt-amd-v-support/
 [this page from the virtual box manual explains how to add additional address ranges to your setup.]: https://www.virtualbox.org/manual/ch06.html#network_hostonly

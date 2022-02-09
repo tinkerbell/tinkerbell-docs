@@ -74,7 +74,7 @@ It will need to be converted to a `raw` filesystem image in order to use it, lik
 
 ### Creating the Template
 
-The template uses actions from the [artifact hub].
+The template uses actions from the [Artifact Hub].
 
 - [image2disk] - to write the OS image to a block device.
 - [kexec] - to `kexec` into our newly provisioned operating system.
@@ -296,7 +296,7 @@ tasks:
 ```
 
 [archive2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk
-[artifact hub]: https://artifact.io
+[artifact hub]: https://artifacthub.io/packages/search?kind=4
 [cexec]: https://artifacthub.io/packages/tbaction/tinkerbell-community/cexec
 [cloud-images]: https://cloud.centos.org/centos/8/x86_64/images/
 [get fedora]: https://getfedora.org/en/coreos/download?tab=metal_virtualized&stream=stable

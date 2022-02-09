@@ -172,7 +172,7 @@ Below is a reference file for creating a Template using above Ubuntu Packer imag
 This section is similar to the other examples we have in the `Deploying Operating systems` section.
 You can follow them for more references.
 
-The template uses actions from the [artifact hub].
+The template uses actions from the [Artifact Hub].
 
 - [image2disk] - to write the OS image to a block device.
 - [kexec] - to `kexec` into our newly provisioned operating system.
@@ -205,7 +205,7 @@ tasks:
             FS_TYPE: ext4
 ```
 
-[artifact hub]: https://artifact.io
+[artifact hub]: https://artifacthub.io/packages/search?kind=4
 [image2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk
 [kexec]: https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec
 [packer]: https://www.packer.io/

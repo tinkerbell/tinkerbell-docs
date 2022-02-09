@@ -21,7 +21,7 @@ Have a look at issues and pull requests and if you can't figure out anything you
 
 Currently, we are doing a lot of work around:
 
-- CI/CD - not only for our projects but also for the reusable actions we ship to [ArtifactHub].
+- CI/CD - not only for our projects but also for the reusable actions we ship to [Artifact Hub].
   You can find them in the [tinkerbell/hub] repo.
 - We are refactoring our Go binaries to be friendly and flexible using Cobra and Viper.
 - We have to write an end-to-end testing framework that we can use to run integration tests on the entire project.
@@ -60,9 +60,9 @@ It also contains documents on project owner responsibilities and maintainers' in
 - [Owners]
 - [Maintainers]
 
-[artifacthub]: https://artifacthub.io/packages/search?page=1&org=tinkerbell-community
-[cncf slack]: https://slack.cncf.org/
-[communication page]: https://github.com/tinkerbell/.github/blob/master/COMMUNICATION.md
+[artifact hub]: https://artifacthub.io/packages/search?kind=4
+[cncf community slack]: https://slack.cncf.org/
+[communication page]: https://github.com/tinkerbell/.github/blob/main/COMMUNICATION.md
 [contributor covenant code of conduct]: https://github.com/tinkerbell/.github/blob/main/CODE_OF_CONDUCT.md
 [contributor mailing list]: https://github.com/tinkerbell/.github/blob/main/COMMUNICATION.md#contributors-mailing-list
 [github]: https://github.com/tinkerbell

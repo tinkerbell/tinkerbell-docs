@@ -76,7 +76,7 @@ mv ./FreeBSD-12.2-RELEASE-amd64.raw.gz ./sandbox/deploy/state/webroot
 
 ## Creating the Template
 
-The template uses actions from the [artifact hub].
+The template uses actions from the [Artifact Hub].
 
 - [image2disk] - to write the image to a block device.
 - [kexec] - to `kexec` into our newly provisioned operating system.
@@ -111,7 +111,7 @@ tasks:
 	  	  FS_TYPE: ext4
 ```
 
-[artifact hub]: https://artifact.io
+[artifact hub]: https://artifacthub.io/packages/search?kind=4
 [cloud-images]: https://download.freebsd.org/ftp/releases/VM-IMAGES/12.2-RELEASE/amd64/Latest/
 [image2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk
 [kexec]: https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec

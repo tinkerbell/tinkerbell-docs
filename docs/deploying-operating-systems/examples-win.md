@@ -128,7 +128,7 @@ actions:
 
 ### The Example Template
 
-The template uses actions from the [artifact hub].
+The template uses actions from the [Artifact Hub].
 
 - [image2disk] - to write the image to a block device.
 - Our custom action that will cause a system reboot into our new Operating System.
@@ -161,7 +161,7 @@ tasks:
 	    - /worker:/worker
 ```
 
-[artifact hub]: https://artifact.io
+[artifact hub]: https://artifacthub.io/packages/search?kind=4
 [crocodile]: https://github.com/tinkerbell/crocodile
 [image2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk
 [tinkerbell]: https://tinkerbell.org

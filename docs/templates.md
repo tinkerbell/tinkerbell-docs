@@ -83,4 +83,4 @@ Templates are each stored as blobs in the database; they are later parsed during
 
 `tink template --help` - Displays the available commands and their usage for `tink template`.
 
-[action]: ../actions/action-architecture
+[action]: /actions/action-architecture

@@ -207,8 +207,8 @@ actions:
 
 ### Additional Bootstraps
 
-- [Ubuntu]
 - [Centos/Rhel]
+- [Ubuntu]
 
 ## Next Steps
 
@@ -222,5 +222,5 @@ Once an Operating System image **or** a filesystem + bootloader is deployed we m
 [qcow]: https://en.wikipedia.org/wiki/Qcow
 [qemu-image]: https://en.wikibooks.org/wiki/QEMU/Images#Copying_an_image_to_a_physical_device
 [rootio]: https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio
-[the basics of deploying an operating system]: https://docs.tinkerbell.org/deploying-operating-systems/the-basics/#filesystem-archives
-[ubuntu]: https://help.ubuntu.com/lts/installation-guide/armhf/apds04.html
+[the basics of deploying an operating system]: /deploying-operating-systems/the-basics/#filesystem-archives
+[ubuntu]: https://help.ubuntu.com/lts/installation-guide/amd64/apds04.html
