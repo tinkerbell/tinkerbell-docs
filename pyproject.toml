@@ -13,6 +13,7 @@ mkdocs-material = ">=5.0"
 mkdocs-versioning = ">=0.3"
 pygments = ">=2.4"
 pymdown-extensions = ">=7.0"
+mdx-truly-sane-lists = "^1.2"
 
 [tool.poetry.dev-dependencies]
 
