@@ -13,24 +13,24 @@ FreeBSD distributes their Operating System in a number of different formats, whi
 
 Below are two examples of images we can use:
 
-```
+```sh
 FreeBSD-12.2-RELEASE-amd64.qcow2.xz	599212960	2020-Oct-23 06:27
 FreeBSD-12.2-RELEASE-amd64.raw.xz	600337912	2020-Oct-23 06:44
 ```
 
 Both images come with compressed with the `xz` compression format, you will need to decompress them with the `xz` command.
 
-```
+```sh
 xz -d <file.xz>
 ```
 
 The `raw` image is a disk image which ontains a full partition table (including OS and Swap partition) and boot loader for our FreeBSD system.
 You can examine this with `losetup`.
 
-```
-$ losetup -f -P ./FreeBSD-12.2-RELEASE-amd64.raw
+```sh
+losetup -f -P ./FreeBSD-12.2-RELEASE-amd64.raw
 
-$ fdisk -l /dev/loop1
+fdisk -l /dev/loop1
 
 Disk /dev/loop1: 5 GiB, 5369587712 bytes, 10487476 sectors
 Units: sectors of 1 * 512 = 512 bytes
@@ -51,26 +51,26 @@ The `raw` image comes with everything that we will need to install and deploy Fr
 The other image, with the extension `.qcow2.xz` is a compressed `qcow2` filesystem image and is a **full** disk image including partition tables, partitions filled with filesystems and files, and importantly, a boot loader at the beginning of the disk image.
 However, if you want to use the `qcow` image you will have to convert it with the `qemu-img` CLI tool.
 
-```
+```sh
 apt-get install -y qemu-utils
 ```
 
 Then use the tool to convert the image into a `raw` filesystem.
 
-```
+```sh
 qemu-img convert  ./FreeBSD-12.2-RELEASE-amd64.qcow2 -O raw ./FreeBSD-12.2-RELEASE-amd64.raw
 ```
 
 Once you have a `raw` filesystem image, you can optionally compress the raw image to save on both local disk space and network bandwidth when deploying the image.
 
-```
+```sh
 gzip ./FreeBSD-12.2-RELEASE-amd64.raw
 ```
 
 The raw image will need to live at a locally accessible web server.
 To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the tink-server.
 
-```
+```sh
 mv ./FreeBSD-12.2-RELEASE-amd64.raw.gz ./sandbox/deploy/state/webroot
 ```
 
@@ -83,7 +83,7 @@ The template uses actions from the [Artifact Hub].
 
 > Important: Don't forget to pull, tag and push `quay.io/tinkerbell-actions/image2disk:v1.0.0` prior to using it.
 
-```
+```yaml
 version: "0.1"
 name: FreeBSD_deployment
 global_timeout: 1800

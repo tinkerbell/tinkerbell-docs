@@ -25,7 +25,7 @@ This guide assumes that you already have:
 
 The first thing to do is to clone the `sandbox` repository because it contains the Terraform file required to spin up the environment.
 
-```
+```sh
 git clone https://github.com/tinkerbell/sandbox.git
 cd sandbox/deploy/terraform
 ```
@@ -35,7 +35,7 @@ You can define them in a `terraform.ftvars` file.
 By default, Terraform will load the file when present.
 You can create one `terraform.tfvars` that looks like this:
 
-```
+```sh
 cat terraform.tfvars
 metal_api_token = "awegaga4gs4g"
 project_id = "235-23452-245-345"
@@ -45,7 +45,7 @@ Otherwise, you can pass the inputs to the `terraform` command through a file, or
 
 Once you have your variables set, run the Terraform commands:
 
-```
+```sh
 terraform init --upgrade
 terraform apply
 
@@ -54,7 +54,7 @@ terraform apply
 As an output, the `terraform apply` command returns the IP address of the Provisioner, the MAC address of the Worker, and an address for the SOS console of the Worker which will help you to follow what the Worker is doing.
 For example,
 
-```
+```text
 Apply complete! Resources: 5 added, 0 changed, 1 destroyed.
 
 Outputs:
@@ -73,7 +73,7 @@ worker_sos = [
 
 When creating servers on Equinix Metal, you might get an error similar to:
 
-```
+```text
 > Error: The facility sjc1 has no provisionable c3.small.x86 servers matching your criteria.
 ```
 
@@ -82,7 +82,7 @@ You can change your device setting to a different `device_type` in `terraform.tf
 
 You can check availability of device type in a particular facility through the Equinix Metal CLI using the `capacity get` command.
 
-```
+```sh
 metal capacity get
 ```
 
@@ -90,7 +90,7 @@ You are looking for a facility that has a `normal` level of `c3.small.x86`.
 
 ### Troubleshooting - SSH Error
 
-```
+```text
 > Error: timeout - last error: SSH authentication failed
 > (root@136.144.56.237:22): ssh: handshake failed: ssh: unable to authenticate,
 > attempted methods [none publickey], no supported methods remain
@@ -99,9 +99,9 @@ You are looking for a facility that has a `normal` level of `c3.small.x86`.
 Terraform uses the Terraform [file] function to copy the tink directory from your local environment to the Provisioner.
 You can get this error if your local `ssh-agent` properly You should start the agent and add the `private_key` that you use to SSH into the Provisioner.
 
-```
-$ ssh-agent
-$ ssh-add ~/.ssh/id_rsa
+```sh
+ssh-agent
+ssh-add ~/.ssh/id_rsa
 ```
 
 Then rerun `terraform apply`.
@@ -109,7 +109,7 @@ You don't need to run `terraform destroy`, as Terraform can be reapplied over an
 
 ### Troubleshooting - File Error
 
-```
+```text
 > Error: Upload failed: scp: /root/tink/deploy: Not a directory
 ```
 
@@ -120,7 +120,7 @@ You can SSH onto the Provisioner, remove the partially copied directory, and rer
 
 SSH into the Provisioner and you will find yourself in a copy of the `tink` repository:
 
-```
+```sh
 ssh -t root@$(terraform output -raw provisioner_ip) "cd /root/tink && bash"
 ```
 
@@ -129,14 +129,14 @@ Use the `generate-env.sh` script to generate the `.env` file.
 Using and setting `.env` creates an idempotent workflow and you can use it to configure the `setup.sh` script.
 For example changing the [OSIE] version.
 
-```
+```sh
 ./generate-env.sh enp1s0f1 > .env
 source .env
 ```
 
 Then, you run the `setup.sh` script.
 
-```
+```sh
 ./setup.sh
 ```
 
@@ -155,20 +155,20 @@ The services in Tinkerbell are containerized, and the daemons will run with `doc
 You can find the definitions in `tink/deploy/docker-compose.yaml`.
 Start all services:
 
-```
+```sh
 cd ./deploy
 docker-compose up -d
 ```
 
 To check if all the services are up and running you can use `docker-compose`.
 
-```
+```sh
 docker-compose ps
 ```
 
 The output should look similar to:
 
-```
+```text
         Name                      Command               State                         Ports
 ------------------------------------------------------------------------------------------------------------------
 deploy_boots_1         /boots -dhcp-addr 0.0.0.0: ...   Up
@@ -184,7 +184,7 @@ You now have a Provisioner up and running on Equinix Metal.
 The next steps take you through creating a workflow and pushing it to the Worker using the `hello-world` workflow example.
 If you want to use the example, you need to pull the `hello-world` image from from Docker Hub to the internal registry.
 
-```
+```sh
 docker pull hello-world
 docker tag hello-world 192.168.1.1/hello-world
 docker push 192.168.1.1/hello-world
@@ -194,7 +194,7 @@ docker push 192.168.1.1/hello-world
 
 To make sure that your environment is correct on subsequent logins and to make it easier to run tink commands create a `.bash_aliases` file:
 
-```
+```sh
 echo "source ~/tink/.env ; alias tink='docker exec -i deploy_tink-cli_1 tink'" > ~/.bash_aliases
 source ~/.bash_aliases
 ```
@@ -204,7 +204,7 @@ source ~/.bash_aliases
 As part of the `terraform apply` output you get the MAC address for the worker and it generates a file that contains the JSON describing it.
 Now time to register it with Tinkerbell.
 
-```
+```sh
 cat /root/tink/deploy/hardware-data-0.json
 {
   "id": "0eba0bf8-3772-4b4a-ab9f-6ebe93b90a94",
@@ -244,7 +244,7 @@ cat /root/tink/deploy/hardware-data-0.json
 
 Now we can push the hardware data to `tink-server`:
 
-```
+```sh
 tink hardware push < /root/tink/deploy/hardware-data-0.json
 ```
 
@@ -261,7 +261,7 @@ This template contains a single task with a single action, which is to perform [
 Just as in the hello-world example, the `hello-world` image doesn’t contain any instructions that the Worker will perform.
 It is just a placeholder in the template so a workflow can be created and pushed to the Worker.
 
-```
+```sh
 cat > hello-world.yml  <<EOF
 version: "0.1"
 name: hello_world_workflow
@@ -280,7 +280,7 @@ Create the template and push it to the `tink-server` with the `tink template cre
 
 > TIP: export the the template ID as a bash variable for future use.
 
-```
+```sh
 export TEMPLATE_ID=$(tink template create < hello-world.yml | tee /dev/stderr | sed 's|.*: ||')
 ```
 
@@ -295,7 +295,7 @@ The next step is to combine both the hardware data and the template to create a 
 
 Combine these two pieces of information and create the workflow with the `tink workflow create` command.
 
-```
+```sh
 tink workflow create \
     -t ${TEMPLATE_ID:?} \
     -r '{"device_1":'$(jq .network.interfaces[0].dhcp.mac hardware-data-0.json)'}'
@@ -303,13 +303,13 @@ tink workflow create \
 
 > TIP: export the the workflow ID as a bash variable.
 
-```
+```sh
 export WORKFLOW_ID=a8984b09-566d-47ba-b6c5-fbe482d8ad7f
 ```
 
 The command returns a Workflow ID and if you are watching the logs, you will see:
 
-```
+```text
 tink-server_1  | {"level":"info","ts":1592936829.6773047,"caller":"grpc-server/workflow.go:63","msg":"done creating a new workflow","service":"github.com/tinkerbell/tink"}
 ```
 
@@ -318,19 +318,19 @@ tink-server_1  | {"level":"info","ts":1592936829.6773047,"caller":"grpc-server/w
 You can not SSH directly into the Worker but you can use the `SOS` or `Out of bond` console provided by Equinix Metal to follow what happens in the Worker during the workflow.
 You can SSH into the SOS console with:
 
-```
+```sh
 ssh $(terraform output -json worker_sos | jq -r '.[0]')
 ```
 
 You can also use the CLI from the provisioner to validate if the workflow completed correctly using the `tink workflow events` command.
 
-```
+```sh
 tink workflow events $WORKFLOW_ID
 ```
 
 The response will look something like:
 
-```
+```text
 +--------------------------------------+-------------+-------------+----------------+---------------------------------+--------------------+
 | WORKER ID                            | TASK NAME   | ACTION NAME | EXECUTION TIME | MESSAGE                         |      ACTION STATUS |
 +--------------------------------------+-------------+-------------+----------------+---------------------------------+--------------------+
@@ -345,7 +345,7 @@ The response will look something like:
 
 Back on the machine where you ran terraform you can build and deploy Hook, and a disk image of Ubuntu:
 
-```
+```sh
 export PROV=$(terraform output -raw provisioner_ip)
 cd ../../..
 export TOP=$(pwd)
@@ -368,7 +368,7 @@ scp ${TOP:?}/crocodile/images/tink-ubuntu-2004.raw.gz root@${PROV:?}:tink/deploy
 
 Create a workflow for deploying Ubuntu to your bare metal worker
 
-```
+```sh
 cat > focal.yaml <<EOF
 version: "0.1"
 name: Ubuntu_Focal
@@ -413,7 +413,7 @@ ssh root@${PROV:?}
 
 On the provisioner machine, switch to Hook, import the required action images, create the template, and create a workflow
 
-```
+```sh
 mv /root/tink/deploy/state/webroot/misc/osie/{current,osie}
 ln -s hook /root/tink/deploy/state/webroot/misc/osie/current
 grep "image:" focal.yaml | sed 's|.*: ||' | while read image; do docker pull $image; docker tag $image 192.168.1.1/$image; docker push 192.168.1.1/$image; done;
@@ -427,7 +427,7 @@ tink workflow create \
 
 You can terminate worker and provisioner with the `terraform destroy` command:
 
-```
+```sh
 terraform destroy
 ```
 

@@ -28,7 +28,7 @@ At that time the Worker has netbooted and Boots has pushed OSIE to the Worker, t
 
 ![Screenshot from the Worker]
 
-The `Welcome to Alpine Linux 4.7` message comes from OSIE.
+The `Welcome to Alpine Linux 3.7` message comes from OSIE.
 
 ## The Current OSIE
 

@@ -19,22 +19,22 @@ The only external dependency that is needed when working on the `tink-cli` or `t
 It is the database used by `tink-server` to store resources like Workflows, Hardware Data, and Templates.
 You can use Docker to manage it for you.
 
-```console
+```sh
 docker run -d -e POSTGRES_USER=tinkerbell -e POSTGRES_PASSWORD=tinkerbell -p 5432:5432 postgres:10-alpine
 ```
 
 In order to apply the database configuration for Tink to the PostgreSQL database, run `tink-server` with the `ONLY_MIGRATION` environment variable set to `true`.
 
-```console
-export PGPASSWORD=tinkerbell
+```sh
 export FACILITY=onprem
+export ONLY_MIGRATION=true
 export PGDATABASE=tinkerbell
 export PGHOST=127.0.0.1
+export PGPASSWORD=tinkerbell
 export PGSSLMODE=disable
 export PGUSER=tinkerbell
 export TINKERBELL_GRPC_AUTHORITY=:42113
 export TINKERBELL_HTTP_AUTHORITY=:42114
-export ONLY_MIGRATION=true
 
 go run cmd/tink-server/main.go
 ```
@@ -44,7 +44,7 @@ If you `unset ONLY_MIGRATION` and you run the `go run` command again it will sta
 
 At this point, you can develop on the `tink-cli` and run it with `go run`.
 
-```console
+```sh
 go run cmd/tink-cli/main.go help
 ```
 

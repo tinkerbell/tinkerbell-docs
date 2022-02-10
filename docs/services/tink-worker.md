@@ -20,7 +20,7 @@ Here an example from [OSIE].
 
 As part of the [OSIE init] script the [tink-worker] container gets executed:
 
-```
+```sh
 # tink-worker has been updated to use ID rather than WORKER_ID
 # TODO: remove setting WORKER_ID when we no longer want to support backwards compatibility
 # with the older tink-worker

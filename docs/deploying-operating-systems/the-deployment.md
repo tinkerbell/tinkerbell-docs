@@ -25,7 +25,7 @@ The qemu project provides a number of useful tools to manage Operating System im
 
 We can convert a `qcow` image to a `raw` image with the following command:
 
-```
+```sh
 qemu-img convert -O raw diskimage.qcow2 diskimage.raw
 ```
 
@@ -39,19 +39,19 @@ The [image2disk] action is designed for this use-case and has the capability to 
 
 For example, you can stream a raw Ubuntu image from a web-server and write the OS image to the block device `/dev/sda`.
 
-```
+```yaml
 actions:
-- name: "stream ubuntu"
-  image: quay.io/tinkerbell-actions/image2disk:v1.0.0
-  timeout: 90
-  environment:
+  - name: "stream ubuntu"
+    image: quay.io/tinkerbell-actions/image2disk:v1.0.0
+    timeout: 90
+    environment:
       IMG_URL: 192.168.1.1:8080/ubuntu.raw
       DEST_DISK: /dev/sda
 ```
 
 [image2disk] also supports on-the-fly gzip streaming, which allows you to compress the raw image using [gzip] to save local disk space **and** the amount of network traffic to the hosts that are being provisioned.
 
-```
+```sh
 gzip diskimage.raw
 ```
 
@@ -59,12 +59,12 @@ The resulting file `diskimage.raw.gz` in most cases will be smaller than the ori
 
 You can then use the [image2disk] action to stream the image to the block device.
 
-```
+```yaml
 actions:
-- name: "stream ubuntu"
-  image: quay.io/tinkerbell-actions/image2disk:v1.0.0
-  timeout: 90
-  environment:
+  - name: "stream ubuntu"
+    image: quay.io/tinkerbell-actions/image2disk:v1.0.0
+    timeout: 90
+    environment:
       IMG_URL: http://192.168.1.1:8080/ubuntu.tar.gz
       DEST_DISK: /dev/sda
       COMPRESSED: true
@@ -80,7 +80,7 @@ For example, the following snippet details the configuration for the block devic
 There are three partitions that will be created and labeled.
 It also specifies the format and filesystem type for two of those partitions.
 
-```
+```json
 "storage": {
   "disks": [
 	  {
@@ -135,7 +135,7 @@ It also specifies the format and filesystem type for two of those partitions.
 The example blob is just the description of the device in hardware data, we will also need an action during provisioning to parse this metadata and actually write these changes to the block device.
 This is the job of the [rootio] action.
 
-```
+```yaml
 actions:
 - name: "format"
   image: quay.io/tinkerbell-actions/rootio:v1.0.0
@@ -153,7 +153,7 @@ As detailed in [The Basics of Deploying an Operating System], we can download or
 Once we have a compressed archive of all of the files that make up the Operating System, we will again need to use an action to manage the task of fetching the archive and extracting it to our newly formatted file system.
 The action [archive2disk] has the functionality to **mount** a filesystem and both **stream**/**extract** a filesystem archive directly to the new filesystem.
 
-```
+```yaml
 actions:
 - name: "expand ubuntu filesystem to root"
   image: quay.io/tinkerbell-actions/archive2disk:v1.0.0
@@ -184,7 +184,7 @@ These typically will require an installer binary to exist, as well as:
 
 `Dockerfile`
 
-```
+```dockerfile
 FROM debian:bullseye
 RUN apt-get update; apt-get install -y grml-debootstrap
 ENTRYPOINT ["grml-debootstrap", "--target", "/dev/sda3", "--grub", "/dev/sda"]
@@ -192,22 +192,22 @@ ENTRYPOINT ["grml-debootstrap", "--target", "/dev/sda3", "--grub", "/dev/sda"]
 
 We can create an action from our Dockerfile:
 
-```
+```sh
 docker build -t local-registry/debian:example .
 ```
 
 Once we have pushed our new action to the registry we can reference the action in a workflow as shown below.
 
-```
+```yaml
 actions:
-- name: "expand ubuntu filesystem to root"
-  image: local-registry/debian:example
-  timeout: 90
+  - name: "expand ubuntu filesystem to root"
+    image: local-registry/debian:example
+    timeout: 90
 ```
 
 ### Additional Bootstraps
 
-- [Centos/Rhel]
+- [Centos/RHEL]
 - [Ubuntu]
 
 ## Next Steps

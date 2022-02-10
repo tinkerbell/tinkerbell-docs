@@ -19,9 +19,9 @@ Below are the preseed file and the config file for creating a minimalistic Ubunt
 When building an image using `virtualbox-iso`, the [preseed file] will help with automating the deployment.
 It is placed inside the `http` directory, and the config file references the location of the preseed file in the `boot_command` list of the `builders` object.
 
-- `pressed.cfg`
+### pressed.cfg
 
-```
+```text
 choose-mirror-bin mirror/http/proxy string
 d-i base-installer/kernel/override-image string linux-server
 d-i clock-setup/utc boolean true
@@ -66,9 +66,9 @@ d-i passwd/user-uid string 900
 
 In config file, the builder type is set to `virtualbox-iso` to generate the VMDK and the post-processor type is set to `compress` to generate a `tar` file.
 
-- `config.json`
+### config.json
 
-```
+```json
 {
   "builders": [
     {
@@ -121,7 +121,7 @@ The steps to generate the image will remain the same.
 
 The files will need to be placed in the directory structure of the Packer image builder.
 
-```
+```text
 ubuntu_packer_image
 ├── http
 │   └── preseed.cfg
@@ -132,7 +132,7 @@ ubuntu_packer_image
 
 Run `packer build` to generate the VMDK and `tar` file.
 
-```
+```sh
 PACKER_LOG=1 packer build config.json
 ```
 
@@ -147,19 +147,19 @@ Note, if you are using `qemu` builder type instead of the `virtualbox-iso` build
 
 First, get the `qemu-img` CLI tool.
 
-```
+```sh
 apt-get install -y qemu-utils
 ```
 
 Then use the tool to convert the VMDK into a `raw` filesystem.
 
-```
+```sh
 qemu-img convert -f vmdk -o raw output-virtualbox-iso/packer-ubuntu-64-20.04-disk001.vmdk test_packer.raw
 ```
 
 Once you have a `raw` filesystem image, you can compress the raw image.
 
-```
+```sh
 gzip test_packer.raw
 ```
 
@@ -177,7 +177,7 @@ The template uses actions from the [Artifact Hub].
 - [image2disk] - to write the OS image to a block device.
 - [kexec] - to `kexec` into our newly provisioned operating system.
 
-```
+```yaml
 version: "0.1"
 name: Ubuntu_20_04
 global_timeout: 1800

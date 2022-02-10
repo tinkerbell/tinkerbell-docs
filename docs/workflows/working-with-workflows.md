@@ -17,11 +17,11 @@ The workflow is stored in the database on the Provisioner and returns a workflow
 
 For example,
 
-```
+```sh
 tink workflow create \
     -t 75ab8483-6f42-42a9-a80d-a9f6196130df \
     -r '{"device_1":"08:00:27:00:00:01"}'
-> Created Workflow:  a8984b09-566d-47ba-b6c5-fbe482d8ad7f
+Created Workflow:  a8984b09-566d-47ba-b6c5-fbe482d8ad7f
 ```
 
 The template ID is `75ab8483-6f42-42a9-a80d-a9f6196130df`.
@@ -31,9 +31,8 @@ It is mapped to `device_1`, which is where the MAC address will be substituted i
 After creating a workflow, you can retrieve it from the database by ID with `tink workflow get`.
 This is particularly useful to check to see that the MAC address or IP Address of the Worker was correctly substituted when you created the workflow.
 
-```
+```sh
 tink workflow get a8984b09-566d-47ba-b6c5-fbe482d8ad7f
->
 version: "0.1"
 name: hello_world_workflow
 global_timeout: 600

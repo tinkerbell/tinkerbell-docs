@@ -58,7 +58,7 @@ However if required there is the possibility to override this with the `command`
 
 e.g. Overwriting the command
 
-```
+```yaml
 command:
   - "/my_command.sh"
   - "-flag"
@@ -69,7 +69,7 @@ The most common method to pass information into an action is through the usage o
 For example, if I had an action that needed to mount a disk the action would need to know the block device with the filesystem and the type of formatted filesystem on that device.
 We can pass that as shown below in the configuration of the action:
 
-```
+```yaml
 environment:
   BLOCK_DEVICE: /dev/sda3
   FS_TYPE: ext4

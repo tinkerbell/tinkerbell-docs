@@ -61,7 +61,7 @@ The timeout defines the amount of time to wait for an action to execute and is i
 
 A hardware device, such as a Worker's MAC address, is specified in template as keys.
 
-```
+```text
 {{.device_1}}
 {{.device_2}}
 ```
@@ -73,7 +73,7 @@ Templates are each stored as blobs in the database; they are later parsed during
 
 ## Template CLI Commands
 
-```
+```text
   create      Create a template in the database.
   delete      Delete a template from the database.
   get         Get a template by ID.

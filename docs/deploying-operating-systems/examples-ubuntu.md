@@ -13,7 +13,7 @@ Ubuntu is distributed in a number of different formats, which are all available 
 
 This example uses the image with the `.img` extension.
 
-```
+```text
 focal-server-cloudimg-amd64.img     2021-03-11 22:27  528M  Ubuntu Server 20.04 LTS (Focal Fossa) daily builds
 ```
 
@@ -24,26 +24,26 @@ This image is actually a `qcow2` filesystem image and is a **full** disk image i
 In order to use this image, it needs to be converted into a `raw` filesystem.
 In order to do the conversion, install the `qemu-img` CLI tool.
 
-```
+```sh
 apt-get install -y qemu-utils
 ```
 
 Then, use the tool to convert the image into a `raw` filesystem.
 
-```
+```sh
 qemu-img convert  ./focal-server-cloudimg-amd64.img -O raw ./focal-server-cloudimg-amd64.raw
 ```
 
 **Optional** - You can compress this raw image to save on both local disk space and network bandwidth when deploying the image.
 
-```
+```sh
 gzip ./focal-server-cloudimg-amd64.raw
 ```
 
 Move the raw image to a locally accessible web server.
 To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
 
-```
+```sh
 mv ./focal-server-cloudimg-amd64.raw ./sandbox/deploy/state/webroot`
 ```
 
@@ -56,7 +56,7 @@ The template uses [actions] from the [Artifact Hub].
 
 > Important: Don't forget to pull, tag, and push `quay.io/tinkerbell-actions/image2disk:v1.0.0` prior to using it.
 
-```
+```yaml
 version: "0.1"
 name: Ubuntu_Focal
 global_timeout: 1800
@@ -88,7 +88,7 @@ tasks:
 
 Note that it is also possible to install Ubuntu from the compressed filesystem image.
 
-```
+```text
 focal-server-cloudimg-amd64.tar.gz  2021-03-11 22:30  485M  File system image and Kernel packed
 ```
 
@@ -107,7 +107,7 @@ We can easily make use of the **official** Docker images to generate a root file
 
 ### Downloading the Image
 
-```
+```sh
 TMPRFS=$(docker container create ubuntu:latest)
 docker export $TMPRFS > ubuntu_rootfs.tar
 docker rm $TMPRFS
@@ -115,14 +115,14 @@ docker rm $TMPRFS
 
 **Optional** - You can compress this raw image to save on both local disk space and network bandwidth when deploying the image.
 
-```
+```sh
 gzip ./ubuntu_rootfs.tar
 ```
 
 Move the raw image to a locally accessible web server.
 To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
 
-```
+```sh
 mv ./ubuntu_rootfs.tar.gz ./sandbox/deploy/state/webroot
 ```
 
@@ -135,7 +135,7 @@ The template makes use of the actions from the artifact hub.
 - [cexec] - to run commands inside (chroot) our newly provisioned operating system.
 - [kexec] - to `kexec` into our newly provisioned operating system.
 
-```
+```yaml
 version: "0.1"
 name: ubuntu_provisioning
 global_timeout: 1800

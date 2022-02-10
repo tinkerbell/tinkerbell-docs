@@ -27,20 +27,21 @@ The last step is to start up the Worker, which will call back to the Provisioner
 - If using VirtualBox be sure to install both:
   - The Vagrant _vagrant-vbguest_ plugin: `vagrant plugin install vagrant-vbguest`
   - The [VirtualBox Extension Pack]
-- If using VirtualBox, you may get an error about valid IP addresses for host-only networks. [This page from the Virtual Box manual explains how to add additional address ranges to your setup.]
+- If using VirtualBox, you may get an error about valid IP addresses for host-only networks.
+  This page from the [Virtual Box manual] explains how to add additional address ranges to your setup.
 
 ## Getting Tinkerbell
 
 To get Tinkerbell, clone the `sandbox` repository at version v0.6.0.
 
-```
+```sh
 git clone https://github.com/tinkerbell/sandbox.git -b v0.6.0
 ```
 
 Move into the `deploy/vagrant` directory.
 This folder contains a Vagrant configuration file (Vagrantfile) needed to setup the Provisioner and the Worker.
 
-```
+```sh
 cd sandbox/deploy/vagrant
 ```
 
@@ -49,7 +50,7 @@ cd sandbox/deploy/vagrant
 First we need to delete the default template and hardware definition that the sandbox repo comes with.
 This lets us practice setting up the template and workflow in tinkerbell without any conflicts with what comes pre-defined in the sandbox repo.
 
-```
+```sh
 rm ../compose/manifests/hardware/hardware-libvirt.json
 rm ../compose/manifests/hardware/hardware.json
 rm ../compose/manifests/template/ubuntu-libvirt.yaml
@@ -58,7 +59,7 @@ rm ../compose/manifests/template/ubuntu.yaml
 
 Since Vagrant is handling the Provisioner's configuration, including installing the Tinkerbell stack, run the command to start it up.
 
-```
+```sh
 vagrant up provisioner
 ```
 
@@ -69,18 +70,18 @@ The time it takes to spin up the Provisioner varies with connection speed and re
 
 Now that the Provisioner's machine is up and running, SSH into the Provisioner.
 
-```
+```sh
 vagrant ssh provisioner
 ```
 
 Tinkerbell is going to be running from a container, so navigate to the `/vagrant/compose` directory and load up the .env file that has all our environment's settings in it, and start the Tinkerbell stack with `docker-compose`.
 
-```
+```sh
 cd /vagrant/compose
 docker-compose ps
 ```
 
-```
+```text
                Name                             Command                  State                             Ports
 ---------------------------------------------------------------------------------------------------------------------------------------
 compose_boots_1                      /usr/bin/boots -dhcp-addr  ...   Up
@@ -98,7 +99,6 @@ compose_tink-server-migration_1      /usr/bin/tink-server             Exit 0
 compose_tink-server_1                /usr/bin/tink-server             Up (healthy)   0.0.0.0:42113->42113/tcp, 0.0.0.0:42114->42114/tcp
 compose_tls-gen_1                    /code/tls/generate.sh 192. ...   Exit 0
 compose_ubuntu-image-setup_1         /scripts/setup_ubuntu.sh h ...   Exit 0
-
 ```
 
 ## Preparing an action image
@@ -109,7 +109,7 @@ Tinkerbell uses Docker registry to host images locally, so pull down the [Hello 
 
 Let's trust the SSL certs of the registry container.
 
-```
+```sh
 cd /vagrant/compose && source .env
 echo | openssl s_client -showcerts -connect $TINKERBELL_HOST_IP:443 2>/dev/null | openssl x509 | sudo tee /usr/local/share/ca-certificates/tinkerbell.crt
 sudo update-ca-certificates
@@ -118,7 +118,7 @@ sudo systemctl restart docker
 
 Then let's login, get the image, and upload it to our registry.
 
-```
+```sh
 docker login $TINKERBELL_HOST_IP -u admin -p Admin1234
 docker pull hello-world
 docker tag hello-world $TINKERBELL_HOST_IP/hello-world
@@ -128,7 +128,7 @@ docker push $TINKERBELL_HOST_IP/hello-world
 At this point, you might want to open a separate terminal window to show logs from the Provisioner, because it will show what the `tink-server` is doing through the rest of the setup.
 Open a new terminal, ssh in to the provisioner as you did before, and run `docker-compose logs -f` to tail logs.
 
-```
+```sh
 cd sandbox/deploy/vagrant
 vagrant ssh provisioner
 cd /vagrant/compose && source .env
@@ -144,7 +144,7 @@ With the provisioner up and running, it's time to set up the worker's configurat
 First, define the Worker's hardware data, which is used to identify the Worker as the target of a workflow.
 Very minimal hardware data is required for this example, but it does at least need to contain the MAC Address of the Worker, which is hardcoded in the Vagrant file, and have the Worker set to allow PXE booting and accept workflows.
 
-```
+```sh
 cat > hardware-data.json <<EOF
 {
   "id": "7462cca3-5539-4524-90e9-ab98c3fabf27",
@@ -181,13 +181,13 @@ EOF
 
 Then, push the hardware data to the database with the `tink hardware push` command.
 
-```
+```sh
 docker exec -i compose_tink-cli_1 tink hardware push < ./hardware-data.json
 ```
 
 If you are following along in the `tink-server` logs, you should see:
 
-```
+```text
 tink-server_1               | {"level":"info","ts":1638306331.943881,"caller":"grpc-server/hardware.go:82","msg":"data pushed","service":"github.com/tinkerbell/tink","id":"7462cca3-5539-4524-90e9-ab98c3fabf27"}
 ```
 
@@ -199,7 +199,7 @@ This template contains a single task with a single action, which is to perform "
 Just as in the [hello-world example], the "hello-world" image doesn't contain any instructions that the Worker will perform.
 It is just a placeholder in the template so a workflow can be created and pushed to the Worker.
 
-```
+```sh
 cat > hello-world.yml  <<EOF
 version: "0.1"
 name: hello_world_workflow
@@ -216,13 +216,13 @@ EOF
 
 Create the template and push it to the database with the `tink template create` command.
 
-```
+```sh
 docker exec -i compose_tink-cli_1 tink template create  < ./hello-world.yml
 ```
 
 The command returns a Template ID, and if you are watching the `tink-server` logs you will see:
 
-```
+```text
 tink-server_1               | {"level":"info","ts":1638306365.5689096,"caller":"grpc-server/template.go:42","msg":"done creating a new Template","service":"github.com/tinkerbell/tink"}
 ```
 
@@ -238,13 +238,13 @@ The next step is to combine both the hardware data and the template to create a 
 
 Combine these two pieces of information and create the workflow with the `tink workflow create` command.
 
-```
+```sh
 docker exec -i compose_tink-cli_1 tink workflow create -r '{"device_1":"08:00:27:9E:F5:3A"}' -t <TEMPLATE ID>
 ```
 
 The command returns a Workflow ID and if you are watching the logs, you will see:
 
-```
+```text
 tink-server_1               | {"level":"info","ts":1638306500.9581006,"caller":"grpc-server/workflow.go:70","msg":"done creating a new workflow","service":"github.com/tinkerbell/tink","workflowID":"a5ba16e0-5221-11ec-89e8-0242ac120005"}
 ```
 
@@ -253,7 +253,7 @@ tink-server_1               | {"level":"info","ts":1638306500.9581006,"caller":"
 You can now bring up the Worker and execute the Workflow.
 In a new terminal window, move into the `tink/deploy/vagrant` directory, and bring up the Worker with Vagrant, similar to bringing up the Provisioner.
 
-```
+```sh
 cd sandbox/deploy/vagrant
 vagrant up machine1
 ```
@@ -267,16 +267,15 @@ Tinkerbell will netboot a custom AlpineOS that runs in RAM, so any changes you m
 At this point you should check on the Provisioner to confirm that the Workflow was executed on the Worker.
 If you opened a terminal window to monitor the Tinkerbell logs, you should see the execution in them.
 
-```
+```text
 tink-server_1               | {"level":"info","ts":1638388091.1408234,"caller":"grpc-server/tinkerbell.go:97","msg":"received action status: STATE_SUCCESS","service":"github.com/tinkerbell/tink","actionName":"hello_world","workflowID":"6e40f68f-52df-11ec-974f-0242ac120006"}
 tink-server_1               | {"level":"info","ts":1638388091.1498456,"caller":"grpc-server/tinkerbell.go:147","msg":"current workflow context","service":"github.com/tinkerbell/tink","workflowID":"6e40f68f-52df-11ec-974f-0242ac120006","currentWorker":"7462cca3-5539-4524-90e9-ab98c3fabf27","currentTask":"hello world","currentAction":"hello_world","currentActionIndex":"0","currentActionState":"STATE_SUCCESS","totalNumberOfActions":1}
 ```
 
 You can also check using the `tink workflow events` and the Workflow ID on the Provisioner.
 
-```
+```sh
 docker exec -i compose_tink-cli_1 tink workflow events a8984b09-566d-47ba-b6c5-fbe482d8ad7f
->
 +--------------------------------------+-------------+-------------+----------------+---------------------------------+--------------------+
 | WORKER ID                            | TASK NAME   | ACTION NAME | EXECUTION TIME | MESSAGE                         |      ACTION STATUS |
 +--------------------------------------+-------------+-------------+----------------+---------------------------------+--------------------+
@@ -293,7 +292,7 @@ The Vagrant set up is not necessarily intended to be persistent, but while it's 
 If you are looking to extend your local setup to develop or test out other workflows, check out the [Extending the Vagrant Setup] doc.
 
 That's it!
-Let us know what you think about it in the #tinkerbell channel on the [CNCF Community Slack].
+Let us know what you think about it in the [#tinkerbell] channel on the [CNCF Community Slack].
 
 [cncf community slack]: https://slack.cncf.io/
 [extending the vagrant setup]: /setup/extending-vagrant
@@ -301,8 +300,9 @@ Let us know what you think about it in the #tinkerbell channel on the [CNCF Comm
 [hello world]: /workflows/hello-world-workflow
 [libvirtd]: https://libvirt.org/
 [the host's processor should support virtualization]: https://www.cyberciti.biz/faq/linux-xen-vmware-kvm-intel-vt-amd-v-support/
-[this page from the virtual box manual explains how to add additional address ranges to your setup.]: https://www.virtualbox.org/manual/ch06.html#network_hostonly
+[#tinkerbell]: https://app.slack.com/client/T08PSQ7BQ/C01SRB41GMT
 [ui bigger]: https://github.com/tinkerbell/tinkerbell.org/pull/76#discussion_r442151095
 [vagrant]: https://www.vagrantup.com/downloads
 [virtualbox extension pack]: https://www.virtualbox.org/wiki/Downloads
 [virtualbox]: https://www.virtualbox.org/
+[virtual box manual]: https://www.virtualbox.org/manual/ch06.html#network_hostonly

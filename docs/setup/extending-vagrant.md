@@ -17,7 +17,7 @@ The requirements for the tests are the same as the Vagrant setup itself, along w
 
 To run the tests, run the `go test` command, pointed at the `test/_vagrant` directory.
 
-```
+```sh
 go test ./test/_vagrant/...
 ```
 
@@ -29,14 +29,14 @@ Check [setup.sh] for reference.
 
 Download Osie before starting the setup
 
-```
+```sh
 curl  https://tinkerbell-oss.s3.amazonaws.com/osie-uploads/latest.tar.gz -o osie.tar.gz
 ```
 
 Move the downloaded file to `tink/deploy/vagrant/`.
 Now, set the environment variable in `tink/deploy/vagrant/scripts/tinkerbell.sh` before it executes `setup.sh`.
 
-```
+```sh
 ...
 export TB_OSIE_TAR='/vagrant/deploy/vagrant/osie.tar.gz'
 ./setup.sh

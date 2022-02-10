@@ -37,14 +37,14 @@ We will pass three pieces of information as environment variables into this acti
 
 ### `example_action.sh`
 
-```
+```sh
 #!/bin/bash
 set -x
 
 # Check that the environment variable is set, so we know what device to mount
 if [[ ! -v BLOCK_DEVICE ]]; then
-  echo "BLOCK_DEVICE NEEDS SETTING"
-  exit 1
+	echo "BLOCK_DEVICE NEEDS SETTING"
+	exit 1
 fi
 
 # Check for other variables FS_TYPE / TOUCH_PATH
@@ -61,7 +61,7 @@ exit 0
 
 ### `Dockerfile`
 
-```
+```dockerfile
 FROM alpine:3.13.1
 COPY /example_action.sh /
 ENTRYPOINT ["/example_action.sh"]
@@ -85,7 +85,7 @@ We can now push/upload our new action to use in a workflow!
 
 Following all the steps above we can now create an action in a workflow, this simple will just leave us with a file called "hello" left in `/tmp`.
 
-```
+```yaml
 actions:
 - name: "Say Hello!"
   image: 192.168.1.1\example_actions:v0.1

@@ -11,7 +11,7 @@ We use and rely on a lot of different technologies such as: iPXE, Docker, Promet
 The projects inside Tinkerbell are designed to be as independent as possible, some are ready and others have a long way to go.
 In general, deciding where you want to contribute depends on what you are working towards.
 
-The best way to start is to join the `#tinkerbell` channel over on the [CNCF Slack] or the [Contributor Mailing list].
+The best way to start is to join the [#tinkerbell] channel over on the [CNCF Community Slack] or the [Contributor Mailing list].
 You can find more about how we communicate on the [COMMUNICATION page] in the [tinkerbell/.github] repo.
 
 ## Contributing to the Codebase
@@ -73,6 +73,7 @@ The [tinkerbell/org] repository contains all the information relating to the lic
 [proposal regarding breaking changes]: https://github.com/tinkerbell/proposals/blob/main/proposals/0011/README.md
 [tinkerbell/docs]: https://github.com/tinkerbell/tinkerbell-docs
 [tinkerbell/.github]: https://github.com/tinkerbell/.github
+[#tinkerbell]: https://app.slack.com/client/T08PSQ7BQ/C01SRB41GMT
 [tinkerbell/hub]: https://github.com/tinkerbell/hub
 [tinkerbell/org]: https://github.com/tinkerbell/org
 [tinkerbell/proposals]: https://github.com/tinkerbell/proposals

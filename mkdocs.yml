@@ -27,7 +27,7 @@ nav:
   - Templates: templates.md
 
   - Actions:
-      - ActionHub: https://artifacthub.io/packages/search?kind=4
+      - Action Hub: https://artifacthub.io/packages/search?kind=4
       - Action Architecture: actions/action-architecture.md
       - Creating a Basic Action: actions/creating-a-basic-action.md
 

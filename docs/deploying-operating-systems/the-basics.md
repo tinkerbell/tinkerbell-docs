@@ -102,7 +102,7 @@ A number of Linux Distributions provide a root file system archive that can alre
 
 We can also make use of root file systems created by the Docker maintainers
 
-```
+```sh
 TMPRFS=$(docker container create ubuntu:latest)
 docker export $TMPRFS > rootfs.tar
 docker rm $TMPRFS

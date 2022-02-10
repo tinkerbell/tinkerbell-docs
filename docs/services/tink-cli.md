@@ -28,16 +28,15 @@ NOTE: In a real environment, every person that has access to the host and ports 
 
 You can export them as environment variables or you can run them in-line as part of the `tink` command.
 
-```
-$ export TINKERBELL_GRPC_AUTHORITY=127.0.0.1:42113
-$ export TINKERBELL_CERT_URL=http://127.0.0.1:42114/cert
+```sh
+export TINKERBELL_GRPC_AUTHORITY=127.0.0.1:42113
+export TINKERBELL_CERT_URL=http://127.0.0.1:42114/cert
 ```
 
 Now you can run `tink` commands without `docker-exec`.
 
-```
+```sh
 $ tink hardware list
->
 +----+-------------+------------+----------+
 | ID | MAC ADDRESS | IP ADDRESS | HOSTNAME |
 +----+-------------+------------+----------+
@@ -46,7 +45,7 @@ $ tink hardware list
 
 You can also test by making some hardware data.
 
-```
+```sh
 $ cat > hardware-data.json <<EOF
 {
   "id": "ce2e62ed-826f-4485-a39f-a82bb74338e2",
@@ -80,7 +79,6 @@ $ cat > hardware-data.json <<EOF
 }
 EOF
 tink hardware push < ./hardware-data.json
->
 2020/08/31 10:20:20 Hardware data pushed successfully
 ```
 
@@ -93,15 +91,15 @@ Prerequisites:
 
 SSH into the Provisioner and navigate to the directory where you have cloned the `tink` repository.
 
-```
+```sh
 ssh
 cd tink
 ```
 
 Now let's compile the binary with:
 
-```
-$ go build -o tink cmd/tink-cli/main.go
+```sh
+go build -o tink cmd/tink-cli/main.go
 ```
 
 ## Tink CLI Commands

@@ -11,14 +11,14 @@ This repository uses [MkDocs] as the documentation framework and [Poetry] to man
 Make sure to have [Python] installed.
 If you wish, you can install `mkdocs` and other dependencies to build the docs locally by running the following commands
 
-```bash
+```sh
 poetry install
 poetry run mkdocs serve
 ```
 
 If you wish to work within a development environment you can use Poetry's virtualenv environment:
 
-```bash
+```sh
 $ poetry install
 $ poetry shell
 ```
@@ -43,7 +43,7 @@ All the images for the docs are in the `images/` folder.
 To pull the image into your doc, use a relative link to the image file.
 Example:
 
-```
+```markdown
 ![Architecture]
 ```
 

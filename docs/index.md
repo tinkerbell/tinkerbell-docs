@@ -82,6 +82,8 @@ Need a little help getting started? We're here!
 [github]: https://github.com/tinkerbell
 [**hegel**]: /services/hegel
 [hello world]: /workflows/hello-world-workflow
+[**hook**]: https://github.com/tinkerbell/hook#hook
+[**image repository**]: https://hub.docker.com/_/registry
 [ipxe]: https://ipxe.org/
 [local setup with vagrant]: /setup/local-vagrant
 [**nginx**]: https://www.nginx.com/

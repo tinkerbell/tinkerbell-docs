@@ -19,7 +19,7 @@ This is a rough shopping list of skills/accounts that will be a benefit for this
 Some "finger in the air" mathematics are generally required when selecting an appropriately sized physical host.
 But if we take a quick look at the expected requirements:
 
-```
+```text
 CONTAINER ID        NAME                   CPU %               MEM USAGE / LIMIT    MEM %               NET I/O             BLOCK I/O           PIDS
 582ce8ba4cdf        deploy_tink-cli_1      0.00%               832KiB / 7.79GiB     0.01%               0B / 0B             13.1MB / 0B         1
 4aeb11684865        deploy_tink-server_1   0.00%               7.113MiB / 7.79GiB   0.09%               75.7MB / 76.6MB     4.94MB / 0B         11
@@ -70,52 +70,54 @@ For speed of deployment and modernity of the Operating System, either Ubuntu 18.
 This examples uses a `c3.small.x86` in the Amsterdam facility `ams6` with `ubuntu 20.04`.
 Once our machine is up and running, we'll need to install our required packages for running Tinkerbell and our virtual machines.
 
-1.  Update the packages.
+1. Update the packages.
 
-    ```
-    apt-get update -y
-    ```
+   ```sh
+   apt-get update -y
+   ```
 
-2.  Install the required dependencies.
+2. Install the required dependencies.
 
-        ```
-        apt-get install -y apt-transport-https \
-         ca-certificates \
-         curl \
-         gnupg-agent \
-         software-properties-common \
-         qemu-kvm \
-         libguestfs-tools \
-         libosinfo-bin \
-         git
-         jq
-        ```
+   ```sh
+   apt-get install -y \
+           apt-transport-https \
+           ca-certificates \
+           curl \
+           gnupg-agent \
+           software-properties-common \
+           qemu-kvm \
+           libguestfs-tools \
+           libosinfo-bin \
+           git \
+           jq \
+           ;
+   ```
 
-    This installation method also requires Docker and [docker-compose]:
+   This installation method also requires Docker and [docker-compose]:
 
-```
-    apt-get install -y docker.io ; \
-    curl -L "https://github.com/docker/compose/releases/download/1.28.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose ; \
-    chmod +x /usr/local/bin/docker-compose
-```
+   ```sh
+   apt-get install -y docker.io && \
+   curl -L "https://github.com/docker/compose/releases/download/1.28.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
+   chmod +x /usr/local/bin/docker-compose
+   ```
 
 3. Grab shack (QEMU wrapper).
 
-   ```
-   wget https://github.com/plunder-app/shack/releases/download/v0.0.0/shack-0.0.0.tar.gz; \
-   tar -xvzf shack-0.0.0.tar.gz; \
+   ```sh
+   wget https://github.com/plunder-app/shack/releases/download/v0.0.0/shack-0.0.0.tar.gz && \
+   tar -xvzf shack-0.0.0.tar.gz && \
    mv shack /usr/local/bin
    ```
 
 4. Create our internal Tinkerbell network (optional).
 
-   ```
+   ```sh
    sudo ip link add tinkerbell type bridge
    ```
 
 5. Create shack configuration.
 
-   ```
+   ```sh
    shack example > shack.yaml
    ```
 
@@ -128,9 +130,9 @@ Once our machine is up and running, we'll need to install our required packages 
 
 7. Test virtual machine creation.
 
-   ```
+   ```sh
    shack vm start --id f0cb3c -v
-   <...>
+   # snip 8< ...
    shack VM configuration
    Network Device:	plndrVM-f0cb3c
    VM MAC Address:	c0:ff:ee:f0:cb:3c
@@ -140,7 +142,7 @@ Once our machine is up and running, we'll need to install our required packages 
 
    We can also examine that this has worked, by examining `ip addr`:
 
-   ```
+   ```text
    11: tinkerbell: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default
        link/ether 2a:27:61:44:d2:07 brd ff:ff:ff:ff:ff:ff
        inet 192.168.1.1/24 brd 192.168.1.255 scope global plunder
@@ -158,7 +160,7 @@ Once our machine is up and running, we'll need to install our required packages 
 
    Kill the VM:
 
-   ```
+   ```sh
    shack vm stop --id f0cb3c -d
    ```
 
@@ -170,14 +172,14 @@ Once our machine is up and running, we'll need to install our required packages 
 
 9. Configure the sandbox.
 
-   ```
+   ```sh
    ./generate-envrc.sh tinkerbell > .env
    ./setup.sh
    ```
 
 10. Start Tinkerbell.
 
-    ```
+    ```sh
     cd deploy
     source ../.env; docker-compose up -d
     ```
@@ -186,7 +188,7 @@ Once our machine is up and running, we'll need to install our required packages 
 
     Resources inside the Tinkrebell will be reachable as per the below details
 
-    ```
+    ```yaml
     - webroot: TINKERBELL_IP:8080
     - webroot/misc/osie/current: TINKERBELL_IP:80
     ```
@@ -195,7 +197,7 @@ Once our machine is up and running, we'll need to install our required packages 
 
 1. Clone the Debian repository.
 
-   ```
+   ```sh
    cd $HOME
    git clone https://github.com/fransvanberckel/debian-workflow
    cd debian-workflow/debian
@@ -203,7 +205,7 @@ Once our machine is up and running, we'll need to install our required packages 
 
 2. Build the Debian content.
 
-   ```
+   ```sh
    ./verify_json_tweaks.sh
    # The JSON syntax is valid
    ./build_and_push_images.sh
@@ -220,15 +222,15 @@ Once our machine is up and running, we'll need to install our required packages 
 
    Here we will be asked for some password credentials for our new machine:
 
-   ```
+   ```sh
    ./create_tink_workflow.sh
    ```
 
 ## Start our virtual host to install on!
 
-```
+```sh
 shack vm start --id f0cb3c -v
-<...>
+# snip 8< ...
 shack VM configuration
 Network Device:	plndrVM-f0cb3c
 VM MAC Address:	c0:ff:ee:f0:cb:3c

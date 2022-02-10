@@ -26,27 +26,27 @@ It will need to be converted to a `raw` filesystem image in order to use it.
 In order to use this image, it needs to be converted into a `raw` filesystem.
 In order to do the conversion, install the `qemu-img` CLI tool.
 
-```
+```sh
 apt-get install -y qemu-utils
 ```
 
 Then, use the tool to convert the image into a `raw` filesystem.
 This example uses one of the CentOS images.
 
-```
+```sh
 qemu-img convert  ./CentOS-8-GenericCloud-8.3.2011-20201204.2.x86_64.qcow2 -O raw ./CentOS-8-GenericCloud-8.3.2011-20201204.2.x86_64.raw
 ```
 
 **Optional** - You can compress this raw image to save on both local disk space and network bandwidth when deploying the image.
 
-```
+```sh
 gzip ./CentOS-8-GenericCloud-8.3.2011-20201204.2.x86_64.raw
 ```
 
 Move the raw image to a locally accessible web server.
 To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
 
-```
+```sh
 mv ./CentOS-8-GenericCloud-8.3.2011-20201204.2.x86_64.raw.gz ./sandbox/deploy/state/webroot
 ```
 
@@ -55,7 +55,7 @@ mv ./CentOS-8-GenericCloud-8.3.2011-20201204.2.x86_64.raw.gz ./sandbox/deploy/st
 CentOS 8 is the last release and will be going EOL at the end of 2021, but following the acquisition of CoreOS by Red Hat, they distribute an additional operating system called Fedora CoreOS.
 It is available at [Get Fedora], and distributed in both `raw` and `qcow2` format.
 
-```
+```sh
 fedora-coreos-33.20210217.3.0-metal.x86_64.qcow2.xz
 fedora-coreos-33.20210217.3.0-metal.x86_64.raw.xz
 ```
@@ -63,7 +63,7 @@ fedora-coreos-33.20210217.3.0-metal.x86_64.raw.xz
 Both images come with compressed with the `xz` compression format.
 You can decompress these image with the `xz` command.
 
-```
+```sh
 xz -d <file.xz>
 ```
 
@@ -83,7 +83,7 @@ The template uses actions from the [Artifact Hub].
 
 The example template uses the CentOS images, but you can modify it for other the other distributions such as RHEL or Fedora CoreOS.
 
-```
+```yaml
 version: '0.1'
 name: CentOS_Deployment
 global_timeout: 1800
@@ -118,7 +118,7 @@ We can easily make use of the **official** docker images to generate a root file
 
 ### Downloading the CentOS Image
 
-```
+```sh
 TMPRFS=$(docker container create centos:8)
 docker export $TMPRFS > centos_rootfs.tar
 docker rm $TMPRFS
@@ -126,14 +126,14 @@ docker rm $TMPRFS
 
 **Optional** - You can compress this filesystem archive to save on both local disk space and network bandwidth when deploying the image.
 
-```
+```sh
 gzip ./centos_rootfs.tar
 ```
 
 Move the raw image to a locally accessible web server.
 To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
 
-```
+```sh
 mv ./centos_rootfs.tar.gz ./sandbox/deploy/state/webroot
 ```
 
@@ -146,7 +146,7 @@ The template makes use of the actions from the artifact hub.
 - [cexec] - to run commands inside (chroot) our newly provisioned operating system.
 - [kexec] - to `kexec` into our newly provisioned operating system.
 
-```
+```yaml
 version: '0.1'
 name: debian_bullseye_provisioning
 global_timeout: 1800
@@ -204,7 +204,7 @@ We can easily make use of the **official** docker images to generate a root file
 
 ### Download the RHEL Image
 
-```
+```sh
 TMPRFS=$(docker container create registry.access.redhat.com/rhel7:latest)
 docker export $TMPRFS > rhel_rootfs.tar
 docker rm $TMPRFS
@@ -212,14 +212,14 @@ docker rm $TMPRFS
 
 **Optional** - You can compress this filesystem archive to save on both local disk space and network bandwidth when deploying the image.
 
-```
+```sh
 gzip ./rhel_rootfs.tar
 ```
 
 Move the raw image to a locally accessible web server.
 To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
 
-```
+```sh
 mv ./rhel_rootfs.tar.gz ./sandbox/deploy/state/webroot
 ```
 
@@ -232,7 +232,7 @@ The template makes use of the actions from the artifact hub.
 - [cexec] - to run commands inside (chroot) our newly provisioned operating system.
 - [kexec] - to `kexec` into our newly provisioned operating system.
 
-```
+```yaml
 version: '0.1'
 name: debian_bullseye_provisioning
 global_timeout: 1800

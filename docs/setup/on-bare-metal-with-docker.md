@@ -38,13 +38,13 @@ At time of writing it is v0.5.0.
 
 ### git clone
 
-```
+```sh
 git clone https://github.com/tinkerbell/sandbox.git
 ```
 
 ### archive download
 
-```
+```sh
 ORG_NAME=tinkerbell
 REPO_NAME=sandbox
 LATEST_VERSION=$(curl -s https://api.github.com/repos/${ORG_NAME}/${REPO_NAME}/releases/latest | grep "tag_name" | cut -d'v' -f2 | cut -d'"' -f1)
@@ -61,7 +61,7 @@ Tinkerbell is under development, but we guarantee as best as we can that tags ar
 
 The sandbox sets up Tinkerbell using the `setup.sh` script. `setup.sh` relies on a `.env` file that can be generated running the command:
 
-```
+```sh
 ./generate-env.sh <network-interface> > .env
 ```
 
@@ -134,40 +134,42 @@ export TINKERBELL_CIDR="24"
 
 The `setup.sh` script does a bunch of manipulation to your local environment, so first we need to install the required dependencies:
 
-=== "Ubuntu"
+### Ubuntu
 
-    ```console
-    sudo apt-get update
-    sudo apt-get install -y apt-transport-https \
-        ca-certificates \
-        curl \
-        gnupg-agent \
-        ifupdown \
-        jq \
-        software-properties-common \
-        git
+```sh
+sudo apt-get update
+sudo apt-get install -y \
+	apt-transport-https \
+	ca-certificates \
+	curl \
+	git \
+	gnupg-agent \
+	ifupdown \
+	jq \
+	software-properties-common \
+	;
 
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-    sudo apt-get update
-    sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
-    sudo curl -L \
-    "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" \
-    -o /usr/local/bin/docker-compose
-    sudo chmod +x /usr/local/bin/docker-compose
-    ```
+sudo curl -L \
+	"https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" \
+	-o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+```
 
-=== "CentOS"
+### CentOS
 
-    ```console
-    sudo yum install -y yum-utils jq ifupdown iproute
-    sudo yum-config-manager \
-        --add-repo \
-        https://download.docker.com/linux/centos/docker-ce.repo
-    yum install docker-ce docker-ce-cli containerd.io
-    sudo systemctl start docker
-    ```
+```sh
+sudo yum install -y yum-utils jq ifupdown iproute
+sudo yum-config-manager \
+	--add-repo \
+	https://download.docker.com/linux/centos/docker-ce.repo
+yum install docker-ce docker-ce-cli containerd.io
+sudo systemctl start docker
+```
 
 ## Run the Setup Script
 
@@ -187,20 +189,20 @@ Now to execute `setup.sh`.
 
 Load the configuration file:
 
-```
+```sh
 source ./.env
 ```
 
 and run it:
 
-```
+```sh
 sudo ./setup.sh
 ```
 
 At the end of the command you have everything you need to start up the Tinkerbell
 Provisioner Stack and we use docker-compose for that.
 
-```
+```sh
 cd deploy
 docker-compose up -d
 ```

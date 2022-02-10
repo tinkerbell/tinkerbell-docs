@@ -26,7 +26,7 @@ The workflow will have a single task that will have a single action.
 Actions are stored as images in an image repository either locally or remotely.
 For this example, pull down the `hello-world` image from Docker to host it locally in the Docker registry on the Provisioner.
 
-```bash
+```sh
 docker pull hello-world
 docker tag hello-world <registry-host>/hello-world
 docker push <registry-host>/hello-world
@@ -66,8 +66,8 @@ You can now use the hardware data and the template to create a workflow.
 You need two pieces of information.
 The MAC Address or IP Address of your Worker as specified in the hardware data and the Template ID that is returned from the `tink template create` command.
 
-```bash
-tink workflow create -t <template_id> -r '{"device_1": "<MAC address/IP address>"}'
+```sh
+tink workflow create -t $TEMPLATE_ID -r '{"device_1": "<MAC address/IP address>"}'
 ```
 
 ## Workflow Execution
@@ -80,9 +80,8 @@ You can now boot up or restart your Worker and a few things are going to happen:
 
 While the workflow execution does not have much effect on the state of the Worker, you can check that the workflow was successfully executed from the `tink workflow events` command.
 
-```
-tink workflow events <ID>
->
+```sh
+tink workflow events $ID
 +--------------------------------------+-------------+-------------+----------------+---------------------------------+--------------------+
 | WORKER ID                            | TASK NAME   | ACTION NAME | EXECUTION TIME | MESSAGE                         |      ACTION STATUS |
 +--------------------------------------+-------------+-------------+----------------+---------------------------------+--------------------+

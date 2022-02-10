@@ -22,10 +22,10 @@ The HTTP server runs on port `:42114` and you can change it as well using the en
 `tink-server` uses the standard Golang toolchain.
 You can clone the `tink` repository:
 
-```
-$ git clone git@github.com:tinkerbell/tink
-$ go run cmd/tink-server/main.go
-$ ./tink-server
+```sh
+git clone git@github.com:tinkerbell/tink
+go run cmd/tink-server/main.go
+./tink-server
 ```
 
 ## Future Development
