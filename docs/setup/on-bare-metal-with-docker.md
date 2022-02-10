@@ -136,7 +136,7 @@ The `setup.sh` script does a bunch of manipulation to your local environment, so
 
 === "Ubuntu"
 
-    ``` terminal
+    ```console
     sudo apt-get update
     sudo apt-get install -y apt-transport-https \
         ca-certificates \
@@ -160,7 +160,7 @@ The `setup.sh` script does a bunch of manipulation to your local environment, so
 
 === "CentOS"
 
-    ``` terminal
+    ```console
     sudo yum install -y yum-utils jq ifupdown iproute
     sudo yum-config-manager \
         --add-repo \
