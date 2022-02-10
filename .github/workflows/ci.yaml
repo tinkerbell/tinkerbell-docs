@@ -1,0 +1,32 @@
+name: For each commit and PR
+on:
+  push:
+  pull_request:
+
+jobs:
+  validation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Install Deps
+        run: |
+          npm install --global hyperlink@5.0.4
+          pip install poetry
+
+      - name: Run Checks
+        run: make test
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Install Deps
+        run: |
+          pip install poetry
+
+      - name: Build the site
+        run: make build
