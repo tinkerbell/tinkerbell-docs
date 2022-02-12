@@ -5,9 +5,10 @@ date: 2021-04-02
 
 # Deploying Ubuntu from Packer Machine Image
 
-This guide will walk you through how you create a minimalistic raw Ubuntu image using [Packer](https://www.packer.io/), an awesome tool to build automated machine images. 
+This guide will walk you through how you create a minimalistic raw Ubuntu image using [Packer], an awesome tool to build automated machine images.
 
-Currently, Packer does not officially provide a way to make bare metal machine images. So, in this example, we will use `virtualbox-iso` builder to create a Virtual Machine Disk (VDMK) and then convert it to a raw image.
+Currently, Packer does not officially provide a way to make bare metal machine images.
+So, in this example, we will use `virtualbox-iso` builder to create a Virtual Machine Disk (VDMK) and then convert it to a raw image.
 
 The raw image can then be deployed on a bare metal server using Tinkerbell.
 
@@ -15,11 +16,12 @@ The raw image can then be deployed on a bare metal server using Tinkerbell.
 
 Below are the preseed file and the config file for creating a minimalistic Ubuntu 20.04 image.
 
-When building an image using `virtualbox-iso`, the [preseed file](https://www.packer.io/guides/automatic-operating-system-installs/preseed_ubuntu) will help with automating the deployment. It is placed inside the `http` directory, and the config file references the location of the preseed file in the `boot_command` list of the `builders` object.
+When building an image using `virtualbox-iso`, the [preseed file] will help with automating the deployment.
+It is placed inside the `http` directory, and the config file references the location of the preseed file in the `boot_command` list of the `builders` object.
 
-- `pressed.cfg`
+### pressed.cfg
 
-```
+```text
 choose-mirror-bin mirror/http/proxy string
 d-i base-installer/kernel/override-image string linux-server
 d-i clock-setup/utc boolean true
@@ -64,9 +66,9 @@ d-i passwd/user-uid string 900
 
 In config file, the builder type is set to `virtualbox-iso` to generate the VMDK and the post-processor type is set to `compress` to generate a `tar` file.
 
-- `config.json`
+### config.json
 
-```
+```json
 {
   "builders": [
     {
@@ -114,11 +116,12 @@ In config file, the builder type is set to `virtualbox-iso` to generate the VMDK
 }
 ```
 
-Both files are reference files, if you wish to modify something, you can make the changes accordingly. The steps to generate the image will remain the same.
+Both files are reference files, if you wish to modify something, you can make the changes accordingly.
+The steps to generate the image will remain the same.
 
 The files will need to be placed in the directory structure of the Packer image builder.
 
-```
+```text
 ubuntu_packer_image
 ├── http
 │   └── preseed.cfg
@@ -127,9 +130,9 @@ ubuntu_packer_image
 
 ## Generating the VMDK
 
-Run `packer build` to generate the VMDK and `tar` file. 
+Run `packer build` to generate the VMDK and `tar` file.
 
-```
+```sh
 PACKER_LOG=1 packer build config.json
 ```
 
@@ -139,38 +142,42 @@ When you run `packer build` with the example config file, the VMDK will be insid
 
 ## Converting the Image
 
-Currently, the raw image can not be built directly from `virtualbox-iso` builder, so we will convert and then compress it. (If you are using `qemu` builder type instead of the `virtualbox-iso` builder, then you can skip the conversion step as Packer lets you directly create a raw image.)
+Currently, the raw image can not be built directly from `virtualbox-iso` builder, so we will convert and then compress it.
+Note, if you are using `qemu` builder type instead of the `virtualbox-iso` builder, then you can skip the conversion step as Packer lets you directly create a raw image.
 
 First, get the `qemu-img` CLI tool.
 
-```
+```sh
 apt-get install -y qemu-utils
 ```
 
 Then use the tool to convert the VMDK into a `raw` filesystem.
 
-```
+```sh
 qemu-img convert -f vmdk -o raw output-virtualbox-iso/packer-ubuntu-64-20.04-disk001.vmdk test_packer.raw
 ```
 
 Once you have a `raw` filesystem image, you can compress the raw image.
 
-```
+```sh
 gzip test_packer.raw
 ```
 
-The result is a `test_packer.raw.gz` file which can now be deployed on Tinkerbell. You can also use the `raw` file `test_packer.raw` directly, the benefit of having the compressed file is that it will be streamed over the network in less time.
+The result is a `test_packer.raw.gz` file which can now be deployed on Tinkerbell.
+You can also use the `raw` file `test_packer.raw` directly, the benefit of having the compressed file is that it will be streamed over the network in less time.
 
 ## Creating a Template
 
-Below is a reference file for creating a Template using above Ubuntu Packer image. This section is similar to the other examples we have in the `Deploying Operating systems` section. You can follow them for more references.
+Below is a reference file for creating a Template using above Ubuntu Packer image.
+This section is similar to the other examples we have in the `Deploying Operating systems` section.
+You can follow them for more references.
 
-The template uses actions from the [artifact.io](https://artifact.io) hub.
+The template uses actions from the [Artifact Hub].
 
-- [image2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) - to write the OS image to a block device.
-- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
+- [image2disk] - to write the OS image to a block device.
+- [kexec] - to `kexec` into our newly provisioned operating system.
 
-```
+```yaml
 version: "0.1"
 name: Ubuntu_20_04
 global_timeout: 1800
@@ -197,3 +204,9 @@ tasks:
           BLOCK_DEVICE: /dev/sda1
             FS_TYPE: ext4
 ```
+
+[artifact hub]: https://artifacthub.io/packages/search?kind=4
+[image2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk
+[kexec]: https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec
+[packer]: https://www.packer.io/
+[preseed file]: https://www.packer.io/guides/automatic-operating-system-installs/preseed_ubuntu

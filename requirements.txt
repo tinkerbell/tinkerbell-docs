@@ -1,6 +1,8 @@
+markdown>=3.2
+mdx_truly_sane_lists
 mkdocs>=1.1
 mkdocs-material>=5.0
-Pygments>=2.4
-markdown>=3.2
-pymdown-extensions>=7.0
 mkdocs-versioning>=0.3
+poetry
+pygments>=2.4
+pymdown-extensions>=7.0

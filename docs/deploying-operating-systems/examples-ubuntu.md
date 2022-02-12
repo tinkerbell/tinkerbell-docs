@@ -9,52 +9,54 @@ This guide walks through the process of deploying Ubuntu from either an operatin
 
 ## Using an Operating System Image
 
-Ubuntu is distributed in a number of different formats, which are all available on the `cloud-images` web site: [https://cloud-images.ubuntu.com/daily/server/focal/current/](https://cloud-images.ubuntu.com/daily/server/focal/current/). 
+Ubuntu is distributed in a number of different formats, which are all available on the [cloud-images] site.
 
 This example uses the image with the `.img` extension.
 
-```
+```text
 focal-server-cloudimg-amd64.img     2021-03-11 22:27  528M  Ubuntu Server 20.04 LTS (Focal Fossa) daily builds
 ```
 
 This image is actually a `qcow2` filesystem image and is a **full** disk image including partition tables, partitions filled with filesystems and the files, and importantly, a boot loader at the beginning of the disk image.
-   
-### Converting Image 
 
-In order to use this image, it needs to be converted into a `raw` filesystem. In order to do the conversion, install the `qemu-img` CLI tool.
+### Converting Image
 
-```
+In order to use this image, it needs to be converted into a `raw` filesystem.
+In order to do the conversion, install the `qemu-img` CLI tool.
+
+```sh
 apt-get install -y qemu-utils
 ```
 
 Then, use the tool to convert the image into a `raw` filesystem.
 
-```
+```sh
 qemu-img convert  ./focal-server-cloudimg-amd64.img -O raw ./focal-server-cloudimg-amd64.raw
 ```
 
 **Optional** - You can compress this raw image to save on both local disk space and network bandwidth when deploying the image.
 
-```
+```sh
 gzip ./focal-server-cloudimg-amd64.raw
 ```
 
-Move the raw image to a locally accessible web server. To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
+Move the raw image to a locally accessible web server.
+To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
 
-```
+```sh
 mv ./focal-server-cloudimg-amd64.raw ./sandbox/deploy/state/webroot`
 ```
 
 ### Creating the Template
 
-The template uses [actions](https://github.com/artifacthub/hub/blob/master/docs/metadata/artifacthub-pkg.yml) from the [artifacthub.io](https://artifacthub.io).
+The template uses [actions] from the [Artifact Hub].
 
-- [image2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk) - to write the OS image to a block device.
-- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system.
+- [image2disk] - to write the OS image to a block device.
+- [kexec] - to `kexec` into our newly provisioned operating system.
 
 > Important: Don't forget to pull, tag, and push `quay.io/tinkerbell-actions/image2disk:v1.0.0` prior to using it.
 
-```
+```yaml
 version: "0.1"
 name: Ubuntu_Focal
 global_timeout: 1800
@@ -84,13 +86,14 @@ tasks:
 
 ### File System Images
 
-Note that it is also possible to install Ubuntu from the compressed filesystem image. 
+Note that it is also possible to install Ubuntu from the compressed filesystem image.
 
-```
+```text
 focal-server-cloudimg-amd64.tar.gz  2021-03-11 22:30  485M  File system image and Kernel packed
 ```
 
-This filesystem image is typically an `ext4` filesystem that contains all of the files in a partition for Ubuntu to run. However, in order for us to use this image we would need to:
+This filesystem image is typically an `ext4` filesystem that contains all of the files in a partition for Ubuntu to run.
+However, in order for us to use this image we would need to:
 
 - Partition the disk
 - Write this data to the partition
@@ -104,7 +107,7 @@ We can easily make use of the **official** Docker images to generate a root file
 
 ### Downloading the Image
 
-```
+```sh
 TMPRFS=$(docker container create ubuntu:latest)
 docker export $TMPRFS > ubuntu_rootfs.tar
 docker rm $TMPRFS
@@ -112,13 +115,14 @@ docker rm $TMPRFS
 
 **Optional** - You can compress this raw image to save on both local disk space and network bandwidth when deploying the image.
 
-```
+```sh
 gzip ./ubuntu_rootfs.tar
 ```
 
-Move the raw image to a locally accessible web server. To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`. 
+Move the raw image to a locally accessible web server.
+To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
 
-```
+```sh
 mv ./ubuntu_rootfs.tar.gz ./sandbox/deploy/state/webroot
 ```
 
@@ -126,12 +130,12 @@ mv ./ubuntu_rootfs.tar.gz ./sandbox/deploy/state/webroot
 
 The template makes use of the actions from the artifact hub.
 
-- [rootio](https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio) - to partition our disk and make filesystems.
-- [archive2disk](https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk) - to write the OS image to a block device.
-- [cexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/cexec) - to run commands inside (chroot) our newly provisioned operating system.
-- [kexec](https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec) - to `kexec` into our newly provisioned operating system. 
+- [rootio] - to partition our disk and make filesystems.
+- [archive2disk] - to write the OS image to a block device.
+- [cexec] - to run commands inside (chroot) our newly provisioned operating system.
+- [kexec] - to `kexec` into our newly provisioned operating system.
 
-```
+```yaml
 version: "0.1"
 name: ubuntu_provisioning
 global_timeout: 1800
@@ -179,3 +183,12 @@ tasks:
 		  BLOCK_DEVICE: /dev/sda3
 		  FS_TYPE: ext4
 ```
+
+[actions]: https://github.com/artifacthub/hub/blob/master/docs/metadata/artifacthub-pkg.yml
+[archive2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk
+[artifact hub]: https://artifacthub.io/packages/search?kind=4
+[cexec]: https://artifacthub.io/packages/tbaction/tinkerbell-community/cexec
+[cloud-images]: https://cloud-images.ubuntu.com/daily/server/focal/current/
+[image2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk
+[kexec]: https://artifacthub.io/packages/tbaction/tinkerbell-community/kexec
+[rootio]: https://artifacthub.io/packages/tbaction/tinkerbell-community/rootio
