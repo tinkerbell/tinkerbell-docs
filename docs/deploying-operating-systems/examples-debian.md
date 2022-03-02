@@ -226,7 +226,6 @@ tasks:
 	  - /dev/console:/dev/console
 	  - /lib/firmware:/lib/firmware:ro
 	actions:
-	  actions:
 	  - name: "disk-wipe-partition"
 		image: quay.io/tinkerbell-actions/rootio:v1.0.0
 		timeout: 90
