@@ -50,7 +50,7 @@ REPO_NAME=sandbox
 LATEST_VERSION=$(curl -s https://api.github.com/repos/${ORG_NAME}/${REPO_NAME}/releases/latest | grep "tag_name" | cut -d'v' -f2 | cut -d'"' -f1)
 curl -L -o ${REPO_NAME}.tar.gz https://github.com/${ORG_NAME}/${REPO_NAME}/archive/v${LATEST_VERSION}.tar.gz
 tar xf sandbox.tar.gz
-cd sandbox-<version> # something like sandbox-0.5.0
+cd sandbox-${LATEST_VERSION}
 ```
 
 In this case we are using the latest sandbox release that today is [v0.4.0].
