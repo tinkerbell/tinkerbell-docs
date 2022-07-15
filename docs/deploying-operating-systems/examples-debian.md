@@ -188,17 +188,18 @@ RUN apt-get update && apt-get install -y grml-debootstrap
 ENTRYPOINT ["grml-debootstrap", "--target", "/dev/sda3", "--grub", "/dev/sda"]
 ```
 
-Now create an action image from our Dockerfile.
+Now create an action image from our Dockerfile and push it to registry.
 
 ```sh
-docker build -t local-registry/debian:example .
+docker build -t local-registry/debian:bootstrap .
+docker push local-registry/debian:bootstrap
 ```
 
 Once the new action is pushed to the local registry, it can be used as an action in a template.
 
 ```yaml
 actions:
-  - name: "expand ubuntu filesystem to root"
+  - name: "expand Debian filesystem to root"
     image: local-registry/debian:bootstrap
     timeout: 90
 ```
@@ -225,7 +226,6 @@ tasks:
 	  - /dev/console:/dev/console
 	  - /lib/firmware:/lib/firmware:ro
 	actions:
-	  actions:
 	  - name: "disk-wipe-partition"
 		image: quay.io/tinkerbell-actions/rootio:v1.0.0
 		timeout: 90
@@ -238,7 +238,7 @@ tasks:
 		command: ["format"]
 		environment:
 			MIRROR_HOST: 192.168.1.2
-	  - name: "expand ubuntu filesystem to root"
+	  - name: "expand Debian filesystem to root"
 		image: local-registry/debian:bootstrap
 		timeout: 90
 	  - name: "kexec-debian"
