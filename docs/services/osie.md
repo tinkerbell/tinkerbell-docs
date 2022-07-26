@@ -22,7 +22,7 @@ Right now we ship our one [OSIE] but you can build your own or modify the operat
 
 ## When You See OSIE
 
-If you follow the [Local Setup with Vagrant] tutorial you encounter OSIE at the section "Start the Worker".
+If you follow the Local Setup with Vagrant tutorial you encounter OSIE at the section "Start the Worker".
 
 At that time the Worker has netbooted and Boots has pushed OSIE to the Worker, the workflow has started, and the Worker does not have an operating system yet.
 
@@ -90,5 +90,4 @@ If you are writing your own operating system installation environment, there are
 [tink]: https://github.com/tinkerbell/tink
 [tink-server]: /services/tink-server
 [tink-worker]: /services/tink-worker
-[local setup with vagrant]: /setup/local-vagrant
 [workflow]: /workflows/working-with-workflows
