@@ -30,7 +30,7 @@ You can also retrieve a AWS EC2 compatible format uses from `/meta-data`.
 curl $HEGEL_IP:50061/<date>/meta-data
 ```
 
-For example, if you are using the [Local Setup with Vagrant], Hegel runs as part of the Provisioner virtual machine with the IP: `192.168.1.1`.
+For example, if you are using the Local Setup with Vagrant, Hegel runs as part of the Provisioner virtual machine with the IP: `192.168.1.1`.
 When the Worker starts and if you have logged in to [hook] using the password `root` you can access the metadata for your server via `curl`:
 
 ```sh
@@ -66,4 +66,3 @@ Some examples are:
 [gcp: storing and retrieving instance metadata]: https://cloud.google.com/compute/docs/metadata/overview
 [hook]: /services/osie
 [tinkerbell/hegel]: https://github.com/tinkerbell/hegel
-[local setup with vagrant]: /setup/local-vagrant

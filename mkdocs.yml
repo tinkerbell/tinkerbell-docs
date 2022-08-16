@@ -31,12 +31,7 @@ nav:
       - Action Architecture: actions/action-architecture.md
       - Creating a Basic Action: actions/creating-a-basic-action.md
 
-  - Setting Up Tinkerbell:
-      - Local Setup with Vagrant: setup/local-vagrant.md
-      - Extending the Vagrant Setup: setup/extending-vagrant.md
-      - Equinix Metal Setup with Terraform: setup/equinix-metal-terraform.md
-      - Bare Metal or Equinix Metal with QEMU: setup/using-qemu.md
-      - On bare metal with Docker: setup/on-bare-metal-with-docker.md
+  - Setting Up Tinkerbell: setup.md
 
   - Deploying Operating Systems:
       - The Basics: deploying-operating-systems/the-basics.md

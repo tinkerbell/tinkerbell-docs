@@ -6,7 +6,6 @@ date: 2020-07-06
 # The Tinkerbell Docs
 
 Everything you need to know about Tinkerbell and its major component microservices.
-​
 
 ## What is Tinkerbell?
 
@@ -59,10 +58,9 @@ In addition to the microservices, there are three pieces of infrastructure:
 
 ## First Steps
 
-​New to Tinkerbell or bare metal provisioning? This is a great place to start!
+New to Tinkerbell or bare metal provisioning? This is a great place to start!
 
-- Getting Started - Set up Tinkerbell following either of the [Local Setup with Vagrant] or [Equinix Metal Setup with Terraform] guides.
-- Run the [hello world] workflow to see Tinkerbell in action.​
+- Getting Started - [Setting Up Tinkerbell].
 
 ## Get Help
 
@@ -77,7 +75,6 @@ Need a little help getting started? We're here!
 [cncf community slack]: https://slack.cncf.io/
 [contributors' page]: https://tinkerbell.org/community/contributors/
 [docker hub]: https://hub.docker.com/
-[equinix metal setup with terraform]: /setup/equinix-metal-terraform
 [faqs]: https://tinkerbell.org/faq/
 [github]: https://github.com/tinkerbell
 [**hegel**]: /services/hegel
@@ -85,12 +82,12 @@ Need a little help getting started? We're here!
 [**hook**]: https://github.com/tinkerbell/hook#hook
 [**image repository**]: https://hub.docker.com/_/registry
 [ipxe]: https://ipxe.org/
-[local setup with vagrant]: /setup/local-vagrant
 [**nginx**]: https://www.nginx.com/
 [**osie**]: /services/osie
 [**pbnj**]: https://github.com/tinkerbell/pbnj
 [**postgresql**]: https://www.postgresql.org/
 [quay]: https://quay.io/
+[Setting Up Tinkerbell]: setup.md
 [tink-cli]: /services/tink-cli
 [**tink**]: https://github.com/tinkerbell/tink
 [tink-server]: /services/tink-server
