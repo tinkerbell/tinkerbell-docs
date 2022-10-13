@@ -29,7 +29,7 @@ The Tinkerbell stack consists of several microservices, and a grpc API:
 - [**Hegel**] is the metadata service used by Tinkerbell and Hook.
   It collects data from both and transforms it into a JSON format to be consumed as metadata.
 
-- [**Hook**] is Tinkerbell's default an in-memory installation environment for bare metal. Executes workflow tasks that result in a provisioned machine.
+- [**Hook**] is Tinkerbell's default in-memory installation environment for bare metal. Hook executes workflow tasks that result in a provisioned machine.
 
 - [**PBnJ**] is an optional microservice that can communicate with baseboard management controllers (BMCs) to control power and boot settings.
 
