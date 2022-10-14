@@ -1,6 +1,5 @@
 ---
 title: Home
-date: 2020-07-06
 ---
 
 # The Tinkerbell Docs
@@ -63,7 +62,7 @@ Need a little help getting started? We're here!
 [**tink**]: https://github.com/tinkerbell/tink
 [**nginx**]: https://www.nginx.com/
 [**pbnj**]: https://github.com/tinkerbell/pbnj
-[**hook**]: https://github.com/tinkerbell/hook#hook
+[**hook**]: /services/hook
 [**image repository**]: https://hub.docker.com/_/registry
 [**hegel**]: /services/hegel
 [**rufio**]: https://github.com/tinkerbell/rufio
