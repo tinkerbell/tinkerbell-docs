@@ -5,10 +5,8 @@ date: 2020-08-31
 
 # Hegel
 
-Hegel is Tinkerbell's metadata store, supporting storage and retrieval of metadata over gRPC and HTTP.
-It also provides a compatible layer with the AWS EC2 metadata format.
-
-Metadata is user-defined as part of the hardware data that makes up a workflow.
+Hegel is Tinkerbell's metadata store that can be used during common provisioning processes such as cloud-init.
+Metadata is exposed over HTTP and sources from various fields on the [`Hardware`] custom resource. 
 
 Take a look at the code in the [tinkerbell/hegel] GitHub repository.
 
@@ -64,5 +62,6 @@ Some examples are:
 [aws: instance metadata and user data]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
 [equinix metal: metadata]: https://metal.equinix.com/developers/docs/servers/metadata/
 [gcp: storing and retrieving instance metadata]: https://cloud.google.com/compute/docs/metadata/overview
-[hook]: /services/osie
+[hook]: /services/hook
 [tinkerbell/hegel]: https://github.com/tinkerbell/hegel
+[`hardware`]: https://github.com/tinkerbell/tink/blob/main/config/crd/bases/tinkerbell.org_hardware.yaml

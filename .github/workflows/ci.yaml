@@ -15,6 +15,10 @@ jobs:
           npm install --global hyperlink@5.0.4
           pip install poetry
 
+          # Install gnome-keyring to get around a funky dependency.
+          # https://github.com/Foundry376/Mailspring/issues/681
+          sudo apt-get install gnome-keyring
+
       - name: Run Checks
         run: make test
 
@@ -27,6 +31,10 @@ jobs:
       - name: Install Deps
         run: |
           pip install poetry
+
+          # Install gnome-keyring to get around a funky dependency.
+          # https://github.com/Foundry376/Mailspring/issues/681
+          sudo apt-get install gnome-keyring
 
       - name: Build the site
         run: make build

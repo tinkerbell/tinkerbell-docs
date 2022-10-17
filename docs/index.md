@@ -1,6 +1,5 @@
 ---
 title: Home
-date: 2020-07-06
 ---
 
 # The Tinkerbell Docs
@@ -17,36 +16,25 @@ Interested in contributing? Check out our [Contributors' Page].
 
 The Tinkerbell stack consists of several microservices, and a grpc API:
 
-- [**Tink**] -
-  Tink is the short-hand name for the [tink-server], [tink-worker], and [tink-cli].
+- [**Tink**] is the short-hand name for the [tink-server], [tink-worker] and [tink-controller].
   `tink-worker` and `tink-server` communicate over gRPC, and are responsible for processing workflows.
-  The CLI is the user-interactive piece for creating workflows and their building blocks, templates and hardware data.
+  `tink-controller` is a Kubernetes controller that resolves custom resources representing workflow execution.
 
-- [**Boots**] -
-  Boots is Tinkerbell's DHCP server.
+- [**Boots**] is Tinkerbell's DHCP server.
   It handles DHCP requests, hands out IPs, and serves up [iPXE].
   It uses the Tinkerbell client to pull and push hardware data.
   It only responds to a predefined set of MAC addresses so it can be deployed in an existing network without interfering with existing DHCP infrastructure.
 
-- [**Hegel**] -
-  Hegel is the metadata service used by Tinkerbell and OSIE.
+- [**Hegel**] is the metadata service used by Tinkerbell and Hook.
   It collects data from both and transforms it into a JSON format to be consumed as metadata.
 
-- [**OSIE**] -
-  OSIE is Tinkerbell's default an in-memory installation environment for bare metal.
-  It installs operating systems and handles deprovisioning.
+- [**Hook**] is Tinkerbell's default in-memory installation environment for bare metal. Hook executes workflow tasks that result in a provisioned machine.
 
-- [**Hook**] -
-  An alternative to OSIE, it's the next iteration of the in-memory installation environment to handle operating system installation and deprovisioning.
+- [**PBnJ**] is an optional microservice that can communicate with baseboard management controllers (BMCs) to control power and boot settings.
 
-- [**PBnJ**] -
-  PBnJ is an optional microservice that can communicate with baseboard management controllers (BMCs) to control power and boot settings.
+- [**Rufio**] is an optional Kubernetes controller that facilitates baseboard management controller interactions. It operates similarly to PBnJ but has a Kubernetes focused API.
 
 In addition to the microservices, there are three pieces of infrastructure:
-
-- [**PostgreSQL**] -
-  Tinkerbell uses PostgreSQL as its data store.
-  PostgreSQL is a free and open-source relational database management system, and it stores Tinkerbell's hardware data, templates, and workflows.
 
 - [**Image Repository**] -
   Tinkerbell uses a local image repository to store all of the action images used in a workflow.
@@ -58,9 +46,7 @@ In addition to the microservices, there are three pieces of infrastructure:
 
 ## First Steps
 
-New to Tinkerbell or bare metal provisioning? This is a great place to start!
-
-- Getting Started - [Setting Up Tinkerbell].
+New to Tinkerbell or bare metal provisioning? Visit the [sandbox] for functional examples that illustrate Tinkerbell stack deployment.
 
 ## Get Help
 
@@ -71,25 +57,25 @@ Need a little help getting started? We're here!
   Look for the [#tinkerbell] channel.
 - Submit an issue on [Github].
 
+
 [**boots**]: /services/boots
+[**tink**]: https://github.com/tinkerbell/tink
+[**nginx**]: https://www.nginx.com/
+[**pbnj**]: https://github.com/tinkerbell/pbnj
+[**hook**]: /services/hook
+[**image repository**]: https://hub.docker.com/_/registry
+[**hegel**]: /services/hegel
+[**rufio**]: https://github.com/tinkerbell/rufio
+
 [cncf community slack]: https://slack.cncf.io/
 [contributors' page]: https://tinkerbell.org/community/contributors/
 [docker hub]: https://hub.docker.com/
 [faqs]: https://tinkerbell.org/faq/
 [github]: https://github.com/tinkerbell
-[**hegel**]: /services/hegel
-[hello world]: /workflows/hello-world-workflow
-[**hook**]: https://github.com/tinkerbell/hook#hook
-[**image repository**]: https://hub.docker.com/_/registry
 [ipxe]: https://ipxe.org/
-[**nginx**]: https://www.nginx.com/
-[**osie**]: /services/osie
-[**pbnj**]: https://github.com/tinkerbell/pbnj
-[**postgresql**]: https://www.postgresql.org/
 [quay]: https://quay.io/
-[Setting Up Tinkerbell]: setup.md
 [tink-cli]: /services/tink-cli
-[**tink**]: https://github.com/tinkerbell/tink
 [tink-server]: /services/tink-server
 [tink-worker]: /services/tink-worker
 [#tinkerbell]: https://app.slack.com/client/T08PSQ7BQ/C01SRB41GMT
+[sandbox]: https://github.com/tinkerbell/sandbox
