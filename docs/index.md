@@ -74,7 +74,6 @@ Need a little help getting started? We're here!
 [github]: https://github.com/tinkerbell
 [ipxe]: https://ipxe.org/
 [quay]: https://quay.io/
-[tink-cli]: /services/tink-cli
 [tink-server]: /services/tink-server
 [tink-worker]: /services/tink-worker
 [#tinkerbell]: https://app.slack.com/client/T08PSQ7BQ/C01SRB41GMT
