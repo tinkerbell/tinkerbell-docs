@@ -23,6 +23,17 @@ The iPXE script tells the Worker to download and boot an in-memory operating sys
 From there you are inside an OS and you can do what you like, the most common action is to partition your hard drive and installing the actual operating system.
 Tinkerbell abstracts those actions with the concept of a workflow.
 
+## Configuring an image registry requiring authentication
+
+When using a registry requiring authentication Boots must be configured with the registry credentials so it can pass
+them to Hook. The 3 required environment variables for authenticated registry access are:
+
+```sh
+DOCKER_REGISTRY: $TINKERBELL_HOST_IP
+REGISTRY_USERNAME: $TINKERBELL_REGISTRY_USERNAME
+REGISTRY_PASSWORD: $TINKERBELL_REGISTRY_PASSWORD
+```
+
 ## Other Resources
 
 One of the core concepts behind Tinkerbell is network booting.
