@@ -43,10 +43,7 @@ nav:
 
   - Troubleshooting: troubleshooting.md
 
-  - Contribute:
-      - Welcome: contrib/index.md
-      - Triage: contrib/triage.md
-      - Contributing to Tink: contrib/tink.md
+  - Contribute: contrib/index.md
 
 theme:
   name: material
