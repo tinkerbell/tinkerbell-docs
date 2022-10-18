@@ -16,7 +16,6 @@ nav:
       - Hook: services/hook.md
       - Tink Server: services/tink-server.md
       - Tink Worker: services/tink-worker.md
-      - Tink CLI: services/tink-cli.md
 
   - Workflows:
       - Working with Workflows: workflows/working-with-workflows.md
