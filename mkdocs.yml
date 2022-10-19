@@ -71,7 +71,9 @@ google_analytics:
   - auto
 
 plugins:
-  - search
+  search:
+  git-revision-date-localized:
+    type: date  
 
 markdown_extensions:
   - admonition

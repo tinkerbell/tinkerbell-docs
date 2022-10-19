@@ -6,3 +6,4 @@ mkdocs-versioning>=0.3
 poetry
 pygments>=2.4
 pymdown-extensions>=7.0
+mkdocs-git-revision-date-localized-plugin>=0.4.8
