@@ -25,7 +25,19 @@ To use your own OS with the Tinkerbell stack it must run [tink-worker], a Golang
 [tink-worker] is shipped as a Docker container.
 Its responsibility is to execute workflow tasks.
 
-<!-- TODO Elaborate on Tink worker configuration requirements for it to retrieve the correct workflows. -->
+## Requirements
+
+In order to successfully retrieve workflows from [tink-server], the following requirements must be met:
+
+1. [boots] must be configured with either a `DOCKER_REGISTRY` env var, or the `BOOTS_EXTRA_KERNEL_ARGS` var, which would append a `tink_worker_image` boot parameter to `/proc/cmdline`, such as `tink_worker_image=my-awesome-registry.local/tink-worker:0.8.0`.
+
+!!! note
+    If only `DOCKER_REGISTRY` is set, then Hook will attempt to pull `${DOCKER_REGISTRY}/tink-worker:latest`.
+
+2. [tink-server] must be accessible to the hardware via the `TINKERBELL_GRPC_AUTHORITY` env var passed to [boots]. 
+
+!!! tip 
+    If using an FQDN for `TINKERBELL_GRPC_AUTHORITY`, be sure to define DNS name servers for your hardware, per [hardware-data])
 
 [alpine linux]: https://alpinelinux.org
 [linuxkit]: https://github.com/linuxkit/linuxkit
@@ -33,6 +45,8 @@ Its responsibility is to execute workflow tasks.
 [tink]: https://github.com/tinkerbell/tink
 [tink-server]: /services/tink-server
 [tink-worker]: /services/tink-worker
+[hardware-data]: /hardware-data
+[boots]: /services/boots
 [workflow]: /workflows/working-with-workflows
 [hook repository]: https://github.com/tinkerbell/hook
 [custom kernel]: https://github.com/tinkerbell/hook/tree/main/kernel
