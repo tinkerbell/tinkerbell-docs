@@ -19,7 +19,7 @@ Every action gets executed as a container.
 In [Hook], [tink-worker] is launched by a multi-staged process. 
 In short, a small program called [hook-bootkit] is launched as a serivce, reads the Kernel command line for [tink-worker] specific parameters, then launches [tink-worker] as a Docker container. See the [LinuxKit configuration file][hook-bootkit-service] and [documentation][linuxkit] for how [hook-bootkit] is launched.
 
-[hook]: /services/hook
+[hook]: /hook
 [tinkerbell/tink]: https://github.com/tinkerbell/tink/tree/main/cmd/tink-worker
 [tink-server]: /services/tink-server
 [tink-worker]: /services/tink-worker

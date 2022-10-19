@@ -14,35 +14,27 @@ Interested in contributing? Check out our [Contributors' Page].
 
 ## What's Powering Tinkerbell?
 
-The Tinkerbell stack consists of several microservices, and a grpc API:
+- **[Tink Server]** is responsible for serving tasks to be run by Tink Worker and updating the state of tasks as reported by Tink worker.
 
-- [**Tink**] is the short-hand name for the [tink-server], [tink-worker] and [tink-controller].
-  `tink-worker` and `tink-server` communicate over gRPC, and are responsible for processing workflows.
-  `tink-controller` is a Kubernetes controller that resolves custom resources representing workflow execution.
+- **[Tink Worker]** is responsible for retrieving and executing workflow tasks. It reports the state of tasks back to Tink Server. It is pre-packaged into our default in-memory provisioning OS, Hook.
 
-- [**Boots**] is Tinkerbell's DHCP server.
+- **[Tink Controller]** is responsible for rendering workflow templates and managing workflow state as Tink Worker's report on their task status'. It is an internal component that users generally do not need to interact with.
+
+- **[Boots]** is Tinkerbell's DHCP server.
   It handles DHCP requests, hands out IPs, and serves up [iPXE].
   It uses the Tinkerbell client to pull and push hardware data.
   It only responds to a predefined set of MAC addresses so it can be deployed in an existing network without interfering with existing DHCP infrastructure.
 
-- [**Hegel**] is the metadata service used by Tinkerbell and Hook.
-  It collects data from both and transforms it into a JSON format to be consumed as metadata.
+- **[Hook]** is Tinkerbell's default in-memory installation environment for bare metal. Hook executes workflow tasks that result in a provisioned machine.
 
-- [**Hook**] is Tinkerbell's default in-memory installation environment for bare metal. Hook executes workflow tasks that result in a provisioned machine.
 
-- [**PBnJ**] is an optional microservice that can communicate with baseboard management controllers (BMCs) to control power and boot settings.
+### Optional services
 
-- [**Rufio**] is an optional Kubernetes controller that facilitates baseboard management controller interactions. It operates similarly to PBnJ but has a Kubernetes focused API.
+- **[Hegel]** is a metadata service that can be used during the configuration of a permanent OS.
 
-In addition to the microservices, there are three pieces of infrastructure:
+- **[PBnJ]** is a microservice that can communicate with baseboard management controllers (BMCs) to control power and boot settings.
 
-- [**Image Repository**] -
-  Tinkerbell uses a local image repository to store all of the action images used in a workflow.
-  This is particularly useful for secure environments that don't have access to the internet.
-  You can also choose to use [Quay] or [Docker Hub] as the repository to store images for if your environment does have internet access.
-
-- [**NGINX**] - NGINX is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache.
-  Tinkerbell uses NGINX to serve the required boot files and OS images during workflow execution.
+- **[Rufio]** is a Kubernetes controller that facilitates baseboard management controller interactions. It functions similarly to PBnJ but with a Kubernetes focused API.
 
 ## First Steps
 
@@ -58,14 +50,14 @@ Need a little help getting started? We're here!
 - Submit an issue on [Github].
 
 
-[**boots**]: /services/boots
-[**tink**]: https://github.com/tinkerbell/tink
-[**nginx**]: https://www.nginx.com/
-[**pbnj**]: https://github.com/tinkerbell/pbnj
-[**hook**]: /services/hook
-[**image repository**]: https://hub.docker.com/_/registry
-[**hegel**]: /services/hegel
-[**rufio**]: https://github.com/tinkerbell/rufio
+[boots]: /services/boots
+[pbnj]: /services/pbnj
+[hook]: /hook
+[hegel]: /services/hegel
+[rufio]: /services/rufio
+[tink server]: /services/tink-server
+[tink worker]: /services/tink-worker
+[tink controller]: /services/tink-controller
 
 [cncf community slack]: https://slack.cncf.io/
 [contributors' page]: https://tinkerbell.org/community/contributors/
@@ -74,7 +66,5 @@ Need a little help getting started? We're here!
 [github]: https://github.com/tinkerbell
 [ipxe]: https://ipxe.org/
 [quay]: https://quay.io/
-[tink-server]: /services/tink-server
-[tink-worker]: /services/tink-worker
 [#tinkerbell]: https://app.slack.com/client/T08PSQ7BQ/C01SRB41GMT
 [sandbox]: https://github.com/tinkerbell/sandbox
