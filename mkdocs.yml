@@ -11,11 +11,14 @@ nav:
   - Architecture: architecture.md
 
   - Services:
-      - Boots: services/boots.md
-      - Hegel: services/hegel.md
-      - Hook: services/hook.md
       - Tink Server: services/tink-server.md
       - Tink Worker: services/tink-worker.md
+      - Tink Controller: services/tink-controller.md
+      - Boots: services/boots.md
+      - Hegel: services/hegel.md
+      - PBnJ: services/pbnj.md
+      - Rufio: services/rufio.md
+  - Hook: hook.md
 
   - Workflows:
       - Working with Workflows: workflows/working-with-workflows.md

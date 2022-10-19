@@ -62,6 +62,6 @@ Some examples are:
 [aws: instance metadata and user data]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
 [equinix metal: metadata]: https://metal.equinix.com/developers/docs/servers/metadata/
 [gcp: storing and retrieving instance metadata]: https://cloud.google.com/compute/docs/metadata/overview
-[hook]: /services/hook
+[hook]: /hook
 [tinkerbell/hegel]: https://github.com/tinkerbell/hegel
 [`hardware`]: https://github.com/tinkerbell/tink/blob/main/config/crd/bases/tinkerbell.org_hardware.yaml
