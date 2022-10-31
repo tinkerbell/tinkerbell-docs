@@ -1,39 +1,16 @@
 ---
 title: Tink Server
-date: 2021-02-03
 ---
 
 # Tink Server
 
-`tink-server` is the primary metadata manager for Tinkerbell, using PostgreSQL for the data store and exposing a gRPC and HTTP API for you to interact with it.
+Take a look at the code in the [tinkerbell/tink] GitHub repository.
 
-Right now there are three main resources:
+Tink Server exposes workflow actions over a gRPC API for [Tink Worker] to retrieve and execute. When a [Tink Worker] completes an action, it reports the status to Tink Server.
+Tink Server uses Kubernetes custom resources to store workflow state.
+Tink Server retrieves tasks from and updates task status' on [`Workflow`][workflow] Kubernetes custom resources. Tinkerbell users submit the [`Workflow`][workflow]s to the cluster via the Kube API Server.
 
-- Hardware Data represents a server, router, or generally something you want to provision via Tinkerbell.
-- A Template represents what we want to execute.
-- A Workflow is a single execution of a template targeting a specific hardware.
-
-By default the gRPC server runs on port `:42113` but you can change it using the environment variable `TINKERBELL_GRPC_AUTHORITY`.
-
-The HTTP server runs on port `:42114` and you can change it as well using the environment variable `TINKERBELL_HTTP_AUTHORITY`.
-
-## Building the Binary
-
-`tink-server` uses the standard Golang toolchain.
-You can clone the `tink` repository:
-
-```sh
-git clone git@github.com:tinkerbell/tink
-go run cmd/tink-server/main.go
-./tink-server
-```
-
-## Future Development
-
-Currently, we're working on:
-
-- Building better API and client documentation.
-  Right now there is nothing in place.
-- We want to version the current API (both gRPC and HTTP) under a `v1` prefix.
-- gRPC requires TLS to work but the implementation is not great, there is no concept of identity and the cert is served by the HTTP client.
-  Probably as first step we will remove TLS.
+[tinkerbell/tink]: https://github.com/tinkerbell/tink/tree/main/cmd/tink-server
+[tink worker]: /services/tink-worker
+[workflow]: https://github.com/tinkerbell/tink/blob/main/pkg/apis/core/v1alpha1/workflow_types.go
+[template]: https://github.com/tinkerbell/tink/blob/main/pkg/apis/core/v1alpha1/template_types.go
