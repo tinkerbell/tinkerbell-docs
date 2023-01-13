@@ -1,6 +1,6 @@
 ---
 title: Hardware Data
-date: 2019-01-04
+date: 2023-01-13
 ---
 
 # Hardware Data
