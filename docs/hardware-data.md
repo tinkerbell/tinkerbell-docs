@@ -94,39 +94,67 @@ In fact, it's upto a workflow designer how they want to use the data in their wo
 Therefore, you may start with the minimal data given below and only add the properties you would want to use in your workflow.
 
 ```yaml
-`
+
 apiVersion: "tinkerbell.org/v1alpha1"
 kind: Hardware
 metadata:
-  name: machine1
+  name: sm01
+  namespace: default
 spec:
   disks:
-    - device: /dev/sda
+    - device: /dev/nvme0n1
   metadata:
     facility:
-      facility_code: mylab
+      facility_code: onprem
+    manufacturer:
+      slug: supermicro
     instance:
-      hostname: "machine1"
-      id: "00:00:00:00:00:00"
+      userdata: ""
+      hostname: "sm01"
+      id: "3c:ec:ef:4c:4f:54"
       operating_system:
         distro: "ubuntu"
-        os_slug: "ubuntu_22_04"
-        version: "22.04"
+        os_slug: "ubuntu_20_04"
+        version: "20.04"
   interfaces:
     - dhcp:
         arch: x86_64
-        hostname: machine1
+        hostname: sm01
         ip:
-          address: 10.10.150.20
-          gateway: 10.10.150.254
+          address: 172.16.10.100
+          gateway: 172.16.10.1
           netmask: 255.255.255.0
         lease_time: 86400
-        mac: 00:00:00:00:00:00
+        mac: 3c:ec:ef:4c:4f:54
         name_servers:
-          - 1.1.1.1
-          - 8.8.8.8
-        uefi: false
+          - 172.16.10.1
+          - 10.1.1.11
+        uefi: true
       netboot:
         allowPXE: true
         allowWorkflow: true
-``
+```
+
+## Applying Changes to Tinkerbell
+
+Once you are happy with your hardware yaml creations, your next task is to furnish these to a running Tinkerbell system.
+This is done via the standard Kubernetes mechanism of applying CRDs. The most critical consideration is to ensure you apply the changes to the correct namespace - the namespace the Tinkerbell stack is deployed in.
+Assuming we previously deployed Tinkerbell in a namespace `tink-system`, and we created a hardware definition in `onpremsm01.yaml`. Then we configure Tinkerbell with this information via:
+
+```
+kubectl -n tink-system apply -f onpremsm01.yaml
+```
+We can inspect what current hardware are under Tinkerbell administration via:
+
+```
+kubectl -n tink-system get hardware
+```
+And we can delete a hardware device from Tinkerbell via either of the below mechanisms - note the second uses the name defined in the `metadata.name` value, and can be retrieved by the prior command above.
+
+```
+kubectl -n tink-system delete -f onpremsm01.yaml
+or
+kubectl -n tink-system delete hardware sm01
+```
+
+
