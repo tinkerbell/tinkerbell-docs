@@ -130,5 +130,3 @@ spec:
         allowPXE: true
         allowWorkflow: true
 ``
-
-[packet-images]: https://github.com/packethost/packet-images
