@@ -1,6 +1,6 @@
 ---
 title: Working with Workflows
-date: 2020-07-28
+date: 2023-01-13
 ---
 
 # Working with Workflows
@@ -106,7 +106,14 @@ If there are no workflows defined for the Worker, the Provisioner will ignore th
 If as a part of the workflow, a new OS is installed and completes successfully, then the boot request (after reboot) will be handled by newly installed OS.
 If as a part of the workflow, an OS is **not** installed, then the Worker after reboot will request PXE-boot from the Provisioner.
 
-You can view the events and the state of a workflow during or after its execution with the tink CLI using the `tink workflow events` an the `tink workflow state` commands.
+You can view the events and the state of a workflow during or after its execution with the kubernetes operation:
+```
+kubectl -n [tink namespace] get workflow
+```
+or for a more detailed view:
+```
+kubectl -n [tink namespace] describe workflow wf1
+```
 
 ## Ephemeral Data
 

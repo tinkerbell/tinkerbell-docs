@@ -1,6 +1,6 @@
 ---
 title: A Hello-world Workflow
-date: 2020-07-10
+date: 2023-01-13
 ---
 
 # A Hello-world Workflow
@@ -34,42 +34,105 @@ docker push <registry-host>/hello-world
 
 This image doesn't have any instructions that the Worker will be able to perform, it's just an example to enable pushing a workflow out to the Worker when it comes up.
 
+## The Hardware
+
+Create a simple hardware YAML file like below, and tailor it to your particular setup - be that a VM target or maybe a consumer device you may test on.
+
+The envorinment variable below will be specific to your environment - for example depending on the type of storage you have, it could be `/dev/sda` or `/dev/nvme0n1`
+
+Key here is to recognize the `metadata.name` field value will be re-used in the subsequent workflow YAML to uniquely identify and recognize this machine. 
+```yaml
+
+apiVersion: "tinkerbell.org/v1alpha1"
+kind: Hardware
+metadata:
+  name: mymachine1
+spec:
+  disks:
+    - device: $DISK_DEVICE
+  metadata:
+    facility:
+      facility_code: sandbox
+    instance:
+      hostname: "mymachine1"
+      id: "$TINKERBELL_CLIENT_MAC"
+      operating_system:
+        distro: "ubuntu"
+        os_slug: "ubuntu_20_04"
+        version: "20.04"
+  interfaces:
+    - dhcp:
+        arch: x86_64
+        hostname: mymachine1
+        ip:
+          address: $TINKERBELL_CLIENT_IP
+          gateway: $TINKERBELL_CLIENT_GW
+          netmask: 255.255.255.0
+        lease_time: 86400
+        mac: $TINKERBELL_CLIENT_MAC
+        name_servers:
+          - 1.1.1.1
+          - 8.8.8.8
+        uefi: false
+      netboot:
+        allowPXE: true
+        allowWorkflow: true
+```
+
+Once you are happy with your YAML file, issue the following onto your Tinkerbell K8s cluster:
+```
+kubectl -n tink-system apply -f [myhardwarefilename].yaml
+```
+
 ## The Template
 
 A template is a YAML file that lays out the series of tasks that you want to perform on the Worker after it boots up.
 The template for this workflow contains the one task with single `hello-world` action.
-The worker field contains a reference to `device_1` which will be substituted with either the MAC Address or the IP Address of your Worker when you run the `tink workflow create` command in the next step.
 
-Save this template as `hello-world.tmpl`.
+Save this template as `hello-world-template.yaml`.
+
+Execute `kubectl -n tink-system apply -f hello-world-template.yaml`
 
 ```yaml
-version: "0.1"
-name: hello_world_workflow
-global_timeout: 600
-tasks:
-  - name: "hello world"
-    worker: "{{.device_1}}"
-    actions:
-      - name: "hello_world"
+
+apiVersion: "tinkerbell.org/v1alpha1"
+kind: Template
+metadata:
+  name: hello_world_template
+  namespace: tink-system
+spec:
+  data: |
+    version: "0.1"
+    name: hello_world_template
+    global_timeout: 1800
+    tasks:
+      - name: "hello world"
         image: hello-world
         timeout: 60
 ```
 
 ## The Workflow
 
-If you haven't already, be sure to have
+Create a workflow YAML file like the following. This is a simple file, the contents should be readily understandable. 
+```yaml
 
-- Pushed the Worker's hardware data to the database with `tink hardware push`.
-- Created the template in the database with `tink template create`.
+apiVersion: "tinkerbell.org/v1alpha1"
+kind: Workflow
+metadata:
+  name: helloworldWf1
+  namespace: tink-system
+spec:
+  templateRef: hello_world_template
+  hardwareRef: mymachine1
+  hardwareMap:
+    device_1: $TINKERBELL_CLIENT_MAC
 
-You can now use the hardware data and the template to create a workflow.
-You need two pieces of information.
-The MAC Address or IP Address of your Worker as specified in the hardware data and the Template ID that is returned from the `tink template create` command.
-
-```sh
-tink workflow create -t $TEMPLATE_ID -r '{"device_1": "<MAC address/IP address>"}'
 ```
+Now apply this file, like similar yamls before by:
+```yaml
 
+kubectl -n tink-system apply -f [myworkflowfilename].yaml
+```
 ## Workflow Execution
 
 You can now boot up or restart your Worker and a few things are going to happen:
@@ -78,17 +141,7 @@ You can now boot up or restart your Worker and a few things are going to happen:
 - Second, the Worker will call back to the Provisioner to check for it's workflow.
 - Third, The Provisioner will push the workflow to the Worker for it to execute.
 
-While the workflow execution does not have much effect on the state of the Worker, you can check that the workflow was successfully executed from the `tink workflow events` command.
-
-```sh
-tink workflow events $ID
-+--------------------------------------+-------------+-------------+----------------+---------------------------------+--------------------+
-| WORKER ID                            | TASK NAME   | ACTION NAME | EXECUTION TIME | MESSAGE                         |      ACTION STATUS |
-+--------------------------------------+-------------+-------------+----------------+---------------------------------+--------------------+
-| ce2e62ed-826f-4485-a39f-a82bb74338e2 | hello world | hello_world |              0 | Started execution               | ACTION_IN_PROGRESS |
-| ce2e62ed-826f-4485-a39f-a82bb74338e2 | hello world | hello_world |              0 | Finished Execution Successfully |     ACTION_SUCCESS |
-+--------------------------------------+-------------+-------------+----------------+---------------------------------+--------------------+
-```
+While the workflow execution does not have much effect on the state of the Worker, you can check that the workflow was successfully executed from the `kubectl -n tink-system get workflow helloworldWf1` command.
 
 If you reboot the Worker at this point, it will again PXE boot, since no alternate operating system was installed as part of the `hello-world` workflow.
 
