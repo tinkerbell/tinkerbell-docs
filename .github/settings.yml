@@ -7,6 +7,8 @@ collaborators:
   - username: displague
     permission: maintain
   # Approvers
+  - username: jacobweinstock
+    permission: push
   - username: mmlb
     permission: push
   - username: tstromberg
@@ -15,8 +17,6 @@ collaborators:
   - username: cprivitere
     permission: triage
   - username: felixwidjaja
-    permission: triage
-  - username: jacobweinstock
     permission: triage
   - username: rgl
     permission: triage
