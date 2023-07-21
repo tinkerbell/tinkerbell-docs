@@ -138,7 +138,7 @@ spec:
 ## Applying Changes to Tinkerbell
 
 Once you are happy with your hardware yaml creations, your next task is to furnish these to a running Tinkerbell system.
-This is done via the standard Kubernetes mechanism of applying CRDs. The most critical consideration is to ensure you apply the changes to the correct namespace - the namespace the Tinkerbell stack is deployed in.
+This is done via the standard Kubernetes mechanism of applying CRDs. The resources _must_ be deployed to the namespace Tinkerbell services are watching (by default the namespace they're deployed to).
 Assuming we previously deployed Tinkerbell in a namespace `tink-system`, and we created a hardware definition in `onpremsm01.yaml`. Then we configure Tinkerbell with this information via:
 
 ```
