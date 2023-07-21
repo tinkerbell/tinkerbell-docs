@@ -78,7 +78,7 @@ flowchart TD
 - The `start` state represents the time you have created the YAML file, but have not yet applied it to the Tinkerbell system.
 - Execute `kubectl -n [tink namespace] apply -f myworkflowfile.yaml` to introduce the workflow to Tinkerbell. 
 - If your file is well formed, you should see its state by executing `kubectl -n [tink namespace] get workflow`
-- The system sits in the `STATUS_PENDING` state until it received an external stimulus. This is the target hardware issuing a iPXE request.
+- The system sits in the `STATUS_PENDING` state until it received an external stimulus. This stimulus is tink-worker on target hardware informing tink server it is about to run the first action.
 - The state of the workflow will move to `STATUS_RUNNING` on receipt of a DHCP/iPXE request for this device.
 - Now the workflow is in operation, which essentially translates to the execution of all the actions described in the associated template YAML definition.
 - Tinkerbell will move the workflow state to either `STATUS_SUCCESS`, `STATUS_FAILED` or `STATUS_TIMEDOUT`. The names are self explanatory.
