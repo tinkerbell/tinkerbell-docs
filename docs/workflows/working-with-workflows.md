@@ -8,7 +8,7 @@ date: 2023-01-13
 A workflow is the Tinkerbell mechanism to put a provision task in motion. A workflow is defined in a YAML file, described later.
 Prior to considering workflow yaml creations, a user will typically have created a set hardware and template YAML files - reflecting 
 - the hardware under Tinkerbell control.
-- the Distros and their particular configuration available for use.
+- the distros and their particular configuration available for use.
 
 Once a suite of the above are created and _kubectl applied_ to the Tinkerbell stack, these remain dormant. A workflow _primes_ the Tinkerbell system in a state to flash an identified target device with an identified distro. We stress prime here as the actual workflow is triggered via a iPXE boot from the specific device - be that via Rufio for BMC managed hardware or a simple manual reboot of more consumer devices.
 
