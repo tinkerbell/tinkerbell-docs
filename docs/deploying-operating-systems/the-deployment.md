@@ -216,7 +216,7 @@ Once an Operating System image **or** a filesystem + bootloader is deployed we m
 
 [archive2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/archive2disk
 [centos/rhel]: https://github.com/dozzie/yumbootstrap
-[custom partitioning & raid]: https://metal.equinix.com/developers/docs/servers/custom-partitioning-raid/
+[custom partitioning & raid]: https://deploy.equinix.com/developers/docs/metal/storage/custom-partitioning-raid/
 [gzip]: https://en.wikipedia.org/wiki/Gzip
 [image2disk]: https://artifacthub.io/packages/tbaction/tinkerbell-community/image2disk
 [qcow]: https://en.wikipedia.org/wiki/Qcow
