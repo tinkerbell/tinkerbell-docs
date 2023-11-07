@@ -43,12 +43,7 @@ The second image is already a `raw` disk image which can be used as-is because i
 gzip ./debian-10-openstack-amd64.raw
 ```
 
-The raw image will need to live at a locally accessible web server.
-To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
-
-```sh
-mv ./debian-10-openstack-amd64.raw.gz ./sandbox/deploy/state/webroot
-```
+The raw image will need to live at an accessible web server.
 
 ### Creating the Template
 
@@ -108,11 +103,6 @@ gzip ./debian_rootfs.tar
 ```
 
 The raw image will need to live at a locally accessible web server.
-To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
-
-```sh
-mv ./debian_rootfs.tar.gz ./sandbox/deploy/state/webroot
-```
 
 ### Creating the Template
 

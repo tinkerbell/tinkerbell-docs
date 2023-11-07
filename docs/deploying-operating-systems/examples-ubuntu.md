@@ -40,12 +40,7 @@ qemu-img convert  ./focal-server-cloudimg-amd64.img -O raw ./focal-server-cloudi
 gzip ./focal-server-cloudimg-amd64.raw
 ```
 
-Move the raw image to a locally accessible web server.
-To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
-
-```sh
-mv ./focal-server-cloudimg-amd64.raw ./sandbox/deploy/state/webroot`
-```
+Move the raw image to an accessible web server.
 
 ### Creating the Template
 
@@ -119,12 +114,7 @@ docker rm $TMPRFS
 gzip ./ubuntu_rootfs.tar
 ```
 
-Move the raw image to a locally accessible web server.
-To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
-
-```sh
-mv ./ubuntu_rootfs.tar.gz ./sandbox/deploy/state/webroot
-```
+Move the raw image to an accessible web server.
 
 ### Creating the Template
 

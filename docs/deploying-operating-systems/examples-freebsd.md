@@ -67,12 +67,7 @@ Once you have a `raw` filesystem image, you can optionally compress the raw imag
 gzip ./FreeBSD-12.2-RELEASE-amd64.raw
 ```
 
-The raw image will need to live at a locally accessible web server.
-To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the tink-server.
-
-```sh
-mv ./FreeBSD-12.2-RELEASE-amd64.raw.gz ./sandbox/deploy/state/webroot
-```
+The raw image will need to live at an accessible web server.
 
 ## Creating the Template
 
