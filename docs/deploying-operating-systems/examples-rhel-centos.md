@@ -43,12 +43,7 @@ qemu-img convert  ./CentOS-8-GenericCloud-8.3.2011-20201204.2.x86_64.qcow2 -O ra
 gzip ./CentOS-8-GenericCloud-8.3.2011-20201204.2.x86_64.raw
 ```
 
-Move the raw image to a locally accessible web server.
-To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
-
-```sh
-mv ./CentOS-8-GenericCloud-8.3.2011-20201204.2.x86_64.raw.gz ./sandbox/deploy/state/webroot
-```
+Move the raw image to an accessible web server.
 
 ### Fedora CoreOS
 
@@ -130,12 +125,7 @@ docker rm $TMPRFS
 gzip ./centos_rootfs.tar
 ```
 
-Move the raw image to a locally accessible web server.
-To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
-
-```sh
-mv ./centos_rootfs.tar.gz ./sandbox/deploy/state/webroot
-```
+Move the raw image to an accessible web server.
 
 ### Creating the CentOS Template
 
@@ -216,12 +206,7 @@ docker rm $TMPRFS
 gzip ./rhel_rootfs.tar
 ```
 
-Move the raw image to a locally accessible web server.
-To simplify, you can place the image in the Tinkerbell sandbox webroot, which allows access to the image at the IP address of the `tink-server`.
-
-```sh
-mv ./rhel_rootfs.tar.gz ./sandbox/deploy/state/webroot
-```
+Move the raw image to an accessible web server.
 
 ### Creating the RHEL Template
 

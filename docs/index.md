@@ -38,7 +38,7 @@ Interested in contributing? Check out our [Contributors' Page].
 
 ## First Steps
 
-New to Tinkerbell or bare metal provisioning? Visit the [sandbox] for functional examples that illustrate Tinkerbell stack deployment.
+New to Tinkerbell or bare metal provisioning? Visit the [playground] for functional examples that illustrate Tinkerbell stack deployment.
 
 ## Get Help
 
@@ -67,4 +67,4 @@ Need a little help getting started? We're here!
 [ipxe]: https://ipxe.org/
 [quay]: https://quay.io/
 [#tinkerbell]: https://app.slack.com/client/T08PSQ7BQ/C01SRB41GMT
-[sandbox]: https://github.com/tinkerbell/sandbox
+[playground]: https://github.com/tinkerbell/playground
