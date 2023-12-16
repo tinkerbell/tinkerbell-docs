@@ -37,7 +37,7 @@ This means that an action has direct access to hardware, such as block devices e
 
 ### Namespace
 
-By default an action will be created in it's on [Linux Namespace] meaning that whilst it can see underlying hardware, it is unaware of any other processes or existing network configuration (the Docker engine auto-magically manages external networking through the Docker network).
+By default an action will be created in it's own [Linux Namespace] meaning that whilst it can see underlying hardware, it is unaware of any other processes or existing network configuration (the Docker engine auto-magically manages external networking through the Docker network).
 This under the majority of use-cases is good for isolating what tasks an action is performing, however there are a number of use-cases where being able to communicate with the hosts existing processes is a requirement.
 The most obvious two (so far) are the capability to `reboot` or `kexec` into a new kernel, both of these actions typically involve a few steps:
 
@@ -46,12 +46,12 @@ The most obvious two (so far) are the capability to `reboot` or `kexec` into a n
 3. Process ID 1 (which should be `/init`) kills all processes and reboots the machine.
 
 When an action attempts to do these steps in a container in its own namespace, nothing will occur as PID 1 is usually the process in the action container.
-To allow the expected behaviour an action can use `pid: host` in its configuration, this will mean that the action processes will be amongst all of the processes on the host itself (including the "real" PID 1).
+To allow the expected behavior an action can use `pid: host` in its configuration, this will mean that the action processes will be amongst all of the processes on the host itself (including the "real" PID 1).
 With the action in the host process ID namespace both a `reboot` or `kexec` will be able to work as expected.
 
 ### Passing configuration to an action
 
-Most actions can make use of reading the metadata during runtime, however there may be use-cases to keep a large standardised set of actions that can be written directly into a workflow.
+Most actions can make use of reading the metadata during runtime, however there may be use-cases to keep a large standardized set of actions that can be written directly into a workflow.
 
 An action should be created using an [ENTRYPOINT] meaning that we don't need to specify what needs to run within the action image.
 However if required there is the possibility to override this with the `command` section of the action configuration.
