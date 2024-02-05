@@ -107,6 +107,6 @@ The other worker may retrieve and use this data and eventually add some more:
 
 You can get the ephemeral data associated with a workflow with the `tink workflow data` tink CLI command.
 
-[architecture]: /images/workflow-diagram.png
-[hardware data]: /hardware-data
-[template]: /templates
+[architecture]: ../images/workflow-diagram.png
+[hardware data]: ../hardware-data.md
+[template]: ../templates.md

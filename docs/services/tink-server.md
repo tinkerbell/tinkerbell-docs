@@ -11,6 +11,6 @@ Tink Server uses Kubernetes custom resources to store workflow state.
 Tink Server retrieves tasks from and updates task status' on [`Workflow`][workflow] Kubernetes custom resources. Tinkerbell users submit the [`Workflow`][workflow]s to the cluster via the Kube API Server.
 
 [tinkerbell/tink]: https://github.com/tinkerbell/tink/tree/main/cmd/tink-server
-[tink worker]: /services/tink-worker
+[tink worker]: tink-worker.md
 [workflow]: https://github.com/tinkerbell/tink/blob/main/pkg/apis/core/v1alpha1/workflow_types.go
 [template]: https://github.com/tinkerbell/tink/blob/main/pkg/apis/core/v1alpha1/template_types.go

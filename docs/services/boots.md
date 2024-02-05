@@ -48,7 +48,7 @@ There are a lot of articles and use cases for netbooting, here a few that our co
 - [RedHat Enterprise Linux: PREPARING FOR A NETWORK INSTALLATION]
 
 [first journeys with netboot and ipxe installing ubuntu]: https://gianarb.it/blog/first-journeys-with-netboot-ipxe
-[hook]: /hook
+[hook]: ../hook.md
 [redhat enterprise linux: preparing for a network installation]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/installation_guide/chap-installation-server-setup
 [the state of netbooting raspberry pis]: https://blog.alexellis.io/the-state-of-netbooting-raspberry-pi/
 [tinkerbell/boots]: https://github.com/tinkerbell/boots

@@ -50,14 +50,14 @@ Need a little help getting started? We're here!
 - Submit an issue on [Github].
 
 
-[boots]: /services/boots
-[pbnj]: /services/pbnj
-[hook]: /hook
-[hegel]: /services/hegel
-[rufio]: /services/rufio
-[tink server]: /services/tink-server
-[tink worker]: /services/tink-worker
-[tink controller]: /services/tink-controller
+[boots]: services/boots.md
+[pbnj]: services/pbnj.md
+[hook]: hook.md
+[hegel]: services/hegel.md
+[rufio]: services/rufio.md
+[tink server]: services/tink-server.md
+[tink worker]: services/tink-worker.md
+[tink controller]: services/tink-controller.md
 
 [cncf community slack]: https://slack.cncf.io/
 [contributors' page]: https://tinkerbell.org/community/contributors/

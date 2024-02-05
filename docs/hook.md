@@ -29,10 +29,10 @@ Its responsibility is to execute workflow tasks.
 
 [alpine linux]: https://alpinelinux.org
 [linuxkit]: https://github.com/linuxkit/linuxkit
-[screenshot from the worker]: /images/vagrant-setup-vbox-worker.png
+[screenshot from the worker]: images/vagrant-setup-vbox-worker.png
 [tink]: https://github.com/tinkerbell/tink
-[tink-server]: /services/tink-server
-[tink-worker]: /services/tink-worker
-[workflow]: /workflows/working-with-workflows
+[tink-server]: services/tink-server.md
+[tink-worker]: services/tink-worker.md
+[workflow]: workflows/working-with-workflows.md
 [hook repository]: https://github.com/tinkerbell/hook
 [custom kernel]: https://github.com/tinkerbell/hook/tree/main/kernel
