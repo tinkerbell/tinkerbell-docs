@@ -45,5 +45,5 @@ There are some very basic requirements that a Worker machine must meet in order 
 There are no Disk requirements for a Worker since OSIE runs an in-memory operating system.
 Your disk requirements will be determined by the OS you are going to install and other use-case considerations.
 
-[architecture]: /images/architecture-diagram.png
-[tinkerbell stack]: /#whats-powering-tinkerbell
+[architecture]: images/architecture-diagram.png
+[tinkerbell stack]: index.md#whats-powering-tinkerbell

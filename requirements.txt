@@ -3,6 +3,7 @@ mdx_truly_sane_lists
 mkdocs>=1.1
 mkdocs-material>=5.0
 mkdocs-versioning>=0.3
-poetry
+poetry>=1.5.1
+platformdirs<4.0.0,>=3.0.0
 pygments>=2.4
 pymdown-extensions>=7.0

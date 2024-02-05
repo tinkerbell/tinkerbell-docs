@@ -77,7 +77,7 @@ environment:
 
 With this understanding of the basic architecture of we can start to look at what would be required to [create your own action].
 
-[create your own action]: /actions/creating-a-basic-action
+[create your own action]: creating-a-basic-action.md
 [entrypoint]: https://docs.docker.com/engine/reference/builder/#entrypoint
 [kexec]: https://wiki.archlinux.org/title/Kexec
 [linux namespace]: https://en.wikipedia.org/wiki/Linux_namespaces

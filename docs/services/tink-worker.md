@@ -20,8 +20,8 @@ A small program called [hook-bootkit] is launched as a serivce, reads the Kernel
 See the [LinuxKit configuration file][hook-bootkit-service] and [documentation][linuxkit] for how [hook-bootkit] is launched.
 
 [tinkerbell/tink]: https://github.com/tinkerbell/tink/tree/main/cmd/tink-worker
-[hook]: /hook
-[tink server]: /services/tink-server
+[hook]: ../hook.md
+[tink server]: tink-server.md
 [hook-bootkit]: https://github.com/tinkerbell/hook/tree/main/hook-bootkit
 [hook-bootkit-service]: https://github.com/tinkerbell/hook/blob/main/hook.yaml#L53
 [linuxkit]: https://github.com/linuxkit/linuxkit

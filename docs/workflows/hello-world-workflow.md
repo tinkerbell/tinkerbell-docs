@@ -92,4 +92,4 @@ tink workflow events $ID
 
 If you reboot the Worker at this point, it will again PXE boot, since no alternate operating system was installed as part of the `hello-world` workflow.
 
-[minimal hardware data example]: /hardware-data/#the-minimal-hardware-data
+[minimal hardware data example]: ../hardware-data.md#the-minimal-hardware-data
