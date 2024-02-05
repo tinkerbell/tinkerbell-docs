@@ -49,7 +49,6 @@ Need a little help getting started? We're here!
   Look for the [#tinkerbell] channel.
 - Submit an issue on [Github].
 
-
 [boots]: services/boots.md
 [pbnj]: services/pbnj.md
 [hook]: hook.md
