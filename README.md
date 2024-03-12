@@ -1,4 +1,5 @@
-![][stability badge]
+> [!IMPORTANT]  
+> The docs content of this repo have been moved into https://github.com/tinkerbell/tinkerbell.org, please see that repo for further updates.
 
 # Tinkerbell Docs
 
